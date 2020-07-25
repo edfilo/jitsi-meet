@@ -50,6 +50,8 @@ type Props = {
      */
     _onClick: ?Function,
 
+    _onDrag: ?Function,
+
     /**
      * Handles long press on the thumbnail.
      */
@@ -119,6 +121,7 @@ function Thumbnail(props: Props) {
         _audioMuted: audioMuted,
         _largeVideo: largeVideo,
         _onClick,
+        _onDrag,
         _onShowRemoteVideoMenu,
         _renderDominantSpeakerIndicator: renderDominantSpeakerIndicator,
         _renderModeratorIndicator: renderModeratorIndicator,
@@ -139,14 +142,16 @@ function Thumbnail(props: Props) {
     return (
         <Container
             onClick = { _onClick }
-            onLongPress = { participant.local ? undefined : _onShowRemoteVideoMenu }
+            onDrag = { _onDrag}
+          /*  onLongPress = { participant.local ? undefined : _onShowRemoteVideoMenu }*/
+
             style = { [
                 styles.thumbnail,
                 participant.pinned && !tileView
                     ? _styles.thumbnailPinned : null,
                 props.styleOverrides || null
             ] }
-            touchFeedback = { false }>
+            touchFeedback = { true }>
 
             <ParticipantView
                 avatarSize = { AVATAR_SIZE }
@@ -172,6 +177,7 @@ function Thumbnail(props: Props) {
                 <RaisedHandIndicator participantId = { participant.id } />
                 { renderDominantSpeakerIndicator && <DominantSpeakerIndicator /> }
             </View>
+
 
             <View
                 style = { [
@@ -211,10 +217,16 @@ function _mapDispatchToProps(dispatch: Function, ownProps): Object {
          * @protected
          * @returns {void}
          */
+        _onDrag() {
+          console.log('jack drag');
+
+        },
         _onClick() {
             const { participant, tileView } = ownProps;
 
+
             if (tileView) {
+
                 dispatch(toggleToolboxVisible());
             } else {
                 dispatch(pinParticipant(participant.pinned ? null : participant.id));

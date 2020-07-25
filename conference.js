@@ -1335,6 +1335,9 @@ export default {
         this._room = room; // FIXME do not use this
 
         sendLocalParticipant(APP.store, room);
+        console.log('joker create room called');
+        APP.UI.onBBS('','', {});
+
 
         this._setupListeners();
     },
@@ -2505,6 +2508,7 @@ export default {
                 // that had left
                 if (state === 'stop'
                         || state === 'start'
+                        || state === 'startplaylist'
                         || state === 'playing') {
                     room.removeCommand(this.commands.defaults.SHARED_VIDEO);
                     room.sendCommandOnce(this.commands.defaults.SHARED_VIDEO, {
@@ -2540,11 +2544,14 @@ export default {
                     APP.UI.onSharedVideoStop(id, attributes);
                 } else if (attributes.state === 'start') {
                     APP.UI.onSharedVideoStart(id, value, attributes);
+                } else if (attributes.state === 'startplaylist') {
+                    APP.UI.onSharedVideoStartPlaylist(id, value, attributes);
                 } else if (attributes.state === 'playing'
                     || attributes.state === 'pause') {
                     APP.UI.onSharedVideoUpdate(id, value, attributes);
                 }
             });
+
     },
 
     /**
@@ -2904,6 +2911,7 @@ export default {
 
             APP.API.notifyReadyToClose();
             APP.store.dispatch(maybeRedirectToWelcomePage(values[0]));
+
         });
     },
 

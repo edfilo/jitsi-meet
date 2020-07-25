@@ -23,10 +23,16 @@ import Filmstrip from '../videolayout/Filmstrip';
 import LargeContainer from '../videolayout/LargeContainer';
 import VideoLayout from '../videolayout/VideoLayout';
 
+
+import Drag from '../videolayout/Drag';
+import LocalPosition from '../videolayout/LocalPosition';
+
+
+
 const logger = Logger.getLogger(__filename);
 
 export const SHARED_VIDEO_CONTAINER_TYPE = 'sharedvideo';
-
+export const BBS_CONTAINER_TYPE = 'bbsvideo';
 /**
  * Example shared video link.
  * @type {string}
@@ -81,7 +87,28 @@ export default class SharedVideoManager {
      * Starts shared video by asking user for url, or if its already working
      * asks whether the user wants to stop sharing the video.
      */
+
+    start() {
+
+      //  if(this.url.length > 0){
+
+      //  }else {
+        //  this.url = 'sRE5iQCdRvE';
+          //var url = 'sRE5iQCdRvE'; //vaporwave menu
+      //  }
+
+
+
+        this.emitter.emit(
+            UIEvents.UPDATE_SHARED_VIDEO, this.url, 'start');
+      //'sRE5iQCdRvE'
+    }
+
     toggleSharedVideo() {
+
+      this.start();
+      return;
+
         if (dialog) {
             return;
         }
@@ -135,15 +162,91 @@ export default class SharedVideoManager {
      * @param url the video url
      * @param attributes
      */
+
+    onSharedVideoStartPlaylist(id, pid, attributes) {
+
+      var player;
+
+      if (typeof(YT) == 'undefined' || typeof(YT.Player) == 'undefined') {
+
+      }else {
+        player = YT.get('youtube');
+
+      }
+
+
+
+      if(!player)return;
+      /*
+      player.cuePlaylist({
+        listType: 'playlist',
+        list:pid
+      });
+*/
+
+    //  pid = 'PLvMOVpwkpbUmV2GyXrXgTWctZR7CHs2HR';
+
+      console.log('pirates ' + pid);
+
+      player.cuePlaylist({
+        list: pid,
+        listType: 'playlist',
+        //index:numPl, dont need to do this if shuffling works....
+        startSeconds: 0
+      });
+
+
+      setTimeout(function() {
+        // your not allowed to shuffle the playlist until after cuing for some reason
+        if(this.debug)console.log('shuffle next video');
+        player.setShuffle({
+          shufflePlaylist: true
+        });
+        player.nextVideo();
+      }, 1000);
+
+
+    }
+
+    onBBS(id, url, attributes){
+
+      APP.store.dispatch(participantJoined({
+          conference: APP.conference._room,
+          id: 'bbs',
+          isFakeParticipant: true,
+          name: 'bbs'
+      }));
+
+    }
+
     onSharedVideoStart(id, url, attributes) {
-        if (this.isSharedVideoShown) {
-            return;
+
+        var player;
+
+        // the video url
+        this.url = url;
+
+        if (typeof(YT) == 'undefined' || typeof(YT.Player) == 'undefined') {
+
+        }else {
+          player = YT.get('youtube');
+
+        }
+
+        if (player) {
+
+        //  if(YT.Player){
+            player.loadVideoById({
+              videoId: url,
+              startSeconds: 0
+            });
+        //  }
+          return;
         }
 
         this.isSharedVideoShown = true;
 
-        // the video url
-        this.url = url;
+
 
         // the owner of the video
         this.from = id;
@@ -156,7 +259,6 @@ export default class SharedVideoManager {
 
         // This code loads the IFrame Player API code asynchronously.
         const tag = document.createElement('script');
-
         tag.src = 'https://www.youtube.com/iframe_api';
         const firstScriptTag = document.getElementsByTagName('script')[0];
 
@@ -171,6 +273,14 @@ export default class SharedVideoManager {
 
         const self = this;
 
+        APP.store.dispatch(participantJoined({
+            conference: APP.conference._room,
+            id: self.url,
+            isFakeParticipant: true,
+            name: 'YouTube'
+        }));
+
+//#sharedVideoContainer
         if (self.isPlayerAPILoaded) {
             window.onYouTubeIframeAPIReady();
         } else {
@@ -178,7 +288,25 @@ export default class SharedVideoManager {
                 self.isPlayerAPILoaded = true;
                 const showControls
                     = APP.conference.isLocalId(self.from) ? 1 : 0;
-                const p = new YT.Player('sharedVideoIFrame', {
+
+
+
+/*
+                    playerVars: {
+                      autoplay: 1,
+                      rel: 0,
+                      controls: 1,
+                      modestbranding:1
+                    },
+                    height: '100%',
+                    width: '100%',
+                    //listType: 'playlist',
+                    //list: 'PLvMOVpwkpbUmV2GyXrXgTWctZR7CHs2HR',
+                    videoId: 'sRE5iQCdRvE',
+                    */
+
+
+                const p = new YT.Player('youtube', {
                     height: '100%',
                     width: '100%',
                     videoId: self.url,
@@ -187,6 +315,7 @@ export default class SharedVideoManager {
                         'fs': '0',
                         'autoplay': 0,
                         'controls': showControls,
+                        'modestbranding': 1,
                         'rel': 0
                     },
                     events: {
@@ -196,19 +325,24 @@ export default class SharedVideoManager {
                     }
                 });
 
+
+
+
+
+
+
                 // add listener for volume changes
-                p.addEventListener(
-                    'onVolumeChange', 'onVolumeChange');
+                p.addEventListener('onVolumeChange', 'onVolumeChange');
 
                 if (APP.conference.isLocalId(self.from)) {
                 // adds progress listener that will be firing events
                 // while we are paused and we change the progress of the
                 // video (seeking forward or backward on the video)
-                    p.addEventListener(
-                        'onVideoProgress', 'onVideoProgress');
+                  //  p.addEventListener('onVideoProgress', 'onVideoProgress');
                 }
             };
         }
+
 
         /**
          * Indicates that a change in state has occurred for the shared video.
@@ -283,10 +417,14 @@ export default class SharedVideoManager {
             const iframe = player.getIframe();
 
             // eslint-disable-next-line no-use-before-define
+
+            /*
             self.sharedVideo = new SharedVideoContainer(
                 { url,
                     iframe,
                     player });
+                    */
+
 
             // prevents pausing participants not sharing the video
             // to pause the video
@@ -294,21 +432,15 @@ export default class SharedVideoManager {
                 $('#sharedVideo').css('pointer-events', 'none');
             }
 
-            VideoLayout.addLargeVideoContainer(
-                SHARED_VIDEO_CONTAINER_TYPE, self.sharedVideo);
+          //  VideoLayout.addLargeVideoContainer(SHARED_VIDEO_CONTAINER_TYPE, self.sharedVideo);
+            //VideoLayout.addRemoteVideoContainer(SHARED_VIDEO_CONTAINER_TYPE, self.sharedVideo);
 
-            APP.store.dispatch(participantJoined({
 
-                // FIXME The cat is out of the bag already or rather _room is
-                // not private because it is used in multiple other places
-                // already such as AbstractPageReloadOverlay.
-                conference: APP.conference._room,
-                id: self.url,
-                isFakeParticipant: true,
-                name: 'YouTube'
-            }));
 
-            APP.store.dispatch(pinParticipant(self.url));
+
+            //fake user crate was here
+
+          //  APP.store.dispatch(pinParticipant(self.url));
 
             // If we are sending the command and we are starting the player
             // we need to continuously send the player current time position
@@ -663,11 +795,11 @@ class SharedVideoContainer extends LargeContainer {
             height = containerHeight - getToolboxHeight();
             width = containerWidth - Filmstrip.getVerticalFilmstripWidth();
         } else {
-            height = containerHeight - Filmstrip.getFilmstripHeight();
-            width = containerWidth;
+            height = 360.0;//containerHeight;// - Filmstrip.getFilmstripHeight();
+            width = 640.0;//containerWidth;
         }
 
-        this.$iframe.width(width).height(height);
+        //this.$iframe.width(width).height(height);
     }
 
     /**

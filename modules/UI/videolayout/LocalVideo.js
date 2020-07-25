@@ -35,7 +35,7 @@ export default class LocalVideo extends SmallVideo {
         this.container = this.createContainer();
         this.$container = $(this.container);
         this.isLocal = true;
-        this._setThumbnailSize();
+        this._setThumbnailSize(0.0);
         this.updateDOMLocation();
 
         this.localVideoId = null;
@@ -65,6 +65,7 @@ export default class LocalVideo extends SmallVideo {
         this.updateIndicators();
 
         this.container.onclick = this._onContainerClick;
+        this.container.onmousemove = this._onMouseMove;
     }
 
     /**

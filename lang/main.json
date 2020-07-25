@@ -12,9 +12,9 @@
         "failedToAdd": "Failed to add participants",
         "footerText": "Dialing out is disabled.",
         "googleEmail": "Google Email",
-        "inviteMoreHeader": "You are the only one in the meeting",
+        "inviteMoreHeader": "You are the only one here...",
         "inviteMoreMailSubject": "Join {{appName}} meeting",
-        "inviteMorePrompt": "Invite more people",
+        "inviteMorePrompt": "Invite  people",
         "linkCopied": "Link copied to clipboard",
         "loading": "Searching for people and phone numbers",
         "loadingNumber": "Validating phone number",
@@ -134,13 +134,13 @@
         "yesterday": "Yesterday"
     },
     "deepLinking": {
-        "appNotInstalled": "You need the {{app}} mobile app to join this meeting on your phone.",
+        "appNotInstalled": "You need the {{app}} mobile app to enter this bar on your phone.",
         "description": "Nothing happened? We tried launching your meeting in the {{app}} desktop app. Try again or launch it in the {{app}} web app.",
         "descriptionWithoutWeb": "Nothing happened? We tried launching your meeting in the {{app}} desktop app.",
         "downloadApp": "Download the app",
         "ifDoNotHaveApp": "If you don't have the app yet:",
         "ifHaveApp": "If you already have the app:",
-        "joinInApp": "Join this meeting using the app",
+        "joinInApp": "enter this bar using the app",
         "launchWebButton": "Launch in web",
         "title": "Launching your meeting in {{app}}...",
         "tryAgainButton": "Try again in desktop"
@@ -850,8 +850,8 @@
         "title": "Secure, fully featured, and completely free video conferencing"
     },
     "lonelyMeetingExperience": {
-        "button": "Invite others",
-        "youAreAlone": "You are the only one in the meeting"
+        "button": "Invite People",
+        "youAreAlone": "You are the only one here..."
     },
     "helpView": {
         "header": "Help center"

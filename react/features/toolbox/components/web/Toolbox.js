@@ -554,7 +554,9 @@ class Toolbox extends Component<Props, State> {
      * @returns {void}
      */
     _onSetOverflowVisible(visible) {
-        this.props.dispatch(setOverflowMenuVisible(visible));
+
+      this.props.dispatch(toggleSharedVideo());
+      //  this.props.dispatch(setOverflowMenuVisible(visible));
     }
 
     _onShortcutToggleChat: () => void;
@@ -986,10 +988,7 @@ class Toolbox extends Component<Props, State> {
                     key = 'sharedvideo'
                     onClick = { this._onToolbarToggleSharedVideo }
                     text = { _sharingVideo ? t('toolbar.stopSharedVideo') : t('toolbar.sharedvideo') } />,
-            this._shouldShowButton('etherpad')
-                && <SharedDocumentButton
-                    key = 'etherpad'
-                    showLabel = { true } />,
+
             <VideoBlurButton
                 key = 'videobackgroundblur'
                 showLabel = { true }
@@ -1175,9 +1174,10 @@ class Toolbox extends Component<Props, State> {
             / 2 // divide by the number of groups(left and right group)
         );
 
+  buttonsLeft.push('desktop');
         if (this._shouldShowButton('desktop')
                 && this._isDesktopSharingButtonVisible()) {
-            buttonsLeft.push('desktop');
+
         }
         if (this._shouldShowButton('raisehand')) {
             buttonsLeft.push('raisehand');
@@ -1240,43 +1240,30 @@ class Toolbox extends Component<Props, State> {
         return (
             <div className = 'toolbox-content'>
                 <div className = 'button-group-left'>
-                    { buttonsLeft.indexOf('desktop') !== -1
-                        && this._renderDesktopSharingButton() }
-                    { buttonsLeft.indexOf('raisehand') !== -1
-                        && <ToolbarButton
-                            accessibilityLabel = { t('toolbar.accessibilityLabel.raiseHand') }
-                            icon = { IconRaisedHand }
-                            onClick = { this._onToolbarToggleRaiseHand }
-                            toggled = { _raisedHand }
-                            tooltip = { t('toolbar.raiseHand') } /> }
-                    { buttonsLeft.indexOf('chat') !== -1
-                        && <div className = 'toolbar-button-with-badge'>
-                            <ToolbarButton
-                                accessibilityLabel = { t('toolbar.accessibilityLabel.chat') }
-                                icon = { IconChat }
-                                onClick = { this._onToolbarToggleChat }
-                                toggled = { _chatOpen }
-                                tooltip = { t('toolbar.chat') } />
-                            <ChatCounter />
-                        </div> }
-                    {
-                        buttonsLeft.indexOf('closedcaptions') !== -1
-                            && <ClosedCaptionButton />
-                    }
-                </div>
-                <div className = 'button-group-center'>
                     { this._renderAudioButton() }
                     <HangupButton
                         visible = { this._shouldShowButton('hangup') } />
                     { this._renderVideoButton() }
+
                 </div>
+                <div className = 'button-group-center'>
+                  <div id="tip_button_bottom"></div>
+                </div>
+
                 <div className = 'button-group-right'>
+                <div id="documentsharebutton">
+                {<SharedDocumentButton  key = 'etherpad' />}
+                </div>
+                <div id="screensharebutton">
+                  { this._renderDesktopSharingButton()}
+                </div>
                     { buttonsRight.indexOf('localrecording') !== -1
                         && <LocalRecordingButton
                             onClick = {
                                 this._onToolbarOpenLocalRecordingInfoDialog
                             } />
                     }
+
                     { buttonsRight.indexOf('tileview') !== -1
                         && <TileViewButton /> }
                     { buttonsRight.indexOf('invite') !== -1
@@ -1286,8 +1273,6 @@ class Toolbox extends Component<Props, State> {
                             icon = { IconInviteMore }
                             onClick = { this._onToolbarOpenInvite }
                             tooltip = { t('toolbar.invite') } /> }
-                    { buttonsRight.indexOf('security') !== -1
-                        && <SecurityDialogButton customClass = 'security-toolbar-button' /> }
                     { buttonsRight.indexOf('overflowmenu') !== -1
                         && <OverflowMenuButton
                             isOpen = { _overflowMenuVisible }

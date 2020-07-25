@@ -18,7 +18,7 @@ const DEFAULT_STATE = {
      * @public
      * @type {boolean}
      */
-    tileViewEnabled: false
+    tileViewEnabled: true
 };
 
 const STORE_NAME = 'features/video-layout';
@@ -39,7 +39,7 @@ ReducerRegistry.register(STORE_NAME, (state = DEFAULT_STATE, action) => {
     case SET_TILE_VIEW:
         return {
             ...state,
-            tileViewEnabled: action.enabled
+            tileViewEnabled: true//action.enabled
         };
     }
 

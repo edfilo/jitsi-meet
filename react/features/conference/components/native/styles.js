@@ -77,7 +77,7 @@ export default {
         alignItems: 'center',
         borderRadius: 24,
         flexDirection: 'row',
-        height: 48,
+        height: 248,
         justifyContent: 'space-around',
         paddingHorizontal: 12
     },

@@ -66,12 +66,17 @@ function _mapStateToProps(state: Object, ownProps: Props) {
     const { participantId } = ownProps;
     const localParticipant = getLocalParticipant(state);
 
+
+
+
+
     // Currently we only render the display name if it's not the local
     // participant and there is no video rendered for
     // them.
     const _render = Boolean(participantId)
         && localParticipant.id !== participantId
         && !shouldRenderParticipantVideo(state, participantId);
+
 
     return {
         _participantName:

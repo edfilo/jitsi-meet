@@ -94,6 +94,9 @@ class Filmstrip extends Component<Props> {
             return null;
         }
 
+console.log('filmstrip');
+
+
         const isNarrowAspectRatio_ = isNarrowAspectRatio(this);
         const filmstripStyle
             = isNarrowAspectRatio_
@@ -109,11 +112,11 @@ class Filmstrip extends Component<Props> {
                         && !isNarrowAspectRatio_
                         && <LocalThumbnail />
                 }
-                <ScrollView
+              /*  <ScrollView
                     horizontal = { isNarrowAspectRatio_ }
                     showsHorizontalScrollIndicator = { false }
                     showsVerticalScrollIndicator = { false }
-                    style = { styles.scrollView } >
+                    style = { styles.scrollView } >*/
                     {
                         !this._separateLocalThumbnail
                             && !isNarrowAspectRatio_
@@ -135,7 +138,8 @@ class Filmstrip extends Component<Props> {
                             && isNarrowAspectRatio_
                             && <LocalThumbnail />
                     }
-                </ScrollView>
+          /*      </ScrollView>  */
+
                 {
                     this._separateLocalThumbnail
                         && isNarrowAspectRatio_

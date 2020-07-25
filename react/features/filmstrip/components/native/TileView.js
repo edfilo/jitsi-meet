@@ -22,6 +22,9 @@ import {
 import Thumbnail from './Thumbnail';
 import styles from './styles';
 
+import VideoTransform from '../../../base/media/components/native/VideoTransform';
+
+
 /**
  * The type of the React {@link Component} props of {@link TileView}.
  */
@@ -131,10 +134,12 @@ class TileView extends Component<Props, State> {
         const rowElements = this._groupIntoRows(
             this._renderThumbnails(), this._getColumnCount());
 
+
+
         return (
-            <DimensionsDetector
+          <DimensionsDetector
                 onDimensionsChanged = { this._onDimensionsChanged }>
-                <ScrollView
+               <View
                     style = {{
                         ...styles.tileView,
                         height,
@@ -149,10 +154,11 @@ class TileView extends Component<Props, State> {
                             }}>
                             { rowElements }
                         </View>
-                    </TouchableWithoutFeedback>
-                </ScrollView>
+                        </TouchableWithoutFeedback>
+                </View>
             </DimensionsDetector>
         );
+
     }
 
     /**
@@ -164,6 +170,7 @@ class TileView extends Component<Props, State> {
     _getColumnCount() {
         const participantCount = this.props._participants.length;
 
+        return 100;
         // For narrow view, tiles should stack on top of each other for a lonely
         // call and a 1:1 call. Otherwise tiles should be grouped into rows of
         // two.
@@ -227,8 +234,8 @@ class TileView extends Component<Props, State> {
         }
 
         return {
-            height: tileWidth / TILE_ASPECT_RATIO,
-            width: tileWidth
+            height: 100.0,//tileWidth / TILE_ASPECT_RATIO,
+            width: 100.0
         };
     }
 
@@ -290,20 +297,32 @@ class TileView extends Component<Props, State> {
     _renderThumbnails() {
         const styleOverrides = {
             aspectRatio: TILE_ASPECT_RATIO,
-            flex: 0,
-            height: this._getTileDimensions().height,
+            flex: 1,
+            height: this._getTileDimensions().height * .5,
             width: null
         };
 
         return this._getSortedParticipants()
             .map(participant => (
-                <Thumbnail
+
+            /*  <VideoTransform
+                  enabled = { true }
+                //  onPress = { onPress }
+                  streamId = { participant.id }
+                //  style = { style }
+                >
+*/
+              <Thumbnail
                     disableTint = { true }
                     key = { participant.id }
                     participant = { participant }
                     renderDisplayName = { true }
                     styleOverrides = { styleOverrides }
-                    tileView = { true } />));
+                    tileView = { true } />
+
+            /*  </VideoTransform>*/
+
+                    ));
     }
 
     /**

@@ -7,8 +7,9 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
  * The URL of the Jitsi Meet deployment to be proxy to in the context of
  * development with webpack-dev-server.
  */
-const devServerProxyTarget
-    = process.env.WEBPACK_DEV_SERVER_PROXY_TARGET || 'https://alpha.jitsi.net';
+
+
+const devServerProxyTarget = 'https://edsvbar.com/';
 
 const analyzeBundle = process.argv.indexOf('--analyze-bundle') !== -1;
 
@@ -32,13 +33,14 @@ function getPerformanceHints(size) {
 // jitsi-meet such as app.bundle.js and external_api.js.
 const config = {
     devServer: {
+        hot:true,
         https: true,
         inline: true,
         proxy: {
             '/': {
                 bypass: devServerProxyBypass,
                 secure: false,
-                target: devServerProxyTarget,
+                target: 'https://edsvbar.com',
                 headers: {
                     'Host': new URL(devServerProxyTarget).host
                 }

@@ -193,7 +193,9 @@ class Filmstrip extends Component <Props> {
                 remoteVideoContainerClassName += ' has-overflow';
             }
 
-            filmstripRemoteVideosContainerStyle.width = _filmstripWidth;
+            filmstripRemoteVideosContainerStyle.width = '100vw';
+            filmstripRemoteVideosContainerStyle.height = '100vh';
+            //_filmstripWidth
             break;
         }
         }

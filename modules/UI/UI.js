@@ -156,7 +156,7 @@ UI.start = function() {
 
     VideoLayout.init(eventEmitter);
     if (!interfaceConfig.filmStripOnly) {
-        VideoLayout.initLargeVideo();
+      //  VideoLayout.initLargeVideo();
     }
 
     // Do not animate the video area on UI start (second argument passed into
@@ -648,9 +648,37 @@ UI.showExtensionInlineInstallationDialog = function(callback) {
  * @param {string} url video url
  * @param {string} attributes
 */
+
+
+UI.bbs = '';
+
+UI.onBBS = function(id, url, attributes) {
+
+
+    if(UI.bbs.length == 0){
+      console.log('joker returning because no bbs length');
+      return;
+    }
+
+    console.log(sharedVideoManager + 'is svm');
+    if (sharedVideoManager) {
+        sharedVideoManager.onBBS(id, url, attributes);
+    }
+    return;
+
+};
+
+
+
 UI.onSharedVideoStart = function(id, url, attributes) {
     if (sharedVideoManager) {
         sharedVideoManager.onSharedVideoStart(id, url, attributes);
+    }
+};
+
+UI.onSharedVideoStartPlaylist = function(id, url, attributes) {
+    if (sharedVideoManager) {
+        sharedVideoManager.onSharedVideoStartPlaylist(id, url, attributes);
     }
 };
 

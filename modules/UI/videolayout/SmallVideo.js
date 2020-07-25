@@ -8,6 +8,8 @@ import ReactDOM from 'react-dom';
 import { I18nextProvider } from 'react-i18next';
 import { Provider } from 'react-redux';
 
+
+
 import { AudioLevelIndicator } from '../../../react/features/audio-level-indicator';
 import { Avatar as AvatarDisplay } from '../../../react/features/base/avatar';
 import { i18next } from '../../../react/features/base/i18n';
@@ -31,7 +33,20 @@ import {
 } from '../../../react/features/video-layout';
 /* eslint-enable no-unused-vars */
 
+
+
+import Drag from './Drag';
+import LocalPosition from './LocalPosition';
+
+
+
 const logger = Logger.getLogger(__filename);
+
+
+
+
+
+
 
 /**
  * Display mode constant used when video is being displayed on the small video.
@@ -81,12 +96,17 @@ export default class SmallVideo {
      * Constructor.
      */
     constructor(VideoLayout) {
+        this.boost = 1.0;
         this.isAudioMuted = false;
         this.isVideoMuted = false;
         this.videoStream = null;
         this.audioStream = null;
         this.VideoLayout = VideoLayout;
         this.videoIsHovered = false;
+        this.padding = 0.0;
+        this.x = 15 + 70 * Math.random();
+        this.y = 15 + 40 * Math.random();
+
 
         /**
          * The current state of the user's bridge connection. The value should be
@@ -135,9 +155,64 @@ export default class SmallVideo {
         this._onPopoverHover = this._onPopoverHover.bind(this);
         this.updateView = this.updateView.bind(this);
 
+
+
+
+      //  this.$container.style.left = `${this.x}vw`;
+      //  this.$container.style.top = `${this.y}vh`;
+      //  this.drag = new Drag(element, element, this.onLocationChanged.bind(this));
+      //  this.position = dragLocalPosition(element);
+      //  this.element = element;
+
+
+      //  this._onMouseMove = this._onMouseMove.bind(this);
+      //  this._onMouseDown = this._on.bind(this);
+      //  this._onMouseUp = this._onMouseUp.bind(this);
+      //  this._isDragging = false;
+      //  this.x = 0;
+      //  this.y = 0;
+        //this._oldX = 0;
+        //this._oldY = 0;
+      //  this._locX = 0;
+      //  this._locY = 0;
+
         this._onContainerClick = this._onContainerClick.bind(this);
     }
 
+    currentPosition(){
+      return {
+        x: this.x,
+        y: this.y
+      };
+    };
+
+
+    avoidPeers(){
+      var position = this.currentPosition();
+      this.onLocationChanged(position.x, position.y);
+    };
+
+
+    onLocationChanged(viewportX, viewportY){
+      // don't do anything if we aren't on the page yet
+      if (!this.element) return;
+
+      var adjustedPosition = this.position.calculate();
+      if (adjustedPosition) {
+        viewportX = adjustedPosition.vw;
+        viewportY = adjustedPosition.vh;
+      }
+
+      this.x = viewportX;
+      this.y = viewportY;
+
+
+    /*  this.db.set("peer:" + this.userId + ":position", {
+        x: this.x,
+        y: this.y
+      }, 99999);
+      */
+    };
     /**
      * Returns the identifier of this small video.
      *
@@ -188,6 +263,17 @@ export default class SmallVideo {
      * Configures hoverIn/hoverOut handlers. Depends on connection indicator.
      */
     bindHoverHandler() {
+
+
+
+              this.$container.css('left', this.x + 'vw');
+              this.$container.css('top', this.y + 'vh');
+              var element = this.$container[0];
+              this.drag = new Drag(element, element, this.onLocationChanged.bind(this), true, this.padding);
+              this.position = new LocalPosition(element);
+              this.element = element;
+
+
         // Add hover handler
         this.$container.hover(
             () => {
@@ -271,6 +357,14 @@ export default class SmallVideo {
             </Provider>,
             statusBarContainer);
     }
+
+    componentDidMount() {
+        const styles = getComputedStyle(this.divRef.current)
+
+        console.log('bro ' + styles.left); // rgb(0, 0, 0)
+        console.log('bro' + styles.top); // 976px
+    }
+
 
     /**
      * Adds the element indicating the audio level of the participant.
@@ -743,6 +837,29 @@ export default class SmallVideo {
         );
     }
 
+/*
+    _onMouseDown(event){
+          this._locX = event.offsetX;
+          this._locY = event.offsetY;
+          this._oldX =  this.$container.position().left;
+          this._oldY = this.$container.position().top;
+
+
+    }
+
+
+    _onMouseUp(event){
+
+    }
+
+    _onMouseMove(event){
+
+
+      console.log('drag' + event.offsetX + ' ' + event.offsetY);
+
+    }
+    */
+
     /**
      * Callback invoked when the thumbnail is clicked and potentially trigger
      * pinning of the participant.
@@ -753,6 +870,8 @@ export default class SmallVideo {
      */
     _onContainerClick(event) {
         const triggerPin = this._shouldTriggerPin(event);
+
+      //  alert('triggered!');
 
         if (event.stopPropagation && triggerPin) {
             event.stopPropagation();
@@ -774,6 +893,8 @@ export default class SmallVideo {
      * @returns {boolean}
      */
     _shouldTriggerPin(event) {
+
+      //  return false;
         // TODO Checking the classes is a workround to allow events to bubble into
         // the DisplayName component if it was clicked. React's synthetic events
         // will fire after jQuery handlers execute, so stop propogation at this
@@ -857,7 +978,8 @@ export default class SmallVideo {
                     height: `${height}px`,
                     'min-height': `${height}px`,
                     'min-width': `${width}px`,
-                    width: `${width}px`
+                    width: `${width}px`,
+
                 });
                 this.$avatar().css({
                     height: `${avatarSize}px`,
@@ -871,14 +993,37 @@ export default class SmallVideo {
             const { thumbnailSize } = state['features/filmstrip'].tileViewDimensions;
 
             if (typeof thumbnailSize !== 'undefined') {
-                const { height, width } = thumbnailSize;
+
+                //const { height, width } = thumbnailSize;
+
+                var clientWidth =window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+                var clientHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+
+                const width = (clientWidth * .22) * this.boost;
+                const height = width * (9.0 / 16.0) + this.padding * 2.0;
                 const avatarSize = height / 2;
 
+
+                const vw = ((width / clientWidth) * 100.0);
+                const vh = ((height / clientWidth) * 100.0);
+
                 this.$container.css({
+                  height: `${vh}vw`,
+                  'min-height': `${vh}vw`,
+                  'min-width': `${vw}vw`,
+                  width: `${vw}vw`,
+                  'padding-top' : this.padding + 'px',
+                  'padding-bottom' : this.padding + 'px',
+
+                  /*
                     height: `${height}px`,
                     'min-height': `${height}px`,
                     'min-width': `${width}px`,
-                    width: `${width}px`
+                    width: `${width}px`,
+                    */
+
+                    'left':(Math.random()*90.0) + 'vw',
+                    'top':(Math.random()*90.0) + 'vh'
                 });
                 this.$avatar().css({
                     height: `${avatarSize}px`,

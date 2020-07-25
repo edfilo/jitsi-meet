@@ -198,6 +198,7 @@ class ParticipantView extends Component<Props> {
                 ? this.props.testHintId
                 : `org.jitsi.meet.Participant#${this.props.participantId}`;
 
+
         return (
             <Container
                 onClick = { renderVideo ? undefined : onPress }
@@ -218,7 +219,7 @@ class ParticipantView extends Component<Props> {
                         videoTrack = { videoTrack }
                         waitForVideoStarted = { false }
                         zOrder = { this.props.zOrder }
-                        zoomEnabled = { this.props.zoomEnabled } /> }
+                        zoomEnabled = { true } /> }
 
                 { !renderVideo
                     && <View style = { styles.avatarContainer }>

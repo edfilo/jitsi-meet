@@ -87,21 +87,20 @@ export default class Video extends Component<Props> {
             const style = styles.video;
             const objectFit
                 = zoomEnabled
-                    ? 'contain'
+                    ? 'cover'
                     : (style && style.objectFit) || 'cover';
-            const rtcView
-                = (
-                    <RTCView
-                        mirror = { this.props.mirror }
-                        objectFit = { objectFit }
-                        streamURL = { stream.toURL() }
-                        style = { style }
-                        zOrder = { this.props.zOrder } />
-                );
-
+                    const rtcView
+                        = (
+                            <RTCView
+                                mirror = { this.props.mirror }
+                                objectFit = { objectFit }
+                                streamURL = { stream.toURL() }
+                                style = { style }
+                                zOrder = { this.props.zOrder } />
+                        );
             // VideoTransform implements "pinch to zoom". As part of "pinch to
             // zoom", it implements onPress, of course.
-            if (zoomEnabled) {
+            if (false) {
                 return (
                     <VideoTransform
                         enabled = { zoomEnabled }

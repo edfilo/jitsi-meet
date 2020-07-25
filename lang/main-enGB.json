@@ -116,13 +116,13 @@
         "yesterday": "Yesterday"
     },
     "deepLinking": {
-        "appNotInstalled": "You need the {{app}} mobile app to join this meeting on your phone.",
+        "appNotInstalled": "You need the {{app}} mobile app to enter this bar on your phone.",
         "description": "Nothing happened? We tried launching your meeting in the {{app}} desktop app. Try again or launch it in the {{app}} web app.",
         "descriptionWithoutWeb": "",
         "downloadApp": "Download the app",
         "ifDoNotHaveApp": "If you don't have the app yet:",
         "ifHaveApp": "If you already have the app:",
-        "joinInApp": "Join this meeting using the app",
+        "joinInApp": "enter this bar using the app",
         "launchWebButton": "Launch in web",
         "title": "Launching your meeting in {{app}}…",
         "tryAgainButton": "Try again in desktop"

@@ -14,23 +14,23 @@ var interfaceConfig = {
     INITIAL_TOOLBAR_TIMEOUT: 20000,
     TOOLBAR_TIMEOUT: 4000,
     TOOLBAR_ALWAYS_VISIBLE: false,
-    DEFAULT_REMOTE_DISPLAY_NAME: 'Fellow Jitster',
-    DEFAULT_LOCAL_DISPLAY_NAME: 'me',
-    SHOW_JITSI_WATERMARK: true,
-    JITSI_WATERMARK_LINK: 'https://jitsi.org',
+    DEFAULT_REMOTE_DISPLAY_NAME: '',
+    DEFAULT_LOCAL_DISPLAY_NAME: '',
+    SHOW_JITSI_WATERMARK: false,
+    JITSI_WATERMARK_LINK: '',
 
     // if watermark is disabled by default, it can be shown only for guests
-    SHOW_WATERMARK_FOR_GUESTS: true,
+    SHOW_WATERMARK_FOR_GUESTS: false,
     SHOW_BRAND_WATERMARK: false,
     BRAND_WATERMARK_LINK: '',
     SHOW_POWERED_BY: false,
     SHOW_DEEP_LINKING_IMAGE: false,
-    GENERATE_ROOMNAMES_ON_WELCOME_PAGE: true,
-    DISPLAY_WELCOME_PAGE_CONTENT: true,
+    GENERATE_ROOMNAMES_ON_WELCOME_PAGE: false,
+    DISPLAY_WELCOME_PAGE_CONTENT: false,
     DISPLAY_WELCOME_PAGE_TOOLBAR_ADDITIONAL_CONTENT: false,
-    APP_NAME: 'Jitsi Meet',
-    NATIVE_APP_NAME: 'Jitsi Meet',
-    PROVIDER_NAME: 'Jitsi',
+    APP_NAME: 'Eds Virtual Bar',
+    NATIVE_APP_NAME: 'Eds Virtual Bar',
+    PROVIDER_NAME: 'Ed',
     LANG_DETECTION: true, // Allow i18n to detect the system language
     INVITATION_POWERED_BY: true,
 
@@ -46,16 +46,15 @@ var interfaceConfig = {
      * enabled. Also, the "profile" button will not display for user's with a
      * jwt.
      */
-    TOOLBAR_BUTTONS: [
-        'microphone', 'camera', 'closedcaptions', 'desktop', 'fullscreen',
-        'fodeviceselection', 'hangup', 'profile', 'chat', 'recording',
-        'livestreaming', 'etherpad', 'sharedvideo', 'settings', 'raisehand',
-        'videoquality', 'filmstrip', 'invite', 'feedback', 'stats', 'shortcuts',
-        'tileview', 'videobackgroundblur', 'download', 'help', 'mute-everyone',
-        'e2ee', 'security'
+    TOOLBAR_BUTTONS: [ 'tileview', 'microphone', 'camera', 'closedcaptions', 'desktop', 'fullscreen',
+        'fodeviceselection',  'info', 'recording',
+        'livestreaming',  'sharedvideo', 'etherpad', 'settings',
+        'videoquality', 'filmstrip', 'feedback',  'shortcuts',
+       'videobackgroundblur', 'download', 'help', 'mute-everyone',
+        'e2ee'
     ],
 
-    SETTINGS_SECTIONS: [ 'devices', 'language', 'moderator', 'profile', 'calendar' ],
+    SETTINGS_SECTIONS: [ 'devices', 'language', 'profile', 'calendar' ],
 
     // Determines how the video would fit the screen. 'both' would fit the whole
     // screen, 'height' would fit the original video height to the height of the
@@ -71,7 +70,7 @@ var interfaceConfig = {
     /**
      * Whether to show thumbnails in filmstrip as a column instead of as a row.
      */
-    VERTICAL_FILMSTRIP: true,
+    VERTICAL_FILMSTRIP: false,
 
     // A html text to be shown to guests on the close page, false disables it
     CLOSE_PAGE_GUEST_HINT: false,
@@ -82,8 +81,8 @@ var interfaceConfig = {
 
     // Enables feedback star animation.
     ENABLE_FEEDBACK_ANIMATION: false,
-    DISABLE_FOCUS_INDICATOR: false,
-    DISABLE_DOMINANT_SPEAKER_INDICATOR: false,
+    DISABLE_FOCUS_INDICATOR: true,
+    DISABLE_DOMINANT_SPEAKER_INDICATOR: true,
 
     /**
      * Whether the speech to text transcription subtitles panel is disabled.
@@ -190,7 +189,7 @@ var interfaceConfig = {
      *
      * Note: this mode is experimental and subject to breakage.
      */
-    AUTO_PIN_LATEST_SCREEN_SHARE: 'remote-only',
+    AUTO_PIN_LATEST_SCREEN_SHARE: true,//'remote-only',
 
     /**
      * If true, presence status: busy, calling, connected etc. is not displayed.

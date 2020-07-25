@@ -66,7 +66,7 @@ class OverflowMenuButton extends Component<Props> {
         const { children, isOpen, t } = this.props;
 
         return (
-            <div className = 'toolbox-button-wth-dialog'>
+            <div id="tvbutton" className = 'toolbox-button-wth-dialog'>
                 <InlineDialog
                     content = { children }
                     isOpen = { isOpen }

@@ -161,7 +161,8 @@ function _participant(state: Object = {}, action) {
 
     case PIN_PARTICIPANT:
         // Currently, only one pinned participant is allowed.
-        return set(state, 'pinned', state.id === action.participant.id);
+        return set(state, 'pinned', false);
+        //state.id === action.participant.id);
     }
 
     return state;

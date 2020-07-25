@@ -36,26 +36,55 @@ const Filmstrip = {
      * @returns {void}
      */
     resizeThumbnailsForTileView(width, height, forceUpdate = false) {
+
+      return;
+
+      var clientWidth =window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+      var clientHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+      const vw = ((width / clientWidth) * 100.0);
+      const vh = ((height / clientHeight) * 100.0);
+
+
         const thumbs = this._getThumbs(!forceUpdate);
         const avatarSize = height / 2;
-
+        const radius = 10.0;//width * .01;
         if (thumbs.localThumb) {
             thumbs.localThumb.css({
+
+
                 'padding-top': '',
+
+                height: `${vh}vh`,
+                'min-height': `${vh}vh`,
+                'min-width': `${vw}vw`,
+                width: `${vw}vw`,
+
+                /*
                 height: `${height}px`,
                 'min-height': `${height}px`,
                 'min-width': `${width}px`,
-                width: `${width}px`
+                width: `${width}px`,
+                */
+                'border-radius': `${radius}px`
+
             });
         }
 
         if (thumbs.remoteThumbs) {
             thumbs.remoteThumbs.css({
                 'padding-top': '',
+                /*
                 height: `${height}px`,
                 'min-height': `${height}px`,
                 'min-width': `${width}px`,
-                width: `${width}px`
+                width: `${width}px`,
+                */
+                height: `${vh}vh`,
+                'min-height': `${vh}vh`,
+                'min-width': `${vw}vw`,
+                width: `${vw}vw`,
+                'border-radius': `${radius}px`
+
             });
         }
 
@@ -74,6 +103,10 @@ const Filmstrip = {
      */
     resizeThumbnailsForHorizontalView({ local = {}, remote = {} }, forceUpdate = false) {
         const thumbs = this._getThumbs(!forceUpdate);
+
+
+
+
 
         if (thumbs.localThumb) {
             const { height, width } = local;

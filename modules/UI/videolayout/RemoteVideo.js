@@ -27,6 +27,9 @@ import UIUtils from '../util/UIUtil';
 
 import SmallVideo from './SmallVideo';
 
+import Drag from './Drag';
+import LocalPosition from './LocalPosition';
+
 const logger = Logger.getLogger(__filename);
 
 /**

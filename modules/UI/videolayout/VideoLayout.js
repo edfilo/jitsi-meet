@@ -11,8 +11,10 @@ import {
 } from '../../../react/features/base/participants';
 import { getTrackByMediaTypeAndParticipant } from '../../../react/features/base/tracks';
 import UIEvents from '../../../service/UI/UIEvents';
-import { SHARED_VIDEO_CONTAINER_TYPE } from '../shared_video/SharedVideo';
+import { SHARED_VIDEO_CONTAINER_TYPE, BBS_CONTAINER_TYPE } from '../shared_video/SharedVideo';
 import SharedVideoThumb from '../shared_video/SharedVideoThumb';
+import BBS from '../shared_video/BBS.js';
+
 
 import LargeVideoManager from './LargeVideoManager';
 import LocalVideo from './LocalVideo';
@@ -282,13 +284,25 @@ const VideoLayout = {
     addRemoteParticipantContainer(participant) {
         if (!participant || participant.local) {
             return;
-        } else if (participant.isFakeParticipant) {
-            const sharedVideoThumb = new SharedVideoThumb(
-                participant,
-                SHARED_VIDEO_CONTAINER_TYPE,
+        }else if (participant.isFakeParticipant) {
+
+          if(participant.id == 'bbs'){
+            const sharedVideoThumb = new BBS(
+                participant, BBS_CONTAINER_TYPE,
                 VideoLayout);
 
             this.addRemoteVideoContainer(participant.id, sharedVideoThumb);
+
+
+          }else {
+            const sharedVideoThumb = new SharedVideoThumb(
+                participant, SHARED_VIDEO_CONTAINER_TYPE,
+                VideoLayout);
+
+            this.addRemoteVideoContainer(participant.id, sharedVideoThumb);
+
+
+          }
 
             return;
         }
@@ -601,6 +615,7 @@ const VideoLayout = {
     },
 
     addLargeVideoContainer(type, container) {
+      alert('adding unnessesary container '+ type);
         largeVideo && largeVideo.addContainer(type, container);
     },
 

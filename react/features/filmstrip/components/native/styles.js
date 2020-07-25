@@ -3,7 +3,7 @@
 import { ColorSchemeRegistry, schemeColor } from '../../../base/color-scheme';
 import { ColorPalette } from '../../../base/styles';
 import { FILMSTRIP_SIZE } from '../../constants';
-
+import { Dimensions, TouchableHighlight, Text } from 'react-native';
 /**
  * Size for the Avatar.
  */
@@ -22,7 +22,8 @@ export default {
         flexDirection: 'row',
         flexGrow: 0,
         justifyContent: 'flex-end',
-        height: FILMSTRIP_SIZE
+        flex:1
+      //  height: 200
     },
 
     /**
@@ -73,16 +74,16 @@ export default {
         alignItems: 'stretch',
         backgroundColor: ColorPalette.appBackground,
         borderColor: '#424242',
-        borderRadius: 3,
+        borderRadius: 20,//Dimensions.get('window').width * 0.2 * .30,
         borderStyle: 'solid',
         borderWidth: 1,
         flex: 1,
-        height: 80,
+        height: Dimensions.get('window').width * 0.25,
         justifyContent: 'center',
         margin: 2,
         overflow: 'hidden',
         position: 'relative',
-        width: 80
+        width: Dimensions.get('window').width * 0.25,
     },
 
     /**
@@ -112,7 +113,8 @@ export default {
     },
 
     tileView: {
-        alignSelf: 'center'
+        alignSelf: 'center',
+        backgroundColor: 'purple'
     },
 
     tileViewRows: {
@@ -121,7 +123,9 @@ export default {
 
     tileViewRow: {
         flexDirection: 'row',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        backgroundColor: 'red',
+        height:200
     }
 };
 

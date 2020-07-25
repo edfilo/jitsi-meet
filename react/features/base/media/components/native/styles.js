@@ -18,7 +18,7 @@ export default StyleSheet.create({
      * animation, or PiP mode.
      */
     videoTransformedViewContainer: {
-        overflow: 'hidden'
+        overflow: 'hidden' 
     },
 
     /**
