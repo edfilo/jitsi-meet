@@ -93,6 +93,7 @@ export class AbstractApp extends BaseApp<Props, *> {
 
     _createMainElement: (React$Element<*>, Object) => ?React$Element<*>;
 
+
     /**
      * Gets the default URL to be opened when this {@code App} mounts.
      *

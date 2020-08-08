@@ -81,7 +81,6 @@ export default class Video extends Component<Props> {
      */
     render() {
         const { onPress, stream, zoomEnabled } = this.props;
-
         if (stream) {
             // RTCView
             const style = styles.video;
@@ -112,6 +111,7 @@ export default class Video extends Component<Props> {
                 );
             }
 
+
             // XXX Unfortunately, VideoTransform implements a custom press
             // detection which has been observed to be very picky about the
             // precision of the press unlike the builtin/default/standard press
@@ -124,6 +124,9 @@ export default class Video extends Component<Props> {
                 </Pressable>
             );
         }
+
+console.log('shouldnt be here');
+
 
         // RTCView has peculiarities which may or may not be platform specific.
         // For example, it doesn't accept an empty streamURL. If the execution

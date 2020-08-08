@@ -25,8 +25,15 @@ import '../../mobile/wake-lock';
 import '../../mobile/watchos';
 import logger from '../logger';
 
+
 import { AbstractApp } from './AbstractApp';
 import type { Props as AbstractAppProps } from './AbstractApp';
+
+//import * as firebase from '@react-native-firebase/app';
+
+//import firestore from '@react-native-firebase/firestore';
+
+
 
 declare var __DEV__;
 
@@ -78,6 +85,17 @@ export class App extends AbstractApp {
         // This will effectively kill the app. In accord with the Web, do not
         // kill the app.
         this._maybeDisableExceptionsManager();
+
+        //firebase().initializeApp();
+
+        //const otherApp = firebase.app('ed-s-virtual-bar');
+        //const firestoreForOtherApp = firebase.firestore(otherApp);
+        //firebase.initializeApp();
+
+        //const bars = firestore().collection('places');
+        //console.log(bars);
+
+
     }
 
     /**

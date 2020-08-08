@@ -32,6 +32,7 @@ const MIN_SCALE = 1;
  * ViewPort (hint) support is added to the LargeVideo component then this
  * contant will not be necessary anymore.
  */
+
 const MAX_OFFSET = 100;
 
 /**
@@ -214,11 +215,12 @@ class VideoTransform extends Component<Props, State> {
      * @inheritdoc
      */
     render() {
+
         const { children, style } = this.props;
+
 
         return (
             <View
-
                 onLayout = { this._onLayout }
                 pointerEvents = 'box-only'
                 style = { [
@@ -345,6 +347,8 @@ class VideoTransform extends Component<Props, State> {
     _getTransformStyle() {
 
         const { enabled } = this.props;
+
+
 
         if (!enabled) {
             return null;

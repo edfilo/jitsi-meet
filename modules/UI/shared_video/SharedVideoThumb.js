@@ -79,6 +79,10 @@ export default class SharedVideoThumb extends SmallVideo {
       return youtubeID;
     }
 
+    openScreenSharing(){
+        APP.conference.toggleScreenSharing(true);
+
+    }
 
     playPlaylist(pid) {
 
@@ -137,6 +141,8 @@ export default class SharedVideoThumb extends SmallVideo {
     setupUI() {
 
         let buttons = document.querySelectorAll('.genre_button');
+
+
         buttons.forEach((btn) => {
           btn.addEventListener("click", (event) => {
             console.log('playlist:' + event.target.id);
@@ -161,6 +167,14 @@ export default class SharedVideoThumb extends SmallVideo {
           ev.stopPropagation();
         }, false);
 
+
+
+        var shareButton = document.getElementById("share_desktop_button");
+        shareButton.addEventListener("click", (event) => {
+
+          this.openScreenSharing();
+
+        });
 
         var goButton = document.getElementById("youtube_go");
         goButton.addEventListener("click", (event) => {
@@ -224,10 +238,10 @@ export default class SharedVideoThumb extends SmallVideo {
       +'<button class="genre_button" id="vaporwave">vaporwave</button>'
       +'<button class="genre_button" id="trap">trap</button>'
       +'</div>'
-      +'<input id="youtube_url" type="text" placeholder="youtube url or playlist"></input>'
+      +'<input id="youtube_url" type="text" placeholder="youtube url, playlist, or video link."></input>'
       +'<button id="youtube_go">Play</button>'
+      +'<div id="share_desktop_button">Share Desktop</div>'
       +'</div>'
-
       this.$container.append(stuff);
 
     }

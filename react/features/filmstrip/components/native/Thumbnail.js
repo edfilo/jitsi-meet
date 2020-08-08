@@ -30,6 +30,7 @@ import RaisedHandIndicator from './RaisedHandIndicator';
 import VideoMutedIndicator from './VideoMutedIndicator';
 import styles, { AVATAR_SIZE } from './styles';
 
+
 /**
  * Thumbnail component's property types.
  */
@@ -141,11 +142,12 @@ function Thumbnail(props: Props) {
 
     return (
         <Container
-            onClick = { _onClick }
-            onDrag = { _onDrag}
+          //  onClick = { _onClick }
+          //  onDrag = { _onDrag}
           /*  onLongPress = { participant.local ? undefined : _onShowRemoteVideoMenu }*/
 
-            style = { [
+            style = {  [
+
                 styles.thumbnail,
                 participant.pinned && !tileView
                     ? _styles.thumbnailPinned : null,
@@ -217,11 +219,15 @@ function _mapDispatchToProps(dispatch: Function, ownProps): Object {
          * @protected
          * @returns {void}
          */
+
+         /*
         _onDrag() {
           console.log('jack drag');
 
         },
+
         _onClick() {
+
             const { participant, tileView } = ownProps;
 
 
@@ -232,6 +238,9 @@ function _mapDispatchToProps(dispatch: Function, ownProps): Object {
                 dispatch(pinParticipant(participant.pinned ? null : participant.id));
             }
         },
+
+        */
+        
 
         /**
          * Handles long press on the thumbnail.
@@ -273,6 +282,7 @@ function _mapStateToProps(state, ownProps) {
     const renderModeratorIndicator = !_isEveryoneModerator && participant.role === PARTICIPANT_ROLE.MODERATOR;
 
     return {
+
         _audioMuted: audioTrack?.muted ?? true,
         _largeVideo: largeVideo,
         _renderDominantSpeakerIndicator: renderDominantSpeakerIndicator,

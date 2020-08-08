@@ -49,8 +49,8 @@ export default {
         alignContent: 'stretch',
         alignSelf: 'stretch',
         aspectRatio: 1,
-        flexShrink: 0,
-        flexDirection: 'row'
+        flexShrink: 0
+      /*  flexDirection: 'row'*/
     },
 
     moderatorIndicatorContainer: {
@@ -71,19 +71,19 @@ export default {
      * the avatar of the associated participant.
      */
     thumbnail: {
-        alignItems: 'stretch',
-        backgroundColor: ColorPalette.appBackground,
+      /*  alignItems: 'stretch',*/
+        backgroundColor: 'blue',
         borderColor: '#424242',
         borderRadius: 20,//Dimensions.get('window').width * 0.2 * .30,
         borderStyle: 'solid',
         borderWidth: 1,
-        flex: 1,
-        height: Dimensions.get('window').width * 0.25,
+      /*  flex: 1,*/
+      /*  height: Dimensions.get('window').width * 0.25,*/
         justifyContent: 'center',
         margin: 2,
         overflow: 'hidden',
-        position: 'relative',
-        width: Dimensions.get('window').width * 0.25,
+        position: 'absolute',
+      /*  width: Dimensions.get('window').width * 0.25,*/
     },
 
     /**
@@ -114,7 +114,8 @@ export default {
 
     tileView: {
         alignSelf: 'center',
-        backgroundColor: 'purple'
+        backgroundColor: 'purple',
+        flex:1
     },
 
     tileViewRows: {

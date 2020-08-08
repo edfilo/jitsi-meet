@@ -999,7 +999,7 @@ export default class SmallVideo {
                 var clientWidth =window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
                 var clientHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 
-                const width = (clientWidth * .22) * this.boost;
+                const width = Math.max((clientWidth * .22) * this.boost, 300);
                 const height = width * (9.0 / 16.0) + this.padding * 2.0;
                 const avatarSize = height / 2;
 

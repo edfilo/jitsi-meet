@@ -22,7 +22,9 @@ import {
 import Thumbnail from './Thumbnail';
 import styles from './styles';
 
-import VideoTransform from '../../../base/media/components/native/VideoTransform';
+/*import VideoTransform from '../../../base/media/components/native/VideoTransform';*/
+import PinchZoomView from 'react-native-pinch-zoom-view-movable';
+
 
 
 /**
@@ -129,35 +131,14 @@ class TileView extends Component<Props, State> {
      * @returns {ReactElement}
      */
     render() {
-        const { onClick } = this.props;
+      //  const { onClick } = this.props;
         const { height, width } = this.state;
-        const rowElements = this._groupIntoRows(
-            this._renderThumbnails(), this._getColumnCount());
+      /* const rowElements = this._groupIntoRows(
+            this._renderThumbnails(), this._getColumnCount());*/
 
-
-
-        return (
-          <DimensionsDetector
-                onDimensionsChanged = { this._onDimensionsChanged }>
-               <View
-                    style = {{
-                        ...styles.tileView,
-                        height,
-                        width
-                    }}>
-                    <TouchableWithoutFeedback onPress = { onClick }>
-                        <View
-                            style = {{
-                                ...styles.tileViewRows,
-                                minHeight: height,
-                                minWidth: width
-                            }}>
-                            { rowElements }
-                        </View>
-                        </TouchableWithoutFeedback>
-                </View>
-            </DimensionsDetector>
-        );
+        const thumbs = this._renderThumbnails();
+        const tilestyle = {backgroundColor:'purple',width:'100%',height:'100%'};
+        return (<View style= {tilestyle}>{thumbs}</View>);
 
     }
 
@@ -239,36 +220,7 @@ class TileView extends Component<Props, State> {
         };
     }
 
-    /**
-     * Splits a list of thumbnails into React Elements with a maximum of
-     * {@link rowLength} thumbnails in each.
-     *
-     * @param {Array} thumbnails - The list of thumbnails that should be split
-     * into separate row groupings.
-     * @param {number} rowLength - How many thumbnails should be in each row.
-     * @private
-     * @returns {ReactElement[]}
-     */
-    _groupIntoRows(thumbnails, rowLength) {
-        const rowElements = [];
 
-        for (let i = 0; i < thumbnails.length; i++) {
-            if (i % rowLength === 0) {
-                const thumbnailsInRow
-                    = thumbnails.slice(i, i + rowLength);
-
-                rowElements.push(
-                    <View
-                        key = { rowElements.length }
-                        style = { styles.tileViewRow }>
-                        { thumbnailsInRow }
-                    </View>
-                );
-            }
-        }
-
-        return rowElements;
-    }
 
     _onDimensionsChanged: (width: number, height: number) => void;
 
@@ -294,35 +246,37 @@ class TileView extends Component<Props, State> {
      * @private
      * @returns {ReactElement[]}
      */
+
+    _onPress() {
+
+    }
     _renderThumbnails() {
         const styleOverrides = {
-            aspectRatio: TILE_ASPECT_RATIO,
-            flex: 1,
-            height: this._getTileDimensions().height * .5,
-            width: null
+            /*aspectRatio: TILE_ASPECT_RATIO,*/
+            flex:0,
+            width:100,
+            height:100,
+          /*  height: '100%',//this._getTileDimensions().height,
+            width: '100%',// this._getTileDimensions().height,*/
+            backgroundColor:'blue'
         };
+
+
 
         return this._getSortedParticipants()
             .map(participant => (
 
-            /*  <VideoTransform
-                  enabled = { true }
-                //  onPress = { onPress }
-                  streamId = { participant.id }
-                //  style = { style }
-                >
-*/
-              <Thumbnail
+              <PinchZoomView style={{width:100,height:100, flex:0, backgroundColor:'orange'}}>
+    <Thumbnail
                     disableTint = { true }
                     key = { participant.id }
                     participant = { participant }
                     renderDisplayName = { true }
                     styleOverrides = { styleOverrides }
                     tileView = { true } />
+              </PinchZoomView>
 
-            /*  </VideoTransform>*/
-
-                    ));
+   ));
     }
 
     /**

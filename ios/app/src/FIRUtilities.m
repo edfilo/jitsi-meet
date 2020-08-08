@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+#import <Firebase.h>
+
 #import "FIRUtilities.h"
 
 @import JitsiMeet;
@@ -30,6 +32,7 @@
   return containsRealServiceInfoPlist;
 }
 
+
 + (NSURL *)extractURL: (FIRDynamicLink*)dynamicLink {
   NSURL *url = nil;
   if (dynamicLink != nil) {
@@ -44,5 +47,6 @@
 
   return url;
 }
+
 
 @end
