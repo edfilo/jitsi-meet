@@ -73,7 +73,6 @@ class NavigationBar extends Component<Props> {
                             { this.props._meetingName }
                         </Text>
                     }
-                    <ConferenceTimer />
                 </View>
             </View>
         ];
@@ -88,6 +87,7 @@ class NavigationBar extends Component<Props> {
  * @returns {Props}
  */
 function _mapStateToProps(state) {
+
     return {
         _meetingName: getConferenceName(state),
         _meetingNameEnabled: getFeatureFlag(state, MEETING_NAME_ENABLED, true),

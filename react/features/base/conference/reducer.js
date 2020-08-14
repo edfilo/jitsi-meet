@@ -7,6 +7,7 @@ import { assign, ReducerRegistry, set } from '../redux';
 
 import {
     AUTH_STATUS_CHANGED,
+    SET_BAR_METADATA,
     CONFERENCE_FAILED,
     CONFERENCE_JOINED,
     CONFERENCE_LEFT,
@@ -24,7 +25,8 @@ import {
     SET_PREFERRED_VIDEO_QUALITY,
     SET_ROOM,
     SET_SIP_GATEWAY_ENABLED,
-    SET_START_MUTED_POLICY
+    SET_START_MUTED_POLICY,
+
 } from './actionTypes';
 import { VIDEO_QUALITY_LEVELS } from './constants';
 import { isRoomValid } from './functions';
@@ -49,10 +51,15 @@ ReducerRegistry.register(
     'features/base/conference',
     (state = DEFAULT_STATE, action) => {
         switch (action.type) {
+
+        case SET_BAR_METADATA:
+           return set(state, 'barMetaData', action.bar);
+
         case AUTH_STATUS_CHANGED:
             return _authStatusChanged(state, action);
 
         case CONFERENCE_FAILED:
+            return state;
             return _conferenceFailed(state, action);
 
         case CONFERENCE_JOINED:

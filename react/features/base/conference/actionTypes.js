@@ -105,6 +105,7 @@ export const DATA_CHANNEL_OPENED = 'DATA_CHANNEL_OPENED';
  */
 export const KICKED_OUT = 'KICKED_OUT';
 
+export const SET_BAR_METADATA = 'SET_BAR_METADATA';
 /**
  * The type of (redux) action which signals that the lock state of a specific
  * {@code JitsiConference} changed.

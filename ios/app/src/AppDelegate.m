@@ -41,12 +41,26 @@
         builder.serverURL = [NSURL URLWithString:@"https://edsvbar.com"];
         builder.welcomePageEnabled = YES;
 
+      
         // Apple rejected our app because they claim requiring a
         // Dropbox account for recording is not acceptable.
+        //https://github.com/jitsi/jitsi-meet/blob/master/react/features/base/flags/constants.js
+
+
+                [builder setFeatureFlag:@"calendar.enabled" withBoolean:NO];
+                [builder setFeatureFlag:@"chat.enabled" withBoolean:NO];
+                
 #if DEBUG
+
         [builder setFeatureFlag:@"ios.recording.enabled" withBoolean:YES];
+
+
+
 #endif
     }];
+
+
+
 
 
   // ...
@@ -54,7 +68,7 @@
     // Initialize Crashlytics and Firebase if a valid GoogleService-Info.plist file was provided.
 
     [FIRApp configure];
-  
+
    if ([FIRUtilities appContainsRealServiceInfoPlist] && ![jitsiMeet isCrashReportingDisabled]) {
         NSLog(@"Enabling Crashlytics and Firebase");
 

@@ -21,12 +21,14 @@ ReducerRegistry.register(
     (state: Object = {}, action: Object) => {
         switch (action.type) {
         case CONNECTION_DISCONNECTED:
+
             return _connectionDisconnected(state, action);
 
         case CONNECTION_ESTABLISHED:
             return _connectionEstablished(state, action);
 
         case CONNECTION_FAILED:
+    
             return _connectionFailed(state, action);
 
         case CONNECTION_WILL_CONNECT:

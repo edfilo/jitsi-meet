@@ -88,10 +88,7 @@ const TILE_ASPECT_RATIO = 1;
  * @extends Component
  */
 class TileView extends Component<Props, State> {
-    state = {
-        height: 0,
-        width: 0
-    };
+
 
     /**
      * Initializes a new {@code TileView} instance.
@@ -101,6 +98,16 @@ class TileView extends Component<Props, State> {
      */
     constructor(props: Props) {
         super(props);
+
+
+        this.state = {
+            height: 0,
+            width: 0
+          //  bgimage: props.bgimage
+            //'https://edsvbar.com/backgrounds/dive.jpg'
+        };
+
+
 
         // Bind event handler so it is only bound once per instance.
         this._onDimensionsChanged = this._onDimensionsChanged.bind(this);
@@ -124,6 +131,12 @@ class TileView extends Component<Props, State> {
         this._updateReceiverQuality();
     }
 
+
+    componentWillReceiveProps(nextProps) {
+
+
+    }
+
     /**
      * Implements React's {@link Component#render()}.
      *
@@ -132,13 +145,21 @@ class TileView extends Component<Props, State> {
      */
     render() {
       //  const { onClick } = this.props;
-        const { height, width } = this.state;
+
+      let { updateParentState } = this.props.data;
+
+        const { height, width} = this.state;
       /* const rowElements = this._groupIntoRows(
             this._renderThumbnails(), this._getColumnCount());*/
 
+
         const thumbs = this._renderThumbnails();
-        const tilestyle = {backgroundColor:'purple',width:'100%',height:'100%'};
-        return (<View style= {tilestyle}>{thumbs}</View>);
+        const tilestyle = {backgroundColor:'transparent',width:'100%',height:'100%'};
+        return (
+          <View style= {tilestyle}>{thumbs}</View>
+
+
+          );
 
     }
 

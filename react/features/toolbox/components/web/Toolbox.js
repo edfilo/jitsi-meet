@@ -82,6 +82,8 @@ import OverflowMenuProfileItem from './OverflowMenuProfileItem';
 import ToolbarButton from './ToolbarButton';
 import VideoSettingsButton from './VideoSettingsButton';
 
+import TipDialog from './TipDialog';
+
 /**
  * The type of the React {@code Component} props of {@link Toolbox}.
  */
@@ -239,6 +241,7 @@ class Toolbox extends Component<Props, State> {
         this._onToolbarOpenKeyboardShortcuts = this._onToolbarOpenKeyboardShortcuts.bind(this);
         this._onToolbarOpenSpeakerStats = this._onToolbarOpenSpeakerStats.bind(this);
         this._onToolbarOpenVideoQuality = this._onToolbarOpenVideoQuality.bind(this);
+        this._onToolbarOpenTips = this._onToolbarOpenTips.bind(this);
         this._onToolbarToggleChat = this._onToolbarToggleChat.bind(this);
         this._onToolbarToggleFullScreen = this._onToolbarToggleFullScreen.bind(this);
         this._onToolbarToggleProfile = this._onToolbarToggleProfile.bind(this);
@@ -403,6 +406,10 @@ class Toolbox extends Component<Props, State> {
      */
     _doOpenVideoQuality() {
         this.props.dispatch(openDialog(VideoQualityDialog));
+    }
+
+    _doOpenTips() {
+        this.props.dispatch(openDialog(TipDialog));
     }
 
     /**
@@ -726,6 +733,7 @@ class Toolbox extends Component<Props, State> {
         this._doOpenSpeakerStats();
     }
 
+  _onToolbarOpenTips: () => void;
     _onToolbarOpenVideoQuality: () => void;
 
     /**
@@ -740,6 +748,12 @@ class Toolbox extends Component<Props, State> {
 
         this._doOpenVideoQuality();
     }
+
+    _onToolbarOpenTips() {
+
+        this._doOpenTips();
+    }
+
 
     _onToolbarToggleChat: () => void;
 
@@ -1237,9 +1251,23 @@ class Toolbox extends Component<Props, State> {
         overflowMenuContent.splice(
             1, 0, ...this._renderMovedButtons(movedButtons));
 
+var dollarStyle = {
+  backgroundImage: 'url(' + '/img/tipshadow.png' + ')',
+  backgroundSize:'contain',
+  backgroundPosition:'center',
+  backgroundRepeat:'no-repeat',
+  height:70,
+  width:150,
+  margin:'auto'
+};
+
+
+
         return (
             <div className = 'toolbox-content'>
-                <div className = 'button-group-left'>
+
+                <div  className = 'button-group-left'>
+
                     { this._renderAudioButton() }
                     <HangupButton
                         visible = { this._shouldShowButton('hangup') } />
@@ -1247,7 +1275,9 @@ class Toolbox extends Component<Props, State> {
 
                 </div>
                 <div className = 'button-group-center'>
-                  <div id="tip_button_bottom"></div>
+
+                <div id="tipbutton" style = {dollarStyle} onClick={this._onToolbarOpenTips} />
+
                 </div>
 
                 <div className = 'button-group-right'>

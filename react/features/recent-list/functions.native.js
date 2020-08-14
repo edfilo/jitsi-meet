@@ -20,7 +20,7 @@ function toDisplayableItem(item, defaultServerURL, t) {
     const serverName = baseURL === defaultServerURL ? null : location.host;
 
     return {
-        colorBase: serverName,
+        colorBase: 'red',
         id: {
             date: item.date,
             url: item.conference

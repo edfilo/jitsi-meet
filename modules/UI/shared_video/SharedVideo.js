@@ -90,19 +90,9 @@ export default class SharedVideoManager {
 
     start() {
 
-      //  if(this.url.length > 0){
-
-      //  }else {
-        //  this.url = 'sRE5iQCdRvE';
-          //var url = 'sRE5iQCdRvE'; //vaporwave menu
-      //  }
-
-
-
-        this.emitter.emit(
-            UIEvents.UPDATE_SHARED_VIDEO, this.url, 'start');
-      //'sRE5iQCdRvE'
+        this.emitter.emit(UIEvents.UPDATE_SHARED_VIDEO, this.url, 'start');
     }
+
 
     toggleSharedVideo() {
 
@@ -306,10 +296,11 @@ export default class SharedVideoManager {
                     */
 
 
+
                 const p = new YT.Player('youtube', {
                     height: '100%',
                     width: '100%',
-                    videoId: self.url,
+                    videoId: self.url || 'sRE5iQCdRvE',
                     playerVars: {
                         'origin': location.origin,
                         'fs': '0',

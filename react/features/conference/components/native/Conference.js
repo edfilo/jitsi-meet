@@ -39,12 +39,22 @@ import LonelyMeetingExperience from './LonelyMeetingExperience';
 import NavigationBar from './NavigationBar';
 import styles, { NAVBAR_GRADIENT_COLORS } from './styles';
 
+import firestore from '@react-native-firebase/firestore';
+import { getRoomName } from '../../../base/conference';
+
+import { getConferenceName } from '../../../base/conference';
+
+import { setBarMetaData } from '../../../base/conference';
+
+
+import { ImageBackground, StyleSheet} from "react-native";
 
 /**
  * The type of the React {@code Component} props of {@link Conference}.
  */
 type Props = AbstractProps & {
 
+    bgimage: string,
     /**
      * Wherther the calendar feature is enabled or not.
      *
@@ -130,6 +140,13 @@ class Conference extends AbstractConference<Props, *> {
         this._onClick = this._onClick.bind(this);
         this._onHardwareBackPress = this._onHardwareBackPress.bind(this);
         this._setToolboxVisible = this._setToolboxVisible.bind(this);
+
+
+        //this.state = {
+        //  bgimage: "https://edsvbar.com/backgrounds/dive.jpg",
+        //  updateParentState: (newState) => this.setState(newState)
+      //  }
+
     }
 
     /**
@@ -141,6 +158,23 @@ class Conference extends AbstractConference<Props, *> {
      */
     componentDidMount() {
         BackButtonRegistry.addListener(this._onHardwareBackPress);
+
+        const slug =  this.props._slug;
+
+        console.log('mounted conference component with slug ' + slug);
+
+
+     const droop = firestore().collection('places').doc(slug)
+     .onSnapshot(documentSnapshot => {
+
+          this.props.dispatch(setBarMetaData(documentSnapshot.data()));
+        //console.log('User data: ', documentSnapshot.data().background_url);
+        //this.setState({ bgimage: documentSnapshot.data().background_url });
+        //debugger;
+      });
+
+
+
     }
 
     /**
@@ -221,8 +255,6 @@ class Conference extends AbstractConference<Props, *> {
     _renderConferenceModals() {
         return [
             <AddPeopleDialog key = 'addPeopleDialog' />,
-            <Chat key = 'chat' />,
-            <SharedDocument key = 'sharedDocument' />
         ];
     }
 
@@ -263,13 +295,23 @@ class Conference extends AbstractConference<Props, *> {
             return this._renderContentForReducedUi();
         }
 
+        let { bgimage, updateParentState } = this.props;
+
+        console.log('render bg' + bgimage);
+
+        //debugger;
         return (
-            <>
+            <ImageBackground
+          source={{uri: bgimage}}
+          style={{ flex: 1,
+            width: null,
+            height: null
+            }}>
                 {/*
                   * The LargeVideo is the lowermost stacking layer.
                   */
                     _shouldDisplayTileView
-                        ? <TileView onClick = { this._onClick } />
+                        ? <TileView data={{ bgimage, updateParentState }} onClick = { this._onClick } />
                         : <LargeVideo onClick = { this._onClick } />
                 }
 
@@ -346,7 +388,8 @@ class Conference extends AbstractConference<Props, *> {
                 { this._renderConferenceNotification() }
 
                 { this._renderConferenceModals() }
-            </>
+
+                </ImageBackground>
         );
     }
 
@@ -427,6 +470,8 @@ class Conference extends AbstractConference<Props, *> {
  * @returns {Props}
  */
 function _mapStateToProps(state) {
+
+
     const { connecting, connection } = state['features/base/connection'];
     const {
         conference,
@@ -447,9 +492,16 @@ function _mapStateToProps(state) {
     const connecting_
         = connecting || (connection && (joining || (!conference && !leaving)));
 
+
+
+    const bgimage = state["features/base/conference"].barMetaData ? state["features/base/conference"].barMetaData.background_url : 'https://edsvbar.com/backgrounds/dive.jpg';
+
     return {
         ...abstractMapStateToProps(state),
 
+        bgimage: bgimage,
+
+        _slug: state["features/base/conference"].room,
         /**
          * Wherther the calendar feature is enabled or not.
          *

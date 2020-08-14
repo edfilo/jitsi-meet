@@ -81,10 +81,12 @@ pod 'RNSVG', :path => '../node_modules/react-native-svg'
 pod 'RNWatch', :path => '../node_modules/react-native-watch-connectivity'
 pod 'RNDefaultPreference', :path => '../node_modules/react-native-default-preference'
 
+  pod 'react-native-webrtc', :path => '../node_modules/react-native-webrtc'
+
 target 'JitsiMeet' do
   project 'sdk/sdk.xcodeproj'
 
-  pod 'react-native-webrtc', :path => '../node_modules/react-native-webrtc'
+
   # React Native and its dependencies
   #
 

@@ -62,6 +62,7 @@ export function abstractMapStateToProps(state: Object) {
     const stateFeaturesBaseDialog = state['features/base/dialog'];
     const { reducedUI } = state['features/base/responsive-ui'];
 
+
     return {
         _component: stateFeaturesBaseDialog.component,
         _componentProps: stateFeaturesBaseDialog.componentProps,

@@ -31,7 +31,7 @@ import type { Props as AbstractAppProps } from './AbstractApp';
 
 //import * as firebase from '@react-native-firebase/app';
 
-//import firestore from '@react-native-firebase/firestore';
+import firestore from '@react-native-firebase/firestore';
 
 
 
@@ -88,15 +88,12 @@ export class App extends AbstractApp {
 
         //firebase().initializeApp();
 
-        //const otherApp = firebase.app('ed-s-virtual-bar');
-        //const firestoreForOtherApp = firebase.firestore(otherApp);
-        //firebase.initializeApp();
 
-        //const bars = firestore().collection('places');
-        //console.log(bars);
 
 
     }
+
+    debugger;
 
     /**
      * Initializes the color scheme.

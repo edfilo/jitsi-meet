@@ -39,6 +39,7 @@ import {
     CONFERENCE_WILL_LEAVE,
     DATA_CHANNEL_OPENED,
     KICKED_OUT,
+    SET_BAR_METADATA,
     LOCK_STATE_CHANGED,
     P2P_STATUS_CHANGED,
     SEND_TONES,
@@ -488,6 +489,16 @@ export function dataChannelOpened() {
  *     participant: JitsiParticipant
  * }}
  */
+
+
+export function setBarMetaData(bar: Object) {
+    return {
+      type: SET_BAR_METADATA,
+      bar
+    };
+}
+
+
 export function kickedOut(conference: Object, participant: Object) {
     return {
         type: KICKED_OUT,
