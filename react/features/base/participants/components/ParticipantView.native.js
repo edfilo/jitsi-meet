@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 
+import { YoutubeLargeVideo } from '../../../youtube-player/components';
 import { Avatar } from '../../avatar';
 import { translate } from '../../i18n';
 import { JitsiParticipantConnectionStatus } from '../../lib-jitsi-meet';
@@ -15,7 +16,9 @@ import { connect } from '../../redux';
 import type { StyleType } from '../../styles';
 import { TestHint } from '../../testing/components';
 import { getTrackByMediaTypeAndParticipant } from '../../tracks';
-import { shouldRenderParticipantVideo } from '../functions';
+import { shouldRenderParticipantVideo, getParticipantById } from '../functions';
+
+import { WebView } from 'react-native-webview';
 
 import styles from './styles';
 
@@ -32,6 +35,13 @@ type Props = {
      * @private
      */
     _connectionStatus: string,
+
+    /**
+     * True if the participant which this component represents is fake.
+     *
+     * @private
+     */
+    _isFakeParticipant: boolean,
 
     /**
      * The name of the participant which this component represents.
@@ -181,8 +191,10 @@ class ParticipantView extends Component<Props> {
     render() {
         const {
             _connectionStatus: connectionStatus,
+            _isFakeParticipant,
             _renderVideo: renderVideo,
             _videoTrack: videoTrack,
+            disableVideo,
             onPress,
             tintStyle
         } = this.props;
@@ -198,10 +210,106 @@ class ParticipantView extends Component<Props> {
                 ? this.props.testHintId
                 : `org.jitsi.meet.Participant#${this.props.participantId}`;
 
+        const renderYoutubeLargeVideo = _isFakeParticipant;// && !disableVideo;
+
+        const html = `<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <style>
+    body { margin: 0; width:100%; height:100%;  background-color:#000000; }
+    html { width:100%; height:100%; background-color:#000000; }
+
+    .embed-container iframe,
+    .embed-container object,
+    .embed-container embed {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100% !important;
+        height: 100% !important;
+    }
+    </style>
+</head>
+<body>
+    <div class="embed-container">
+        <div id="player"></div>
+    </div>
+    <script src="https://www.youtube.com/iframe_api" onerror="window.location.href='ytplayer://onYouTubeIframeAPIFailedToLoad'"></script>
+    <script>
+    var player;
+    var error = false;
+
+    YT.ready(function() {
+        player = new YT.Player('player', {
+  "width" : "100%",
+  "events" : {
+    "onPlaybackQualityChange" : "onPlaybackQualityChange",
+    "onReady" : "onReady",
+    "onError" : "onPlayerError",
+    "onStateChange" : "onStateChange"
+  },
+  "videoId" : "hTWKbfoikeg",
+  "height" : "100%",
+  "playerVars" : {
+    "modestbranding" : 1,
+    "autohide" : 1,
+    "showinfo" : 0,
+    "controls" : 0,
+    "playsinline" : 1
+  }
+});
+        player.setSize(window.innerWidth, window.innerHeight);
+        window.location.href = 'ytplayer://onYouTubeIframeAPIReady';
+
+        // this will transmit playTime frequently while playng
+        function getCurrentTime() {
+             var state = player.getPlayerState();
+             if (state == YT.PlayerState.PLAYING) {
+                 time = player.getCurrentTime()
+                 window.location.href = 'ytplayer://onPlayTime?data=' + time;
+             }
+        }
+
+        window.setInterval(getCurrentTime, 500);
+
+    });
+
+    function onReady(event) {
+        window.location.href = 'ytplayer://onReady?data=' + event.data;
+    }
+
+    function onStateChange(event) {
+        if (!error) {
+            window.location.href = 'ytplayer://onStateChange?data=' + event.data;
+        }
+        else {
+            error = false;
+        }
+    }
+
+    function onPlaybackQualityChange(event) {
+        window.location.href = 'ytplayer://onPlaybackQualityChange?data=' + event.data;
+    }
+
+    function onPlayerError(event) {
+        if (event.data == 100) {
+            error = true;
+        }
+        window.location.href = 'ytplayer://onError?data=' + event.data;
+    }
+
+    window.onresize = function() {
+        player.setSize(window.innerWidth, window.innerHeight);
+    }
+    </script>
+</body>
+</html>`;
+
 
         return (
             <Container
-                onClick = { renderVideo ? undefined : onPress }
+                onClick = { renderVideo || renderYoutubeLargeVideo ? undefined : onPress }
                 style = {{
                     ...styles.participantView,
                     ...this.props.style
@@ -210,10 +318,16 @@ class ParticipantView extends Component<Props> {
 
                 <TestHint
                     id = { testHintId }
-                    onPress = { onPress }
+                    onPress = { renderYoutubeLargeVideo ? undefined : onPress }
                     value = '' />
 
-                { renderVideo
+
+
+                  { renderYoutubeLargeVideo && <YoutubeLargeVideo youtubeId = { this.props.participantId } /> }
+
+
+
+                { !_isFakeParticipant && renderVideo
                     && <VideoTrack
                         onPress = { onPress }
                         videoTrack = { videoTrack }
@@ -221,7 +335,7 @@ class ParticipantView extends Component<Props> {
                         zOrder = { this.props.zOrder }
                         zoomEnabled = { true } /> }
 
-                { !renderVideo
+                { !renderYoutubeLargeVideo && !renderVideo
                     && <View style = { styles.avatarContainer }>
                         <Avatar
                             participantId = { this.props.participantId }
@@ -254,6 +368,7 @@ class ParticipantView extends Component<Props> {
  */
 function _mapStateToProps(state, ownProps) {
     const { disableVideo, participantId } = ownProps;
+    const participant = getParticipantById(state, participantId);
     let connectionStatus;
     let participantName;
 
@@ -261,6 +376,7 @@ function _mapStateToProps(state, ownProps) {
         _connectionStatus:
             connectionStatus
                 || JitsiParticipantConnectionStatus.ACTIVE,
+        _isFakeParticipant: participant && participant.isFakeParticipant,
         _participantName: participantName,
         _renderVideo: shouldRenderParticipantVideo(state, participantId) && !disableVideo,
         _videoTrack:

@@ -33,6 +33,10 @@ export default {
         flex: 1
     }),
 
+    displayNameContainer: {
+        margin: 10
+    },
+
     gradient: {
         position: 'absolute',
         top: 0,
@@ -77,7 +81,7 @@ export default {
         alignItems: 'center',
         borderRadius: 24,
         flexDirection: 'row',
-        height: 248,
+        height: 35,
         justifyContent: 'space-around',
         paddingHorizontal: 12
     },
@@ -87,7 +91,7 @@ export default {
     },
 
     lonelyMeetingContainer: {
-        alignSelf: 'stretch',
+      //  alignSelf: 'stretch',
         alignItems: 'center',
         padding: BoxModel.padding * 2
     },

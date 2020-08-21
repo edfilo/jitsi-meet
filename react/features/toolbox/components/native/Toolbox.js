@@ -2,6 +2,7 @@
 
 import React, { PureComponent } from 'react';
 import { View } from 'react-native';
+import { type Dispatch } from 'redux';
 
 import { ColorSchemeRegistry } from '../../../base/color-scheme';
 import { Container } from '../../../base/react';
@@ -15,6 +16,17 @@ import VideoMuteButton from '../VideoMuteButton';
 
 import OverflowMenuButton from './OverflowMenuButton';
 import styles from './styles';
+
+import { VideoShareButton } from '../../../youtube-player/components';
+
+import { openDialog, toggleDialog } from '../../../base/dialog';
+
+import {ImageButton} from 'react-native-image-button-text';
+
+import TipDialog from './TipDialog';
+
+
+/**
 
 /**
  * The type of {@link Toolbox}'s React {@code Component} props.
@@ -34,7 +46,7 @@ type Props = {
     /**
      * The redux {@code dispatch} function.
      */
-    dispatch: Function
+    dispatch: Dispatch<any>
 };
 
 /**
@@ -95,6 +107,11 @@ class Toolbox extends PureComponent<Props> {
      *
      * @returns {React$Node}
      */
+     _tip() {
+
+           this.props.dispatch(openDialog(TipDialog));
+
+     }
     _renderToolbar() {
         const { _styles } = this.props;
         const { buttonStyles, buttonStylesBorderless, hangupButtonStyles, toggledButtonStyles } = _styles;
@@ -112,7 +129,30 @@ class Toolbox extends PureComponent<Props> {
                 <VideoMuteButton
                     styles = { buttonStyles }
                     toggledStyles = { toggledButtonStyles } />
-  
+
+                  <VideoShareButton styles = { buttonStyles }/>
+
+                  <ImageButton
+                          width={180}
+                          height={60}
+                          fontSize={20}
+                          textColor="#fff"
+                          paddingTop={4}
+                          textAlignHorizontal="flex-start"
+                          onPress={this._tip.bind(this)}
+                          source={require('./cleandollar.jpg')}
+                          text="tip"
+                        />
+                        <ImageButton
+                                width={50}
+                                height={50}
+                                fontSize={20}
+                                textColor="#fff"
+                                paddingTop={4}
+                                textAlignHorizontal="flex-start"
+                                onPress={this._tip.bind(this)}
+                                source={require('./rabbit.png')}
+                                text="barhop"/>
             </View>
         );
     }
@@ -130,7 +170,7 @@ class Toolbox extends PureComponent<Props> {
 function _mapStateToProps(state: Object): Object {
     return {
         _styles: ColorSchemeRegistry.get(state, 'Toolbox'),
-        _visible: isToolboxVisible(state)
+        _visible: true// isToolboxVisible(state)
     };
 }
 

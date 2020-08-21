@@ -8,6 +8,9 @@ import extraConfigWhitelist from './extraConfigWhitelist';
  *
  * @type Array
  */
+
+
+ 
 export default [
     '_desktopSharingSourceDevice',
     '_peerConnStatusOutOfLastNTimeout',
@@ -72,11 +75,6 @@ export default [
     'debug',
     'debugAudioLevels',
     'defaultLanguage',
-    'desktopSharingChromeDisabled',
-    'desktopSharingChromeExtId',
-    'desktopSharingChromeMinExtVersion',
-    'desktopSharingChromeSources',
-    'desktopSharingFirefoxDisabled',
     'desktopSharingFrameRate',
     'desktopSharingSources',
     'disable1On1Mode',
@@ -102,6 +100,7 @@ export default [
     'enableDisplayNameInStats',
     'enableEmailInStats',
     'enableIceRestart',
+    'enableInsecureRoomNameWarning',
     'enableLayerSuspension',
     'enableLipSync',
     'enableRemb',
@@ -126,15 +125,18 @@ export default [
     'ignoreStartMuted',
     'liveStreamingEnabled',
     'localRecording',
+    'maxFullResolutionParticipants',
     'minParticipants',
     'nick',
     'openBridgeChannel',
+    'opusMaxAverageBitrate',
     'p2p',
     'pcStatsInterval',
     'preferH264',
     'prejoinPageEnabled',
     'requireDisplayName',
     'remoteVideoMenu',
+    'roomPasswordNumberOfDigits',
     'resolution',
     'startAudioMuted',
     'startAudioOnly',
@@ -147,9 +149,8 @@ export default [
     'stereo',
     'subject',
     'testing',
-    'useIPv6',
-    'useNicks',
     'useStunTurn',
+    'useTurnUdp',
     'webrtcIceTcpDisable',
     'webrtcIceUdpDisable'
 ].concat(extraConfigWhitelist);

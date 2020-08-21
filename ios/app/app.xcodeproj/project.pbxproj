@@ -17,8 +17,8 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		918ECC0CA638A50085B00190 /* libPods-jitsi-meet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 489E8EFE2C720D10F5961AEF /* libPods-jitsi-meet.a */; };
 		B3BF0B9924DC87560046F812 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BF0B9824DC87560046F812 /* File.swift */; };
-		B3D55B8824E269BB00F60A24 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = B3D55B8724E269BB00F60A24 /* main.jsbundle */; };
 		B3E1D65D24D983FC0036B87A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B3E1D65C24D983FC0036B87A /* GoogleService-Info.plist */; };
+		B3E320BE24ECF85300BD9CAF /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = B3E320BD24ECF84D00BD9CAF /* main.jsbundle */; };
 		DE4C456121DE1E4E00EA0709 /* FIRUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4C455F21DE1E4E00EA0709 /* FIRUtilities.m */; };
 /* End PBXBuildFile section */
 
@@ -51,18 +51,8 @@
 		0B412F1D1EDEE6E800B1A0A6 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		0B412F1E1EDEE6E800B1A0A6 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		0B412F201EDEE95300B1A0A6 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		0B5418461F7C5D8C00A2DD86 /* MeetingRowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingRowController.swift; sourceTree = "<group>"; };
-		0B70016F1F7C51CC005944F4 /* InCallController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InCallController.swift; sourceTree = "<group>"; };
 		0BBD021F212EB69D00CCB19F /* Types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Types.h; sourceTree = "<group>"; };
 		0BD6B4361EF82A6B00D1F4CD /* WebRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebRTC.framework; path = "../../node_modules/react-native-webrtc/ios/WebRTC.framework"; sourceTree = "<group>"; };
-		0BEA5C281F7B8F73000D0AB4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
-		0BEA5C2A1F7B8F73000D0AB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		0BEA5C2C1F7B8F73000D0AB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0BEA5C361F7B8F73000D0AB4 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
-		0BEA5C381F7B8F73000D0AB4 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
-		0BEA5C3A1F7B8F73000D0AB4 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
-		0BEA5C3C1F7B8F73000D0AB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		0BEA5C3E1F7B8F73000D0AB4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* Eds Vbar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Eds Vbar.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -75,12 +65,10 @@
 		B3B083EB1D4955FF0069CEE7 /* app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = app.entitlements; sourceTree = "<group>"; };
 		B3BF0B9724DC87550046F812 /* jitsi-meet-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "jitsi-meet-Bridging-Header.h"; sourceTree = "<group>"; };
 		B3BF0B9824DC87560046F812 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
-		B3D55B8724E269BB00F60A24 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = main.jsbundle; path = "../../../../Library/Developer/Xcode/DerivedData/jitsi-meet-axjvlyekyhgmexcladkvsaxgoxzw/Build/Products/Release-iphoneos/JitsiMeet.framework/main.jsbundle"; sourceTree = "<group>"; };
 		B3E1D65C24D983FC0036B87A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B3E320BD24ECF84D00BD9CAF /* main.jsbundle */ = {isa = PBXFileReference; lastKnownFileType = text; name = main.jsbundle; path = ../sdk/main.jsbundle; sourceTree = "<group>"; };
 		DE4C455F21DE1E4E00EA0709 /* FIRUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIRUtilities.m; sourceTree = "<group>"; };
 		DE4C456021DE1E4E00EA0709 /* FIRUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIRUtilities.h; sourceTree = "<group>"; };
-		E58801132278944E008B0561 /* JitsiMeetContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JitsiMeetContext.swift; sourceTree = "<group>"; };
-		E5C97B62227A1EB400199214 /* JitsiMeetCommands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JitsiMeetCommands.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,34 +93,6 @@
 				489E8EFE2C720D10F5961AEF /* libPods-jitsi-meet.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		0BEA5C261F7B8F73000D0AB4 /* Watch app */ = {
-			isa = PBXGroup;
-			children = (
-				0BEA5C271F7B8F73000D0AB4 /* Interface.storyboard */,
-				0BEA5C2A1F7B8F73000D0AB4 /* Assets.xcassets */,
-				0BEA5C2C1F7B8F73000D0AB4 /* Info.plist */,
-			);
-			name = "Watch app";
-			path = watchos/app;
-			sourceTree = "<group>";
-		};
-		0BEA5C351F7B8F73000D0AB4 /* WatchKit extension */ = {
-			isa = PBXGroup;
-			children = (
-				0BEA5C361F7B8F73000D0AB4 /* InterfaceController.swift */,
-				0BEA5C381F7B8F73000D0AB4 /* ExtensionDelegate.swift */,
-				0BEA5C3A1F7B8F73000D0AB4 /* ComplicationController.swift */,
-				0BEA5C3C1F7B8F73000D0AB4 /* Assets.xcassets */,
-				0BEA5C3E1F7B8F73000D0AB4 /* Info.plist */,
-				0B70016F1F7C51CC005944F4 /* InCallController.swift */,
-				0B5418461F7C5D8C00A2DD86 /* MeetingRowController.swift */,
-				E58801132278944E008B0561 /* JitsiMeetContext.swift */,
-				E5C97B62227A1EB400199214 /* JitsiMeetCommands.swift */,
-			);
-			name = "WatchKit extension";
-			path = watchos/extension;
 			sourceTree = "<group>";
 		};
 		13B07FAE1A68108700A75B9A /* src */ = {
@@ -166,16 +126,14 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				B3E320BD24ECF84D00BD9CAF /* main.jsbundle */,
 				B3BF0B9824DC87560046F812 /* File.swift */,
-				B3D55B8724E269BB00F60A24 /* main.jsbundle */,
 				B3B083EB1D4955FF0069CEE7 /* app.entitlements */,
 				B3E1D65C24D983FC0036B87A /* GoogleService-Info.plist */,
 				0B26BE711EC5BC4D00EEFB41 /* Frameworks */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				13B07FAE1A68108700A75B9A /* src */,
 				5E96ADD5E49F3B3822EF9A52 /* Pods */,
-				0BEA5C261F7B8F73000D0AB4 /* Watch app */,
-				0BEA5C351F7B8F73000D0AB4 /* WatchKit extension */,
 				B3BF0B9724DC87550046F812 /* jitsi-meet-Bridging-Header.h */,
 			);
 			indentWidth = 2;
@@ -205,10 +163,10 @@
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				0B26BE701EC5BC3C00EEFB41 /* Embed Frameworks */,
 				B35383AD1DDA0083008F406A /* Adjust embedded framework architectures */,
+				DE3A859324C701EA009B7D76 /* Copy WebRTC dSYM */,
 				0BB7DA181EC9E695007AAE98 /* Adjust ATS */,
 				DEF4813D224925A2002AD03A /* Copy Google Plist file */,
 				DE11877A21EE09640078D059 /* Setup Google reverse URL handler */,
-				DEC2069321CBBD6900072F03 /* Setup Crashlytics */,
 				DE4F6D6E22005C0400DE699E /* Setup Dropbox */,
 				0BEA5C491F7B8F73000D0AB4 /* Embed Watch Content */,
 				98127725110C9D114369FF4C /* [CP] Copy Pods Resources */,
@@ -270,9 +228,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3E320BE24ECF85300BD9CAF /* main.jsbundle in Resources */,
 				0B412F211EDEE95300B1A0A6 /* Main.storyboard in Resources */,
 				B3E1D65D24D983FC0036B87A /* GoogleService-Info.plist in Resources */,
-				B3D55B8824E269BB00F60A24 /* main.jsbundle in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
@@ -427,6 +385,24 @@
 			shellPath = /bin/sh;
 			shellScript = "echo \"hello\"\nINFO_PLIST=\"$BUILT_PRODUCTS_DIR/$INFOPLIST_PATH\"\nGOOGLE_PLIST=\"$PROJECT_DIR/GoogleService-Info.plist\"\necho \"build path  is $INFO_PLIST\"\nif [[ -f $GOOGLE_PLIST ]]; then\n    REVERSED_CLIENT_ID=$(/usr/libexec/PlistBuddy -c \"Print :REVERSED_CLIENT_ID:\" $GOOGLE_PLIST)\n\n    echo \"/usr/libexec/PlistBuddy -c \\\"Set :CFBundleURLTypes:1:CFBundleURLSchemes:0 $REVERSED_CLIENT_ID\\\" $INFO_PLIST\"\n    /usr/libexec/PlistBuddy -c \"Set :CFBundleURLTypes:1:CFBundleURLSchemes:0 $REVERSED_CLIENT_ID\" \"$INFO_PLIST\"\nfi\n";
 		};
+		DE3A859324C701EA009B7D76 /* Copy WebRTC dSYM */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy WebRTC dSYM";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -x\n\nif [[ \"${CONFIGURATION}\" != \"Debug\" ]]; then\n    cp -r ../../node_modules/react-native-webrtc/ios/WebRTC.dSYM ${DWARF_DSYM_FOLDER_PATH}/\nfi\n";
+		};
 		DE4F6D6E22005C0400DE699E /* Setup Dropbox */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -444,24 +420,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "INFO_PLIST=\"$BUILT_PRODUCTS_DIR/$INFOPLIST_PATH\"\nDROPBOX_KEY_FILE=\"$PROJECT_DIR/dropbox.key\"\n\nif [[ -f $DROPBOX_KEY_FILE ]]; then\n    /usr/libexec/PlistBuddy -c \"Delete :LSApplicationQueriesSchemes\" $INFO_PLIST\n    /usr/libexec/PlistBuddy -c \"Add :LSApplicationQueriesSchemes array\" $INFO_PLIST\n    /usr/libexec/PlistBuddy -c \"Add :LSApplicationQueriesSchemes:0 string 'dbapi-2'\" $INFO_PLIST\n    /usr/libexec/PlistBuddy -c \"Add :LSApplicationQueriesSchemes:1 string 'dbapi-8-emm'\" $INFO_PLIST\n\n    DROPBOX_KEY=$(head -n 1 $DROPBOX_KEY_FILE)\n    /usr/libexec/PlistBuddy -c \"Add :CFBundleURLTypes:2:CFBundleURLName string dropbox\" $INFO_PLIST\n    /usr/libexec/PlistBuddy -c \"Add :CFBundleURLTypes:2:CFBundleURLSchemes array\" $INFO_PLIST\n    /usr/libexec/PlistBuddy -c \"Add :CFBundleURLTypes:2:CFBundleURLSchemes:0 string $DROPBOX_KEY\" $INFO_PLIST\nfi\n";
-		};
-		DEC2069321CBBD6900072F03 /* Setup Crashlytics */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Setup Crashlytics";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "GOOGLE_PLIST=\"$PROJECT_DIR/GoogleService-Info.plist\"\n\n#https://stackoverflow.com/questions/60821249/ios-and-firebasecrashlytics\n";
 		};
 		DEF4813D224925A2002AD03A /* Copy Google Plist file */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -499,14 +457,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		0BEA5C271F7B8F73000D0AB4 /* Interface.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0BEA5C281F7B8F73000D0AB4 /* Base */,
-			);
-			name = Interface.storyboard;
-			sourceTree = "<group>";
-		};
 		13B07FB11A68108700A75B9A /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (

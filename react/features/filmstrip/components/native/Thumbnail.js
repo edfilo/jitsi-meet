@@ -21,7 +21,7 @@ import { getTrackByMediaTypeAndParticipant } from '../../../base/tracks';
 import { ConnectionIndicator } from '../../../connection-indicator';
 import { DisplayNameLabel } from '../../../display-name';
 import { RemoteVideoMenu } from '../../../remote-video-menu';
-import { toggleToolboxVisible } from '../../../toolbox';
+import { toggleToolboxVisible } from '../../../toolbox/actions.native';
 
 import AudioMutedIndicator from './AudioMutedIndicator';
 import DominantSpeakerIndicator from './DominantSpeakerIndicator';
@@ -156,46 +156,48 @@ function Thumbnail(props: Props) {
             touchFeedback = { true }>
 
             <ParticipantView
-                avatarSize = { AVATAR_SIZE }
-                disableVideo = { isScreenShare }
+                avatarSize = { tileView ? AVATAR_SIZE * 1.5 : AVATAR_SIZE }
+                disableVideo = { isScreenShare || participant.isFakeParticipant }
                 participantId = { participantId }
                 style = { _styles.participantViewStyle }
                 tintEnabled = { participantInLargeVideo && !disableTint }
                 tintStyle = { _styles.activeThumbnailTint }
                 zOrder = { 1 } />
 
-            { renderDisplayName && <DisplayNameLabel participantId = { participantId } /> }
+            { renderDisplayName && <Container style = { styles.displayNameContainer }>
+                <DisplayNameLabel participantId = { participantId } />
+            </Container> }
 
             { renderModeratorIndicator
                 && <View style = { styles.moderatorIndicatorContainer }>
                     <ModeratorIndicator />
-                </View> }
+                </View>}
 
-            <View
+            { !participant.isFakeParticipant && <View
                 style = { [
                     styles.thumbnailTopIndicatorContainer,
                     styles.thumbnailTopLeftIndicatorContainer
                 ] }>
                 <RaisedHandIndicator participantId = { participant.id } />
                 { renderDominantSpeakerIndicator && <DominantSpeakerIndicator /> }
-            </View>
+            </View> }
 
 
-            <View
+            { !participant.isFakeParticipant && <View
                 style = { [
                     styles.thumbnailTopIndicatorContainer,
                     styles.thumbnailTopRightIndicatorContainer
                 ] }>
                 <ConnectionIndicator participantId = { participant.id } />
-            </View>
+            </View> }
 
-            <Container style = { styles.thumbnailIndicatorContainer }>
+            { !participant.isFakeParticipant && <Container style = { styles.thumbnailIndicatorContainer }>
                 { audioMuted
                     && <AudioMutedIndicator /> }
 
                 { videoMuted
                     && <VideoMutedIndicator /> }
-            </Container>
+            </Container> }
 
         </Container>
     );
@@ -240,7 +242,7 @@ function _mapDispatchToProps(dispatch: Function, ownProps): Object {
         },
 
         */
-        
+
 
         /**
          * Handles long press on the thumbnail.
