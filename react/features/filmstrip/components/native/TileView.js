@@ -1,6 +1,8 @@
 // @flow
 
 import React, { Component } from 'react';
+import ReactNativeZoomableView from '@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView';
+
 import {
     ScrollView,
     TouchableWithoutFeedback,
@@ -11,6 +13,8 @@ import type { Dispatch } from 'redux';
 import { connect } from '../../../base/redux';
 import { ASPECT_RATIO_NARROW } from '../../../base/responsive-ui/constants';
 import { setTileViewDimensions } from '../../actions.native';
+
+import VideoTransform from '../../../base/media';
 
 import Thumbnail from './Thumbnail';
 import styles from './styles';
@@ -195,7 +199,7 @@ class TileView extends Component<Props, State> {
      * @private
      * @returns {Object}
      */
-    _getTileDimensions() {
+    _getTileDimensions(isYouTube) {
         const { _height, _participants, _width } = this.props;
         const columns = this._getColumnCount();
         const participantCount = _participants.length;
@@ -211,10 +215,12 @@ class TileView extends Component<Props, State> {
             tileWidth = Math.min(widthToUse / columns, heightToUse);
         }
 
+        const boost = isYouTube ? 1.5 : 1.0;
+
         return {
-            height: (_width * .22) * (9.0/16.0),//tileWidth / TILE_ASPECT_RATIO,
-            width: _width * .22
-        };
+            height: (_width * .22) * (9.0/16.0) * boost,//tileWidth / TILE_ASPECT_RATIO,
+            width: _width * .22 * boost
+          }
     }
 
 
@@ -232,28 +238,22 @@ class TileView extends Component<Props, State> {
     }
     _renderThumbnails() {
 
-        const styleOverrides = {
-            /*aspectRatio: TILE_ASPECT_RATIO,*/
-            flex:0,
-            height: this._getTileDimensions().height,
-            width: this._getTileDimensions().width
-        };
-
-
-
         return this._getSortedParticipants()
             .map(participant => (
-
-              <PinchZoomView style={{width:this._getTileDimensions().width,height:this._getTileDimensions().height, flex:0}}>
-    <Thumbnail disableTint = { true }
-                    key = { participant.id }
-                    participant = { participant }
-                    renderDisplayName = { true }
-                    styleOverrides = { styleOverrides }
-                    tileView = { true } />
+              <PinchZoomView>
+              <Thumbnail disableTint = { true }
+                      key = { participant.id }
+                      participant = { participant }
+                      renderDisplayName = { true }
+                      styleOverrides = {{
+                      width:this._getTileDimensions(participant.isFakeParticipant).width,
+                      height:this._getTileDimensions(participant.isFakeParticipant).height,
+                        flex:0,
+                        backgroundColor:'blue'
+                      }}
+                      tileView = { true } />
               </PinchZoomView>
-
-   ));
+                      ));
     }
 
     /**

@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import { View } from 'react-native';
+import { View, Image } from 'react-native';
 import type { Dispatch } from 'redux';
 
 import { ColorSchemeRegistry } from '../../../base/color-scheme';
@@ -159,14 +159,19 @@ function Thumbnail(props: Props) {
                 avatarSize = { tileView ? AVATAR_SIZE * 1.5 : AVATAR_SIZE }
                 disableVideo = { isScreenShare || participant.isFakeParticipant }
                 participantId = { participantId }
-                style = { _styles.participantViewStyle }
+                style = {{..._styles.participantViewStyle, flex:1 }}
                 tintEnabled = { participantInLargeVideo && !disableTint }
                 tintStyle = { _styles.activeThumbnailTint }
                 zOrder = { 1 } />
 
-            { renderDisplayName && <Container style = { styles.displayNameContainer }>
+
+
+                <Image style={{backgroundColor:'transparent', position:'absolute', top:0, left:0, width:'100%', height:'100%'}} source={require('./smoke.gif')} />
+
+
+            {/* renderDisplayName && <Container style = { styles.displayNameContainer }>
                 <DisplayNameLabel participantId = { participantId } />
-            </Container> }
+            </Container> */}
 
             { renderModeratorIndicator
                 && <View style = { styles.moderatorIndicatorContainer }>

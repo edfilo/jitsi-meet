@@ -11,6 +11,10 @@ import { App } from './features/app/components';
 import { _initLogging } from './features/base/logging/functions';
 import { IncomingCallApp } from './features/mobile/incoming-call';
 
+
+import codePush from "react-native-code-push";
+
+
 declare var __DEV__;
 
 /**
@@ -31,6 +35,9 @@ type Props = {
  *
  * @extends Component
  */
+
+
+
 class Root extends PureComponent<Props> {
     /**
      * Implements React's {@link Component#render()}.
@@ -38,6 +45,17 @@ class Root extends PureComponent<Props> {
      * @inheritdoc
      * @returns {ReactElement}
      */
+
+    componentDidMount() {
+
+      codePush.sync({
+            updateDialog: true,
+            installMode: codePush.InstallMode.IMMEDIATE
+        });
+
+
+    }
+
     render() {
         return (
             <App
@@ -67,6 +85,10 @@ if (!__DEV__) {
 
     /* eslint-enable */
 }
+
+let codePushOptions = { checkFrequency: codePush.CheckFrequency.ON_APP_RESUME };
+
+Root = codePush(codePushOptions)(Root);
 
 
 // Register the main/root Component of JitsiMeetView.

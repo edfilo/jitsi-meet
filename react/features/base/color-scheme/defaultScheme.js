@@ -52,9 +52,11 @@ export default {
         background: 'rgb(94, 109, 122)'
     },
     'Toolbox': {
-        button: 'rgb(255, 255, 255)',
-        buttonToggled: 'rgb(38, 58, 76)',
-        buttonToggledBorder: getRGBAFormat('#a4b8d1', 0.6),
+        button: 'rgb(22, 22, 22)',
+        buttonBorder: 'rgb(255,255,255)',
+        buttonToggled: 'rgb(22, 22, 22)',
+        buttonToggledBorder: 'rgb(255,255,255)',
+        //getRGBAFormat('#a4b8d1', 0.6),
         hangup: 'rgb(225, 45, 45)'
     }
 };

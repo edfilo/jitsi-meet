@@ -734,7 +734,7 @@ export default class JitsiMeetExternalAPI extends EventEmitter {
     }
 
     /**
-     * Invite people to the call.
+     * Invite friends to the call.
      *
      * @param {Array<Object>} invitees - The invitees.
      * @returns {Promise} - Resolves on success and rejects on failure.

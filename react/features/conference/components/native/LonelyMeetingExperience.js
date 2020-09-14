@@ -74,13 +74,13 @@ class LonelyMeetingExperience extends PureComponent<Props> {
 
         return (
             <View style = { styles.lonelyMeetingContainer }>
-                <Text
+                {/*<Text
                     style = { [
                         styles.lonelyMessage,
                         _styles.lonelyMessage
                     ] }>
                     { t('lonelyMeetingExperience.youAreAlone') }
-                </Text>
+                </Text>*/}
                 { !_isInviteFunctionsDiabled && (
                     <TouchableOpacity
                         onPress = { this._onPress }
@@ -131,7 +131,7 @@ function _mapStateToProps(state): $Shape<Props> {
 
     return {
         _isInviteFunctionsDiabled: !flag || disableInviteFunctions,
-        _isLonelyMeeting: conference && getParticipantCount(state) === 1,
+        _isLonelyMeeting: true,//conference && getParticipantCount(state) === 1,
         _styles: ColorSchemeRegistry.get(state, 'Conference')
     };
 }

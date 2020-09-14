@@ -222,7 +222,7 @@ function showEditor(title, slug, background_url, public) {
 
 function updateUI() {
 
-  var slug = APP.conference.roomName;
+  var slug = APP.conference.roomName || 'eds';
   var docRef = db.collection("places").doc(slug);
   var ownerIsLoggedIn = false;
   var hasOwner = false;
@@ -270,18 +270,11 @@ function updateUI() {
       console.log("Error getting document:", error);
   });
 
-
-
-
-
-
-
   $('#edit_button').hide();
   $('#login_button').hide();
   $('#logout_button').hide();
   $('#claim_button').hide();
   $('#create_button').hide();
-
 
 
   var user = auth.currentUser;
@@ -359,9 +352,7 @@ if((isAdminLoggedIn() && slug != 'eds')){
 console.log('saving:');
 console.log(docData);
 
-db.collection("places").doc(slug).set(docData)
-
-.then(function() {
+db.collection("places").doc(slug).set(docData).then(function() {
   $.modal.close();
   window.location.href = 'https://edsvbar.com/' + slug
 
@@ -443,11 +434,10 @@ $('#directory_button').click(function(){
   createDirectory();
 });
 
-/*
 $('#tip_button').click(function(){
   $('#tips').modal();
 });
-*/
+
 $('#create_button').click(function(){
   showEditor('', '', '', true);
 });
@@ -472,28 +462,20 @@ $.ajax({
     async:  true,
     success: function (csvd) {
         data = $.csv.toArrays(csvd);
-        console.log(data);
+      //  console.log(data);
         for(var i=0; i < data.length; i++){
             var slug = data[i][2];
             var title = data[i][1];
             var bg = data[i][3];
             if(APP.conference.roomName == slug){
-              //live_bg_image = data[i][3];
             }
-            /*
-            db.collection("places").doc(slug).set({
-              title: title,
-              background_url: bg
-            }).then(function() {
-                console.log("Document successfully written!");
-            });
-            */
+
 
         }
     },
     dataType: "text",
     complete: function () {
-        //  $('.tile-view #remoteVideos').css("background-image", "url(" + live_bg_image + ")");
+
     }
 });
 

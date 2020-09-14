@@ -209,7 +209,8 @@ export function getParticipantPresenceStatus(
  * @returns {Participant[]}
  */
 export function getParticipants(stateful: Object | Function) {
-    return _getAllParticipants(stateful).filter(p => !p.isFakeParticipant);
+    return _getAllParticipants(stateful);
+    //.filter(p => !p.isFakeParticipant);
 }
 
 /**

@@ -49,7 +49,6 @@ export function isServerURLChangeEnabled(stateful: Object | Function) {
 export function normalizeUserInputURL(url: string) {
     /* eslint-disable no-param-reassign */
 
-    debugger;
     if (url) {
         url = url.replace(/\s/g, '').toLowerCase();
 

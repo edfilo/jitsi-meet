@@ -3,7 +3,7 @@
 import { ColorSchemeRegistry, schemeColor } from '../../../base/color-scheme';
 import { BoxModel, ColorPalette } from '../../../base/styles';
 
-const BUTTON_SIZE = 50;
+const BUTTON_SIZE = 70;
 
 // Toolbox, toolbar:
 
@@ -13,7 +13,8 @@ const BUTTON_SIZE = 50;
 const toolbarButton = {
     backgroundColor: schemeColor('button'),
     borderRadius: BUTTON_SIZE / 2,
-    borderWidth: 0,
+    borderWidth: 2,
+    borderColor: '#fff',
     flex: 0,
     flexDirection: 'row',
     height: BUTTON_SIZE,
@@ -21,7 +22,7 @@ const toolbarButton = {
 
     // XXX We probably tested BoxModel.margin and discovered it to be too small
     // for our taste.
-    marginHorizontal: 7,
+    marginHorizontal: 11,
     width: BUTTON_SIZE
 };
 
@@ -30,8 +31,9 @@ const toolbarButton = {
  */
 const toolbarButtonIcon = {
     alignSelf: 'center',
-    color: ColorPalette.darkGrey,
-    fontSize: 22
+    color: '#fff',
+    //ColorPalette.darkGrey,
+    fontSize: 30
 };
 
 /**

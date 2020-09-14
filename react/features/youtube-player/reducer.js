@@ -9,9 +9,9 @@ import { SET_SHARED_VIDEO_STATUS } from './actionTypes';
 ReducerRegistry.register('features/youtube-player', (state = {}, action) => {
     const { videoId, status, time, ownerId } = action;
 
-  //  console.log('youtube reducer ' + action.type);
     switch (action.type) {
     case SET_SHARED_VIDEO_STATUS:
+        console.log('IMPORTANT reducer SET_SHARED_VIDEO_STATUS ' + status);
         return {
             ...state,
             videoId,

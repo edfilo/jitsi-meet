@@ -13,7 +13,7 @@ export * from './actions.any';
 
 /**
  * Starts the process for inviting people. Dpending on the sysstem config it
- * may use the system share sheet or the invite peoplee dialog.
+ * may use the system share sheet or the Invite friendse dialog.
  *
  * @returns {Function}
  */

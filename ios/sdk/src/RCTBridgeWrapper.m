@@ -15,6 +15,7 @@
  */
 
 #include "RCTBridgeWrapper.h"
+    #import <CodePush/CodePush.h>
 
 /**
  * Wrapper around RCTBridge which also implements the RCTBridgeDelegate methods,
@@ -45,6 +46,8 @@ static NSURL *serverRootWithHost(NSString *host) {
 - (BOOL)isPackagerRunning:(NSString *)host {
     NSURL *url = [serverRootWithHost(host) URLByAppendingPathComponent:@"status"];
 
+    NSLog(@"host is %@", host);
+
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     __block NSURLResponse *response;
@@ -60,12 +63,14 @@ static NSURL *serverRootWithHost(NSString *host) {
                     dispatch_semaphore_signal(semaphore);
                 }] resume];
     dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-
+    //DISPATCH_TIME_FOREVER
     NSString *status = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     return [status isEqualToString:@"packager-status:running"];
 }
 
 - (NSString *)guessPackagerHost {
+
+
     static NSString *ipGuess;
     static dispatch_once_t dispatchOncePredicate;
 
@@ -82,17 +87,31 @@ static NSURL *serverRootWithHost(NSString *host) {
                             [NSCharacterSet newlineCharacterSet]];
     });
 
-    NSString *host = ipGuess ?: @"localhost";
+
+    NSString *host = @"localhost";
+
+    #if TARGET_OS_SIMULATOR
+        // Simulator-specific code
+    #else
+        host = @"mac.local";
+        // Device-specific code
+    #endif
+
 
     if ([self isPackagerRunning:host]) {
         return host;
     }
+
+
+
+
 
     return nil;
 }
 #endif
 
 #pragma mark RCTBridgeDelegate methods
+
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge {
 #if DEBUG
@@ -103,6 +122,13 @@ static NSURL *serverRootWithHost(NSString *host) {
     // This duplicates some functionality present in RCTBundleURLProvider, but
     // that mode is not designed to work inside a framework, because all
     // resources are loaded from the main bundle.
+
+
+    //NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    //return [NSURL fileURLWithPath:[[paths firstObject] stringByAppendingPathComponent:@"main.jsbundle"]];
+
+
+
     NSString *host = [self guessPackagerHost];
 
     if (host != nil) {
@@ -119,8 +145,13 @@ static NSURL *serverRootWithHost(NSString *host) {
     }
 #endif
 
-    return [[NSBundle bundleForClass:self.class] URLForResource:@"main"
-                                                  withExtension:@"jsbundle"];
+    BOOL ok = [[NSFileManager defaultManager] fileExistsAtPath:[CodePush bundleURL].path];
+
+    NSLog(@"911 bundle is %@", ok ? @"found" : @"missig");
+
+
+    return [CodePush bundleURL];
+    //return [[NSBundle bundleForClass:self.class] URLForResource:@"main"  withExtension:@"jsbundle"];
 }
 
 @end

@@ -11,5 +11,13 @@ import { YOUTUBE_PARTICIPANT_NAME } from './constants';
  * @returns {boolean}
  */
 export function isYoutubeVideoPlaying(stateful: Object | Function): boolean {
-    return Boolean(getParticipants(stateful).find(p => p.isFakeParticipant && p.name === YOUTUBE_PARTICIPANT_NAME));
+
+
+
+  const parts = getParticipants(stateful);
+
+
+
+
+    return Boolean(parts.find(p => p.isFakeParticipant && p.name === YOUTUBE_PARTICIPANT_NAME));
 }

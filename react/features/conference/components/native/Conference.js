@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import { NativeModules, SafeAreaView, StatusBar } from 'react-native';
+import { NativeModules, View, SafeAreaView, StatusBar } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 import { appNavigate } from '../../../app/actions';
@@ -123,7 +123,6 @@ class Conference extends AbstractConference<Props, *> {
         this._onHardwareBackPress = this._onHardwareBackPress.bind(this);
         this._setToolboxVisible = this._setToolboxVisible.bind(this);
 
-
         //this.state = {
         //  bgimage: "https://edsvbar.com/backgrounds/dive.jpg",
         //  updateParentState: (newState) => this.setState(newState)
@@ -138,6 +137,20 @@ class Conference extends AbstractConference<Props, *> {
      * @inheritdoc
      * @returns {void}
      */
+
+    componentDidUpdate() {
+
+      const slug =  this.props._slug;
+      const droop = firestore().collection('places').doc(slug)
+      .onSnapshot(documentSnapshot => {
+         console.log('fml');
+           console.log(JSON.stringify(documentSnapshot.data()));
+
+           this.props.dispatch(setBarMetaData(documentSnapshot.data()));
+       });
+
+    }
+
     componentDidMount() {
         BackButtonRegistry.addListener(this._onHardwareBackPress);
 
@@ -146,14 +159,8 @@ class Conference extends AbstractConference<Props, *> {
         console.log('mounted conference component with slug ' + slug);
 
 
-     const droop = firestore().collection('places').doc(slug)
-     .onSnapshot(documentSnapshot => {
 
-          this.props.dispatch(setBarMetaData(documentSnapshot.data()));
-        //console.log('User data: ', documentSnapshot.data().background_url);
-        //this.setState({ bgimage: documentSnapshot.data().background_url });
-        //debugger;
-      });
+
 
 
 
@@ -313,7 +320,7 @@ class Conference extends AbstractConference<Props, *> {
                         </TintedView>
                 }
 
-                <SafeAreaView
+                <View
                     pointerEvents = 'box-none'
                     style = { styles.toolboxAndFilmstripContainer }>
 
@@ -341,12 +348,8 @@ class Conference extends AbstractConference<Props, *> {
                         <DisplayNameLabel participantId = { _largeVideoParticipantId } />
                     </Container> }
 
-                    <LonelyMeetingExperience />
+                    {/*<LonelyMeetingExperience />*/}
 
-                    {/*
-                      * The Toolbox is in a stacking layer below the Filmstrip.
-                      */}
-                    <Toolbox />
 
                     {/*
                       * The Filmstrip is in a stacking layer above the
@@ -358,7 +361,11 @@ class Conference extends AbstractConference<Props, *> {
                       */
                         _shouldDisplayTileView ? undefined : <Filmstrip />
                     }
-                </SafeAreaView>
+
+                                        <Toolbox />
+
+                </View>
+
 
                 <SafeAreaView
                     pointerEvents = 'box-none'
@@ -368,11 +375,15 @@ class Conference extends AbstractConference<Props, *> {
                     <KnockingParticipantList />
                 </SafeAreaView>
 
+
+
+
                 <TestConnectionInfo />
 
                 { this._renderConferenceNotification() }
 
                 { this._renderConferenceModals() }
+
 
                 </ImageBackground>
         );
@@ -479,8 +490,6 @@ function _mapStateToProps(state) {
     //   are leaving one.
     const connecting_
         = connecting || (connection && (!membersOnly && (joining || (!conference && !leaving))));
-
-
 
     const bgimage = state["features/base/conference"].barMetaData ? state["features/base/conference"].barMetaData.background_url : 'https://edsvbar.com/backgrounds/dive.jpg';
 

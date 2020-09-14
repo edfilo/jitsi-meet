@@ -1,7 +1,7 @@
 // @flow
 
 import React, { PureComponent } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import { type Dispatch } from 'redux';
 
 import { ColorSchemeRegistry } from '../../../base/color-scheme';
@@ -10,20 +10,22 @@ import { connect } from '../../../base/redux';
 import { StyleType } from '../../../base/styles';
 import { ChatButton } from '../../../chat';
 import { isToolboxVisible } from '../../functions';
+
 import AudioMuteButton from '../AudioMuteButton';
 import HangupButton from '../HangupButton';
 import VideoMuteButton from '../VideoMuteButton';
+import { VideoShareButton } from '../../../youtube-player/components';
+import { openDialog, toggleDialog } from '../../../base/dialog';
+import RoundButton from './RoundButton';
+import TipDialog from './TipDialog';
+import LonelyMeetingExperience from '../../../conference/components/native/LonelyMeetingExperience';
+import { appNavigate } from '../../../app/actions';
+
+import Menu from './Menu';
 
 import OverflowMenuButton from './OverflowMenuButton';
 import styles from './styles';
 
-import { VideoShareButton } from '../../../youtube-player/components';
-
-import { openDialog, toggleDialog } from '../../../base/dialog';
-
-import {ImageButton} from 'react-native-image-button-text';
-
-import TipDialog from './TipDialog';
 
 
 /**
@@ -107,55 +109,57 @@ class Toolbox extends PureComponent<Props> {
      *
      * @returns {React$Node}
      */
+
+     _menu() {
+
+           this.props.dispatch(openDialog(Menu));
+
+     }
+
      _tip() {
 
            this.props.dispatch(openDialog(TipDialog));
 
      }
-    _renderToolbar() {
-        const { _styles } = this.props;
-        const { buttonStyles, buttonStylesBorderless, hangupButtonStyles, toggledButtonStyles } = _styles;
 
-        return (
-            <View
+     _exit() {
+
+         this.props.dispatch(appNavigate(undefined));
+
+     }
+
+    _renderToolbar() {
+
+        //const { _styles } = this.props;
+      //  const { buttonStyles, buttonStylesBorderless, hangupButtonStyles, toggledButtonStyles } = _styles;
+
+        return (<View
                 accessibilityRole = 'toolbar'
                 pointerEvents = 'box-none'
-                style = { styles.toolbar }>
+                style = {{height:66, flexDirection:'row', justifyContent:
+                'flex-start'}} >
 
-                <AudioMuteButton
-                    styles = { buttonStyles }
-                    toggledStyles = { toggledButtonStyles } />
 
-                <VideoMuteButton
-                    styles = { buttonStyles }
-                    toggledStyles = { toggledButtonStyles } />
+                    <RoundButton
+                     backgroundColor = "purple"
+                     round = 'true'
+                     width={200}
+                     height={66}
+                     fontSize={20}
+                     fontWeight = 'bold'
+                     textColor="#fff"
+                     textHeight={66}
+                     textAlignHorizontal="center"
+                     onPress={this._menu.bind(this)}
+                     style = {{backgroundColor:'purple'}}
+                     text="MENU"/>
 
-                  <VideoShareButton styles = { buttonStyles }/>
 
-                  <ImageButton
-                          width={180}
-                          height={60}
-                          fontSize={20}
-                          textColor="#fff"
-                          paddingTop={4}
-                          textAlignHorizontal="flex-start"
-                          onPress={this._tip.bind(this)}
-                          source={require('./cleandollar.jpg')}
-                          text="tip"
-                        />
-                        <ImageButton
-                                width={50}
-                                height={50}
-                                fontSize={20}
-                                textColor="#fff"
-                                paddingTop={4}
-                                textAlignHorizontal="flex-start"
-                                onPress={this._tip.bind(this)}
-                                source={require('./rabbit.png')}
-                                text="barhop"/>
-            </View>
-        );
-    }
+
+
+          </View>);
+        }
+
 }
 
 /**

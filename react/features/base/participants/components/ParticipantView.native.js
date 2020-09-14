@@ -161,7 +161,7 @@ class ParticipantView extends Component<Props> {
         const {
             avatarSize,
             _participantName: displayName,
-            t
+
         } = this.props;
 
         // XXX Consider splitting this component into 2: one for the large view
@@ -210,7 +210,11 @@ class ParticipantView extends Component<Props> {
                 ? this.props.testHintId
                 : `org.jitsi.meet.Participant#${this.props.participantId}`;
 
+
+
         const renderYoutubeLargeVideo = _isFakeParticipant;// && !disableVideo;
+
+
 
         const html = `<!DOCTYPE html>
 <html>
@@ -309,17 +313,13 @@ class ParticipantView extends Component<Props> {
 
         return (
             <Container
-                onClick = { renderVideo || renderYoutubeLargeVideo ? undefined : onPress }
+
                 style = {{
                     ...styles.participantView,
                     ...this.props.style
                 }}
                 touchFeedback = { false }>
 
-                <TestHint
-                    id = { testHintId }
-                    onPress = { renderYoutubeLargeVideo ? undefined : onPress }
-                    value = '' />
 
 
 
@@ -333,7 +333,7 @@ class ParticipantView extends Component<Props> {
                         videoTrack = { videoTrack }
                         waitForVideoStarted = { false }
                         zOrder = { this.props.zOrder }
-                        zoomEnabled = { true } /> }
+                      zoomEnabled = { false } /> }
 
                 { !renderYoutubeLargeVideo && !renderVideo
                     && <View style = { styles.avatarContainer }>

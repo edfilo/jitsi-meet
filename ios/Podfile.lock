@@ -218,6 +218,25 @@ PODS:
     - AppAuth/ExternalUserAgent (= 1.4.0)
   - AppAuth/Core (1.4.0)
   - AppAuth/ExternalUserAgent (1.4.0)
+  - appcenter-analytics (3.1.1):
+    - AppCenter/Analytics
+    - AppCenterReactNativeShared
+    - React
+  - appcenter-core (3.1.1):
+    - AppCenterReactNativeShared
+    - React
+  - appcenter-crashes (3.1.1):
+    - AppCenter/Crashes
+    - AppCenterReactNativeShared
+    - React
+  - AppCenter/Analytics (3.3.2):
+    - AppCenter/Core
+  - AppCenter/Core (3.3.2)
+  - AppCenter/Crashes (3.3.2):
+    - AppCenter/Core
+  - AppCenterReactNativeShared (3.1.1):
+    - AppCenter/Core (= 3.3.2)
+  - Base64 (1.1.2)
   - boost-for-react-native (1.63.0)
   - BoringSSL-GRPC (0.0.7):
     - BoringSSL-GRPC/Implementation (= 0.0.7)
@@ -230,6 +249,11 @@ PODS:
   - CocoaLumberjack (3.5.3):
     - CocoaLumberjack/Core (= 3.5.3)
   - CocoaLumberjack/Core (3.5.3)
+  - CodePush (6.3.0):
+    - Base64 (~> 1.1)
+    - JWT (~> 3.0.0-beta.12)
+    - React
+    - SSZipArchive (~> 2.2.2)
   - Crashlytics (3.14.0):
     - Fabric (~> 1.10.2)
   - DoubleConversion (1.1.6)
@@ -373,6 +397,8 @@ PODS:
   - GTMSessionFetcher/Core (1.4.0)
   - GTMSessionFetcher/Full (1.4.0):
     - GTMSessionFetcher/Core (= 1.4.0)
+  - JWT (3.0.0-beta.12):
+    - Base64 (~> 1.1.2)
   - leveldb-library (1.22)
   - nanopb (1.30905.0):
     - nanopb/decode (= 1.30905.0)
@@ -642,12 +668,17 @@ PODS:
     - React
   - RNWatch (0.4.3):
     - React
+  - SSZipArchive (2.2.3)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
   - Amplitude-iOS (~> 4.0.4)
+  - appcenter-analytics (from `../node_modules/appcenter-analytics/ios`)
+  - appcenter-core (from `../node_modules/appcenter/ios`)
+  - appcenter-crashes (from `../node_modules/appcenter-crashes/ios`)
   - BVLinearGradient (from `../node_modules/react-native-linear-gradient`)
   - CocoaLumberjack (~> 3.5.3)
+  - CodePush (from `../node_modules/react-native-code-push`)
   - Crashlytics (~> 3.14.0)
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - Fabric (~> 1.10.2)
@@ -700,6 +731,9 @@ SPEC REPOS:
     - abseil
     - Amplitude-iOS
     - AppAuth
+    - AppCenter
+    - AppCenterReactNativeShared
+    - Base64
     - boost-for-react-native
     - BoringSSL-GRPC
     - CocoaLumberjack
@@ -721,14 +755,24 @@ SPEC REPOS:
     - gRPC-Core
     - GTMAppAuth
     - GTMSessionFetcher
+    - JWT
     - leveldb-library
     - nanopb
     - ObjectiveDropboxOfficial
     - PromisesObjC
+    - SSZipArchive
 
 EXTERNAL SOURCES:
+  appcenter-analytics:
+    :path: "../node_modules/appcenter-analytics/ios"
+  appcenter-core:
+    :path: "../node_modules/appcenter/ios"
+  appcenter-crashes:
+    :path: "../node_modules/appcenter-crashes/ios"
   BVLinearGradient:
     :path: "../node_modules/react-native-linear-gradient"
+  CodePush:
+    :path: "../node_modules/react-native-code-push"
   DoubleConversion:
     :podspec: "../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec"
   FBLazyVector:
@@ -816,10 +860,17 @@ SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
   Amplitude-iOS: 2ad4d7270c99186236c1272a3a9425463b1ae1a7
   AppAuth: 31bcec809a638d7bd2f86ea8a52bd45f6e81e7c7
+  AppCenter: aba7de06e4c2184f90dc84f7866bd07f82427d69
+  appcenter-analytics: bce201b504c8138d235e6f42de1f36d30d2cd7f5
+  appcenter-core: 086ab16077baef60368c6a119af6e9e127406286
+  appcenter-crashes: 10790bf670f79150f1654d79f76c10a8b4936688
+  AppCenterReactNativeShared: b9fa50d999e830e03f086f487b1aa0f9772088c1
+  Base64: cecfb41a004124895a7bcee567a89bae5a89d49b
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
   BVLinearGradient: e3aad03778a456d77928f594a649e96995f1c872
   CocoaLumberjack: 2f44e60eb91c176d471fdba43b9e3eae6a721947
+  CodePush: 18dd72e6176d261832d036f22c70f910370d6b64
   Crashlytics: 540b7e5f5da5a042647227a5e3ac51d85eed06df
   DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
   Fabric: 706c8b8098fff96c33c0db69cbf81f9c551d0d74
@@ -843,6 +894,7 @@ SPEC CHECKSUMS:
   gRPC-Core: 4afa11bfbedf7cdecd04de535a9e046893404ed5
   GTMAppAuth: 4deac854479704f348309e7b66189e604cf5e01e
   GTMSessionFetcher: 6f5c8abbab8a9bce4bb3f057e317728ec6182b10
+  JWT: 9b5c05abbcc1a0e69c3c91e1655b3387fc7e581d
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   ObjectiveDropboxOfficial: a5afefc83f6467c42c45f2253f583f2ad1ffc701
@@ -882,8 +934,9 @@ SPEC CHECKSUMS:
   RNSound: c980916b596cc15c8dcd2f6ecd3b13c4881dbe20
   RNSVG: aac12785382e8fd4f28d072fe640612e34914631
   RNWatch: a5320c959c75e72845c07985f3e935e58998f1d3
+  SSZipArchive: 62d4947b08730e4cda640473b0066d209ff033c9
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
-PODFILE CHECKSUM: 8d752e4c82df7664506550f59f53a2d5af937266
+PODFILE CHECKSUM: 8215700293050bef29c39d5514c303b388fcbeee
 
 COCOAPODS: 1.10.0.beta.1

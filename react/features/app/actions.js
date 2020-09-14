@@ -47,10 +47,14 @@ declare var interfaceConfig: Object;
  */
 export function appNavigate(uri: ?string) {
     return async (dispatch: Dispatch<any>, getState: Function) => {
+
+
         let location = parseURIString(uri);
 
         // If the specified location (URI) does not identify a host, use the app's
         // default.
+        console.log('fml app navigate ' + uri);
+
         if (!location || !location.host) {
             const defaultLocation = parseURIString(getDefaultURL(getState));
 
@@ -70,11 +74,17 @@ export function appNavigate(uri: ?string) {
         }
 
         location.protocol || (location.protocol = 'https:');
+
+
         const { contextRoot, host, room } = location;
+
+
+
         const locationURL = new URL(location.toString());
 
         // Disconnect from any current conference.
         // FIXME: unify with web.
+
         if (navigator.product === 'ReactNative') {
             dispatch(disconnect());
         }

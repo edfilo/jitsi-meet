@@ -33,7 +33,7 @@
 		A4414AE020B37F1A003546E6 /* rejected.wav in Resources */ = {isa = PBXBuildFile; fileRef = A4414ADF20B37F1A003546E6 /* rejected.wav */; };
 		A480429C21EE335600289B73 /* AmplitudeModule.m in Sources */ = {isa = PBXBuildFile; fileRef = A480429B21EE335600289B73 /* AmplitudeModule.m */; };
 		A4A934E9212F3ADB001E9388 /* Dropbox.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A934E8212F3ADB001E9388 /* Dropbox.m */; };
-		B3E320BC24ECF84500BD9CAF /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = B3E320BB24ECF84500BD9CAF /* main.jsbundle */; };
+		B357BFD8250C348A00811170 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B357BFD7250C348A00811170 /* libz.tbd */; };
 		C30F88D0CB0F4F5593216D24 /* liveStreamingOff.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C30F88D1CB0F4F5593216D24 /* liveStreamingOff.mp3 */; };
 		C30F88D2CB0F4F5593216D24 /* liveStreamingOn.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C30F88D3CB0F4F5593216D24 /* liveStreamingOn.mp3 */; };
 		C6245F5D2053091D0040BE68 /* image-resize@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C6245F5B2053091D0040BE68 /* image-resize@2x.png */; };
@@ -98,7 +98,7 @@
 		A480429B21EE335600289B73 /* AmplitudeModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AmplitudeModule.m; path = src/analytics/AmplitudeModule.m; sourceTree = SOURCE_ROOT; };
 		A4A934E8212F3ADB001E9388 /* Dropbox.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Dropbox.m; sourceTree = "<group>"; };
 		A4A934EB21349A06001E9388 /* Dropbox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Dropbox.h; sourceTree = "<group>"; };
-		B3E320BB24ECF84500BD9CAF /* main.jsbundle */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
+		B357BFD7250C348A00811170 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		C30F88D1CB0F4F5593216D24 /* liveStreamingOff.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = liveStreamingOff.mp3; path = ../../sounds/liveStreamingOff.mp3; sourceTree = "<group>"; };
 		C30F88D3CB0F4F5593216D24 /* liveStreamingOn.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = liveStreamingOn.mp3; path = ../../sounds/liveStreamingOn.mp3; sourceTree = "<group>"; };
 		C6245F5B2053091D0040BE68 /* image-resize@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "image-resize@2x.png"; path = "src/picture-in-picture/image-resize@2x.png"; sourceTree = "<group>"; };
@@ -139,6 +139,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B357BFD8250C348A00811170 /* libz.tbd in Frameworks */,
 				0BB9AD791F5EC6D7001C08DB /* Intents.framework in Frameworks */,
 				0BB9AD771F5EC6CE001C08DB /* CallKit.framework in Frameworks */,
 				0F65EECE1D95DA94561BB47E /* libPods-JitsiMeet.a in Frameworks */,
@@ -172,7 +173,6 @@
 		0BD906DB1EC0C00300C8C18E = {
 			isa = PBXGroup;
 			children = (
-				B3E320BB24ECF84500BD9CAF /* main.jsbundle */,
 				9C3C6FA2341729836589B856 /* Frameworks */,
 				C5E72ADFC30ED96F9B35F076 /* Pods */,
 				0BD906E61EC0C00300C8C18E /* Products */,
@@ -239,6 +239,7 @@
 		9C3C6FA2341729836589B856 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B357BFD7250C348A00811170 /* libz.tbd */,
 				0BB9AD761F5EC6CE001C08DB /* CallKit.framework */,
 				0B93EF7A1EC608550030D24D /* CoreText.framework */,
 				0BB9AD781F5EC6D7001C08DB /* Intents.framework */,
@@ -380,7 +381,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3E320BC24ECF84500BD9CAF /* main.jsbundle in Resources */,
 				87FE6F3321E52437004A5DC7 /* incomingMessage.wav in Resources */,
 				0B49424520AD8DBD00BD2DE0 /* outgoingStart.wav in Resources */,
 				C30F88D0CB0F4F5593216D24 /* liveStreamingOff.mp3 in Resources */,
@@ -412,7 +412,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#export NODE_BINARY=node\n#export NODE_ARGS=\"--max_old_space_size=4096\"\n#../../node_modules/react-native/scripts/react-native-xcode.sh\n";
+			shellScript = "export NODE_BINARY=node\nexport NODE_ARGS=\"--max_old_space_size=4096\"\n#../../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		26796D8589142D80C8AFDA51 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -681,7 +681,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = src/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

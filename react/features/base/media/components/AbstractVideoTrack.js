@@ -105,7 +105,7 @@ export default class AbstractVideoTrack<P: Props> extends Component<P> {
 
         // Actual zoom is currently only enabled if the stream is a desktop
         // stream.
-        const zoomEnabled = true;
+        const zoomEnabled = false;
 
         /* this.props.zoomEnabled
                 && stream

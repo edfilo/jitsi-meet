@@ -16,6 +16,12 @@ import { YOUTUBE_PARTICIPANT_NAME } from './constants';
 
 const SHARED_VIDEO = 'shared-video';
 
+import { isYoutubeVideoPlaying } from './functions';
+
+import { getParticipants } from '../base/participants';
+
+
+
 /**
  * Middleware that captures actions related to YouTube video sharing and updates
  * components not hooked into redux.
@@ -24,6 +30,7 @@ const SHARED_VIDEO = 'shared-video';
  * @returns {Function}
  */
 MiddlewareRegistry.register(store => next => action => {
+
     const { dispatch, getState } = store;
     const state = getState();
     const conference = getCurrentConference(state);
@@ -33,16 +40,15 @@ MiddlewareRegistry.register(store => next => action => {
 
 
 
+
     switch (action.type) {
 
 
     case TOGGLE_SHARED_VIDEO:
     console.log('youtube toggle shared video');
-
         _toggleSharedVideo(store, next, action);
         break;
     case CONFERENCE_LEFT:
-
         dispatch(setSharedVideoStatus('', 'stop', 0, ''));
         break;
     case PARTICIPANT_LEFT:
@@ -52,6 +58,7 @@ MiddlewareRegistry.register(store => next => action => {
         }
         break;
     case SET_SHARED_VIDEO_STATUS:
+
         if (localParticipantId === ownerId) {
             sendShareVideoCommand(videoId, status, conference, localParticipantId, time);
         }
@@ -67,8 +74,11 @@ MiddlewareRegistry.register(store => next => action => {
  * open.
  */
 StateListenerRegistry.register(
+
     state => getCurrentConference(state),
     (conference, store, previousConference) => {
+
+
         if (conference && conference !== previousConference) {
             conference.addCommandListener(SHARED_VIDEO,
                 ({ value, attributes }) => {
@@ -77,6 +87,10 @@ StateListenerRegistry.register(
                     const { from } = attributes;
                     const localParticipantId = getLocalParticipant(getState()).id;
                     const status = attributes.state;
+
+
+
+
 
                     if ([ 'playing', 'pause', 'start' ].includes(status)) {
                         handleSharingVideoStatus(store, value, attributes, conference);
@@ -107,13 +121,17 @@ function handleSharingVideoStatus(store, videoId, { state, time, from }, confere
     const localParticipantId = getLocalParticipant(getState()).id;
     const oldStatus = getState()['features/youtube-player']?.status;
 
-    console.log( `https://img.youtube.com/vi/${videoId}/0.jpg`);
+    //console.log( `https://img.youtube.com/vi/${videoId}/0.jpg`);
 
-    if (state === 'start' || ![ 'playing', 'pause', 'start' ].includes(oldStatus)) {
+    const ytp = isYoutubeVideoPlaying(getState());
+
+    if (!ytp && (state === 'start' || ![ 'playing', 'pause', 'start' ].includes(oldStatus))) {
+
         dispatch(participantJoined({
             conference,
             id: videoId,
             isFakeParticipant: true,
+            videoId: videoId,
             avatarURL: `https://img.youtube.com/vi/${videoId}/0.jpg`,
             name: YOUTUBE_PARTICIPANT_NAME
         }));
@@ -122,6 +140,7 @@ function handleSharingVideoStatus(store, videoId, { state, time, from }, confere
     }
 
     if (localParticipantId !== from) {
+
         dispatch(setSharedVideoStatus(videoId, state, time, from));
     }
 }

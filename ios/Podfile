@@ -2,7 +2,7 @@ platform :ios, '11.0'
 workspace 'jitsi-meet'
 
 #require_relative '../node_modules/react-native/scripts/react_native_pods'
-require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
+#require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
 
 pod 'RNFBApp', :path => '../node_modules/@react-native-firebase/app'
@@ -15,7 +15,16 @@ pod 'Amplitude-iOS', '~> 4.0.4'
 pod 'CocoaLumberjack', '~>3.5.3'
 pod 'ObjectiveDropboxOfficial', '~> 3.9.4'
 
-  pod 'RNGoogleSignin', :path => '../node_modules/@react-native-community/google-signin'
+pod 'RNGoogleSignin', :path => '../node_modules/@react-native-community/google-signin'
+
+pod 'appcenter-core', path: '../node_modules/appcenter/ios'
+pod 'appcenter-analytics', path: '../node_modules/appcenter-analytics/ios'
+pod 'appcenter-crashes', path: '../node_modules/appcenter-crashes/ios'
+#pod 'appcenter-push', path: '../node_modules/appcenter-push/ios'
+
+pod 'CodePush', path: '../node_modules/react-native-code-push'
+
+
 
 
 target 'jitsi-meet' do
@@ -41,8 +50,10 @@ pod 'ReactCommon', :path => '../node_modules/react-native/ReactCommon', :subspec
 pod 'React-Core', :path => '../node_modules/react-native/', :subspecs => [
   'CoreModulesHeaders',
   'DevSupport',
-  'RCTWebSocket'
+  'RCTWebSocket',
+
 ]
+
 pod 'React-CoreModules', :path => '../node_modules/react-native/React/CoreModules'
 
 
@@ -80,8 +91,15 @@ pod 'RNSound', :path => '../node_modules/react-native-sound'
 pod 'RNSVG', :path => '../node_modules/react-native-svg'
 pod 'RNWatch', :path => '../node_modules/react-native-watch-connectivity'
 pod 'RNDefaultPreference', :path => '../node_modules/react-native-default-preference'
+pod 'react-native-webrtc', :path => '../node_modules/react-native-webrtc'
 
-  pod 'react-native-webrtc', :path => '../node_modules/react-native-webrtc'
+
+# CodePush plugin dependency
+pod 'CodePush', :path => '../node_modules/react-native-code-push'
+
+
+
+
 
 target 'JitsiMeet' do
   project 'sdk/sdk.xcodeproj'
@@ -104,7 +122,7 @@ target 'JitsiMeet' do
 
 
 
-  use_native_modules!
+  #use_native_modules!
 end
 
 post_install do |installer|

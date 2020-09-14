@@ -22,6 +22,13 @@
 
 #import <Firebase.h>
 
+
+#import <AppCenterReactNative.h>
+#import <AppCenterReactNativeAnalytics.h>
+#import <AppCenterReactNativeCrashes.h>
+
+
+
 @import Crashlytics;
 @import Fabric;
 @import Firebase;
@@ -29,8 +36,14 @@
 
 @implementation AppDelegate
 
--             (BOOL)application:(UIApplication *)application
+- (BOOL)application:(UIApplication *)application
   didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+  [AppCenterReactNative register];
+  [AppCenterReactNativeAnalytics registerWithInitiallyEnabled:true];
+  [AppCenterReactNativeCrashes registerWithAutomaticProcessing];
+
+
     JitsiMeet *jitsiMeet = [JitsiMeet sharedInstance];
 
     jitsiMeet.conferenceActivityType = JitsiMeetConferenceActivityType;
@@ -40,6 +53,7 @@
     jitsiMeet.defaultConferenceOptions = [JitsiMeetConferenceOptions fromBuilder:^(JitsiMeetConferenceOptionsBuilder *builder) {
         builder.serverURL = [NSURL URLWithString:@"https://edsvbar.com"];
 
+        builder.room = @"eds";
 
         builder.welcomePageEnabled = YES;
 

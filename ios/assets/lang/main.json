@@ -8,7 +8,7 @@
         "countryNotSupported": "We do not support this destination yet.",
         "countryReminder": "Calling outside the US? Please make sure you start with the country code!",
         "defaultEmail": "Your Default Email",
-        "disabled": "You can't invite people.",
+        "disabled": "You can't Invite friends.",
         "failedToAdd": "Failed to add participants",
         "footerText": "Dialing out is disabled.",
         "googleEmail": "Google Email",
@@ -29,7 +29,7 @@
         "shareLink": "Share the meeting link to invite others",
         "shareStream": "Share the live streaming link",
         "telephone": "Telephone: {{number}}",
-        "title": "Invite people to this meeting",
+        "title": "Invite friends to this meeting",
         "yahooEmail": "Yahoo Email"
     },
     "audioDevices": {
@@ -682,7 +682,7 @@
             "grantModerator": "Grant Moderator",
             "hangup": "Leave the call",
             "help": "Help",
-            "invite": "Invite people",
+            "invite": "Invite friends",
             "kick": "Kick participant",
             "lobbyButton": "Enable/disable lobby mode",
             "localRecording": "Toggle local recording controls",
@@ -732,7 +732,7 @@
         "feedback": "Leave feedback",
         "hangup": "Leave",
         "help": "Help",
-        "invite": "Invite people",
+        "invite": "Invite friends",
         "lobbyButtonDisable": "Disable lobby mode",
         "lobbyButtonEnable": "Enable lobby mode",
         "login": "Login",
@@ -841,7 +841,7 @@
     "welcomepage": {
         "accessibilityLabel": {
             "join": "Tap to join",
-            "roomname": "Enter room name"
+            "roomname": "Enter bar name"
         },
         "appDescription": "Go ahead, video chat with the whole team. In fact, invite everyone you know. {{app}} is a fully encrypted, 100% open source video conferencing solution that you can use all day, every day, for free — with no account needed.",
         "audioVideoSwitch": {
@@ -864,14 +864,14 @@
         "recentListEmpty": "Your recent list is currently empty. Chat with your team and you will find all your recent meetings here.",
         "reducedUIText": "Welcome to {{app}}!",
         "roomNameAllowedChars": "Meeting name should not contain any of these characters: ?, &, :, ', \", %, #.",
-        "roomname": "Enter room name",
+        "roomname": "Enter bar name",
         "roomnameHint": "Enter the name or URL of the room you want to join. You may make a name up, just let the people you are meeting know it so that they enter the same name.",
         "sendFeedback": "Send feedback",
         "terms": "Terms",
         "title": "Secure, fully featured, and completely free video conferencing"
     },
     "lonelyMeetingExperience": {
-        "button": "Invite People",
+        "button": "Invite friends",
         "youAreAlone": "You are the only one here..."
     },
     "helpView": {

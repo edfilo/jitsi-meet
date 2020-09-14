@@ -1,7 +1,7 @@
 // @flow
 
-import React from 'react';
 
+import React, { Component } from 'react';
 import { setColorScheme } from '../../base/color-scheme';
 import { DialogContainer } from '../../base/dialog';
 import { updateFlags } from '../../base/flags/actions';
@@ -20,6 +20,7 @@ import type { Props as AbstractAppProps } from './AbstractApp';
 //import * as firebase from '@react-native-firebase/app';
 
 import firestore from '@react-native-firebase/firestore';
+
 
 
 // Register middlewares and reducers.
@@ -54,6 +55,13 @@ type Props = AbstractAppProps & {
      */
     userInfo: ?Object
 };
+
+
+export class MyApp extends Component {
+
+}
+
+
 
 /**
  * Root app {@code Component} on mobile/React Native.
@@ -90,6 +98,10 @@ export class App extends AbstractApp {
      * @returns {void}
      */
     componentDidMount() {
+
+
+
+
         super.componentDidMount();
 
         this._init.then(() => {

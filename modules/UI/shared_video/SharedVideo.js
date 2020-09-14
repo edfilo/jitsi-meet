@@ -102,6 +102,7 @@ export default class SharedVideoManager {
         }
 
         if (!this.isSharedVideoShown) {
+          /*
             requestVideoLink().then(
                     url => {
                         this.emitter.emit(
@@ -113,7 +114,7 @@ export default class SharedVideoManager {
                         sendAnalytics(createEvent('canceled'));
                     }
             );
-
+            */
             return;
         }
 
@@ -352,9 +353,11 @@ export default class SharedVideoManager {
 
                     self.initialAttributes = null;
                 }
+
                 self.smartAudioMute();
                 // eslint-disable-next-line eqeqeq
             } else if (event.data == YT.PlayerState.PAUSED) {
+
                 self.smartAudioUnmute();
                 sendAnalytics(createEvent('paused'));
             }
@@ -546,8 +549,11 @@ export default class SharedVideoManager {
         } else if (state === YT.PlayerState.PLAYING) {
             // if its playing and it was paused - send update with time
             // if its playing and was playing just send update with time
+
+            const vid = this.player.getVideoData().video_id;
+
             this.emitter.emit(UIEvents.UPDATE_SHARED_VIDEO,
-                this.url, 'playing',
+                vid, 'playing',
                 this.player.getCurrentTime(),
                 this.player.isMuted(),
                 this.player.getVolume());
