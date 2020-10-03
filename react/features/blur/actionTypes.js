@@ -1,5 +1,8 @@
 // @flow
 
+
+export const BLUR_CHANGE = 'BLUR_CHANGE';
+
 /**
  * The type of redux action dispatched which represents that the blur
  * is enabled.

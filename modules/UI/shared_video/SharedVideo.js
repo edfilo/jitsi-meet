@@ -277,7 +277,7 @@ export default class SharedVideoManager {
             window.onYouTubeIframeAPIReady = function() {
                 self.isPlayerAPILoaded = true;
                 const showControls
-                    = APP.conference.isLocalId(self.from) ? 1 : 0;
+                    = APP.conference.isLocalId(self.from) ? 1 : 1;
 
 
 
@@ -354,7 +354,7 @@ export default class SharedVideoManager {
                     self.initialAttributes = null;
                 }
 
-                self.smartAudioMute();
+                self.smartAudioUnmute();
                 // eslint-disable-next-line eqeqeq
             } else if (event.data == YT.PlayerState.PAUSED) {
 
@@ -387,7 +387,7 @@ export default class SharedVideoManager {
 
             // let's check, if player is not muted lets mute locally
             if (event.data.volume > 0 && !event.data.muted) {
-                self.smartAudioMute();
+                self.smartAudioUnmute();
             } else if (event.data.volume <= 0 || event.data.muted) {
                 self.smartAudioUnmute();
             }
@@ -683,7 +683,7 @@ export default class SharedVideoManager {
         } else if (this.player.isMuted() && !mute) {
             this.player.unMute();
             if (isVideoUpdate) {
-                this.smartAudioMute();
+                this.smartAudioUnmute();
             }
         }
     }

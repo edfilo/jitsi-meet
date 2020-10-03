@@ -103,9 +103,8 @@ export default class SharedVideoThumb extends SmallVideo {
         }, 1000);
         */
 
-
-          console.log('playvideo  ' + pid);
-        //  APP.UI.getSharedVideoManager().emitter.emit(UIEvents.UPDATE_SHARED_VIDEO, this.url, 'stop');
+          console.log('playvideo ' + pid);
+          //APP.UI.getSharedVideoManager().emitter.emit(UIEvents.UPDATE_SHARED_VIDEO, this.url, 'stop');
           this.url = pid;
           APP.UI.getSharedVideoManager().emitter.emit(UIEvents.UPDATE_SHARED_VIDEO, this.url, 'startplaylist');
 

@@ -29,15 +29,15 @@ export default {
     },
     'Dialog': {
         border: 'rgba(0, 3, 6, 0.6)',
-        buttonBackground: ColorPalette.blue,
-        buttonLabel: ColorPalette.white
+        buttonBackground: ColorPalette.white,
+        buttonLabel: ColorPalette.black
     },
     'Header': {
         background: ColorPalette.blue,
-        icon: ColorPalette.white,
-        statusBar: ColorPalette.blueHighlight,
+        icon: ColorPalette.black,
+        statusBar: ColorPalette.white,
         statusBarContent: ColorPalette.white,
-        text: ColorPalette.white
+        text: ColorPalette.black
     },
     'Modal': {},
     'LargeVideo': {

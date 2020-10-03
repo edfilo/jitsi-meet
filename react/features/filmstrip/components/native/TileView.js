@@ -1,7 +1,6 @@
 // @flow
 
 import React, { Component } from 'react';
-import ReactNativeZoomableView from '@dudigital/react-native-zoomable-view/src/ReactNativeZoomableView';
 
 import {
     ScrollView,
@@ -20,7 +19,7 @@ import Thumbnail from './Thumbnail';
 import styles from './styles';
 
 /*import VideoTransform from '../../../base/media/components/native/VideoTransform';*/
-import PinchZoomView from 'react-native-pinch-zoom-view-movable';
+import PinchZoomView from 'react-native-pinch-zoom-view';
 
 
 
@@ -238,22 +237,36 @@ class TileView extends Component<Props, State> {
     }
     _renderThumbnails() {
 
+/*
+style = {{
+  width:this._getTileDimensions(participant.isFakeParticipant).width,
+  height:this._getTileDimensions(participant.isFakeParticipant).height
+  }}
+  <PinchZoomView></PinchZoomView>
+*/
         return this._getSortedParticipants()
             .map(participant => (
-              <PinchZoomView>
-              <Thumbnail disableTint = { true }
-                      key = { participant.id }
-                      participant = { participant }
-                      renderDisplayName = { true }
-                      styleOverrides = {{
-                      width:this._getTileDimensions(participant.isFakeParticipant).width,
-                      height:this._getTileDimensions(participant.isFakeParticipant).height,
-                        flex:0,
-                        backgroundColor:'blue'
-                      }}
-                      tileView = { true } />
-              </PinchZoomView>
-                      ));
+                <PinchZoomView
+                style = {{
+
+                  width:100,
+                  height:100,
+                  position:'absolute'
+                  }}
+                >
+                <View
+                style = {{
+                  backgroundColor:'red',
+                  width:100,
+                  position:'absolute',
+                  left:0,
+                  top:0,
+                  height:100
+                }}></View>
+
+                </PinchZoomView>
+            ));
+
     }
 
     /**

@@ -225,7 +225,7 @@ class VideoTransform extends Component<Props, State> {
 
         const { children, style } = this.props;
 
-debugger;
+//debugger;
         return (
             <View
                 onLayout = { this._onLayout }

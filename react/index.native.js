@@ -48,18 +48,16 @@ class Root extends PureComponent<Props> {
 
     componentDidMount() {
 
-      codePush.sync({
-            updateDialog: true,
-            installMode: codePush.InstallMode.IMMEDIATE
-        });
-
+    //  codePush.sync({
+            //updateDialog: true
+            //installMode: codePush.InstallMode.IMMEDIATE
+    //  });
 
     }
 
     render() {
         return (
-            <App
-                { ...this.props } />
+            <App { ...this.props } />
         );
     }
 }
@@ -88,7 +86,13 @@ if (!__DEV__) {
 
 let codePushOptions = { checkFrequency: codePush.CheckFrequency.ON_APP_RESUME };
 
-Root = codePush(codePushOptions)(Root);
+//Root = codePush(codePushOptions)(Root);
+
+// Active update, which lets the end user know
+// about each update, and displays it to them
+// immediately after downloading it
+//class MyApp extends Component {}
+Root = codePush({ updateDialog: true, installMode: codePush.InstallMode.IMMEDIATE, checkFrequency: codePush.CheckFrequency.ON_APP_RESUME  })(Root);
 
 
 // Register the main/root Component of JitsiMeetView.

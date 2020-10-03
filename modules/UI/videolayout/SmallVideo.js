@@ -1021,9 +1021,9 @@ export default class SmallVideo {
                     'min-width': `${width}px`,
                     width: `${width}px`,
                     */
-
-                    'left':(Math.random()*90.0) + 'vw',
-                    'top':(Math.random()*90.0) + 'vh'
+                    position:'absolute'
+                    //'left':(Math.random()*90.0) + 'vw',
+                  //  'top':(Math.random()*90.0) + 'vh'
                 });
                 this.$avatar().css({
                     height: `${avatarSize}px`,

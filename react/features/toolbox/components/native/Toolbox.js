@@ -24,6 +24,9 @@ import { appNavigate } from '../../../app/actions';
 import Menu from './Menu';
 
 import OverflowMenuButton from './OverflowMenuButton';
+
+import { toggleBlurEffect } from '../../../blur/actions';
+
 import styles from './styles';
 
 
@@ -139,9 +142,8 @@ class Toolbox extends PureComponent<Props> {
                 style = {{height:66, flexDirection:'row', justifyContent:
                 'flex-start'}} >
 
-
                     <RoundButton
-                     backgroundColor = "purple"
+                     backgroundColor = "green"
                      round = 'true'
                      width={200}
                      height={66}
@@ -153,9 +155,6 @@ class Toolbox extends PureComponent<Props> {
                      onPress={this._menu.bind(this)}
                      style = {{backgroundColor:'purple'}}
                      text="MENU"/>
-
-
-
 
           </View>);
         }

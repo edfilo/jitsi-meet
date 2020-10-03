@@ -243,7 +243,7 @@ module.exports = [
             library: [ 'JitsiMeetJS', 'app', 'effects' ],
             libraryTarget: 'window',
             filename: '[name].min.js',
-            sourceMapFilename: '[name].min.map'
+            sourceMapFilename: '[name].min.map[query]'
         }),
         performance: getPerformanceHints(1 * 1024 * 1024)
     }),
@@ -256,7 +256,7 @@ module.exports = [
             library: [ 'JitsiMeetJS', 'app', 'effects', 'rnnoise' ],
             libraryTarget: 'window',
             filename: '[name].min.js',
-            sourceMapFilename: '[name].min.map'
+            sourceMapFilename: '[name].min.map[query]'
         }),
         performance: getPerformanceHints(30 * 1024)
     }),
@@ -320,7 +320,7 @@ function devServerProxyBypass({ path }) {
         return path;
     }
 
-    if (path.startsWith('/libs/')) {
+    if (path.startsWith('/libs/') || path.startsWith('/effects/')) {
         return path;
     }
 }

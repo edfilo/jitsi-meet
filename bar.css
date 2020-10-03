@@ -555,7 +555,7 @@ p {
   cursor:pointer;
 }
 
-.audio-preview, .video-preview, #tipbutton, #tvbutton{
+.audio-preview, .video-preview, #tipbutton, #tvbutton, #maskbutton{
   pointer-events: auto;
 }
 

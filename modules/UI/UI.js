@@ -114,7 +114,7 @@ UI.changeDisplayName = function(id, displayName) {
 UI.initConference = function() {
     const { getState } = APP.store;
     const { id, name } = getLocalParticipant(getState);
-    debugger;
+    
     UI.showToolbar();
 
     const displayName = config.displayJids ? id : name;

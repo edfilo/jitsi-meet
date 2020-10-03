@@ -86,6 +86,9 @@ import ToolbarButton from './ToolbarButton';
 import VideoSettingsButton from './VideoSettingsButton';
 
 import TipDialog from './TipDialog';
+import BeerMenu from './BeerMenu';
+import { toggleBlurEffect } from '../../../blur/actions';
+
 
 /**
  * The type of the React {@code Component} props of {@link Toolbox}.
@@ -246,6 +249,7 @@ class Toolbox extends Component<Props, State> {
         this._onToolbarOpenEmbedMeeting = this._onToolbarOpenEmbedMeeting.bind(this);
         this._onToolbarOpenVideoQuality = this._onToolbarOpenVideoQuality.bind(this);
         this._onToolbarOpenTips = this._onToolbarOpenTips.bind(this);
+        this._onToolbarOpenMenu = this._onToolbarOpenMenu.bind(this);
         this._onToolbarToggleChat = this._onToolbarToggleChat.bind(this);
         this._onToolbarToggleFullScreen = this._onToolbarToggleFullScreen.bind(this);
         this._onToolbarToggleProfile = this._onToolbarToggleProfile.bind(this);
@@ -254,6 +258,8 @@ class Toolbox extends Component<Props, State> {
         this._onToolbarToggleSharedVideo = this._onToolbarToggleSharedVideo.bind(this);
         this._onToolbarOpenLocalRecordingInfoDialog = this._onToolbarOpenLocalRecordingInfoDialog.bind(this);
         this._onShortcutToggleTileView = this._onShortcutToggleTileView.bind(this);
+
+        this._onToolbarMask = this._onToolbarMask.bind(this);
 
         this.state = {
             windowWidth: window.innerWidth
@@ -429,6 +435,11 @@ class Toolbox extends Component<Props, State> {
     _doOpenTips() {
         this.props.dispatch(openDialog(TipDialog));
     }
+
+    _doOpenMenu() {
+        this.props.dispatch(openDialog(BeerMenu));
+    }
+
 
     /**
      * Dispatches an action to toggle the display of chat.
@@ -771,6 +782,9 @@ class Toolbox extends Component<Props, State> {
         this._doOpenSpeakerStats();
     }
 
+  _onToolbarMask: () => void;
+
+
   _onToolbarOpenTips: () => void;
     _onToolbarOpenVideoQuality: () => void;
 
@@ -787,10 +801,23 @@ class Toolbox extends Component<Props, State> {
         this._doOpenVideoQuality();
     }
 
+    _onToolbarMask() {
+
+          this.props.dispatch(toggleBlurEffect(true));
+
+    }
+
     _onToolbarOpenTips() {
 
         this._doOpenTips();
     }
+
+    _onToolbarOpenMenu() {
+
+        this._doOpenMenu();
+    }
+
+
 
 
     _onToolbarToggleChat: () => void;
@@ -1319,64 +1346,72 @@ var dollarStyle = {
   margin:'auto'
 };
 
+var menuStyle = {
+  backgroundImage: 'url(' + '/img/.png' + ')',
+  backgroundSize:'contain',
+  backgroundPosition:'center',
+  backgroundRepeat:'no-repeat',
+  height:70,
+  width:150,
+  margin:'auto'
+};
 
 
-        return (
-            <div className = 'toolbox-content'>
+        return (<div className = 'toolbox-content'>
+
+            <div  className = 'button-group-left'>
+                { this._renderAudioButton() }
+                <HangupButton
+                    visible = { this._shouldShowButton('hangup') } />
+                { this._renderVideoButton() }
+            </div>
+
+            <div className = 'button-group-center'>
+            <div id="tipbutton" style = {dollarStyle} onClick={this._onToolbarOpenTips}></div>
+            <div id="menubutton" style = {menuStyle} onClick={this._onToolbarOpenMenu}>Drink Menu</div>
+            </div>
 
 
-                <div  className = 'button-group-left'>
+            <div className = 'button-group-right'>
 
-                    { this._renderAudioButton() }
-                    <HangupButton
-                        visible = { this._shouldShowButton('hangup') } />
-                    { this._renderVideoButton() }
+            <div id="sharevideobutton">
 
-                </div>
-                <div className = 'button-group-center'>
+            <ToolbarButton
+               accessibilityLabel = { t('toolbar.accessibilityLabel.sharedvideo') }
+               icon = { IconShareVideo }
+               key = 'sharedvideo'
+               onClick = { this._onToolbarToggleSharedVideo }
+               text = { t('toolbar.sharedvideo') } />
 
-                <div id="tipbutton" style = {dollarStyle} onClick={this._onToolbarOpenTips} />
+            </div>
+                { buttonsRight.indexOf('localrecording') !== -1
+                    && <LocalRecordingButton
+                        onClick = {
+                            this._onToolbarOpenLocalRecordingInfoDialog
+                        } />
+                }
 
-                </div>
+                { buttonsRight.indexOf('tileview') !== -1
+                    && <TileViewButton /> }
+                { buttonsRight.indexOf('invite') !== -1
+                    && <ToolbarButton
+                        accessibilityLabel =
+                            { t('toolbar.accessibilityLabel.invite') }
+                        icon = { IconInviteMore }
+                        onClick = { this._onToolbarOpenInvite }
+                        tooltip = { t('toolbar.invite') } /> }
+                { buttonsRight.indexOf('overflowmenu') !== -1
+                    && <OverflowMenuButton
+                        isOpen = { _overflowMenuVisible }
+                        onVisibilityChange = { this._onSetOverflowVisible }>
+                        <ul
+                            aria-label = { t(toolbarAccLabel) }
+                            className = 'overflow-menu'>
+                            { overflowMenuContent }
+                        </ul>
+                    </OverflowMenuButton> }
+            </div>
 
-                <div className = 'button-group-right'>
-                <div id="sharevideobutton">
-
-                <ToolbarButton
-                   accessibilityLabel = { t('toolbar.accessibilityLabel.sharedvideo') }
-                   icon = { IconShareVideo }
-                   key = 'sharedvideo'
-                   onClick = { this._onToolbarToggleSharedVideo }
-                   text = { t('toolbar.sharedvideo') } />
-
-                </div>
-                    { buttonsRight.indexOf('localrecording') !== -1
-                        && <LocalRecordingButton
-                            onClick = {
-                                this._onToolbarOpenLocalRecordingInfoDialog
-                            } />
-                    }
-
-                    { buttonsRight.indexOf('tileview') !== -1
-                        && <TileViewButton /> }
-                    { buttonsRight.indexOf('invite') !== -1
-                        && <ToolbarButton
-                            accessibilityLabel =
-                                { t('toolbar.accessibilityLabel.invite') }
-                            icon = { IconInviteMore }
-                            onClick = { this._onToolbarOpenInvite }
-                            tooltip = { t('toolbar.invite') } /> }
-                    { buttonsRight.indexOf('overflowmenu') !== -1
-                        && <OverflowMenuButton
-                            isOpen = { _overflowMenuVisible }
-                            onVisibilityChange = { this._onSetOverflowVisible }>
-                            <ul
-                                aria-label = { t(toolbarAccLabel) }
-                                className = 'overflow-menu'>
-                                { overflowMenuContent }
-                            </ul>
-                        </OverflowMenuButton> }
-                </div>
             </div>);
     }
 

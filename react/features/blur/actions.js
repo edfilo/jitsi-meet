@@ -2,7 +2,9 @@
 
 import { getLocalVideoTrack } from '../../features/base/tracks';
 
-import { BLUR_DISABLED, BLUR_ENABLED } from './actionTypes';
+import JitsiStreamBlurEffect from '../../features/stream-effects/blur/JitsiStreamBlurEffect';
+
+import { BLUR_DISABLED, BLUR_ENABLED, BLUR_CHANGED } from './actionTypes';
 import { getBlurEffect } from './functions';
 import logger from './logger';
 
@@ -12,6 +14,10 @@ import logger from './logger';
 * @param {boolean} enabled - If true enables video blur, false otherwise.
 * @returns {Promise}
 */
+
+
+
+
 export function toggleBlurEffect(enabled: boolean) {
     return function(dispatch: (Object) => Object, getState: () => any) {
         const state = getState();
@@ -34,6 +40,16 @@ export function toggleBlurEffect(enabled: boolean) {
                     dispatch(blurDisabled());
                     logger.error('getBlurEffect failed with error:', error);
                 });
+        }else {
+
+          const { jitsiTrack } = getLocalVideoTrack(state['features/base/tracks']);
+
+
+          jitsiTrack._streamEffect.changeEffect();
+
+
+
+
         }
 
         return Promise.resolve();
