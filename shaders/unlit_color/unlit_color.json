@@ -1,0 +1,16 @@
+{
+	"name" : "unlitColor",
+	"displayName" : "Unlit Color",
+	"textures" : [
+		
+	],
+
+	"uniforms" : [
+		{
+			"name" : "u_color",
+			"displayName" : "Color",
+			"type" : "Vec4",
+			"defaultValue" : [1.0, 1.0, 1.0, 1.0]
+		}
+	]
+}

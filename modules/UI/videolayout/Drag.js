@@ -5,8 +5,8 @@ var downOrTouchStart = isTouch ? 'touchstart' : 'mousedown';
 var moveOrTouchMove = isTouch ? 'touchmove' : 'mousemove';
 var upOrTouchEnd = isTouch ? 'touchend' : 'mouseup';
 
-var ASPECT_W = 16;
-var ASPECT_H = 9;
+var ASPECT_W = 5;
+var ASPECT_H = 4;
 var TOP_BAR_HEIGHT = 0;
 var BOTTOM_BAR_HEIGHT = 0;
 var VERTICAL_PADDING = TOP_BAR_HEIGHT + BOTTOM_BAR_HEIGHT;

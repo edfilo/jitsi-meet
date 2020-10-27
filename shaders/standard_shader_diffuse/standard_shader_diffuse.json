@@ -1,0 +1,70 @@
+{
+	"name" : "standardShaderDiffuse",
+	"displayName" : "Standard shader diffuse",
+	"textures" : [
+		{
+			"name" : "s_texDiffuse",
+			"displayName" : "Diffuse texture",
+			"stage" : 0
+		}
+	],
+
+	"uniforms" : [
+		{
+			"name" : "u_diffuseColor",
+			"displayName" : "Diffuse color",
+			"type" : "Vec4",
+			"defaultValue" : [1.0, 1.0, 1.0, 1.0]
+		},{
+			"name" : "u_specularMaterial",
+			"displayName" : "Specular color",
+			"type" : "Vec4",
+			"defaultValue" : [1.0, 1.0, 1.0, 1.0]
+		},{
+			"name" : "u_ambientColor",
+			"displayName" : "Ambient color",
+			"type" : "Vec4",
+			"defaultValue" : [0.0, 0.0, 0.0, 1.0]
+		},{
+			"name" : "u_shininess",
+			"displayName" : "Shinines",
+			"type" : "Vec1",
+			"defaultValue" : [16.0]
+		},{
+			"name" : "u_colorDir",
+			"displayName" : "Directional light color",
+			"type" : "Vec4",
+			"defaultValue" : [1.0, 1.0, 1.0, 1.0]
+		},{
+			"name" : "u_colorP1",
+			"displayName" : "Point light 1 color",
+			"type" : "Vec4",
+			"defaultValue" : [1.0, 1.0, 1.0, 1.0]
+		},{
+			"name" : "u_colorP2",
+			"displayName" : "Point light 2 color",
+			"type" : "Vec4",
+			"defaultValue" : [1.0, 1.0, 1.0, 1.0]
+		},{
+			"name" : "u_intensity",
+			"displayName" : "Lights intensity",
+			"type" : "Vec3",
+			"defaultValue" : [1.0, 0.0, 0.0]
+		},{
+			"name" : "u_lightPosDir",
+			"displayName" : "Directional light",
+			"type" : "Vec3",
+			"defaultValue" : [0.0, 0.0, 1.0]
+		},{
+			"name" : "u_lightPosPoint1",
+			"displayName" : "Point light 1 position",
+			"type" : "Vec3",
+			"defaultValue" : [0.5, 0.0, 0.5] 
+		},{
+			"name" : "u_lightPosPoint2",
+			"displayName" : "Point light 2 position",
+			"type" : "Vec3",
+			"defaultValue" : [-0.5, 0.0, 0.5]
+		}
+	]
+}

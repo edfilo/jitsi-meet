@@ -1,0 +1,24 @@
+{
+	"name" : "overlay_color",
+	"displayName" : "Overlay Color",
+	"textures" : [
+		{
+			"name" : "s_texDiffuse",
+			"displayName" : "Diffuse texture",
+			"stage" : 0
+		}, {
+			"name" : "s_texAlpha",
+			"displayName" : "Alpha map",
+			"stage" : 1
+		}
+	],
+
+	"uniforms" : [
+		{
+			"name" : "newColor",
+			"displayName" : "Target color",
+			"type" : "Vec4",
+			"defaultValue" : [1.0, 0.0, 0.0, 1.0]
+		}
+	]
+}

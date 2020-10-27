@@ -1,0 +1,36 @@
+{
+	"name" : "beauty_lut",
+	"displayName" : "Beauty LUT",
+	"textures" : [
+		{
+			"name" : "inputtex",
+			"displayName" : "Input Texture",
+			"stage" : 0
+		},
+		{
+			"name" : "masktex",
+			"displayName" : "Alpha mask Texture",
+			"stage" : 1
+		},
+		{
+			"name" : "lut",
+			"displayName" : "LUT",
+			"stage" : 2
+		}
+	],
+
+	"uniforms" : [
+		{
+			"name" : "lutAmount",
+			"displayName" : "LUT Amount",
+			"type" : "Vec1",
+			"defaultValue" : [1.0]
+		},
+		{
+			"name" : "smoothingAmount",
+			"displayName" : "Smoothing Amount",
+			"type" : "Vec1",
+			"defaultValue" : [1.0]
+		}
+	]
+}

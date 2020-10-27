@@ -1,0 +1,24 @@
+{
+	"name" : "skinBlend",
+	"displayName" : "Skin Blend",
+	"textures" : [
+		{
+			"name" : "s_videoColor",
+			"displayName" : "Video texture",
+			"stage" : 0
+		},{
+			"name" : "s_texColor",
+			"displayName" : "Skin texture",
+			"stage" : 1
+		},{
+			"name" : "s_alphaColor",
+			"displayName" : "Alpha mask texture",
+			"stage" : 2
+		}
+		
+	],
+
+	"uniforms" : [
+
+	]
+}

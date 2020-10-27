@@ -1,26 +1,70 @@
 // @flow
 
-import { ReducerRegistry } from '../base/redux';
+import { ReducerRegistry, PersistenceRegistry } from '../base/redux';
 
-import { BLUR_ENABLED, BLUR_DISABLED } from './actionTypes';
+import { FX_ENABLED, FX_DISABLED, ADD_PURCHASED_ITEMS, SET_ACTIVE_ITEMS, ACTIVATE_ITEM, PURCHASE_ITEM} from './actionTypes';
+
+PersistenceRegistry.register('features/blur');
 
 
-ReducerRegistry.register('features/blur', (state = {}, action) => {
+const DEFAULT_STATE = {
+    blurEnabled: false,
+    activeItems: [],
+    purchasedItems: []
+};
+
+ReducerRegistry.register('features/blur', (state = DEFAULT_STATE, action) => {
+
+
 
     switch (action.type) {
-    case BLUR_ENABLED: {
+
+
+
+      case ADD_PURCHASED_ITEMS: {
+
+
+
+
         return {
-            ...state,
+          ...state,
+          purchasedItems: [...state.purchasedItems, ...action.items],
+          blurEnabled: true
+        }
+
+      }
+
+    case SET_ACTIVE_ITEMS: {
+
+
+      return {
+        ...state,
+        activeItems:action.items,
+        blurEnabled: true
+      }
+
+    }
+
+    case FX_ENABLED: {
+      Object.assign(state.fx, action.fx);
+        return {
+             ...state,
             blurEnabled: true
         };
     }
-    case BLUR_DISABLED: {
+
+    case FX_DISABLED: {
+        console.log('persistance disabled');
         return {
             ...state,
             blurEnabled: false
         };
     }
+
     }
+
+
+
 
     return state;
 });

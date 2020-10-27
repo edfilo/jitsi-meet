@@ -1,0 +1,26 @@
+{
+	"name" : "photo_booth",
+	"displayName" : "Good Photo Booth",
+	"textures" : [
+		{
+			"name" : "s_texColor",
+			"displayName" : "Diffuse texture",
+			"stage" : 0
+		}
+	],
+
+	"uniforms" : [
+		{
+			"name" : "u_color",
+			"displayName" : "Color",
+			"type" : "Vec4",
+			"defaultValue" : [1.0, 1.0, 1.0, 1.0]
+		},
+		{
+			"name" : "u_brightness",
+			"displayName" : "Brightness",
+			"type" : "Vec1",
+			"defaultValue" : [0.0]
+		}
+	]
+}

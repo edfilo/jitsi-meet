@@ -1,0 +1,32 @@
+{
+	"name" : "chroma_key",
+	"displayName" : "Chroma Key",
+	"textures" : [
+		{
+			"name" : "s_texColor",
+			"displayName" : "Input",
+			"stage" : 0
+		}
+	],
+
+	"uniforms" : [
+		{
+			"name" : "chromaColor",
+			"displayName" : "Chroma color",
+			"type" : "Vec4",
+			"defaultValue" : [0.0, 0.0, 0.0, 1.0]
+		},
+		{
+			"name" : "thresholdSensitivity",
+			"displayName" : "Threshold",
+			"type" : "Vec1",
+			"defaultValue" : [0.5]
+		},
+		{
+			"name" : "smoothing",
+			"displayName" : "Smoothing",
+			"type" : "Vec1",
+			"defaultValue" : [0.5]
+		},
+	]
+}

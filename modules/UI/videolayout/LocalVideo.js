@@ -84,7 +84,7 @@ export default class LocalVideo extends SmallVideo {
             <span id = 'localVideoWrapper'></span>
             <div class = 'videocontainer__toolbar'></div>
             <div class = 'videocontainer__toptoolbar'></div>
-            <div class = 'videocontainer__hoverOverlay'></div>
+            <!--<div class = 'videocontainer__hoverOverlay'></div>-->
             <div class = 'displayNameContainer'></div>
             <div class = 'avatar-container'></div>
           <!-- <img style = 'position:absolute;left:0px;top:0px;width:100%' src= 'https://edsvbar.com/img/giraffecat.jpg'>

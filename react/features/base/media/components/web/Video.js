@@ -144,6 +144,7 @@ class Video extends Component<Props> {
     render() {
         return (
             <video
+                style = {{objectFit:'cover'}}
                 autoPlay = { this.props.autoPlay }
                 className = { this.props.className }
                 id = { this.props.id }

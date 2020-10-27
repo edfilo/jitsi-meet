@@ -10,7 +10,9 @@ import JitsiStreamBlurEffect from './JitsiStreamBlurEffect';
  *
  * @returns {Promise<JitsiStreamBlurEffect>}
  */
-export async function createBlurEffect() {
+export async function createBlurEffect(color) {
+
+
     if (!MediaStreamTrack.prototype.getSettings && !MediaStreamTrack.prototype.getConstraints) {
         throw new Error('JitsiStreamBlurEffect not supported!');
     }
@@ -25,5 +27,6 @@ export async function createBlurEffect() {
         quantBytes: 2
     });
     */
-    return new JitsiStreamBlurEffect();
+
+    return new JitsiStreamBlurEffect(color);
 }

@@ -1,0 +1,15 @@
+{
+	"name" : "unlitTexture",
+	"displayName" : "Unlit Texture",
+	"textures" : [
+		{
+			"name" : "s_texColor",
+			"displayName" : "Diffuse texture",
+			"stage" : 0
+		}
+	],
+
+	"uniforms" : [
+
+	]
+}

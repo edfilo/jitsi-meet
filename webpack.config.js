@@ -13,7 +13,8 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const devServerProxyTarget = 'https://edsvbar.com/';
 
 const analyzeBundle = process.argv.indexOf('--analyze-bundle') !== -1;
-const detectCircularDeps = process.argv.indexOf('--detect-circular-deps') !== -1;
+const detectCircularDeps =false;
+// process.argv.indexOf('--detect-circular-deps') !== -1;
 
 const minimize
     = process.argv.indexOf('-p') !== -1
@@ -248,6 +249,11 @@ module.exports = [
         performance: getPerformanceHints(1 * 1024 * 1024)
     }),
 
+  //  path: path.resolve(__dirname, 'dist'),
+ //filename: '[name].[hash:8].js',
+ //sourceMapFilename: '[name].[hash:8].map',
+ //chunkFilename: '[id].[hash:8].js'
+
     Object.assign({}, config, {
         entry: {
             'rnnoise-processor': './react/features/stream-effects/rnnoise/index.js'
@@ -320,7 +326,9 @@ function devServerProxyBypass({ path }) {
         return path;
     }
 
-    if (path.startsWith('/libs/') || path.startsWith('/effects/')) {
+    if (path.startsWith('/libs/') || path.startsWith('/effects/') || path.startsWith('/img/') || path.startsWith('/fonts/')) {
+
         return path;
+
     }
 }

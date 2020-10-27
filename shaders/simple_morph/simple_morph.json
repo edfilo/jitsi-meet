@@ -1,0 +1,20 @@
+{
+	"name" : "simpleMorph",
+	"displayName" : "Simple Morph",
+	"textures" : [
+		{
+			"name" : "s_videoColor",
+			"displayName" : "Video texture",
+			"stage" : 0
+		},{
+			"name" : "s_alphaMask",
+			"displayName" : "Alpha mask texture",
+			"stage" : 1
+		}
+		
+	],
+
+	"uniforms" : [
+
+	]
+}

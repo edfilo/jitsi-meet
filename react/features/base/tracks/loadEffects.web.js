@@ -11,14 +11,15 @@ import logger from './logger';
  * @param {Object} store - The Redux store.
  * @returns {Promsie} - A Promise which resolves when all effects are created.
  */
+
 export default function loadEffects(store: Object): Promise<any> {
     const state = store.getState();
 
-    const blurPromise = state['features/blur'].blurEnabled
-        ? getBlurEffect()
-            .catch(error => {
-                logger.error('Failed to obtain the blur effect instance with error: ', error);
+    const fx = state['features/blur'].activeItems;
 
+    const blurPromise = (state['features/blur'].blurEnabled && true)
+        ? getBlurEffect(fx).catch(error => {
+                logger.error('Failed to obtain the blur effect instance with error: ', error);
                 return Promise.resolve();
             })
         : Promise.resolve();

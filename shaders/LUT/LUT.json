@@ -1,0 +1,25 @@
+{
+	"name" : "LUT",
+	"displayName" : "LUT",
+	"textures" : [
+		{
+			"name" : "s_texColor",
+			"displayName" : "Input texture",
+			"stage" : 0
+		},
+		{
+			"name" : "s_texLut",
+			"displayName" : "LUT",
+			"stage" : 2
+		}
+	],
+
+	"uniforms" : [
+		{
+			"name" : "lutAmount",
+			"displayName" : "LUT Amount",
+			"type" : "Vec1",
+			"defaultValue" : [1.0]
+		}
+	]
+}

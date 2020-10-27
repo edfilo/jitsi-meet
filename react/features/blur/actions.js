@@ -4,7 +4,7 @@ import { getLocalVideoTrack } from '../../features/base/tracks';
 
 import JitsiStreamBlurEffect from '../../features/stream-effects/blur/JitsiStreamBlurEffect';
 
-import { BLUR_DISABLED, BLUR_ENABLED, BLUR_CHANGED } from './actionTypes';
+import { FX_DISABLED, FX_ENABLED, SET_ACTIVE_ITEMS, ADD_PURCHASED_ITEMS, ACTIVATE_ITEM, PURCHASE_ITEM} from './actionTypes';
 import { getBlurEffect } from './functions';
 import logger from './logger';
 
@@ -15,24 +15,102 @@ import logger from './logger';
 * @returns {Promise}
 */
 
+export function activateItems(items: array) {
+
+  return function(dispatch: (Object) => Object, getState: () => any) {
+
+    const state = getState();
+
+    const { jitsiTrack } = getLocalVideoTrack(state['features/base/tracks']);
+    jitsiTrack._streamEffect.applyFX(items);
+
+    dispatch(setActiveItems(items));
+
+  };
 
 
 
-export function toggleBlurEffect(enabled: boolean) {
+}
+
+/*
+export function activateItem(newitem: object) {
+
+
     return function(dispatch: (Object) => Object, getState: () => any) {
+
+          const state = getState();
+          const activeItems = state['features/blur'].activeItems;
+
+          const { jitsiTrack } = getLocalVideoTrack(state['features/base/tracks']);
+
+          return getBlurEffect(activeItems)
+            .then(() => {
+
+                          var newitems = [];
+                          if(newitem.slug == 'tattoo'){
+                              newitems = [...activeItems].filter(obj => (newitem.slug !== obj.slug && newitem.location !== obj.location));
+                          } else {
+                              newitems = [...activeItems].filter(obj => (newitem.slug !== obj.slug));
+                          }
+                          newitems.push(newitem);
+
+                          debugger;
+
+                          jitsiTrack._streamEffect.applyFX(newitems);
+
+                          dispatch(setActiveItems(newitems));
+
+                });
+
+
+          return Promise.resolve();
+
+      }
+
+}
+*/
+export function addPurchasedItems(items) {
+
+  return {
+      type: ADD_PURCHASED_ITEMS,
+      items: items
+  };
+
+}
+
+
+
+export function setActiveItems(items) {
+
+  return {
+      type: SET_ACTIVE_ITEMS,
+      items: items
+  };
+
+}
+
+
+export function toggleBlurEffect(enabled: boolean, fx: object) {
+
+  return function(dispatch: (Object) => Object, getState: () => any) {
         const state = getState();
 
         if (state['features/blur'].blurEnabled !== enabled) {
             const { jitsiTrack } = getLocalVideoTrack(state['features/base/tracks']);
 
-            return getBlurEffect()
+            return getBlurEffect(fx)
                 .then(blurEffectInstance =>
                     jitsiTrack.setEffect(enabled ? blurEffectInstance : undefined)
                         .then(() => {
-                            enabled ? dispatch(blurEnabled()) : dispatch(blurDisabled());
-                        })
-                        .catch(error => {
-                            enabled ? dispatch(blurDisabled()) : dispatch(blurEnabled());
+                            //enabled ?
+                            dispatch(blurEnabled(color));
+                            //debugger;
+                            // : dispatch(blurDisabled());
+                            //jitsiTrack._streamEffect.changeEffect(color);
+
+                              logger.error('setEffect succeeded', error);
+                        }).catch(error => {
+                            enabled ? dispatch(blurDisabled()) : dispatch(blurEnabled(color));
                             logger.error('setEffect failed with error:', error);
                         })
                 )
@@ -40,15 +118,11 @@ export function toggleBlurEffect(enabled: boolean) {
                     dispatch(blurDisabled());
                     logger.error('getBlurEffect failed with error:', error);
                 });
-        }else {
+        } else {
 
           const { jitsiTrack } = getLocalVideoTrack(state['features/base/tracks']);
-
-
-          jitsiTrack._streamEffect.changeEffect();
-
-
-
+          dispatch(blurEnabled(color));
+          jitsiTrack._streamEffect.changeEffect(color);
 
         }
 
@@ -60,12 +134,14 @@ export function toggleBlurEffect(enabled: boolean) {
  * Signals the local participant that the blur has been enabled.
  *
  * @returns {{
- *      type: BLUR_ENABLED
+ *      type: FX_ENABLED
  * }}
  */
-export function blurEnabled() {
+export function blurEnabled(color) {
     return {
-        type: BLUR_ENABLED
+        type: FX_ENABLED,
+        color:color
+
     };
 }
 
@@ -73,11 +149,11 @@ export function blurEnabled() {
  * Signals the local participant that the blur has been disabled.
  *
  * @returns {{
- *      type: BLUR_DISABLED
+ *      type: FX_DISABLED
  * }}
  */
 export function blurDisabled() {
     return {
-        type: BLUR_DISABLED
+        type: FX_DISABLED
     };
 }

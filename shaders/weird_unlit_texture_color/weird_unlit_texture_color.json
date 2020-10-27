@@ -1,0 +1,20 @@
+{
+	"name" : "unlitTextureColor",
+	"displayName" : "Unlit Texture & Color",
+	"textures" : [
+		{
+			"name" : "s_texColor",
+			"displayName" : "Diffuse map",
+			"stage" : 0
+		}
+	],
+
+	"uniforms" : [
+		{
+			"name" : "u_color",
+			"displayName" : "Color",
+			"type" : "Vec4",
+			"defaultValue" : [1.0, 1.0, 1.0, 1.0]
+		}
+	]
+}

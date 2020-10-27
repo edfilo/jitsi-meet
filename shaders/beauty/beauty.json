@@ -1,0 +1,42 @@
+{
+	"name" : "beauty",
+	"displayName" : "Beauty",
+	"textures" : [
+		{
+			"name" : "inputtex",
+			"displayName" : "Input Texture",
+			"stage" : 0
+		},
+		{
+			"name" : "masktex",
+			"displayName" : "Smooth mask",
+			"stage" : 1
+		},
+		{
+			"name" : "softtex",
+			"displayName" : "Soft mask",
+			"stage" : 2
+		}
+	],
+
+	"uniforms" : [
+		{
+			"name" : "smoothingAmount",
+			"displayName" : "Smoothing Amount",
+			"type" : "Vec1",
+			"defaultValue" : [1.0]
+		},
+		{
+			"name" : "softAmount",
+			"displayName" : "Soft Amount",
+			"type" : "Vec1",
+			"defaultValue" : [1.0]
+		},
+		{
+			"name" : "softColor",
+			"displayName" : "Soft Color",
+			"type" : "Vec4",
+			"defaultValue" : [1.0, 1.0, 1.0, 1.0]
+		}
+	]
+}

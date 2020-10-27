@@ -1,0 +1,30 @@
+{
+	"name" : "LUT_alpha",
+	"displayName" : "LUT with alpha mask",
+	"textures" : [
+		{
+			"name" : "s_texColor",
+			"displayName" : "Input texture",
+			"stage" : 0
+		},
+		{
+			"name" : "s_texMask",
+			"displayName" : "Alpha mask",
+			"stage" : 1
+		},
+		{
+			"name" : "s_texLut",
+			"displayName" : "LUT",
+			"stage" : 2
+		}
+	],
+
+	"uniforms" : [
+		{
+			"name" : "lutAmount",
+			"displayName" : "LUT Amount",
+			"type" : "Vec1",
+			"defaultValue" : [1.0]
+		}
+	]
+}

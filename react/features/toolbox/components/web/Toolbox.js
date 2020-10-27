@@ -373,7 +373,7 @@ class Toolbox extends Component<Props, State> {
                 onMouseOut = { this._onMouseOut }
                 onMouseOver = { this._onMouseOver }>
                 <div className = 'toolbox-background' />
-                { this._renderToolboxContent() }
+              {this._renderToolboxContent()}
             </div>
         );
     }
@@ -433,7 +433,8 @@ class Toolbox extends Component<Props, State> {
     }
 
     _doOpenTips() {
-        this.props.dispatch(openDialog(TipDialog));
+        this.props.dispatch(openDialog(BeerMenu));
+      //  this.props.dispatch(openDialog(TipDialog));
     }
 
     _doOpenMenu() {
@@ -797,18 +798,14 @@ class Toolbox extends Component<Props, State> {
      */
     _onToolbarOpenVideoQuality() {
         sendAnalytics(createToolbarEvent('video.quality'));
-
         this._doOpenVideoQuality();
     }
 
     _onToolbarMask() {
-
-          this.props.dispatch(toggleBlurEffect(true));
-
+        this.props.dispatch(toggleBlurEffect(true));
     }
 
     _onToolbarOpenTips() {
-
         this._doOpenTips();
     }
 
@@ -1368,8 +1365,7 @@ var menuStyle = {
 
             <div className = 'button-group-center'>
             <div id="tipbutton" style = {dollarStyle} onClick={this._onToolbarOpenTips}></div>
-            <div id="menubutton" style = {menuStyle} onClick={this._onToolbarOpenMenu}>Drink Menu</div>
-            </div>
+              </div>
 
 
             <div className = 'button-group-right'>

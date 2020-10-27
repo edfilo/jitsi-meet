@@ -1,0 +1,20 @@
+{
+	"name" : "reflection_cubemap",
+	"displayName" : "Reflection Cubemap",
+	"textures" : [
+		{
+			"name" : "s_texCube",
+			"displayName" : "Cube map",
+			"stage" : 0
+		}
+	],
+
+	"uniforms" : [
+		{
+			"name" : "u_color",
+			"displayName" : "Color",
+			"type" : "Vec4",
+			"defaultValue" : [1.0, 1.0, 1.0, 1.0]
+		}
+	]
+}

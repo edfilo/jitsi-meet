@@ -1,24 +1,27 @@
 // @flow
 
 
-export const BLUR_CHANGE = 'BLUR_CHANGE';
+export const SET_ACTIVE_ITEMS = 'SET_ACTIVE_ITEMS';
+export const ADD_PURCHASED_ITEMS = 'ADD_PURCHASED_ITEMS';
+export const ACTIVATE_ITEM = 'ACTIVATE_ITEM';
+export const PURCHASE_ITEM = 'PURCHASE_ITEM';
 
 /**
  * The type of redux action dispatched which represents that the blur
  * is enabled.
  *
  * {
- *      type: BLUR_ENABLED
+ *      type: FX_ENABLED
  * }
  */
-export const BLUR_ENABLED = 'BLUR_ENABLED';
+export const FX_ENABLED = 'FX_ENABLED';
 
 /**
  * The type of redux action dispatched which represents that the blur
  * is disabled.
  *
  * {
- *      type: BLUR_DISABLED
+ *      type: FX_DISABLED
  * }
  */
-export const BLUR_DISABLED = 'BLUR_DISABLED';
+export const FX_DISABLED = 'FX_DISABLED';

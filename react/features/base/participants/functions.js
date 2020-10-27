@@ -30,10 +30,10 @@ const AVATAR_CHECKER_FUNCTIONS = [
     },
     participant => {
         return participant && participant.avatarURL ? participant.avatarURL : null;
-    },
+    }/*,
     participant => {
         return participant && participant.email ? getGravatarURL(participant.email) : null;
-    }
+    }*/
 ];
 /* eslint-enable arrow-body-style */
 

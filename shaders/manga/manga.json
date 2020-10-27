@@ -1,0 +1,41 @@
+{
+	"name" : "manga",
+	"displayName" : "Manga",
+	"textures" : [
+		{
+			"name" : "s_texDiffuse",
+			"displayName" : "Postprocessing texture",
+			"stage" : 0
+		}
+	],
+
+	"uniforms" : [
+		{
+			"name" : "u_speed",
+			"displayName" : "Speed",
+			"type" : "Vec1",
+			"defaultValue" : [5.0]
+		},		{
+			"name" : "u_color",
+			"displayName" : "Color",
+			"type" : "Vec4",
+			"defaultValue" : [1.0, 1.0, 1.0, 1.0]
+		},		{
+			"name" : "u_size",
+			"displayName" : "Size",
+			"type" : "Vec1",
+			"defaultValue" : [1.0]
+		},    	{
+			"name" : "u_centerx",
+			"displayName" : "Center X",
+			"type" : "Vec1",
+			"defaultValue" : [0.5]
+		},    	{
+			"name" : "u_centery",
+			"displayName" : "Center Y",
+			"type" : "Vec1",
+			"defaultValue" : [0.5]
+		}
+
+	]
+}

@@ -59,6 +59,7 @@ class VideoTrack extends AbstractVideoTrack<Props> {
     render() {
         return (
             <Video
+                style = {{objectFit:'cover'}}
                 autoPlay = { !this.props._noAutoPlayVideo }
                 className = { this.props.className }
                 id = { this.props.id }

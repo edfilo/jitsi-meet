@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
+  <path id="text-path-1" style="fill:none;" d="M 0 0 Q 95 -50 180 0" transform="translate(100, 100)" stroke="transparent" stroke-width="2"></path>
+  <text>
+  <textPath xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#text-path-1" startOffset="50%" text-anchor="middle">
+    <tspan style="fill: white; font-family: Helvetica; font-size:30px; letter-spacing: 1px;"> hello </tspan>
+  </textPath>
+  </text>
+</svg>
