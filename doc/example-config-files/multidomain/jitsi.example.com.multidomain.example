@@ -51,6 +51,15 @@ server {
         rewrite ^/([^/?&:'"]+)/(.*)$ /$2;
     }
 
+    location /test {
+
+          #set $args $args&host=$http_host;
+          proxy_pass http://localhost:3000/header/;
+    }
+
+
+
+
     # BOSH for subdomains
     location ~ ^/([^/?&:'"]+)/http-bind {
         set $subdomain "$1.";

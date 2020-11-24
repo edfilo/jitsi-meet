@@ -1331,8 +1331,8 @@ export default {
         this._room = room; // FIXME do not use this
 
         sendLocalParticipant(APP.store, room);
-        console.log('joker create room called');
-        APP.UI.onBBS('','', {});
+        console.log('joker create room called' + room);
+        //APP.UI.onBBS('','', {});
 
 
         this._setupListeners();

@@ -136,12 +136,12 @@
         "yesterday": "Yesterday"
     },
     "deepLinking": {
-        "appNotInstalled": "You need the {{app}} mobile app to enter this bar on your phone.",
+        "appNotInstalled": "Visit in chrome to use Eds Virtual Bar and enjoy virtual drinks and fun with your friends.  Otherwise you need the jitsi mobile app to enter this bar on your phone.  We'll have a custom app soon!",
         "description": "Nothing happened? We tried launching your meeting in the {{app}} desktop app. Try again or launch it in the {{app}} web app.",
         "descriptionWithoutWeb": "Nothing happened? We tried launching your meeting in the {{app}} desktop app.",
         "downloadApp": "Download the app",
-        "ifDoNotHaveApp": "If you don't have the app yet:",
-        "ifHaveApp": "If you already have the app:",
+        "ifDoNotHaveApp": "If you don't have jitsi app:",
+        "ifHaveApp": "If you already have  jitsiapp:",
         "joinInApp": "enter this bar using the app",
         "launchWebButton": "Launch in web",
         "title": "Launching your meeting in {{app}}...",

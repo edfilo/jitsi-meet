@@ -11,6 +11,10 @@ import { Platform } from './features/base/react';
 import { getJitsiMeetGlobalNS } from './features/base/util';
 import PrejoinApp from './features/prejoin/components/PrejoinApp';
 
+
+//import { hot } from 'react-hot-loader/root';
+
+
 const logger = getLogger('index.web');
 const OS = Platform.OS;
 
@@ -22,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     APP.connectionTimes['document.ready'] = now;
     logger.log('(TIME) document ready:\t', now);
+
 });
 
 // Workaround for the issue when returning to a page with the back button and
@@ -47,7 +52,7 @@ if (OS === 'ios') {
  */
 window.addEventListener('beforeunload', () => {
     // Stop the LogCollector
-    
+
     if (APP.logCollectorStarted) {
         APP.logCollector.stop();
         APP.logCollectorStarted = false;
@@ -69,6 +74,9 @@ globalNS.renderEntryPoint = ({
     props = {},
     elementId = 'react'
 }) => {
+    if(module.hot) {
+      module.hot.accept();
+    }
     ReactDOM.render(
         <Component { ...props } />,
         document.getElementById(elementId)

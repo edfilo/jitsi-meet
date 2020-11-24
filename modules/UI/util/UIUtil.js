@@ -47,6 +47,8 @@ const UIUtil = {
      * used instead of this method in order to preserve curent URL params.
      */
     redirect(url) {
+      debugger;
+      
         window.location.href = url;
     },
 

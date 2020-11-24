@@ -95,6 +95,8 @@ export function toggleBlurEffect(enabled: boolean, fx: object) {
   return function(dispatch: (Object) => Object, getState: () => any) {
         const state = getState();
 
+
+
         if (state['features/blur'].blurEnabled !== enabled) {
             const { jitsiTrack } = getLocalVideoTrack(state['features/base/tracks']);
 

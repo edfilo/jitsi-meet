@@ -5,12 +5,12 @@ var downOrTouchStart = isTouch ? 'touchstart' : 'mousedown';
 var moveOrTouchMove = isTouch ? 'touchmove' : 'mousemove';
 var upOrTouchEnd = isTouch ? 'touchend' : 'mouseup';
 
-var ASPECT_W = 5;
-var ASPECT_H = 4;
+
 var TOP_BAR_HEIGHT = 0;
 var BOTTOM_BAR_HEIGHT = 0;
 var VERTICAL_PADDING = TOP_BAR_HEIGHT + BOTTOM_BAR_HEIGHT;
-var ASPECT_COEF = ASPECT_H / ASPECT_W;
+
+
 var MIN_SIZE = 150;
 var RESIZE_ICON_SIZE = 35.0;
 
@@ -28,7 +28,15 @@ function touchify(e) {
   return { pageX: pageX, pageY: pageY };
 }
 
-function Drag(dragTarget, moveTarget, locationCallback, resizable, padding) {
+function Drag(dragTarget, moveTarget, locationCallback, resizable, padding, aspectRatio) {
+
+
+  //var ASPECT_W = 5;
+  //var ASPECT_H = 4;
+  //var ASPECT_COEF = ASPECT_H / ASPECT_W;
+  this.aspectRatio = 1.0 / aspectRatio;
+
+
   this.dragTarget = dragTarget;
   this.el = moveTarget;
   this.locationCallback = locationCallback || function() {};
@@ -80,7 +88,7 @@ Drag.prototype.onDown = function(e) {
     parseFloat(this.target.style.width) *  this.clientWidth * 0.01,
     parseFloat(this.target.style.minWidth)
   );
-  this.startHeightPx = this.startWidthPx * ASPECT_COEF + this.padding * 2.0;
+  this.startHeightPx = this.startWidthPx * this.aspectRatio + this.padding * 2.0;
 
 
 
@@ -132,7 +140,7 @@ this.dragdistanceX = (pos.pageX  - (parseFloat(this.target.style.left) * .01) * 
       var newWidthPx = this.startWidthPx + this.dragdistanceX;
       var newWidth = newWidthPx / this.clientWidth;
       var newHeight =
-        (newWidthPx * ASPECT_COEF + this.padding * 2.0) / this.clientWidth;
+        (newWidthPx * this.aspectRatio + this.padding * 2.0) / this.clientWidth;
       var newMinWidth = Math.max(
         Math.min(parseFloat(this.target.style.minWidth), newWidthPx),
         MIN_SIZE
@@ -144,7 +152,7 @@ this.dragdistanceX = (pos.pageX  - (parseFloat(this.target.style.left) * .01) * 
 
       this.target.style.minWidth = newMinWidth + 'px';
       this.target.style.minHeight =
-        newMinWidth * ASPECT_COEF + this.padding * 2.0 + 'px';
+        newMinWidth * this.aspectRatio + this.padding * 2.0 + 'px';
 
       this.target.style.paddingTop = this.padding;
       this.target.style.paddingBottom = this.padding;

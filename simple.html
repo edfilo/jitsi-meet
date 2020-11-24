@@ -1,0 +1,48 @@
+<html itemscope itemtype="http://schema.org/Product" prefix="og: http://ogp.me/ns#" xmlns="http://www.w3.org/1999/html">
+  <head>
+    <!--#include virtual="head.html" -->
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--#include virtual="base.html" -->
+
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="stylesheet" href="css/all.css">
+
+    <script type = "text/javascript">
+
+  //  config = {};
+  //  interfaceConfig = {};
+
+    </script>
+
+    <script src="/config.js"></script>
+    <!--#include virtual="connection_optimization/connection_optimization.html" -->
+    <script src="libs/do_external_connect.min.js?v=1"></script>
+    <script src ="/interface_config.js"></script>
+    <script><!--#include virtual="/logging_config.js" --></script>
+    <script src="libs/lib-jitsi-meet.min.js?v=413276191"></script>
+    <script src="libs/app.bundle.min.js?v=4133"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!JitsiMeetJS.app) {
+                return;
+            }
+
+            JitsiMeetJS.app.renderEntryPoint({
+                Component: JitsiMeetJS.app.entryPoints.APP
+            })
+        })
+    </script>
+
+  </head>
+
+
+  <body>
+    <!--#include virtual="body.html" -->
+    <div id="react"></div>
+
+
+  </body>
+</html>

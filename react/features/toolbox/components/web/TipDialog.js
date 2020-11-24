@@ -38,7 +38,7 @@ export default class TipDialog extends Component {
            +'</form>'
          +'</div>'
          +'<div class="payment" id="venmo">'
-           +'<a href="http://venmo.com/edfilo" target="_blank"><img id="venmo_img" src="http://edsvbar.com/img/venmo.png" /></a>'
+           +'<a href="http://venmo.com/edfilo" target="_blank"><img id="venmo_img" src="https://edsvbar.com/img/venmo.png" /></a>'
          +'</div>'
        +'</div>';
 

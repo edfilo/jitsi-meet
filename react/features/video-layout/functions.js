@@ -57,7 +57,7 @@ export function getTileViewGridDimensions(state: Object, maxColumns: number = ge
     const columns = Math.min(columnsToMaintainASquare, maxColumns);
     const rows = Math.ceil(numberOfParticipants / columns);
     const visibleRows = Math.min(maxColumns, rows);
-    console.log('liz' + columns + ' ' + rows);
+    //console.log('liz' + columns + ' ' + rows);
     return {
         columns,
         visibleRows

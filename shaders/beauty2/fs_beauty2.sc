@@ -13,7 +13,7 @@ uniform vec4 softColor;
 
 vec3 softLight(vec3 _target, vec3 _blend)
 {
-	vec3 lt = _target * (_blend + 0.5); 
+	vec3 lt = _target * (_blend + 0.5);
 	vec3 gte = 1.0 - (1.0-_target)*(1.0-(_blend-0.5));
 	return mix(lt, gte, step(vec3_splat(0.5), _target) );
 }
@@ -33,10 +33,11 @@ void main()
 
 	vec4 result = adaptiveSmoothing(inputPixel, neighbours1, smoothingAmount.x*alphaMaskPixel.a);
 
-	vec3 soft = softLight(result.rgb, softColor.rgb);
+	vec3 soft = softColor.rgb;
+	//softLight(result.rgb, softColor.rgb);
 
 	result = mix(result, vec4(soft, 1.0), softMaskPixel.a*softAmount.x);
-	
+
 	result.a = 1.0;
 	gl_FragColor = result;
 

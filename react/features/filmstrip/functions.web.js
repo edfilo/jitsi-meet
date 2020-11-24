@@ -113,7 +113,7 @@ export function calculateThumbnailSizeForTileView({
     const height = Math.min(Math.floor(Math.min(aspectRatioHeight, viewHeight / visibleRows)), clientWidth * .2);
     const width = Math.floor(TILE_ASPECT_RATIO * height);
 
-    console.log('**** jos ' + width + ' ' + height + '****');
+    //console.log('**** jos ' + width + ' ' + height + '****');
 
     return {
         height,

@@ -8,7 +8,7 @@ PersistenceRegistry.register('features/blur');
 
 
 const DEFAULT_STATE = {
-    blurEnabled: false,
+    blurEnabled:  true,
     activeItems: [],
     purchasedItems: []
 };
@@ -57,7 +57,7 @@ ReducerRegistry.register('features/blur', (state = DEFAULT_STATE, action) => {
         console.log('persistance disabled');
         return {
             ...state,
-            blurEnabled: false
+            blurEnabled: true
         };
     }
 

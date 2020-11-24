@@ -269,7 +269,7 @@ export default class SmallVideo {
               this.$container.css('left', this.x + 'vw');
               this.$container.css('top', this.y + 'vh');
               var element = this.$container[0];
-              this.drag = new Drag(element, element, this.onLocationChanged.bind(this), true, this.padding);
+              this.drag = new Drag(element, element, this.onLocationChanged.bind(this), true, this.padding, 5.0/4.0);
               this.position = new LocalPosition(element);
               this.element = element;
 
@@ -1002,10 +1002,27 @@ export default class SmallVideo {
                 //const width = Math.max((clientWidth * .22) * this.boost, 300);
                 //const height = width * (9.0 / 16.0) + this.padding * 2.0;
 
-                var width = Math.max((clientWidth * .22) * this.boost, 300);
+                var width = 177 * this.boost;
+                //Math.max((clientWidth * .22) * this.boost, 300);
+
+
                 var height = width * (9.0 / 16.0) + this.padding * 2.0;
 
-                width = (this.boost > 1) ? width : (height * (5.0/4.0));
+                //width = (this.boost > 1) ? width : (height * (5.0/4.0));
+
+                if(this.boost > 1){
+
+                  width = Math.max(clientWidth * .28, 360.0);
+                  height = 9.0/16.0 * width + this.padding * 2.0;
+
+                }else {
+
+                  width = 177.0;
+                  height = width * (4.0 / 5.0);
+
+
+
+                }
 
 
                 const avatarSize = height / 2;

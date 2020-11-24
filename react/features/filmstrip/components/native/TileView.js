@@ -244,6 +244,14 @@ style = {{
   }}
   <PinchZoomView></PinchZoomView>
 */
+
+const styleOverrides = {
+            aspectRatio: TILE_ASPECT_RATIO,
+            flex: 0,
+            height: this._getTileDimensions().height,
+            width: null
+        };
+        
         return this._getSortedParticipants()
             .map(participant => (
                 <PinchZoomView
@@ -254,15 +262,13 @@ style = {{
                   position:'absolute'
                   }}
                 >
-                <View
-                style = {{
-                  backgroundColor:'red',
-                  width:100,
-                  position:'absolute',
-                  left:0,
-                  top:0,
-                  height:100
-                }}></View>
+                <Thumbnail
+                    disableTint = { true }
+                    key = { participant.id }
+                    participant = { participant }
+                    renderDisplayName = { false }
+                    styleOverrides = { styleOverrides }
+                    tileView = { true } />
 
                 </PinchZoomView>
             ));

@@ -17,7 +17,9 @@ export default function loadEffects(store: Object): Promise<any> {
 
     const fx = state['features/blur'].activeItems;
 
-    const blurPromise = (state['features/blur'].blurEnabled && true)
+        console.log('debugger quito');
+        //state['features/blur'].blurEnabled &&
+    const blurPromise = (true)
         ? getBlurEffect(fx).catch(error => {
                 logger.error('Failed to obtain the blur effect instance with error: ', error);
                 return Promise.resolve();

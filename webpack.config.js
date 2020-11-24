@@ -1,8 +1,14 @@
 /* global __dirname */
 
+//const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const webpack = require('webpack');
+
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 const process = require('process');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+
+
+const isDevelopment = process.env.NODE_ENV !== 'production';
 
 /**
  * The URL of the Jitsi Meet deployment to be proxy to in the context of
@@ -36,9 +42,15 @@ function getPerformanceHints(size) {
 // jitsi-meet such as app.bundle.js and external_api.js.
 const config = {
     devServer: {
-        hot:true,
+
+        host: '0.0.0.0',
+        hotOnly:true,
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+        },
         https: true,
-        inline: true,
+      //  port: 9000,
+      //inline: true,
         proxy: {
             '/': {
                 bypass: devServerProxyBypass,
@@ -62,16 +74,21 @@ const config = {
             ],
             loader: 'babel-loader',
             options: {
+
+                cacheDirectory: true,
+
                 // XXX The require.resolve bellow solves failures to locate the
                 // presets when lib-jitsi-meet, for example, is npm linked in
                 // jitsi-meet.
+                //isDevelopment && require.resolve('react-refresh/babel'),
                 plugins: [
+
                     require.resolve('@babel/plugin-transform-flow-strip-types'),
                     require.resolve('@babel/plugin-proposal-class-properties'),
                     require.resolve('@babel/plugin-proposal-export-default-from'),
                     require.resolve('@babel/plugin-proposal-export-namespace-from'),
                     require.resolve('@babel/plugin-proposal-nullish-coalescing-operator'),
-                    require.resolve('@babel/plugin-proposal-optional-chaining')
+                    require.resolve('@babel/plugin-proposal-optional-chaining'),
                 ],
                 presets: [
                     [
@@ -94,6 +111,7 @@ const config = {
 
                         }
                     ],
+                    require.resolve('@babel/preset-typescript'),
                     require.resolve('@babel/preset-flow'),
                     require.resolve('@babel/preset-react')
                 ]
@@ -150,10 +168,12 @@ const config = {
         minimize
     },
     output: {
-        filename: `[name]${minimize ? '.min' : ''}.js`,
+        filename: `[name]${minimize ? '.min' : ''}.js[query]`,
         path: `${__dirname}/build`,
         publicPath: '/libs/',
-        sourceMapFilename: `[name].${minimize ? 'min' : 'js'}.map`
+        //publicPath:'https://localhost:9000/libs',
+        //publicPath: 'http://0.0.0.0:8081/libs/',
+        sourceMapFilename: `[name].${minimize ? 'min' : 'js'}.map[query]`
     },
     plugins: [
         analyzeBundle
@@ -166,7 +186,9 @@ const config = {
                 allowAsyncCycles: false,
                 exclude: /node_modules/,
                 failOnError: false
-            })
+            }),
+          //  isDevelopment && new webpack.HotModuleReplacementPlugin(),
+    //isDevelopment && new ReactRefreshWebpackPlugin(),
     ].filter(Boolean),
     resolve: {
         alias: {
@@ -187,42 +209,49 @@ const config = {
 
 module.exports = [
     Object.assign({}, config, {
+      name:'bundle',
         entry: {
             'app.bundle': './app.js'
         },
         performance: getPerformanceHints(4 * 1024 * 1024)
     }),
     Object.assign({}, config, {
+      name:'device',
         entry: {
             'device_selection_popup_bundle': './react/features/settings/popup.js'
         },
         performance: getPerformanceHints(750 * 1024)
     }),
     Object.assign({}, config, {
+      name:'always',
         entry: {
             'alwaysontop': './react/features/always-on-top/index.js'
         },
         performance: getPerformanceHints(400 * 1024)
     }),
     Object.assign({}, config, {
+      name:'dial',
         entry: {
             'dial_in_info_bundle': './react/features/invite/components/dial-in-info-page'
         },
         performance: getPerformanceHints(500 * 1024)
     }),
     Object.assign({}, config, {
+      name:'external',
         entry: {
             'do_external_connect': './connection_optimization/do_external_connect.js'
         },
         performance: getPerformanceHints(5 * 1024)
     }),
     Object.assign({}, config, {
+      name:'flac',
         entry: {
             'flacEncodeWorker': './react/features/local-recording/recording/flac/flacEncodeWorker.js'
         },
         performance: getPerformanceHints(5 * 1024)
     }),
     Object.assign({}, config, {
+      name:'analytics',
         entry: {
             'analytics-ga': './react/features/analytics/handlers/GoogleAnalyticsHandler.js'
         },
@@ -237,13 +266,14 @@ module.exports = [
     // mode. Thus we change these modules to have the same filename in both
     // prod and dev mode.
     Object.assign({}, config, {
+      name:'blur',
         entry: {
             'video-blur-effect': './react/features/stream-effects/blur/index.js'
         },
         output: Object.assign({}, config.output, {
             library: [ 'JitsiMeetJS', 'app', 'effects' ],
             libraryTarget: 'window',
-            filename: '[name].min.js',
+            filename: '[name].min.js[query]',
             sourceMapFilename: '[name].min.map[query]'
         }),
         performance: getPerformanceHints(1 * 1024 * 1024)
@@ -255,19 +285,21 @@ module.exports = [
  //chunkFilename: '[id].[hash:8].js'
 
     Object.assign({}, config, {
+      name:'noise',
         entry: {
             'rnnoise-processor': './react/features/stream-effects/rnnoise/index.js'
         },
         output: Object.assign({}, config.output, {
             library: [ 'JitsiMeetJS', 'app', 'effects', 'rnnoise' ],
             libraryTarget: 'window',
-            filename: '[name].min.js',
+            filename: '[name].min.js[query]',
             sourceMapFilename: '[name].min.map[query]'
         }),
         performance: getPerformanceHints(30 * 1024)
     }),
 
     Object.assign({}, config, {
+        name:'externalapi',
         entry: {
             'external_api': './modules/API/external/index.js'
         },
@@ -289,12 +321,17 @@ module.exports = [
  * target, undefined; otherwise, the path to the local file to be served.
  */
 function devServerProxyBypass({ path }) {
-    if (path.startsWith('/css/') || path.startsWith('/doc/')
+    if (path.startsWith('/css/')
+            || path.startsWith('/doc/')
             || path.startsWith('/fonts/')
             || path.startsWith('/images/')
             || path.startsWith('/lang/')
             || path.startsWith('/sounds/')
             || path.startsWith('/static/')
+            || path.includes('hot-update')
+            || path.includes('index')
+            || path.includes('simple')
+            || path.includes('config')
             || path.endsWith('.wasm')) {
 
         return path;

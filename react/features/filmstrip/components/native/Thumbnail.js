@@ -169,33 +169,6 @@ function Thumbnail(props: Props) {
                 zOrder = { 1 } />
 
 
-            {/*<Emitter
-                            infiniteLoop = {true}
-                            autoStart = {true}
-                          numberOfParticles={500}
-                          emissionRate={5}
-                          interval={10}
-                          particleLife={20000}
-                          direction={270}
-                          spread={45}
-                          speed = {10}
-                        fromPosition={{ x:100, y:100 }}>
-
-            <Image style = {{position:'absolute', top:0, left:0, height:100, width:100}} source={require('./smoketexture.png')} />
-
-          </Emitter>*/}
-
-              {/*  <SmokeElement
-         src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/95637/quickText.png"
-         opacity=".1"
-         smokeSrc="https://s3-us-west-2.amazonaws.com/s.cdpn.io/95637/Smoke-Element.png"
-         smokeOpacity="0.3"
-         style = {{position:'absolute', top:0, left:0, width:'100%'}}
-       />*/}
-
-
-    {/* <Image style={{backgroundColor:'transparent', mixBlendMode: 'lighten', position:'absolute', top:0, left:0, width:'100%', height:'100%'}} source={require('./realsmoke.gif')} /> */}
-
 
 
             {/* renderDisplayName && <Container style = { styles.displayNameContainer }>

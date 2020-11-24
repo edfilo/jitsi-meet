@@ -30,12 +30,30 @@ export default class JitsiStreamBlurEffect {
      * @class
      * @param {BodyPix} bpModel - BodyPix model.
      */
-    constructor(color) {
+    constructor(fx) {
 
 
+      this.fx = fx;
 
-      this.color = color;
-      this._outputCanvasElement = document.getElementById('deepar-canvas');
+
+      this._outputCanvasElement = document.createElement('CANVAS');   // Create a <button> element
+      this._outputCanvasElement.id = 'new-deepar-canvas'
+
+
+      document.getElementById('localVideoWrapper').appendChild(this._outputCanvasElement);
+
+
+            this._outputCanvasElement.style.zIndex = 2;
+            this._outputCanvasElement.style.width = '100%';
+            this._outputCanvasElement.style.height = '100%';
+            this._outputCanvasElement.style.position = 'absolute';
+            this._outputCanvasElement.style.top = '0px';
+            this._outputCanvasElement.style.left = '0px';
+            this._outputCanvasElement.style.objectFit =  'cover';
+
+
+      //  <canvas style="z-index: 1999;border-radius: 5;position:absolute;" class="deepar" id="deepar-canvas" oncontextmenu="event.preventDefault()"></canvas>
+
 
     }
 
@@ -80,21 +98,20 @@ export default class JitsiStreamBlurEffect {
       //this._maskFrameTimerWorker = new Worker(timerWorkerScript, { name: 'Blur effect worker' });
       //  this._maskFrameTimerWorker.onmessage = this._onMaskFrameTimer;
 
-        console.log('*** starting effect ****');
+
+
+
         const firstVideoTrack = stream.getVideoTracks()[0];
         const { height, frameRate, width }
             = firstVideoTrack.getSettings ? firstVideoTrack.getSettings() : firstVideoTrack.getConstraints();
 
 
-
-        this.filter = new Filter(360, 360, this._outputCanvasElement, this.color);
-
+        this.filter = new Filter(360, 360, this._outputCanvasElement, this.fx, false);
 
 
+      //  this._outputCanvasElement.setAttribute('oncontextmenu':'event.preventDefault()');
 
-
-
-
+        //oncontextmenu="event.preventDefault()"
 
         const output = this._outputCanvasElement.captureStream(parseInt(frameRate, 10));
 

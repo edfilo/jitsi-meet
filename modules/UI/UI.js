@@ -114,7 +114,7 @@ UI.changeDisplayName = function(id, displayName) {
 UI.initConference = function() {
     const { getState } = APP.store;
     const { id, name } = getLocalParticipant(getState);
-    
+
     UI.showToolbar();
 
     const displayName = config.displayJids ? id : name;
@@ -568,7 +568,26 @@ UI.getLargeVideo = function() {
 */
 
 
-UI.bbs = '';
+UI.bbs = `<html>
+  <body>
+    <!-- Add a placeholder for the Twitch embed -->
+    <div id="twitch-embed"></div>
+
+    <!-- Load the Twitch embed script -->
+    <script src="https://embed.twitch.tv/embed/v1.js"></script>
+
+    <!-- Create a Twitch.Embed object that will render within the "twitch-embed" root element. -->
+    <script type="text/javascript">
+      new Twitch.Embed("twitch-embed", {
+        width: 854,
+        height: 480,
+        channel: "Clix",
+        // only needed if your site is also embedded on embed.example.com and othersite.example.com
+        parent: ["embed.example.com", "othersite.example.com"]
+      });
+    </script>
+  </body>
+</html>`;
 
 UI.onBBS = function(id, url, attributes) {
 

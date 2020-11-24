@@ -191,7 +191,7 @@ export default class LocalVideo extends SmallVideo {
             return;
         }
         if (val) {
-            this.selectVideoElement().addClass('flipVideoX');
+          //  this.selectVideoElement().addClass('flipVideoX');
         } else {
             this.selectVideoElement().removeClass('flipVideoX');
         }

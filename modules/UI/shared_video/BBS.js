@@ -25,7 +25,7 @@ export default class BBS extends SmallVideo {
      */
     constructor(participant, videoType, VideoLayout) {
         super(VideoLayout);
-        this.boost = 2.0;
+        this.boost = 4.0;
         this.padding = 25.0;
         this.x = 10 + 20 * Math.random();
         this.y = 10 + 20 * Math.random();
@@ -64,7 +64,7 @@ export default class BBS extends SmallVideo {
       this.$container.css('padding-bottom', this.padding + 'px');
 
       var element = this.$container[0];
-      this.drag = new Drag(element, element, this.onLocationChanged.bind(this), true, this.padding);
+      this.drag = new Drag(element, element, this.onLocationChanged.bind(this), true, this.padding, 16.0/9.0);
       this.position = new LocalPosition(element);
       this.element = element;
 

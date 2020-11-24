@@ -100,6 +100,9 @@ export function createLocalTracksF(options = {}, firePermissionPromptIsShownEven
             // Filter any undefined values returned by Promise.resolve().
             const effects = effectsArray.filter(effect => Boolean(effect));
 
+            console.log("MIGUEL WTF");
+
+
             return JitsiMeetJS.createLocalTracks(
                 {
                     cameraDeviceId,

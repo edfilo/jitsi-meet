@@ -85,9 +85,11 @@ import OverflowMenuProfileItem from './OverflowMenuProfileItem';
 import ToolbarButton from './ToolbarButton';
 import VideoSettingsButton from './VideoSettingsButton';
 
-import TipDialog from './TipDialog';
+//import TipDialog from './TipDialog';
 import BeerMenu from './BeerMenu';
 import { toggleBlurEffect } from '../../../blur/actions';
+
+import Modal, {closeStyle} from 'simple-react-modal'
 
 
 /**
@@ -248,7 +250,7 @@ class Toolbox extends Component<Props, State> {
         this._onToolbarOpenSpeakerStats = this._onToolbarOpenSpeakerStats.bind(this);
         this._onToolbarOpenEmbedMeeting = this._onToolbarOpenEmbedMeeting.bind(this);
         this._onToolbarOpenVideoQuality = this._onToolbarOpenVideoQuality.bind(this);
-        this._onToolbarOpenTips = this._onToolbarOpenTips.bind(this);
+
         this._onToolbarOpenMenu = this._onToolbarOpenMenu.bind(this);
         this._onToolbarToggleChat = this._onToolbarToggleChat.bind(this);
         this._onToolbarToggleFullScreen = this._onToolbarToggleFullScreen.bind(this);
@@ -361,10 +363,21 @@ class Toolbox extends Component<Props, State> {
      * @inheritdoc
      * @returns {ReactElement}
      */
+
+     show(){
+
+       this.setState({...this.state, show: true});
+     }
+
+     close(){
+       this.setState({...this.state, show: false});
+     }
+
     render() {
         const { _chatOpen, _visible, _visibleButtons } = this.props;
         const rootClassNames = `new-toolbox ${_visible ? 'visible' : ''} ${
             _visibleButtons.size ? '' : 'no-buttons'} ${_chatOpen ? 'shift-right' : ''}`;
+
 
         return (
             <div
@@ -374,6 +387,17 @@ class Toolbox extends Component<Props, State> {
                 onMouseOver = { this._onMouseOver }>
                 <div className = 'toolbox-background' />
               {this._renderToolboxContent()}
+
+              <Modal
+      containerStyle={{background: '#000', borderRadius:20, border:'solid #edf 3px', width:550, height:360}} //changes styling on the inner content area
+      containerClassName="test"
+      closeOnOuterClick={false}
+      show={this.state.show}
+      onClose={this.close.bind(this)}>
+
+      <BeerMenu/>
+      <a style={{...closeStyle, backgroundColor:'black', top:'5px', right:'5px', fontFamily:'Helvetica'}} onClick={this.close.bind(this)}>X</a>
+      </Modal>
             </div>
         );
     }
@@ -432,13 +456,13 @@ class Toolbox extends Component<Props, State> {
         this.props.dispatch(openDialog(VideoQualityDialog));
     }
 
-    _doOpenTips() {
-        this.props.dispatch(openDialog(BeerMenu));
-      //  this.props.dispatch(openDialog(TipDialog));
-    }
+
 
     _doOpenMenu() {
-        this.props.dispatch(openDialog(BeerMenu));
+      //debugger;
+      this.show();
+
+        //this.props.dispatch(openDialog(BeerMenu));
     }
 
 
@@ -805,13 +829,12 @@ class Toolbox extends Component<Props, State> {
         this.props.dispatch(toggleBlurEffect(true));
     }
 
-    _onToolbarOpenTips() {
-        this._doOpenTips();
-    }
 
     _onToolbarOpenMenu() {
 
+      //debugger;
         this._doOpenMenu();
+
     }
 
 
@@ -1334,11 +1357,14 @@ class Toolbox extends Component<Props, State> {
             1, 0, ...this._renderMovedButtons(movedButtons));
 
 var dollarStyle = {
-  backgroundImage: 'url(' + '/img/tipshadow.png' + ')',
+  backgroundImage: 'url(' + '/img/menu.png' + ')',
   backgroundSize:'contain',
   backgroundPosition:'center',
   backgroundRepeat:'no-repeat',
-  height:70,
+  border:'solid white 1px',
+  height:50,
+  borderRadius:25,
+  backgroundColor:'black',
   width:150,
   margin:'auto'
 };
@@ -1364,7 +1390,7 @@ var menuStyle = {
             </div>
 
             <div className = 'button-group-center'>
-            <div id="tipbutton" style = {dollarStyle} onClick={this._onToolbarOpenTips}></div>
+            <div id="tipbutton" style = {dollarStyle} onClick={this._onToolbarOpenMenu}></div>
               </div>
 
 

@@ -16,7 +16,11 @@
 
             JitsiMeetJS.app.renderEntryPoint({
                 Component: JitsiMeetJS.app.entryPoints.APP
-            })
+            });
+
+            debugger;
+
+
         })
     </script>
     <script>
@@ -26,57 +30,7 @@
       gtag('config', 'UA-1363186-6');
     </script>
 
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="/__/firebase/7.15.0/firebase-app.js"></script>
 
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-         https://firebase.google.com/docs/web/setup#available-libraries -->
-    <script src="/__/firebase/7.15.0/firebase-analytics.js"></script>
-
-    <!-- Initialize Firebase -->
-    <script src="/__/firebase/init.js"></script>
-
-
-
-    <script src="https://www.gstatic.com/firebasejs/ui/4.5.1/firebase-ui-auth.js"></script>
-<link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.5.1/firebase-ui-auth.css" />
-
-
-
-    <style type="text/css">
-
-   .welcome,   .tile-view #remoteVideos {
-
-     -webkit-background-size: cover;
-     -moz-background-size: cover;
-     -o-background-size: cover;
-     background-size: cover;
-
-      background-color: black;
-      /*background-image:url('/dive.jpg');*/
-
-    }
-    .welcome .header {
-      display: none;
-    }
-
-    .videocontainer {
-
-      /*width: 100%;
-      height: 100%;
-      object-fit: cover;*/
-      /*border-radius: 50px!important;*/
-      overflow: hidden!important;
-      border: 1px solid rgb(68, 68, 68)!important;
-    }
-
-
-
-
-
-    </style>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
         // IE11 and earlier can be identified via their user agent and be
@@ -221,11 +175,7 @@
     <script><!--#include virtual="/interface_config.js" --></script>
     <script><!--#include virtual="/logging_config.js" --></script>
     <script src="libs/lib-jitsi-meet.min.js?v=413276191"></script>
-    <script src="libs/app.bundle.min.js?v=4133"></script>
-    <!--#include virtual="title.html" -->
-    <!--#include virtual="plugin.head.html" -->
-    <!--#include virtual="static/welcomePageAdditionalContent.html" -->
-    <!--#include virtual="static/settingsToolbarAdditionalContent.html" -->
+    <script src="libs/app.bundle.min.js?v=42393133"></script>
 
 
   </head>
@@ -235,46 +185,6 @@
     <!--#include virtual="body.html" -->
     <div id="react"></div>
 
-
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.8.9/jquery.csv.js"></script>
-
-    <script>
-
-            $(document).ready(function() {
-
-
-                    $.ajax({
-                        type: "GET",
-                        url: "bars.csv",
-                        dataType: "text",
-	                      success: function(response)  {
-		                          data = $.csv.toArrays(response);
-
-
-                              let url = $(location).attr('href');
-                              var urlKey = url.replace(/\/\s*$/, "").split('/').pop().toLowerCase();
-
-
-                              //console.log('key:' + urlKey);
-                              var found = false;
-                              var imageUrl = "/dive.jpg";
-                              for(i=0; i < data.length; i++){
-
-                                if(urlKey == data[i][2]){
-                                  imageUrl = data[i][3];
-
-                                }
-
-                              }
-                              console.log('setting bg to ' + imageUrl);
-                              $('.tile-view #remoteVideos').css("background-image", "url(" + imageUrl + ")");
-
-	                       }
-                     });
-            });
-
-
-    </script>
 
   </body>
 </html>

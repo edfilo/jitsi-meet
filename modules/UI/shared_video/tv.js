@@ -164,7 +164,7 @@ Tv.prototype.onPlayerReady = function(event) {
   element.style.minWidth = "360px";
   element.style.minHeight = (360 * (9.0 / 16.0) + 50.0) + "px";
 
-  this.drag = new Drag(element, element, null, true);
+  this.drag = new Drag(element, element, null, true, 16.0/9.0);
   this.drag.resizable = true;
 
   tv.player.setVolume(25);
