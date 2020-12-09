@@ -282,6 +282,8 @@ const VideoLayout = {
      * @returns {void}
      */
     addRemoteParticipantContainer(participant) {
+			
+			
         if (!participant || participant.local) {
             return;
         }else if (participant.isFakeParticipant) {

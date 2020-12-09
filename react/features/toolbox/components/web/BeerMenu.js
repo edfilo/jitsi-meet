@@ -111,7 +111,7 @@ class BeerMenu extends Component<Props> {
 
   _onBuy() {
 
-    alert('Enjoy your '+ this.makeTitle() +" ...Please don't forget to tip - it helps keep the system running!!!");
+    alert('Enjoy your '+ this.makeTitle() +'');
     this.props.dispatch(activateItems(this._addNewItemToExistingItems(this.state.preview)));
     this.setState({preview:{slug:'none'}});
 
@@ -569,7 +569,10 @@ class BeerMenu extends Component<Props> {
             if(item.slug == 'cat')return 'Invite this cat into bar to drink with you.';
             if(item.slug == 'smoke')return 'SMOKE\n'+ item.name + '';
             */
-            return 'LEAVE TIP';
+
+            
+            return 'leave a tip.';
+
 
           }
 

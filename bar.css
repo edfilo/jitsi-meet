@@ -368,7 +368,7 @@ p {
     bottom: 0px;
     width:100%;
     height:100%;//calc(100% - 50px);
-    background-color:rgba(0, 0, 0, .666);
+    background-color:rgba(0, 0, 0, .90);
     border-radius:15px;
 
   }
@@ -410,7 +410,6 @@ p {
     border-radius: 5px;
     font-size: 15px;
     margin-top: 25px;
-    width:85%;
     margin-top: 20px;
     border: solid gray 1px;
     height: 30px;
@@ -421,13 +420,11 @@ p {
   #youtube_go {
     background-color: green;
     width:100px;
-    height: 23px;
+    height: 30px;
     margin:auto;
     color:white;
     font-weight: bolder;
     display: block;
-    margin-top: 10px;
-
   }
 
   #youtube_url {
@@ -470,19 +467,7 @@ p {
     padding-left: 5px;
   }
 
-  #tv_menu_done {
-    float:right;
-    background-image: url(/img/x.png);
-    background-size: 20px 20px;
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    float: left;
-    width: 25px;
-    height: 25px;
-    corner-radius: 12.5px;
-    float: right;
-    margin: 7px;
-  }
+
 
   #tv_title {
     color:white;

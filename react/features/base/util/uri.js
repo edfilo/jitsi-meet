@@ -155,7 +155,12 @@ export function getBackendSafeRoomName(room: ?string): ?string {
     // add some uppercase characters, but some backend services
     // expect it to be full lowercase. However lowercasing an encoded string
     // doesn't change the string value.
-    return room.toLowerCase();
+
+    const r = room.toLowerCase().replace("-dev", "");
+    console.log('miami safe ' + r);
+    return r;
+
+    return r;
 }
 
 /**

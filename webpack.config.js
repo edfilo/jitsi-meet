@@ -16,7 +16,7 @@ const isDevelopment = process.env.NODE_ENV !== 'production';
  */
 
 
-const devServerProxyTarget = 'https://edsvbar.com/';
+const devServerProxyTarget = 'https://edsvbar.com:9493/';
 
 const analyzeBundle = process.argv.indexOf('--analyze-bundle') !== -1;
 const detectCircularDeps =false;
@@ -42,20 +42,27 @@ function getPerformanceHints(size) {
 // jitsi-meet such as app.bundle.js and external_api.js.
 const config = {
     devServer: {
-
         host: '0.0.0.0',
+        disableHostCheck: true,
         hotOnly:true,
         headers: {
           'Access-Control-Allow-Origin': '*',
         },
         https: true,
-      //  port: 9000,
-      //inline: true,
+        //watchOptions: {
+          // aggregateTimeout: 300,
+          // poll: 1000
+        // },
+        port: 9493,
+        inline: true,
+      //  contentBase: 'https://edsvbar.com:9493/',
+      //  publicPath:'https://edsvbar.com:9493/',
         proxy: {
             '/': {
                 bypass: devServerProxyBypass,
                 secure: false,
-                target: 'https://edsvbar.com',
+                changeOrigin: true,
+                target: 'https://edsvbar.com/',
                 headers: {
                     'Host': new URL(devServerProxyTarget).host
                 }
@@ -171,8 +178,8 @@ const config = {
         filename: `[name]${minimize ? '.min' : ''}.js[query]`,
         path: `${__dirname}/build`,
         publicPath: '/libs/',
-        //publicPath:'https://localhost:9000/libs',
-        //publicPath: 'http://0.0.0.0:8081/libs/',
+        //publicPath:'https://localhost:9493/libs/',
+        //publicPath: 'https://0.0.0.0:9493/libs/',
         sourceMapFilename: `[name].${minimize ? 'min' : 'js'}.map[query]`
     },
     plugins: [
@@ -363,7 +370,7 @@ function devServerProxyBypass({ path }) {
         return path;
     }
 
-    if (path.startsWith('/libs/') || path.startsWith('/effects/') || path.startsWith('/img/') || path.startsWith('/fonts/')) {
+    if (path.startsWith('/xxxxxlibs/') || path.startsWith('/effects/') || path.startsWith('/img/') || path.startsWith('/fonts/')) {
 
         return path;
 

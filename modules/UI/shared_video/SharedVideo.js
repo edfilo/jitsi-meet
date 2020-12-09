@@ -1,6 +1,8 @@
 /* global $, APP, YT, interfaceConfig, onPlayerReady, onPlayerStateChange,
 onPlayerError */
 
+
+
 import Logger from 'jitsi-meet-logger';
 
 import {
@@ -58,6 +60,9 @@ export default class SharedVideoManager {
         this.mutedWithUserInteraction = false;
     }
 
+
+
+
     /**
      * Indicates if the player volume is currently on. This will return true if
      * we have an available player, which is currently in a PLAYING state,
@@ -81,20 +86,35 @@ export default class SharedVideoManager {
         return this.from && APP.conference.isLocalId(this.from);
     }
 
+
+
     /**
      * Starts shared video by asking user for url, or if its already working
      * asks whether the user wants to stop sharing the video.
      */
 
-    start() {
-
-        this.emitter.emit(UIEvents.UPDATE_SHARED_VIDEO, this.url, 'start');
-    }
 
 
     toggleSharedVideo() {
 
-      this.start();
+       //this.url ='https://youtube.com/watch?v=1s58rW0_LN4';
+
+			// 'https://youtube.com/watch?v=1s58rW0_LN4';
+
+			if(!this.url){
+
+				this.url = window.livetwitches[0];
+
+			}
+
+
+
+
+			 //https://twitch.tv/misschessknight'
+
+			this.emitter.emit(UIEvents.UPDATE_SHARED_VIDEO, this.url, 'start');
+
+
       return;
 
         if (dialog) {
@@ -154,6 +174,11 @@ export default class SharedVideoManager {
 
     onSharedVideoStartPlaylist(id, pid, attributes) {
 
+		    this.onSharedVideoStart(id, pid, attributes);
+
+
+				return;
+
       var player;
 
       if (typeof(YT) == 'undefined' || typeof(YT.Player) == 'undefined') {
@@ -197,18 +222,96 @@ export default class SharedVideoManager {
 
     }
 
-    onBBS(id, url, attributes){
 
-      APP.store.dispatch(participantJoined({
-          conference: APP.conference._room,
-          id: 'bbs',
-          isFakeParticipant: true,
-          name: 'bbs'
-      }));
 
-    }
 
-    onSharedVideoStart(id, url, attributes) {
+    onSharedVideoStart(id, myurl, attributes) {
+
+
+
+
+			this.url = myurl;
+
+//alert('tvpress');
+
+
+/*
+
+  renderReactPlayer(container, { url: this.url, playing: true })
+	*/
+
+        // and will process any initial attributes if any
+
+
+
+      const tvon = document.getElementById('youtube');
+
+      if(!tvon){
+				APP.store.dispatch(participantJoined({
+            conference: APP.conference._room,
+            id: 'Twitch',
+            participantId: this.url,
+            isFakeParticipant: true,
+            name: 'Twitch'
+					}));
+				}
+
+
+
+
+
+
+
+					//const url ='https://www.twitch.tv/emadgg'
+
+
+				//	'https://twitch.tv/misschessknight';
+
+
+					//const url = 'https://twitch.tv/misschessknight';
+
+				//	'https://twitch.tv/misschessknight';
+				//const url =	'https://www.youtube.com/watch?v=d46Azg3Pm4c';
+					const container = document.getElementById('youtube')
+
+
+
+				//alert('rendering ' + myurl);
+
+				const url = myurl;
+
+
+
+				renderReactPlayer(container, { url, playing: true,width:'100%', height:'100%',
+				pip: true,
+    playing: true,
+    controls: true,
+    light: false,
+    volume: 0.8,
+    muted: false,
+    played: 0,
+    loaded: 0,
+    duration: 0,
+    playbackRate: 1.0,
+    loop: false })
+
+					  this.renderReact = true;
+
+				// the owner of the video
+        this.from = id;
+
+		/*
+				 if (APP.conference.isLocalId(this.from)) {
+                this.intervalId = setInterval(
+                    self.fireSharedVideoEvent.bind(this),
+                    updateInterval);
+				}
+	*/
+
+
+
+	return;
+
 
         var player;
 
@@ -237,8 +340,6 @@ export default class SharedVideoManager {
 
 
 
-        // the owner of the video
-        this.from = id;
 
         this.mutedWithUserInteraction = APP.conference.isLocalAudioMuted();
 
@@ -593,7 +694,22 @@ export default class SharedVideoManager {
      * left and we want to remove video if the user sharing it left).
      * @param id the id of the sender of the command
      */
+
+    stopLocalShareVideo() {
+
+
+
+    }
+
     onSharedVideoStop(id, attributes) {
+
+
+        APP.store.dispatch(participantLeft('Twitch', APP.conference._room));
+
+      //  this.emitter.emit(UIEvents.UPDATE_SHARED_VIDEO, null, 'removed');
+
+        return;
+
         if (!this.isSharedVideoShown) {
             return;
         }

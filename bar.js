@@ -27,9 +27,15 @@ var ui = new firebaseui.auth.AuthUI(auth);
 
 var live_bg_image = 'https://edsvbar.com/backgrounds/dive.jpg';
 var live_bar_title = '';
+var live_playlist = '';
 
 var lockSlug = false;
 var slug = '';
+
+
+var isLoggedIn = false;
+
+
 
 auth.onAuthStateChanged(function(user) {
 
@@ -198,13 +204,18 @@ function isAdminLoggedIn() {
 
 }
 
-function showEditor(title, slug, background_url, public) {
+
+
+
+
+function showEditor(title, slug, background_url,  playlist, public) {
 
   if(checkAuth() == false)return;
 
 
   $('#user_id').val(auth.currentUser.uid);
   $('#bar_title').val(title);
+  $('#bar_playlist').val(playlist);
   $('#bar_slug').val(slug);
   $('#bar_slug').prop('enabled', (slug.length == 0));
   $('#edit').modal();
@@ -220,22 +231,26 @@ function showEditor(title, slug, background_url, public) {
   });
 }
 
+
 function updateUI() {
+
+
 
   var slug = APP.conference.roomName || 'eds';
   var docRef = db.collection("places").doc(slug);
   var ownerIsLoggedIn = false;
   var hasOwner = false;
 
-  if(!slug){
-    console.log('annoying guy no slug');
-  }else {
-    console.log('annpying guy slug ' + slug);
-  }
 
   docRef.get().then(function(doc) {
       barDoc = doc;
       if (doc.exists) {
+
+      console.log('MIAMI bar is returning ' + barDoc.data().playlist);
+
+
+
+		  window.playlist = barDoc.data().playlist;
           live_bg_image = barDoc.data().background_url;
           $('.tile-view #remoteVideos').css("background-image", "url(" + live_bg_image + ")");
           if(barDoc.data().userid) {
@@ -248,10 +263,9 @@ function updateUI() {
           var title = barDoc.data().title;
           $('#bar_sign').html(title.length > 0  ? title : slug);
 
-          console.log("sesame Document data:", doc.data());
       } else {
-          // doc.data() will be undefined in this case
-          console.log("annoying guy  No such document!");
+        $('.tile-view #remoteVideos').css("background-image", "url(/backgrounds/dive.jpg)");
+
       }
 
       if(ownerIsLoggedIn || isAdminLoggedIn()) {
@@ -259,12 +273,16 @@ function updateUI() {
       }else {
         $('#edit_button').hide();
       }
+
       if(hasOwner){
         $('#claim_button').hide();
-      }else {
+      } else {
         $('#claim_button').show();
       }
       $('#create_button').show();
+
+
+
 
   }).catch(function(error) {
       console.log("Error getting document:", error);
@@ -274,12 +292,13 @@ function updateUI() {
   $('#login_button').hide();
   $('#logout_button').hide();
   $('#claim_button').hide();
-  $('#create_button').hide();
+  $('#create_button').show();
 
 
   var user = auth.currentUser;
 
   if(user){
+    isLoggedIn = true;
     $('#logout_button').show();
     $('#login_button').hide();
   }else {
@@ -302,25 +321,29 @@ function updateUI() {
 
 }
 
-function loadTwitch() {
-
-  APP.UI.bbs = '<div id="twitch-embed"></div>';
-
-  APP.UI.onBBS();
 
 
-  new Twitch.Embed("twitch-embed", {
-    width: 854,
-    height: 480,
-    channel: "latebarchicago",
-    // only needed if your site is also embedded on embed.example.com and othersite.example.com
-    parent: ["embed.example.com", "othersite.example.com"]
-  });
 
+window.savePlaylist = function(url) {
+
+	const slug = APP.conference.roomName;
+  //userid:auth.currentUser.uid,
+	var mydata = {playlist:url};
+
+db.collection("places").doc(slug).update(mydata).then(function() {
+  $.modal.close();
+    console.log("miami Document successfully written!");
+}).catch(function(error) {
+    alert(error);
+
+	});
 
 
 
 }
+
+
+
 
 
 function saveBar() {
@@ -342,25 +365,14 @@ function saveBar() {
     alert('title cannot be empty');
     return;
   }
+
   var docData = {
     title: title,
     slug: slug,
     public: $('#bar_public').val(),
-    background_url: $('#background_url').val()
-
-    /*
-    numberExample: 3.14159265,
-    dateExample: firebase.firestore.Timestamp.fromDate(new Date("December 10, 1815")),
-    arrayExample: [5, true, "hello"],
-    nullExample: null,
-    objectExample: {
-        a: 5,
-        b: {
-            nested: "foo"
-        }
-    }
-    */
-};
+    background_url: $('#background_url').val(),
+    playlist: $('#bar_playlist').val()
+  };
 
 if((isAdminLoggedIn() && slug != 'eds')){
 
@@ -387,19 +399,16 @@ db.collection("places").doc(slug).set(docData).then(function() {
 }
 
 
+
 $( document ).ready(function() {
-
   var myVar = setTimeout(updateUI, 1000);
-
   var fileUpload = document.getElementById("file_input");
   fileUpload.addEventListener('change', function(evt) {
       let firstFile = evt.target.files[0] // upload the first file only
       let storageRef = firebase.storage().ref('backgrounds/'+ firstFile.name);
       let uploadTask = storageRef.put(firstFile);
       uploadTask.on('state_changed', function(snapshot){
-        // Observe state change events such as progress, pause, and resume
-        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         console.log('Upload is ' + progress + '% done');
         switch (snapshot.state) {
           case firebase.storage.TaskState.PAUSED: // or 'paused'
@@ -410,17 +419,12 @@ $( document ).ready(function() {
           break;
         }
       }, function(error) {
-  // Handle unsuccessful uploads
       }, function(sucess) {
-        // Handle successful uploads on complete
-        // For instance, get the download URL: https://firebasestorage.googleapis.com/...
               uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
                 console.log('File available at', downloadURL);
                       setFormBackground(downloadURL);
               });
-
       });
-
   });
 
 
@@ -429,10 +433,7 @@ $('#login_button').click(function(){
 });
 
 $('#submit_button').click(function(){
-
-
   saveBar();
-
 });
 
 
@@ -446,7 +447,6 @@ $('#logout_button').click(function(){
     // An error happened
   });
 
-
 });
 
 $('#directory_button').click(function(){
@@ -459,7 +459,13 @@ $('#tip_button').click(function(){
 });
 
 $('#create_button').click(function(){
-  showEditor('', '', '', true);
+
+  if(!isLoggedIn){
+    showAuth();
+  }else {
+    showEditor('', '', '', true);
+  }
+
 });
 
 $('#claim_button').click(function(){
@@ -470,40 +476,8 @@ $('#edit_button').click(function(){
 
   console.log('bon jovi' + barDoc.id + 'is ' + barDoc.data().public);
   var check = barDoc.data().public ? barDoc.data().public : false;
-    showEditor( barDoc.data().title, barDoc.id, barDoc.data().background_url, check);
+    showEditor( barDoc.data().title, barDoc.id, barDoc.data().background_url, barDoc.data().playlist, check);
 });
-
-
-
-
-
-$.ajax({
-    url: "/bars.csv",
-    async:  true,
-    success: function (csvd) {
-        data = $.csv.toArrays(csvd);
-      //  console.log(data);
-        for(var i=0; i < data.length; i++){
-            var slug = data[i][2];
-            var title = data[i][1];
-            var bg = data[i][3];
-            if(APP.conference.roomName == slug){
-            }
-
-
-        }
-    },
-    dataType: "text",
-    complete: function () {
-
-    }
-});
-
-
-
-
-
-
 
 
   // Handler for .ready() called.

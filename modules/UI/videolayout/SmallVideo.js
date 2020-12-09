@@ -641,15 +641,30 @@ export default class SmallVideo {
     initializeAvatar() {
         const thumbnail = this.$avatar().get(0);
 
+        if(!window.catpong){
+          window.catpong = 0;
+        }
+
+        window.catpong += 1;
+
+        var idx = 1;//(window.catpong % 2);
+
+        //alert('catpong' + idx);
+
+
+        console.log('MIAMI CAT ' + idx);
+
+
+        var fn = "/img/catpong" + idx + ".mp4";
+
+
         if (thumbnail) {
             // Maybe add a special case for local participant, as on init of
             // LocalVideo.js the id is set to "local" but will get updated later.
-            ReactDOM.render(
-                <Provider store = { APP.store }>
-                    <AvatarDisplay
-                        className = 'userAvatar'
-                        participantId = { this.id } />
-                </Provider>,
+            ReactDOM.render(<>
+              <video style={{display:'none'}} className="cat"  width="100%" height="100%" autoPlay muted loop>
+<source src={fn} type="video/mp4"/>
+</video><img className = "catdrink" style = {{display:'none',left:'10%', position:'absolute', height:'70%', bottom:'-15%'}} src="/img/whiteclaw.png" /></>,
                 thumbnail
             );
         }
@@ -1002,7 +1017,7 @@ export default class SmallVideo {
                 //const width = Math.max((clientWidth * .22) * this.boost, 300);
                 //const height = width * (9.0 / 16.0) + this.padding * 2.0;
 
-                var width = 177 * this.boost;
+                var width = 150 * this.boost;
                 //Math.max((clientWidth * .22) * this.boost, 300);
 
 
@@ -1017,7 +1032,7 @@ export default class SmallVideo {
 
                 }else {
 
-                  width = 177.0;
+                  width = 150;
                   height = width * (4.0 / 5.0);
 
 
@@ -1050,8 +1065,8 @@ export default class SmallVideo {
                   //  'top':(Math.random()*90.0) + 'vh'
                 });
                 this.$avatar().css({
-                    height: `${avatarSize}px`,
-                    width: `${avatarSize}px`
+                    height: '100%',// `${avatarSize}px`,
+                    width: '100%'// `${avatarSize}px`
                 });
             }
             break;

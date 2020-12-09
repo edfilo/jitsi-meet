@@ -155,6 +155,10 @@ UI.start = function() {
 
     sharedVideoManager = new SharedVideoManager(eventEmitter);
 
+    //alert('we are ready!!!!');
+
+
+
     if (isMobileBrowser()) {
         $('body').addClass('mobile-browser');
     } else {
@@ -173,6 +177,7 @@ UI.start = function() {
 
         APP.store.dispatch(setToolboxEnabled(false));
         UI.messageHandler.enablePopups(false);
+
     }
 };
 
@@ -388,6 +393,8 @@ UI.updateAllVideos = () => VideoLayout.updateAllVideos();
  * @param listener a function that would be called when notified
  */
 UI.addListener = function(type, listener) {
+
+  //  console.log('miami ' + type);
     eventEmitter.on(type, listener);
 };
 
@@ -436,6 +443,24 @@ UI.dockToolbar = dock => APP.store.dispatch(dockToolbox(dock));
 UI.refreshAvatarDisplay = function(id) {
     VideoLayout.changeUserAvatar(id);
 };
+
+UI.startVideo = function() {
+
+  const slug =  APP.conference.roomName;
+
+  var vurl = 'twitch.tv/'+ window.livetwitches[0];
+
+  if(window.playlist){
+    console.log('MIAMI found playlist variable for ' + slug + 'so playing it');
+    vurl = window.playlist;
+  }else if(window.livetwitches.includes(slug)) {
+    vurl = 'twitch.tv/'+APP.conference.roomName;
+  }
+  
+  UI.getSharedVideoManager().onSharedVideoStart('twitch', vurl, {});
+
+}
+
 
 /**
  * Notify user that connection failed.
@@ -589,21 +614,6 @@ UI.bbs = `<html>
   </body>
 </html>`;
 
-UI.onBBS = function(id, url, attributes) {
-
-
-    if(UI.bbs.length == 0){
-      console.log('joker returning because no bbs length');
-      return;
-    }
-
-    console.log(sharedVideoManager + 'is svm');
-    if (sharedVideoManager) {
-        sharedVideoManager.onBBS(id, url, attributes);
-    }
-    return;
-
-};
 
 
 

@@ -9,6 +9,9 @@ import LocalPosition from '../videolayout/LocalPosition';
 
 import UIEvents from '../../../service/UI/UIEvents';
 
+import { ApiClient } from 'twitch';
+import { ClientCredentialsAuthProvider } from 'twitch-auth';
+
 
 const logger = Logger.getLogger(__filename);
 
@@ -42,6 +45,16 @@ export default class SharedVideoThumb extends SmallVideo {
         this.container.onmousemove = this._onMouseMove;
         this.setupUI();
         console.log('shared constructor mypadding is' + this.padding);
+
+        const clientId = '2pw755fu9em84t92c2jd25e3o2sbqh';
+        const clientSecret = 's44pnn7utnyqq21n3n8pcp5dtqz3iv';
+
+        const authProvider = new ClientCredentialsAuthProvider(clientId, clientSecret);
+        const apiClient = new ApiClient({ authProvider });
+
+
+        //getAllLiveStreams(page, limit)
+
     }
 
     playlistIDFromURL(url) {
@@ -105,7 +118,7 @@ export default class SharedVideoThumb extends SmallVideo {
 
           console.log('playvideo ' + pid);
           //APP.UI.getSharedVideoManager().emitter.emit(UIEvents.UPDATE_SHARED_VIDEO, this.url, 'stop');
-          this.url = pid;
+          this.url = 'https://www.youtube.com/playlist?list='+pid;
           APP.UI.getSharedVideoManager().emitter.emit(UIEvents.UPDATE_SHARED_VIDEO, this.url, 'startplaylist');
 
     }
@@ -122,9 +135,16 @@ export default class SharedVideoThumb extends SmallVideo {
       //console.log('playvideo  ' + url);
     //  APP.UI.getSharedVideoManager().emitter.emit(UIEvents.UPDATE_SHARED_VIDEO, this.url, 'stop');
 
-
       this.url = url;
+        window.playlist = url;
       APP.UI.getSharedVideoManager().emitter.emit(UIEvents.UPDATE_SHARED_VIDEO, this.url, 'start');
+
+      APP.UI.startVideo();
+      window.savePlaylist(url);
+
+
+
+
 
     }
 
@@ -138,7 +158,47 @@ export default class SharedVideoThumb extends SmallVideo {
 
 
     setupUI() {
+      //alert('setup');
 
+      let buttons = document.querySelectorAll('.card');
+
+
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", (event) => {
+
+          const url = 'twitch.tv/' + event.target.id;
+
+          this.toggleMenu(false);
+
+          //APP.UI.startVideo();
+          this.playVideo(url);
+
+
+          //savePlaylist(url);
+
+          //debugger;
+
+          //alert('card' + event.target.id);
+          /*
+
+          console.log('playlist:' + event.target.id);
+
+          var numPl = Math.floor((Math.random() * 50) + 1);
+          var genre = event.target.id;
+          var pid = '';
+          if (genre == 'vaporwave') pid = 'PLvMOVpwkpbUmV2GyXrXgTWctZR7CHs2HR';
+          if (genre == 'trap') pid = 'PL4xqRMQ2GXakFbfcHTNq6jfKO93c4WKfS';
+          if (genre == 'lavalounge') pid = 'PLfL1Hz7phkcRaoQlvh_nJ4OjcvIYAufhb';
+          if (genre == 'kpop') pid = 'PLOHoVaTp8R7dfrJW5pumS0iD_dhlXKv17';
+          if (genre == 'dance') pid = 'PLU3zXKb8T7TG9pKGXPkjqx6jBGrcIOgKH';
+
+          this.playPlaylist(pid);
+          this.toggleMenu(false);
+          */
+        });
+      });
+
+      /*
         let buttons = document.querySelectorAll('.genre_button');
 
 
@@ -161,24 +221,43 @@ export default class SharedVideoThumb extends SmallVideo {
           });
         });
 
+        */
 
         document.getElementById('youtube_url').addEventListener('mousedown', function(ev) {
           ev.stopPropagation();
         }, false);
 
+        console.log('um');
+        var closeButton = document.getElementById("tv_close");
+        closeButton.addEventListener("click", (event) => {
 
 
+
+
+
+
+          APP.UI.onSharedVideoStop('', {});
+
+          //APP.UI.getSharedVideoManager().
+          //alert('closing TV - doesnt work yet');
+
+        });
+
+
+
+        /*
         var shareButton = document.getElementById("share_desktop_button");
         shareButton.addEventListener("click", (event) => {
 
           this.openScreenSharing();
 
         });
+        */
 
         var goButton = document.getElementById("youtube_go");
         goButton.addEventListener("click", (event) => {
           var inputVal = document.getElementById("youtube_url").value;
-
+/*
           var pid = this.playlistIDFromURL(inputVal);
           var vid = this.videoIDFromURL(inputVal);
          if (pid) {
@@ -188,22 +267,51 @@ export default class SharedVideoThumb extends SmallVideo {
           } else {
             return;
           }
+*/
+					this.playVideo(inputVal)
+
 
           this.toggleMenu(false);
         });
 
         var doneButton = document.getElementById("tv_menu_done");
+
+        //debugger;
+
         doneButton.addEventListener("click", (event) => {
           this.toggleMenu(false);
+
+
           //shufflePlaylist
         });
+
+
 
         var menuButton = document.getElementById("tv_menu_show");
         menuButton.addEventListener("click", (event) => {
           this.toggleMenu(true);
         });
 
-        this.toggleMenu(true);
+        this.toggleMenu(false);
+
+    }
+
+    playTwitch(el) {
+    //  alert(el.id);
+
+    }
+
+    makeLiveShows() {
+
+      var h = '';
+      window.livetwitchesfull.forEach((item, i) => {
+        h += `<div style="width:20%;float:left;padding:5px;" >
+        <div><img class="card" id="${item.name}" style="width:100%;" src="${item.thumb}"></div>
+        <div style="font-size:10px;color:white;" class="name">${item.name}</div>
+        </div>`;
+      });
+
+      return h;
 
     }
 
@@ -226,27 +334,34 @@ export default class SharedVideoThumb extends SmallVideo {
 
 
 
-     var stuff = '<div id="tv_bottom"><button id="tv_menu_show">menu</button></div>'
-      +'<div id="tv_menu">'
-      +'<button id="tv_menu_done"></button>'
-      +'<div id="genre_buttons">'
-      +'<div id="genre_buttons_title">Playlists</div>'
-      +'<button class="genre_button" id="lavalounge">80s lava lounge</button>'
-      +'<button class="genre_button" id="kpop">kpop</button>'
-      +'<button class="genre_button" id="dance">dance</button>'
-      +'<button class="genre_button" id="vaporwave">vaporwave</button>'
-      +'<button class="genre_button" id="trap">trap</button>'
-      +'</div>'
-      +'<input id="youtube_url" type="text" placeholder="youtube url, playlist, or video link."></input>'
-      +'<button id="youtube_go">Play</button>'
-      +'<div id="share_desktop_button">Share Desktop</div>'
-      +'</div>'
+      //+'<div id="genre_buttons">'
+      //+'<div id="genre_buttons_title">Playlists</div>'
+      //+'<button class="genre_button" id="lavalounge">80s lava lounge</button>'
+      //+'<button class="genre_button" id="kpop">kpop</button>'
+      //+'<button class="genre_button" id="dance">dance</button>'
+      //+'<button class="genre_button" id="vaporwave">vaporwave</button>'
+      //+'<button class="genre_button" id="trap">trap</button>'
+      //+'</div>'
+     var stuff = `<div style="position:absolute;height:16px;width:16px;border-radius:8px;background-color:red;top:3px;left:3px;" id="tv_close"></div><div id="tv_bottom"><button style="border:solid white 0px;" id="tv_menu_show">menu</button></div>'
+      <div id="tv_menu">
+      <button style="border:solid white 2px;" id="tv_menu_done"></button>
+
+
+      <div style="clear:both;">
+        <div style="width:calc(100% - 100px);display:inline-block;"><input style="width:100%;" id="youtube_url" type="text" placeholder="youtube, twitch, mixcloud, or video link."></input></div>
+        <button style="border:solid white 0px;width:80px;float:right;" id="youtube_go">Play</button>
+      </div>
+      <div style="color:white;font-size:16px;">Live Shows</div>
+      <div style="width:100%;height:calc(100% - 100px);overflow-y: auto; ">
+      ${this.makeLiveShows()}
+      <div style="clear:both;"></div>
+      </div>
+      </div>`;
+
       this.$container.append(stuff);
 
     }
-    /**
-     *
-     */
+
     initializeAvatar() {} // eslint-disable-line no-empty-function
 
     /**
@@ -266,6 +381,9 @@ export default class SharedVideoThumb extends SmallVideo {
         avatar.src = `https://img.youtube.com/vi/${this.url}/0.jpg`;
         container.appendChild(avatar);
         */
+
+				//alert('tube')
+
 
         const youtube = document.createElement('div');
         youtube.id = 'youtube';

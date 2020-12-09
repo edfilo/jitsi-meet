@@ -717,6 +717,9 @@ export default {
             }));
         }
 
+        APP.UI.startVideo();
+        
+
         // XXX The API will take care of disconnecting from the XMPP
         // server (and, thus, leaving the room) on unload.
         return new Promise((resolve, reject) => {

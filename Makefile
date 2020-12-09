@@ -12,11 +12,30 @@ STYLES_DESTINATION = css/all.css
 STYLES_MAIN = css/main.scss
 WEBPACK = ./node_modules/.bin/webpack
 WEBPACK_DEV_SERVER = ./node_modules/.bin/webpack-dev-server
+PRODUCTION = /usr/share/jitsi-meet/libs
+
+
+
+
 
 all: compile deploy clean
 
 compile:
 	$(WEBPACK) -p
+
+
+edward:
+
+#	rm $(PRODUCTION)/app.bundle.min.map
+
+#	rm $(PRODUCTION)/app.bundle.min.js
+	#$(WEBPACK) -p
+
+	cp $(BUILD_DIR)/app.bundle.min.js  $(PRODUCTION)/app.bundle.min.js
+	cp $(BUILD_DIR)/app.bundle.min.map  $(PRODUCTION)/app.bundle.min.map
+
+
+
 
 clean:
 	rm -fr $(BUILD_DIR)
@@ -27,6 +46,9 @@ deploy: deploy-init deploy-appbundle deploy-rnnoise-binary deploy-lib-jitsi-meet
 deploy-init:
 	rm -fr $(DEPLOY_DIR)
 	mkdir -p $(DEPLOY_DIR)
+
+
+
 
 deploy-appbundle:
 	cp \

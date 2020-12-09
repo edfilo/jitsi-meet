@@ -1,34 +1,43 @@
 <html itemscope itemtype="http://schema.org/Product" prefix="og: http://ogp.me/ns#" xmlns="http://www.w3.org/1999/html">
   <head>
-    <!--#include virtual="head.html" -->
+    <!--#include virtual="header?slug=$inc" -->
     <meta charset="utf-8">
     <meta http-equiv="content-type" content="text/html;charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width">
+
     <!--#include virtual="base.html" -->
 
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-    <link rel="stylesheet" href="css/all.css">
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            if (!JitsiMeetJS.app) {
-                return;
-            }
+    <link rel="stylesheet" href="css/all.css?v=91229927">
 
-            JitsiMeetJS.app.renderEntryPoint({
-                Component: JitsiMeetJS.app.entryPoints.APP
-            });
-
-            debugger;
-
-
-        })
-    </script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-1363186-6"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'UA-1363186-6');
     </script>
+
+
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script src='https://cdn.rawgit.com/CookPete/react-player/master/dist/ReactPlayer.standalone.js'></script>
+
+
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-storage.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/ui/4.5.1/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.5.1/firebase-ui-auth.css" />
+
+    <script type="text/javascript" src="deepar/deepar.js"></script>
+
+
+
 
 
 
@@ -167,24 +176,141 @@
             'error', loadErrHandler, true /* capture phase type of listener */);
 
 
+            document.addEventListener('DOMContentLoaded', () => {
+                if (!JitsiMeetJS.app) {
+                    return;
+                }
+
+                JitsiMeetJS.app.renderEntryPoint({
+                    Component: JitsiMeetJS.app.entryPoints.APP
+                })
+            })
+
 
     </script>
     <script><!--#include virtual="/config.js" --></script><!-- adapt to your needs, i.e. set hosts and bosh path -->
     <!--#include virtual="connection_optimization/connection_optimization.html" -->
-    <script src="libs/do_external_connect.min.js?v=1"></script>
+    <script src="libs/do_external_connect.min.js?v=2"></script>
     <script><!--#include virtual="/interface_config.js" --></script>
     <script><!--#include virtual="/logging_config.js" --></script>
-    <script src="libs/lib-jitsi-meet.min.js?v=413276191"></script>
-    <script src="libs/app.bundle.min.js?v=42393133"></script>
+    <script src="libs/lib-jitsi-meet.min.js?v=953733991"></script>
+    <script src="/libs/app.<!--#echo var="dev"-->bundle.min.js?v=726235"></script>
+
+
+
+    <script>
+
+
+    //let myScript = document.createElement("script");
+    //myScript.setAttribute("src", "/libs/app.bundle.min.js?v=7664535");
+    //document.body.appendChild(myScript);
+    </script>
+
+
+    <!--#include virtual="plugin.head.html" -->
+    <!--#include virtual="static/welcomePageAdditionalContent.html" -->
+    <!--#include virtual="static/settingsToolbarAdditionalContent.html" -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+
+    <link rel="stylesheet" href="bar.css?v=2237379903" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.8.9/jquery.csv.js"></script>
+    <script type="text/javascript" src="/bar.js?v=3443093"></script>
+
+
 
 
   </head>
 
 
   <body>
-    <!--#include virtual="body.html" -->
-    <div id="react"></div>
 
+    <script src="https://www.paypal.com/sdk/js?client-id=AUPo2FThPdZSelqhre7YtV6nHFCeH634NwH2qmAGP-GgNyzUqqUiyRvbl7pCeEbB6X2T6xL4w1GT_EI_"></script>
+
+
+    <script>
+
+    window.livetwitches = <!--#include virtual="/twitch?json=true" -->
+    window.livetwitchesfull = <!--#include virtual="/twitch?jsonfull=true" -->
+
+    </script>
+
+
+
+    <!-- Link to open the modal -->
+<div id="edit" class="modal">
+<!--#include virtual="edit.html" -->
+</div>
+
+<div id="auth" class="modal">
+<!--#include virtual="auth.html" -->
+</div>
+
+<div id="directory" class="modal">
+  <!--<div id="directory_container"></div>-->
+</div>
+
+
+<div id="tips" class="modal">
+<!--#include virtual="platformtips.html" -->
+</div>
+
+
+
+  <div id="tip_button"><div id="tip_button_text"></div></div>
+
+<div id="button_menu">
+  <div id="login_button">👤 Login</div>
+  <div id="logout_button">👤 Logout</div>
+  <div id="edit_button">✏️ Edit Bar</div>
+  <div id="create_button"><b>+</b> Create Bar</div>
+  <div id="claim_button">🛍️ Claim </div>
+  <!--<div id="directory_button">🔥 Top100</div>-->
+
+</div>
+
+<div id="bar_sign"></div>
+
+
+
+  <div id="react"></div>
+
+
+
+    <!-- jQuery Modal -->
+
+
+
+
+    <script>
+
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '504280173677182',
+          cookie     : true,
+          xfbml      : true,
+          version    : 'v7.0'
+        });
+
+        FB.AppEvents.logPageView();
+
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "https://connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+
+
+
+    </script>
 
   </body>
 </html>
