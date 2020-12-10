@@ -60,6 +60,7 @@ function createContainer(spanId) {
     remoteVideosContainer.insertBefore(container, localVideoContainer);
 
     return container;
+    
 }
 
 /**

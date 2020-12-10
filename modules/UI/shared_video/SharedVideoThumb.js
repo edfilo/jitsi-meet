@@ -27,7 +27,7 @@ export default class SharedVideoThumb extends SmallVideo {
      */
     constructor(participant, videoType, VideoLayout) {
         super(VideoLayout);
-        this.boost = 2;
+        this.isTV = true;
         this.padding = 25.0;
         this.x = 40 + 20 * Math.random();
         this.y = 40 + 20 * Math.random();
