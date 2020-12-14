@@ -96,7 +96,7 @@ export default class SmallVideo {
      * Constructor.
      */
     constructor(VideoLayout) {
-        this.boost = 1.0;
+        this.isTV = false;
         this.isAudioMuted = false;
         this.isVideoMuted = false;
         this.videoStream = null;
@@ -966,6 +966,18 @@ export default class SmallVideo {
     /**
      * Sets the size of the thumbnail.
      */
+
+     _widthFromHeight(height) {
+       return this.isTV ?  (height - this.padding * 2.0) / (16.0 / 9.0)
+       : height * (5.0 / 4.0);
+     }
+
+     _heightFromWidth(width) {
+       return this.isTV ?
+        9.0/16.0 * width + this.padding * 2.0
+        : (4.0 / 5.0) * width;
+     }
+
     _setThumbnailSize() {
         const layout = getCurrentLayout(APP.store.getState());
         const heightToWidthPercent = 100
@@ -1009,48 +1021,39 @@ export default class SmallVideo {
 
             if (typeof thumbnailSize !== 'undefined') {
 
-                //const { height, width } = thumbnailSize;
 
                 var clientWidth =window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
                 var clientHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
 
-                //const width = Math.max((clientWidth * .22) * this.boost, 300);
-                //const height = width * (9.0 / 16.0) + this.padding * 2.0;
-
-                var width = 150 * this.boost;
-                //Math.max((clientWidth * .22) * this.boost, 300);
-
-
-                var height = width * (9.0 / 16.0) + this.padding * 2.0;
-
-                //width = (this.boost > 1) ? width : (height * (5.0/4.0));
-
-                if(this.boost > 1){
-
-                  width = Math.max(clientWidth * .28, 360.0);
-                  height = 9.0/16.0 * width + this.padding * 2.0;
-
-                }else {
-
-                  width = 150;
-                  height = width * (4.0 / 5.0);
-
-
-
-                }
-
-
-                const avatarSize = height / 2;
-
+                var width = this.isTV ? Math.max(clientWidth * .28, 360.0) : 125;
+                var height = this._heightFromWidth(width);
 
                 const vw = ((width / clientWidth) * 100.0);
                 const vh = ((height / clientWidth) * 100.0);
 
+                const portrait = clientHeight > clientWidth;
+
+                var maxW;
+                var maxH;
+                if(portrait){
+                   maxW = 1.0 * clientWidth;
+                   maxH = this._heightFromWidth(maxW);
+                 }else {
+                   maxH = .75 * clientHeight;
+                   maxW = this._widthFromHeight(maxH)
+                 }
+
+                 var minW = this.isTV ? Math.min(300, width) : width;
+                 var minH = this._heightFromWidth(minW);
+
                 this.$container.css({
-                  height: `${vh}vw`,
-                  'min-height': `${vh}vw`,
-                  'min-width': `${vw}vw`,
                   width: `${vw}vw`,
+                  height: `${vh}vw`,
+                  'min-width': `${minW}px`, //`${vh}vw`
+                  'min-height': `${minH}px`, //`${vh}vh`
+                  'max-height': `${maxH}px`,
+                  'max-width' : `${maxW}px`,
+
                   'padding-top' : this.padding + 'px',
                   'padding-bottom' : this.padding + 'px',
 
