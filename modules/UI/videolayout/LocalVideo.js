@@ -86,9 +86,7 @@ export default class LocalVideo extends SmallVideo {
             <div class = 'videocontainer__toptoolbar'></div>
             <!--<div class = 'videocontainer__hoverOverlay'></div>-->
             <div class = 'displayNameContainer'></div>
-            <div class = 'avatar-container'></div>
-          <!-- <img style = 'position:absolute;left:0px;top:0px;width:100%' src= 'https://edsvbar.com/img/giraffecat.jpg'>
-            <img style = 'position:absolute;left:0px;top:0px;object-fit: cover;mix-blend-mode: lighten;' src= 'https://edsvbar.com/img/realsmoke.gif'>-->`;
+            <div class = 'avatar-container'></div>`;
         return containerSpan;
     }
 

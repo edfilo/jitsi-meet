@@ -23,9 +23,9 @@
 #import <Firebase.h>
 
 
-#import <AppCenterReactNative.h>
-#import <AppCenterReactNativeAnalytics.h>
-#import <AppCenterReactNativeCrashes.h>
+//#import <AppCenterReactNative.h>
+//#import <AppCenterReactNativeAnalytics.h>
+//#import <AppCenterReactNativeCrashes.h>
 
 
 
@@ -39,9 +39,9 @@
 - (BOOL)application:(UIApplication *)application
   didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-  [AppCenterReactNative register];
-  [AppCenterReactNativeAnalytics registerWithInitiallyEnabled:true];
-  [AppCenterReactNativeCrashes registerWithAutomaticProcessing];
+ // [AppCenterReactNative register];
+ // [AppCenterReactNativeAnalytics registerWithInitiallyEnabled:true];
+ // [AppCenterReactNativeCrashes registerWithAutomaticProcessing];
 
 
     JitsiMeet *jitsiMeet = [JitsiMeet sharedInstance];
@@ -158,6 +158,7 @@
     }
 
     NSURL *openUrl = url;
+
 
 
     if ([FIRUtilities appContainsRealServiceInfoPlist]) {

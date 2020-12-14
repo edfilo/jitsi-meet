@@ -418,8 +418,8 @@ function _mapStateToProps(state) {
         playerHeight = playerWidth * 9 / 16;
     }
 
-    playerWidth = 400;
-    playerHeight = 300;
+    playerWidth = 320;
+    playerHeight = 180;
 
 
 
@@ -431,8 +431,8 @@ function _mapStateToProps(state) {
         _isStopped: status === 'stop',
         _isWideScreen: isWideScreen,
         _ownerId: ownerId,
-        _playerHeight: '100%',
-        _playerWidth: '100%',
+        _playerHeight: playerHeight,
+        _playerWidth: playerWidth,
         _seek: time,
         _status: status
 

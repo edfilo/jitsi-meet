@@ -166,7 +166,7 @@ function Thumbnail(props: Props) {
                 style = {{..._styles.participantViewStyle, flex:1 }}
                 tintEnabled = { participantInLargeVideo && !disableTint }
                 tintStyle = { _styles.activeThumbnailTint }
-                zOrder = { 1 } />
+              zOrder = { 1 } />
 
 
 

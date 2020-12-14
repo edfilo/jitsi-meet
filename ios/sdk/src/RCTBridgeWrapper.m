@@ -40,7 +40,7 @@
 static NSURL *serverRootWithHost(NSString *host) {
     return
         [NSURL URLWithString:
-                [NSString stringWithFormat:@"http://%@:8081/", host]];
+                [NSString stringWithFormat:@"http://%@/", host]];
 }
 
 - (BOOL)isPackagerRunning:(NSString *)host {
@@ -75,28 +75,19 @@ static NSURL *serverRootWithHost(NSString *host) {
     static dispatch_once_t dispatchOncePredicate;
 
     dispatch_once(&dispatchOncePredicate, ^{
-        NSString *ipPath
-            = [[NSBundle bundleForClass:self.class] pathForResource:@"ip"
-                                                             ofType:@"txt"];
+            NSString *ipPath
+                = [[NSBundle bundleForClass:self.class] pathForResource:@"ip"
+                                                                 ofType:@"txt"];
 
-        ipGuess
-            = [[NSString stringWithContentsOfFile:ipPath
-                                         encoding:NSUTF8StringEncoding
-                                            error:nil]
-                    stringByTrimmingCharactersInSet:
-                            [NSCharacterSet newlineCharacterSet]];
-    });
+            ipGuess
+                = [[NSString stringWithContentsOfFile:ipPath
+                                             encoding:NSUTF8StringEncoding
+                                                error:nil]
+                        stringByTrimmingCharactersInSet:
+                                [NSCharacterSet newlineCharacterSet]];
+        });
 
-
-    NSString *host = @"localhost";
-
-    #if TARGET_OS_SIMULATOR
-        // Simulator-specific code
-    #else
-        host = @"mac.local";
-        // Device-specific code
-    #endif
-
+        NSString *host = ipGuess ?: @"localhost";
 
     if ([self isPackagerRunning:host]) {
         return host;
@@ -129,9 +120,26 @@ static NSURL *serverRootWithHost(NSString *host) {
 
 
 
-    NSString *host = [self guessPackagerHost];
+    NSString *host = @"10.0.0.133:8081";
+    //@"58c1680ac91d.ngrok.io/";
 
-    if (host != nil) {
+    //@"10.0.0.133:8081";
+    //@"ac40743bfeaa.ngrok.io";
+    //@"10.0.0.133:8081";
+    //@"7133a6fc94ac.ngrok.io";
+    //http://7133a6fc94ac.ngrok.io/
+     //http://3121c901efd0.ngrok.io
+    //@"63dc6ab59248.ngrok.io";
+
+    //http://63dc6ab59248.ngrok.io
+
+    //@"10.0.0.133";
+    //[self guessPackagerHost];
+
+
+
+    if (host != nil  && [self isPackagerRunning:host]) {
+
         NSString *path = @"/index.bundle";
         NSString *query = @"platform=ios&dev=true&minify=false";
         NSURLComponents *components
@@ -143,14 +151,21 @@ static NSURL *serverRootWithHost(NSString *host) {
 
         return components.URL;
     }
+
+
+
 #endif
 
     BOOL ok = [[NSFileManager defaultManager] fileExistsAtPath:[CodePush bundleURL].path];
 
     NSLog(@"911 bundle is %@", ok ? @"found" : @"missig");
 
-
-    return [CodePush bundleURL];
+    /*
+    return [[NSBundle bundleForClass:self.class] URLForResource:@"main"
+                                                     withExtension:@"jsbundle"];
+     */
+    return nil;
+   // return [CodePush bundleURL];
     //return [[NSBundle bundleForClass:self.class] URLForResource:@"main"  withExtension:@"jsbundle"];
 }
 

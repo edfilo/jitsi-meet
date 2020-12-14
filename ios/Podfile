@@ -4,6 +4,8 @@ workspace 'jitsi-meet'
 #require_relative '../node_modules/react-native/scripts/react_native_pods'
 #require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
+#Unable to find a specification for `React-callinvoker (= 0.63.4)` depended upon by `ReactCommon/turbomodule`
+
 
 pod 'RNFBApp', :path => '../node_modules/@react-native-firebase/app'
 pod 'RNFBAuth', :path => '../node_modules/@react-native-firebase/auth'
@@ -17,9 +19,9 @@ pod 'ObjectiveDropboxOfficial', '~> 3.9.4'
 
 pod 'RNGoogleSignin', :path => '../node_modules/@react-native-community/google-signin'
 
-pod 'appcenter-core', path: '../node_modules/appcenter/ios'
-pod 'appcenter-analytics', path: '../node_modules/appcenter-analytics/ios'
-pod 'appcenter-crashes', path: '../node_modules/appcenter-crashes/ios'
+#pod 'appcenter-core', path: '../node_modules/appcenter/ios'
+#pod 'appcenter-analytics', path: '../node_modules/appcenter-analytics/ios'
+#pod 'appcenter-crashes', path: '../node_modules/appcenter-crashes/ios'
 #pod 'appcenter-push', path: '../node_modules/appcenter-push/ios'
 
 pod 'CodePush', path: '../node_modules/react-native-code-push'
@@ -55,7 +57,6 @@ pod 'React-Core', :path => '../node_modules/react-native/', :subspecs => [
 ]
 
 pod 'React-CoreModules', :path => '../node_modules/react-native/React/CoreModules'
-
 
 pod 'React-RCTActionSheet', :path => '../node_modules/react-native/Libraries/ActionSheetIOS'
 pod 'React-RCTAnimation', :path => '../node_modules/react-native/Libraries/NativeAnimation'
@@ -104,25 +105,6 @@ pod 'CodePush', :path => '../node_modules/react-native-code-push'
 target 'JitsiMeet' do
   project 'sdk/sdk.xcodeproj'
 
-
-  # React Native and its dependencies
-  #
-
-
-
-
-
-  # React Native plugins
-  #
-
-
-
-  # Native pod dependencies
-  #
-
-
-
-  #use_native_modules!
 end
 
 post_install do |installer|

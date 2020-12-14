@@ -15,6 +15,7 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		918ECC0CA638A50085B00190 /* libPods-jitsi-meet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 489E8EFE2C720D10F5961AEF /* libPods-jitsi-meet.a */; };
+		A1F94B2427963C1831DD6435 /* libPods-jitsi-meet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 489E8EFE2C720D10F5961AEF /* libPods-jitsi-meet.a */; };
 		B304378E24FD5E1D00E2E636 /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = B304378D24FD5E1C00E2E636 /* AppCenter-Config.plist */; };
 		B357BFE5250CC85F00811170 /* edsbar1024.png in Resources */ = {isa = PBXBuildFile; fileRef = B357BFE4250CC85F00811170 /* edsbar1024.png */; };
 		B357BFE6250CCE1300811170 /* EdsBarLaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* EdsBarLaunchScreen.xib */; };
@@ -27,15 +28,14 @@
 		B357BFF6250F6F1100811170 /* libCodePush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B357BFE9250CE4BC00811170 /* libCodePush.a */; };
 		B357BFF7250F6F1100811170 /* JitsiMeet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B26BE6D1EC5BC3C00EEFB41 /* JitsiMeet.framework */; };
 		B357BFF8250F6F1100811170 /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BD6B4361EF82A6B00D1F4CD /* WebRTC.framework */; };
-		B357BFF9250F6F1100811170 /* libPods-jitsi-meet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 489E8EFE2C720D10F5961AEF /* libPods-jitsi-meet.a */; };
 		B357BFFB250F6F1100811170 /* edsbar1024.png in Resources */ = {isa = PBXBuildFile; fileRef = B357BFE4250CC85F00811170 /* edsbar1024.png */; };
 		B357BFFC250F6F1100811170 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B412F201EDEE95300B1A0A6 /* Main.storyboard */; };
 		B357BFFD250F6F1100811170 /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = B304378D24FD5E1C00E2E636 /* AppCenter-Config.plist */; };
 		B357BFFE250F6F1100811170 /* EdsBarLaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* EdsBarLaunchScreen.xib */; };
 		B357BFFF250F6F1100811170 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B3E1D65C24D983FC0036B87A /* GoogleService-Info.plist */; };
 		B357C000250F6F1100811170 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
-		B357C013250F75BE00811170 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = B357C012250F75BE00811170 /* main.jsbundle */; };
 		B357C0E3250F8ECC00811170 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = B357C0E2250F8ECB00811170 /* assets */; };
+		B364DCB3258803C50086426C /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = B364DCB2258803C50086426C /* main.jsbundle */; };
 		B3BF0B9924DC87560046F812 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BF0B9824DC87560046F812 /* File.swift */; };
 		B3E1D65D24D983FC0036B87A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B3E1D65C24D983FC0036B87A /* GoogleService-Info.plist */; };
 		DE4C456121DE1E4E00EA0709 /* FIRUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4C455F21DE1E4E00EA0709 /* FIRUtilities.m */; };
@@ -85,7 +85,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		09AA3B93E4CC62D84B424690 /* Pods-jitsi-meet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-jitsi-meet.release.xcconfig"; path = "../Pods/Target Support Files/Pods-jitsi-meet/Pods-jitsi-meet.release.xcconfig"; sourceTree = "<group>"; };
 		0B26BE6D1EC5BC3C00EEFB41 /* JitsiMeet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = JitsiMeet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B412F1D1EDEE6E800B1A0A6 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		0B412F1E1EDEE6E800B1A0A6 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
@@ -99,16 +98,17 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		4670A512A688E2DC34528282 /* Pods-jitsi-meet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-jitsi-meet.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-jitsi-meet/Pods-jitsi-meet.debug.xcconfig"; sourceTree = "<group>"; };
 		489E8EFE2C720D10F5961AEF /* libPods-jitsi-meet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-jitsi-meet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5EB4E2E8A094177F62D8DD18 /* Pods-jitsi-meet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-jitsi-meet.release.xcconfig"; path = "../Pods/Target Support Files/Pods-jitsi-meet/Pods-jitsi-meet.release.xcconfig"; sourceTree = "<group>"; };
+		9DB537EB8AB412D2A0DFBC43 /* Pods-jitsi-meet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-jitsi-meet.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-jitsi-meet/Pods-jitsi-meet.debug.xcconfig"; sourceTree = "<group>"; };
 		B304378D24FD5E1C00E2E636 /* AppCenter-Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "AppCenter-Config.plist"; sourceTree = "<group>"; };
 		B357BFD3250C33F700811170 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		B357BFE4250CC85F00811170 /* edsbar1024.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edsbar1024.png; sourceTree = "<group>"; };
 		B357BFE9250CE4BC00811170 /* libCodePush.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libCodePush.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B357C00E250F6F1100811170 /* Eds Bar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Eds Bar.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B357C00F250F6F1300811170 /* jitsi-meet copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "jitsi-meet copy-Info.plist"; path = "/Users/kilojam/jitsidev/jitsi-meet/ios/app/jitsi-meet copy-Info.plist"; sourceTree = "<absolute>"; };
-		B357C012250F75BE00811170 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = main.jsbundle; path = ../../main.jsbundle; sourceTree = "<group>"; };
 		B357C0E2250F8ECB00811170 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
+		B364DCB2258803C50086426C /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = main.jsbundle; path = ../main.jsbundle; sourceTree = "<group>"; };
 		B3B083EB1D4955FF0069CEE7 /* app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = app.entitlements; sourceTree = "<group>"; };
 		B3BF0B9724DC87550046F812 /* jitsi-meet-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "jitsi-meet-Bridging-Header.h"; sourceTree = "<group>"; };
 		B3BF0B9824DC87560046F812 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
@@ -126,6 +126,7 @@
 				0B26BE6E1EC5BC3C00EEFB41 /* JitsiMeet.framework in Frameworks */,
 				0BD6B4371EF82A6B00D1F4CD /* WebRTC.framework in Frameworks */,
 				918ECC0CA638A50085B00190 /* libPods-jitsi-meet.a in Frameworks */,
+				A1F94B2427963C1831DD6435 /* libPods-jitsi-meet.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,7 +137,6 @@
 				B357BFF6250F6F1100811170 /* libCodePush.a in Frameworks */,
 				B357BFF7250F6F1100811170 /* JitsiMeet.framework in Frameworks */,
 				B357BFF8250F6F1100811170 /* WebRTC.framework in Frameworks */,
-				B357BFF9250F6F1100811170 /* libPods-jitsi-meet.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,8 +177,8 @@
 		5E96ADD5E49F3B3822EF9A52 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				4670A512A688E2DC34528282 /* Pods-jitsi-meet.debug.xcconfig */,
-				09AA3B93E4CC62D84B424690 /* Pods-jitsi-meet.release.xcconfig */,
+				9DB537EB8AB412D2A0DFBC43 /* Pods-jitsi-meet.debug.xcconfig */,
+				5EB4E2E8A094177F62D8DD18 /* Pods-jitsi-meet.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -195,8 +195,8 @@
 			children = (
 				B357C0E2250F8ECB00811170 /* assets */,
 				B357BFE4250CC85F00811170 /* edsbar1024.png */,
+				B364DCB2258803C50086426C /* main.jsbundle */,
 				B304378D24FD5E1C00E2E636 /* AppCenter-Config.plist */,
-				B357C012250F75BE00811170 /* main.jsbundle */,
 				B3BF0B9824DC87560046F812 /* File.swift */,
 				B3B083EB1D4955FF0069CEE7 /* app.entitlements */,
 				B3E1D65C24D983FC0036B87A /* GoogleService-Info.plist */,
@@ -266,7 +266,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B357C00B250F6F1100811170 /* Build configuration list for PBXNativeTarget "jitsi-meet release" */;
 			buildPhases = (
-				B357BFEC250F6F1100811170 /* [CP] Check Pods Manifest.lock */,
 				B357BFED250F6F1100811170 /* Run React packager */,
 				B357BFEE250F6F1100811170 /* Start packager */,
 				B357BFEF250F6F1100811170 /* Sources */,
@@ -280,8 +279,6 @@
 				B357C006250F6F1100811170 /* Setup Google reverse URL handler */,
 				B357C007250F6F1100811170 /* Setup Dropbox */,
 				B357C008250F6F1100811170 /* Embed Watch Content */,
-				B357C009250F6F1100811170 /* [CP] Copy Pods Resources */,
-				B357C00A250F6F1100811170 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -350,8 +347,8 @@
 				B357C0E3250F8ECC00811170 /* assets in Resources */,
 				B357BFE6250CCE1300811170 /* EdsBarLaunchScreen.xib in Resources */,
 				B3E1D65D24D983FC0036B87A /* GoogleService-Info.plist in Resources */,
-				B357C013250F75BE00811170 /* main.jsbundle in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				B364DCB3258803C50086426C /* main.jsbundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -458,28 +455,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "../scripts/fixup-frameworks.sh\n";
-		};
-		B357BFEC250F6F1100811170 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-jitsi-meet-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
 		};
 		B357BFED250F6F1100811170 /* Run React packager */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -612,52 +587,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "INFO_PLIST=\"$BUILT_PRODUCTS_DIR/$INFOPLIST_PATH\"\nDROPBOX_KEY_FILE=\"$PROJECT_DIR/dropbox.key\"\n\nif [[ -f $DROPBOX_KEY_FILE ]]; then\n    /usr/libexec/PlistBuddy -c \"Delete :LSApplicationQueriesSchemes\" $INFO_PLIST\n    /usr/libexec/PlistBuddy -c \"Add :LSApplicationQueriesSchemes array\" $INFO_PLIST\n    /usr/libexec/PlistBuddy -c \"Add :LSApplicationQueriesSchemes:0 string 'dbapi-2'\" $INFO_PLIST\n    /usr/libexec/PlistBuddy -c \"Add :LSApplicationQueriesSchemes:1 string 'dbapi-8-emm'\" $INFO_PLIST\n\n    DROPBOX_KEY=$(head -n 1 $DROPBOX_KEY_FILE)\n    /usr/libexec/PlistBuddy -c \"Add :CFBundleURLTypes:2:CFBundleURLName string dropbox\" $INFO_PLIST\n    /usr/libexec/PlistBuddy -c \"Add :CFBundleURLTypes:2:CFBundleURLSchemes array\" $INFO_PLIST\n    /usr/libexec/PlistBuddy -c \"Add :CFBundleURLTypes:2:CFBundleURLSchemes:0 string $DROPBOX_KEY\" $INFO_PLIST\nfi\n";
-		};
-		B357C009250F6F1100811170 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-jitsi-meet/Pods-jitsi-meet-resources.sh",
-				"${PODS_ROOT}/Amplitude-iOS/Amplitude/api.amplitude.com.der",
-				"${PODS_ROOT}/Amplitude-iOS/Amplitude/ComodoCaLimitedRsaCertificationAuthority.der",
-				"${PODS_ROOT}/Amplitude-iOS/Amplitude/ComodoRsaCA.der",
-				"${PODS_ROOT}/Amplitude-iOS/Amplitude/ComodoRsaDomainValidationCA.der",
-				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-C++/gRPCCertificates-Cpp.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/api.amplitude.com.der",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ComodoCaLimitedRsaCertificationAuthority.der",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ComodoRsaCA.der",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ComodoRsaDomainValidationCA.der",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/gRPCCertificates-Cpp.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-jitsi-meet/Pods-jitsi-meet-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B357C00A250F6F1100811170 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-jitsi-meet/Pods-jitsi-meet-frameworks.sh",
-				"${PODS_ROOT}/../../node_modules/react-native-webrtc/ios/WebRTC.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WebRTC.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-jitsi-meet/Pods-jitsi-meet-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 		B3D55B8624E266A600F60A24 /* Start packager */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -814,10 +743,10 @@
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4670A512A688E2DC34528282 /* Pods-jitsi-meet.debug.xcconfig */;
+			baseConfigurationReference = 9DB537EB8AB412D2A0DFBC43 /* Pods-jitsi-meet.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = slick;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = app.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -858,10 +787,10 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 09AA3B93E4CC62D84B424690 /* Pods-jitsi-meet.release.xcconfig */;
+			baseConfigurationReference = 5EB4E2E8A094177F62D8DD18 /* Pods-jitsi-meet.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = slick;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = app.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1015,7 +944,6 @@
 		};
 		B357C00C250F6F1100811170 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4670A512A688E2DC34528282 /* Pods-jitsi-meet.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1059,7 +987,6 @@
 		};
 		B357C00D250F6F1100811170 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 09AA3B93E4CC62D84B424690 /* Pods-jitsi-meet.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

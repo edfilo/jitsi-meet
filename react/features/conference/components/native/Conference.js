@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import { NativeModules, View, SafeAreaView, StatusBar } from 'react-native';
+import {ImageBackground, StyleSheet, NativeModules, Image, View, SafeAreaView, StatusBar } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 import { appNavigate } from '../../../app/actions';
@@ -46,8 +46,6 @@ import { getConferenceName } from '../../../base/conference';
 
 import { setBarMetaData } from '../../../base/conference';
 
-
-import { ImageBackground, StyleSheet} from "react-native";
 
 /**
  * The type of the React {@code Component} props of {@link Conference}.
@@ -140,6 +138,8 @@ class Conference extends AbstractConference<Props, *> {
 
     componentDidUpdate() {
 
+      //debugger;
+
       const slug =  this.props._slug;
       const droop = firestore().collection('places').doc(slug)
       .onSnapshot(documentSnapshot => {
@@ -155,13 +155,7 @@ class Conference extends AbstractConference<Props, *> {
         BackButtonRegistry.addListener(this._onHardwareBackPress);
 
         const slug =  this.props._slug;
-
         console.log('mounted conference component with slug ' + slug);
-
-
-
-
-
 
 
     }
@@ -287,15 +281,19 @@ class Conference extends AbstractConference<Props, *> {
         }
 
         let { bgimage, updateParentState } = this.props;
-        console.log('render bg' + bgimage);
+        //console.log('render bg' + bgimage);
+
+        //alert(bgimage);
+
+
+        const image = { uri: "https://edsvbar.com/backgrounds/dive.jpg" };
+
+
 
         return (
             <ImageBackground
-          source={{uri: bgimage}}
-          style={{ flex: 1,
-            width: null,
-            height: null
-            }}>
+            source={image}
+            style={{backgroundColor:'red',width: '100%', height: '100%', resizeMode:'cover'}}>
                 {/*
                   * The LargeVideo is the lowermost stacking layer.
                   */
@@ -386,6 +384,7 @@ class Conference extends AbstractConference<Props, *> {
 
 
                 </ImageBackground>
+
         );
     }
 

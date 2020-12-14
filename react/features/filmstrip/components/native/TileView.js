@@ -93,8 +93,6 @@ class TileView extends Component<Props, State> {
      */
     constructor(props: Props) {
         super(props);
-
-
     }
 
     /**
@@ -131,6 +129,7 @@ class TileView extends Component<Props, State> {
       //  const { onClick } = this.props;
 
       let { updateParentState } = this.props.data;
+
 
 
 
@@ -214,11 +213,16 @@ class TileView extends Component<Props, State> {
             tileWidth = Math.min(widthToUse / columns, heightToUse);
         }
 
-        const boost = isYouTube ? 1.5 : 1.0;
+        //const boost = isYouTube ? 1.5 : 1.0;
+
+        const width = isYouTube ? 320 : 100;
+        const height = isYouTube ? 180 : width * (4.0/5.0);
 
         return {
-            height: (_width * .22) * (9.0/16.0) * boost,//tileWidth / TILE_ASPECT_RATIO,
-            width: _width * .22 * boost
+            height:height,
+            // (_width * .22) * (9.0/16.0) * boost,//tileWidth / TILE_ASPECT_RATIO,
+            width:width
+            // _width * .22 * boost
           }
     }
 
@@ -237,29 +241,22 @@ class TileView extends Component<Props, State> {
     }
     _renderThumbnails() {
 
-/*
-style = {{
-  width:this._getTileDimensions(participant.isFakeParticipant).width,
-  height:this._getTileDimensions(participant.isFakeParticipant).height
-  }}
-  <PinchZoomView></PinchZoomView>
-*/
 
-const styleOverrides = {
-            aspectRatio: TILE_ASPECT_RATIO,
-            flex: 0,
-            height: this._getTileDimensions().height,
-            width: null
-        };
-        
+
+
+
+
+
+
+
         return this._getSortedParticipants()
             .map(participant => (
                 <PinchZoomView
                 style = {{
-
-                  width:100,
-                  height:100,
+                  width:this._getTileDimensions(participant.isFakeParticipant).width,
+                  height:this._getTileDimensions(participant.isFakeParticipant).height,
                   position:'absolute'
+                //  backgroundColor:'purple'
                   }}
                 >
                 <Thumbnail
@@ -267,7 +264,8 @@ const styleOverrides = {
                     key = { participant.id }
                     participant = { participant }
                     renderDisplayName = { false }
-                    styleOverrides = { styleOverrides }
+                    styleOverrides = {{width:this._getTileDimensions(participant.isFakeParticipant).width
+                      ,height:this._getTileDimensions(participant.isFakeParticipant).height}}
                     tileView = { true } />
 
                 </PinchZoomView>
