@@ -13,6 +13,7 @@ import { Filter } from './filter'
 export default class JitsiStreamBlurEffect {
     _bpModel: Object;
     _inputVideoElement: HTMLVideoElement;
+    _inputVideoCanvasElement: HTMLCanvasElement;
     _onMaskFrameTimer: Function;
     _maskFrameTimerWorker: Worker;
     _maskInProgress: boolean;

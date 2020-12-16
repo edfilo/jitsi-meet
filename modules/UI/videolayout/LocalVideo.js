@@ -65,6 +65,7 @@ export default class LocalVideo extends SmallVideo {
 
         this.addAudioLevelIndicator();
         this.updateIndicators();
+        this.updateStatusBar();
 
         this.container.onclick = this._onContainerClick;
         this.container.onmousemove = this._onMouseMove;
@@ -105,7 +106,7 @@ export default class LocalVideo extends SmallVideo {
         }
 
         this._renderDisplayName({
-            allowEditing: APP.store.getState()['features/base/jwt'].isGuest,
+            allowEditing: !config.disableProfile,
             displayNameSuffix: interfaceConfig.DEFAULT_LOCAL_DISPLAY_NAME,
             elementID: 'localDisplayName',
             participantID: this.id

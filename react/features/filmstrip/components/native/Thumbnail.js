@@ -27,6 +27,7 @@ import AudioMutedIndicator from './AudioMutedIndicator';
 import DominantSpeakerIndicator from './DominantSpeakerIndicator';
 import ModeratorIndicator from './ModeratorIndicator';
 import RaisedHandIndicator from './RaisedHandIndicator';
+import ScreenShareIndicator from './ScreenShareIndicator';
 import VideoMutedIndicator from './VideoMutedIndicator';
 import styles, { AVATAR_SIZE } from './styles';
 
@@ -201,9 +202,10 @@ function Thumbnail(props: Props) {
             { !participant.isFakeParticipant && <Container style = { styles.thumbnailIndicatorContainer }>
                 { audioMuted
                     && <AudioMutedIndicator /> }
-
                 { videoMuted
                     && <VideoMutedIndicator /> }
+                { isScreenShare
+                    && <ScreenShareIndicator /> }
             </Container> }
 
         </Container>
