@@ -132,6 +132,7 @@ export default [
     'localRecording',
     'maxFullResolutionParticipants',
     'openBridgeChannel',
+    'openSharedDocumentOnJoin',
     'opusMaxAverageBitrate',
     'p2p',
     'pcStatsInterval',
