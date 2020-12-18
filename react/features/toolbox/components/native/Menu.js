@@ -19,9 +19,7 @@ import { openDialog, hideDialog } from '../../../base/dialog';
 import { type Dispatch } from 'redux';
 import { connect } from '../../../base/redux';
 
-import AudioMuteButton from '../AudioMuteButton';
-import HangupButton from '../HangupButton';
-import VideoMuteButton from '../VideoMuteButton';
+
 import { VideoShareButton } from '../../../youtube-player/components';
 
 import LonelyMeetingExperience from '../../../conference/components/native/LonelyMeetingExperience';
@@ -35,11 +33,14 @@ import { isLocalTrackMuted } from '../../../base/tracks';
 import { muteLocal } from '../../../remote-video-menu/actions';
 import { MEDIA_TYPE } from '../../../base/media';
 
-import { getLocalVideoType, isLocalVideoTrackMuted } from '../../../base/tracks';
+import { getLocalVideoType} from '../../../base/tracks';
 
 import { doInvitePeople } from '../../../invite/actions.native';
 
 import { toggleSharedVideo } from '../../../youtube-player/actions';
+
+import AudioMuteButton from '../AudioMuteButton';
+import VideoMuteButton from '../VideoMuteButton';
 
 import {
     VIDEO_MUTISM_AUTHORITY,
@@ -208,7 +209,7 @@ class Menu extends PureComponent<Props>{
     //this.props.dispatch(appNavigate(undefined));
 
   }
-
+/*
   _isAudioMuted() {
       return this.props._audioMuted;
   }
@@ -233,12 +234,13 @@ class Menu extends PureComponent<Props>{
       return this.props._videoMuted;
   }
 
+
   _setVideoMuted(videoMuted: boolean) {
 
 
       if (this.props._audioOnly) {
           this.props.dispatch(
-              setAudioOnly(false, /* ensureTrack */ true));
+              setAudioOnly(false, true));
       }
       const mediaType = this.props._videoMediaType;
 
@@ -247,10 +249,12 @@ class Menu extends PureComponent<Props>{
               videoMuted,
               mediaType,
               VIDEO_MUTISM_AUTHORITY.USER,
-              /* ensureTrack */ true));
+             true));
 
 
   }
+
+  */
 
 
   _youtube() {
@@ -296,7 +300,7 @@ class Menu extends PureComponent<Props>{
 
       <View style={styles.centeredView}  >
       <View style={styles.modalView}  >
-
+{/*
       <RoundButton
       text="video"
       source={ this._isVideoMuted()? require('./video_off.png') : require('./video_on.png')}
@@ -313,6 +317,9 @@ class Menu extends PureComponent<Props>{
       onPressOut = {() => { this._toggleAudio() }}
 
       />
+      */}
+      <AudioMuteButton/>
+      <VideoMuteButton/>
 
     <RoundButton
     text="invite friends"
@@ -431,8 +438,6 @@ const styles = StyleSheet.create({
 function _mapStateToProps(state: Object): Object {
 
 
-
-
 //annoying registry defined in toolbox styles
   const annoying = ColorSchemeRegistry.get(state, 'Toolbox');
   const _audioMuted = isLocalTrackMuted(state['features/base/tracks'], MEDIA_TYPE.AUDIO);
@@ -448,7 +453,7 @@ function _mapStateToProps(state: Object): Object {
     _audioOnly: Boolean(audioOnly),
     _videoDisabled: !hasAvailableDevices(state, 'videoInput'),
     _videoMediaType: getLocalVideoType(tracks),
-    _videoMuted: isLocalVideoTrackMuted(tracks),
+  //  _videoMuted: isLocalVideoTrackMuted(tracks),
     _audioMuted,
     _audioDisabled,
     _participantId: id,

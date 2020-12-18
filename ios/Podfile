@@ -1,38 +1,41 @@
-platform :ios, '13.0'
-workspace 'jitsi-meet'
-require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
-install! 'cocoapods', :deterministic_uuids => false
+platform :ios, '11.0'
 
+#use_frameworks!
+
+workspace 'jitsi-meet'
+
+#require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
+#install! 'cocoapods', :deterministic_uuids => false
 
 pod 'RNFBApp', :path => '../node_modules/@react-native-firebase/app'
 pod 'RNFBAuth', :path => '../node_modules/@react-native-firebase/auth'
 pod 'RNFBFirestore', :path => '../node_modules/@react-native-firebase/firestore'
 pod 'RNFBDynamicLinks', :path => '../node_modules/@react-native-firebase/dynamic-links'
 
+pod 'Amplitude-iOS', '~> 4.0.4'
+pod 'CocoaLumberjack', '~>3.5.3'
+pod 'ObjectiveDropboxOfficial', '~> 3.9.4'
+
+
 pod 'RNGoogleSignin', :path => '../node_modules/@react-native-community/google-signin'
 pod 'CodePush', path: '../node_modules/react-native-code-push'
+
 
 
 target 'jitsi-meet' do
   project 'app/app.xcodeproj'
 
 
-  pod 'Firebase/Analytics'
+ # pod 'Firebase/Analytics'
   pod 'Firebase/Crashlytics'
-  pod 'Firebase/DynamicLinks'
+ # pod 'Firebase/DynamicLinks'
 end
 
-target 'JitsiMeet' do
-  project 'sdk/sdk.xcodeproj'
-
-  # React Native and its dependencies
-  #
 
 
 
 
 
-  
   pod 'FBLazyVector', :path => '../node_modules/react-native/Libraries/FBLazyVector/'
   pod 'FBReactNativeSpec', :path => '../node_modules/react-native/Libraries/FBReactNativeSpec/'
   pod 'RCTRequired', :path => '../node_modules/react-native/Libraries/RCTRequired/'
@@ -88,9 +91,16 @@ target 'JitsiMeet' do
   # Native pod dependencies
   #
 
-  pod 'Amplitude-iOS', '~> 4.0.4'
-  pod 'CocoaLumberjack', '~>3.5.3'
-  pod 'ObjectiveDropboxOfficial', '~> 3.9.4'
+
+
+
+target 'JitsiMeet' do
+  project 'sdk/sdk.xcodeproj'
+
+  # React Native and its dependencies
+  #
+
+
 
   #use_native_modules!
 end
