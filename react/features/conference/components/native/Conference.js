@@ -138,7 +138,7 @@ class Conference extends AbstractConference<Props, *> {
 
     componentDidUpdate() {
 
-      //debugger;
+      debugger;
 
       const slug =  this.props._slug;
       const droop = firestore().collection('places').doc(slug)
