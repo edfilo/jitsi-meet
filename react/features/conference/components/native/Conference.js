@@ -139,7 +139,9 @@ class Conference extends AbstractConference<Props, *> {
     componentDidUpdate() {
 
       debugger;
+      alert('firestore');
 
+      console.log('fuck');
       const slug =  this.props._slug;
       const droop = firestore().collection('places').doc(slug)
       .onSnapshot(documentSnapshot => {
