@@ -55,12 +55,13 @@
 
   [jitsiMeet application:application didFinishLaunchingWithOptions:launchOptions];
 
+  
     // Initialize Crashlytics and Firebase if a valid GoogleService-Info.plist file was provided.
   if ([FIRUtilities appContainsRealServiceInfoPlist]) {
         NSLog(@"Enabling Firebase");
         [FIRApp configure];
         // Crashlytics defaults to disabled wirth the FirebaseCrashlyticsCollectionEnabled Info.plist key.
-        [[FIRCrashlytics crashlytics] setCrashlyticsCollectionEnabled:![jitsiMeet isCrashReportingDisabled]];
+       // [[FIRCrashlytics crashlytics] setCrashlyticsCollectionEnabled:![jitsiMeet isCrashReportingDisabled]];
     }
 
     ViewController *rootController = (ViewController *)self.window.rootViewController;

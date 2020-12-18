@@ -4,6 +4,13 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 install! 'cocoapods', :deterministic_uuids => false
 
 
+pod 'RNFBApp', :path => '../node_modules/@react-native-firebase/app'
+pod 'RNFBAuth', :path => '../node_modules/@react-native-firebase/auth'
+pod 'RNFBFirestore', :path => '../node_modules/@react-native-firebase/firestore'
+pod 'RNFBDynamicLinks', :path => '../node_modules/@react-native-firebase/dynamic-links'
+
+pod 'RNGoogleSignin', :path => '../node_modules/@react-native-community/google-signin'
+pod 'CodePush', path: '../node_modules/react-native-code-push'
 
 
 target 'jitsi-meet' do
@@ -22,13 +29,6 @@ target 'JitsiMeet' do
   #
 
 
-  pod 'RNFBApp', :path => '../node_modules/@react-native-firebase/app'
-  pod 'RNFBAuth', :path => '../node_modules/@react-native-firebase/auth'
-  pod 'RNFBFirestore', :path => '../node_modules/@react-native-firebase/firestore'
-  pod 'RNFBDynamicLinks', :path => '../node_modules/@react-native-firebase/dynamic-links'
-
-  pod 'RNGoogleSignin', :path => '../node_modules/@react-native-community/google-signin'
-  pod 'CodePush', path: '../node_modules/react-native-code-push'
 
 
 
