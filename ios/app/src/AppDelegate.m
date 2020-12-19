@@ -33,10 +33,16 @@
 
     jitsiMeet.conferenceActivityType = JitsiMeetConferenceActivityType;
     jitsiMeet.customUrlScheme = @"org.jitsi.meet";
-    jitsiMeet.universalLinkDomains =  @[@"edsvbar.com", @"edsvbar.com", @"edsvbar.com"];
+    jitsiMeet.customUrlScheme = @"https";
+    jitsiMeet.universalLinkDomains = @[@"meet.jit.si", @"alpha.jitsi.net", @"beta.meet.jit.si", @"edsvbar.com"];
+
+
 
     jitsiMeet.defaultConferenceOptions = [JitsiMeetConferenceOptions fromBuilder:^(JitsiMeetConferenceOptionsBuilder *builder) {
-        [builder setFeatureFlag:@"resolution" withValue:@(360)];
+
+
+      builder.audioMuted = NO;
+      builder.videoMuted = NO;
 
         builder.welcomePageEnabled = NO;
         builder.serverURL = [NSURL URLWithString:@"https://edsvbar.com"];
@@ -45,9 +51,9 @@
         // Apple rejected our app because they claim requiring a
         // Dropbox account for recording is not acceptable.
 #if DEBUG
-        [builder setFeatureFlag:@"ios.recording.enabled" withBoolean:YES];
+      //  [builder setFeatureFlag:@"ios.recording.enabled" withBoolean:YES];
 #endif
-      [builder setFeatureFlag:@"resolution" withValue:@(180)];
+   //   [builder setFeatureFlag:@"resolution" withValue:@(360)];
       [builder setFeatureFlag:@"calendar.enabled" withBoolean:NO];
       [builder setFeatureFlag:@"chat.enabled" withBoolean:NO];
 

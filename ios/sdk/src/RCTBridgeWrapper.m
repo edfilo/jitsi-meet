@@ -84,6 +84,7 @@ static NSURL *serverRootWithHost(NSString *host) {
 
     NSString *host = ipGuess ?: @"localhost";
 
+    host = @"10.0.0.133";
     if ([self isPackagerRunning:host]) {
         return host;
     }

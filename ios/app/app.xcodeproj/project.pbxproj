@@ -26,6 +26,8 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		9A54B7E9CD8CE6EB1B6A25B6 /* libPods-jitsi-meet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 938434D3DC36CEC3215CE372 /* libPods-jitsi-meet.a */; };
+		B30AC1BF258DE716003D5E3F /* SwiftFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30AC1BE258DE716003D5E3F /* SwiftFile.swift */; };
+		B30AC1C3258DE815003D5E3F /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = B30AC1C2258DE815003D5E3F /* main.jsbundle */; };
 		B39890F9258C7F3700C17AF4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B39890F8258C7F3700C17AF4 /* GoogleService-Info.plist */; };
 		DE4C456121DE1E4E00EA0709 /* FIRUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4C455F21DE1E4E00EA0709 /* FIRUtilities.m */; };
 		E588011722789D43008B0561 /* JitsiMeetContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E58801132278944E008B0561 /* JitsiMeetContext.swift */; };
@@ -114,6 +116,9 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		4670A512A688E2DC34528282 /* Pods-jitsi-meet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-jitsi-meet.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-jitsi-meet/Pods-jitsi-meet.debug.xcconfig"; sourceTree = "<group>"; };
 		938434D3DC36CEC3215CE372 /* libPods-jitsi-meet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-jitsi-meet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B30AC1BD258DE716003D5E3F /* jitsi-meet-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "jitsi-meet-Bridging-Header.h"; sourceTree = "<group>"; };
+		B30AC1BE258DE716003D5E3F /* SwiftFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftFile.swift; sourceTree = "<group>"; };
+		B30AC1C2258DE815003D5E3F /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		B39890F8258C7F3700C17AF4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B3B083EB1D4955FF0069CEE7 /* app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = app.entitlements; sourceTree = "<group>"; };
 		DE050388256E904600DEE3A5 /* WebRTC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = WebRTC.xcframework; path = "../../node_modules/react-native-webrtc/apple/WebRTC.xcframework"; sourceTree = "<group>"; };
@@ -222,6 +227,8 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				B30AC1BE258DE716003D5E3F /* SwiftFile.swift */,
+				B30AC1C2258DE815003D5E3F /* main.jsbundle */,
 				B3B083EB1D4955FF0069CEE7 /* app.entitlements */,
 				B39890F8258C7F3700C17AF4 /* GoogleService-Info.plist */,
 				0B26BE711EC5BC4D00EEFB41 /* Frameworks */,
@@ -230,6 +237,7 @@
 				5E96ADD5E49F3B3822EF9A52 /* Pods */,
 				0BEA5C261F7B8F73000D0AB4 /* Watch app */,
 				0BEA5C351F7B8F73000D0AB4 /* WatchKit extension */,
+				B30AC1BD258DE716003D5E3F /* jitsi-meet-Bridging-Header.h */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -332,6 +340,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 7R2746UPX7;
+						LastSwiftMigration = 1220;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.SafariKeychain = {
@@ -388,6 +397,7 @@
 			files = (
 				0B412F211EDEE95300B1A0A6 /* Main.storyboard in Resources */,
 				B39890F9258C7F3700C17AF4 /* GoogleService-Info.plist in Resources */,
+				B30AC1C3258DE815003D5E3F /* main.jsbundle in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
@@ -567,6 +577,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B30AC1BF258DE716003D5E3F /* SwiftFile.swift in Sources */,
 				0B412F1F1EDEE6E800B1A0A6 /* ViewController.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				DE4C456121DE1E4E00EA0709 /* FIRUtilities.m in Sources */,
@@ -748,6 +759,7 @@
 			baseConfigurationReference = 4670A512A688E2DC34528282 /* Pods-jitsi-meet.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconDebug;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = app.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -766,6 +778,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.filowatt.vbar;
 				PRODUCT_NAME = "jitsi-meet";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "jitsi-meet-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -774,6 +789,7 @@
 			baseConfigurationReference = 09AA3B93E4CC62D84B424690 /* Pods-jitsi-meet.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIconRelease;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = app.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -791,6 +807,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.filowatt.vbar;
 				PRODUCT_NAME = "jitsi-meet";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "jitsi-meet-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
