@@ -66,6 +66,7 @@ static NSURL *serverRootWithHost(NSString *host) {
 }
 
 - (NSString *)guessPackagerHost {
+    /*
     static NSString *ipGuess;
     static dispatch_once_t dispatchOncePredicate;
 
@@ -81,10 +82,15 @@ static NSURL *serverRootWithHost(NSString *host) {
                     stringByTrimmingCharactersInSet:
                             [NSCharacterSet newlineCharacterSet]];
     });
+     */
 
-    NSString *host = ipGuess ?: @"localhost";
+    //NSString *host = ipGuess ?: @"localhost";
 
-    host = @"10.0.0.133";
+    NSString *host = @"10.0.0.133";
+    //@"336ac3f758d0.ngrok.io";
+
+    NSLog(@"YOU ARE HERE MIAMI");
+
     if ([self isPackagerRunning:host]) {
         return host;
     }
@@ -104,6 +110,8 @@ static NSURL *serverRootWithHost(NSString *host) {
     // This duplicates some functionality present in RCTBundleURLProvider, but
     // that mode is not designed to work inside a framework, because all
     // resources are loaded from the main bundle.
+
+
     NSString *host = [self guessPackagerHost];
 
     if (host != nil) {

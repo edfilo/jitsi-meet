@@ -32,7 +32,6 @@ const MIN_SCALE = 1;
  * ViewPort (hint) support is added to the LargeVideo component then this
  * contant will not be necessary anymore.
  */
-
 const MAX_OFFSET = 100;
 
 /**
@@ -159,7 +158,6 @@ class VideoTransform extends Component<Props, State> {
                 this._getSavedTransform(props.streamId) || DEFAULT_TRANSFORM
         };
 
-        /*
         this._didMove = this._didMove.bind(this);
         this._getTransformStyle = this._getTransformStyle.bind(this);
         this._onGesture = this._onGesture.bind(this);
@@ -171,8 +169,6 @@ class VideoTransform extends Component<Props, State> {
         this._onPanResponderRelease = this._onPanResponderRelease.bind(this);
         this._onStartShouldSetPanResponder
             = this._onStartShouldSetPanResponder.bind(this);
-            */
-
 
         // The move threshold should be adaptive to the pixel ratio of the
         // screen to avoid making it too sensitive or difficult to handle on
@@ -180,7 +176,6 @@ class VideoTransform extends Component<Props, State> {
         this.moveThreshold
             = PixelRatio.get() * MOVE_THRESHOLD_DISMISSES_TOUCH;
 
-/*
         this.gestureHandlers = PanResponder.create({
             onPanResponderGrant: this._onPanResponderGrant,
             onPanResponderMove: this._onPanResponderMove,
@@ -190,9 +185,6 @@ class VideoTransform extends Component<Props, State> {
             onShouldBlockNativeResponder: () => false,
             onStartShouldSetPanResponder: this._onStartShouldSetPanResponder
         });
-        */
-
-
     }
 
     /**
@@ -222,10 +214,8 @@ class VideoTransform extends Component<Props, State> {
      * @inheritdoc
      */
     render() {
-
         const { children, style } = this.props;
 
-//debugger;
         return (
             <View
                 onLayout = { this._onLayout }
@@ -234,10 +224,11 @@ class VideoTransform extends Component<Props, State> {
                     styles.videoTransformedViewContainer,
                     style
                 ] }
-            >
+                { ...this.gestureHandlers.panHandlers }>
                 <View
                     style = { [
-                        styles.videoTranformedView
+                        styles.videoTranformedView,
+                        this._getTransformStyle()
                     ] }>
                     { children }
                 </View>
@@ -334,9 +325,6 @@ class VideoTransform extends Component<Props, State> {
      * @returns {Object}
      */
     _getTouchPosition({ nativeEvent: { touches } }) {
-      console.log('baseball 329'  + touches[0].pageY);
-
-
         return {
             x: touches[0].pageX,
             y: touches[0].pageY
@@ -351,25 +339,17 @@ class VideoTransform extends Component<Props, State> {
      * @returns {{string: Array<{string: number}>}}
      */
     _getTransformStyle() {
-
         const { enabled } = this.props;
-
-
 
         if (!enabled) {
             return null;
         }
-
-
 
         const {
             scale,
             translateX,
             translateY
         } = this.state.transform;
-
-        console.log('baseball ' + scale, translateX, translateY);
-
 
         return {
             transform: [
@@ -393,8 +373,6 @@ class VideoTransform extends Component<Props, State> {
      */
     _limitAndApplyTransformation(transform: Transform) {
         const { layout } = this.state;
-
-        console.log('baseball 382');
 
         if (layout) {
             const { scale } = this.state.transform;
@@ -471,7 +449,7 @@ class VideoTransform extends Component<Props, State> {
                 += Math.max(
                     originalLayout.d.y - transformedLayout.d.y - _MAX_OFFSET,
                     0);
-                /*
+
             this.setState({
                 transform: {
                     scale: newScale,
@@ -479,13 +457,10 @@ class VideoTransform extends Component<Props, State> {
                     translateY: Math.round(newTranslateY)
                 }
             });
-            */
         }
     }
 
     _onGesture: (string, ?Object | number) => void
-
-
 
     /**
      * Handles gestures and converts them to transforms.
@@ -509,8 +484,6 @@ class VideoTransform extends Component<Props, State> {
     _onGesture(type, value) {
         let transform;
 
-        console.log('ongesture');
-
         switch (type) {
         case 'move':
             transform = {
@@ -527,9 +500,8 @@ class VideoTransform extends Component<Props, State> {
             break;
 
         case 'press': {
-          console.log('....press');
             const { onPress } = this.props;
-console.log('ok');
+
             typeof onPress === 'function' && onPress();
             break;
         }
@@ -553,7 +525,6 @@ console.log('ok');
      * @returns {void}
      */
     _onLayout({ nativeEvent: { layout: { x, y, width, height } } }) {
-      /*
         this.setState({
             layout: {
                 x,
@@ -562,7 +533,6 @@ console.log('ok');
                 height
             }
         });
-        */
     }
 
     _onMoveShouldSetPanResponder: (Object, Object) => boolean
@@ -576,9 +546,6 @@ console.log('ok');
      * @returns {boolean}
      */
     _onMoveShouldSetPanResponder(evt, gestureState) {
-
-      console.log('videotransform ' + gestureState.numberActiveTouches + ' touches');
-
         return this.props.enabled
             && (this._didMove(gestureState)
                 || gestureState.numberActiveTouches === 2);
@@ -606,7 +573,6 @@ console.log('ok');
 
     _onPanResponderMove: (Object, Object) => void
 
-
     /**
      * Handles the PanResponder move (touch move) event.
      *
@@ -616,8 +582,6 @@ console.log('ok');
      * @returns {void}
      */
     _onPanResponderMove(evt, gestureState) {
-        console.log('baseball 597');
-
         if (gestureState.numberActiveTouches === 2) {
             // this is a zoom event
             if (
@@ -653,7 +617,6 @@ console.log('ok');
 
     _onPanResponderRelease: () => void
 
-
     /**
      * Handles the PanResponder gesture end event.
      *
@@ -661,9 +624,6 @@ console.log('ok');
      * @returns {void}
      */
     _onPanResponderRelease() {
-
-
-      console.log('baseball n644');
         if (this.lastTap && Date.now() - this.lastTap < TAP_TIMEOUT_MS) {
             this._onGesture('press');
         }
@@ -681,8 +641,7 @@ console.log('ok');
      * @returns {boolean}
      */
     _onStartShouldSetPanResponder() {
-      console.log('should start set pan');
-        return true;// typeof this.props.onPress === 'function';
+        return typeof this.props.onPress === 'function';
     }
 
     /**
@@ -697,11 +656,9 @@ console.log('ok');
         const savedTransform = this._getSavedTransform(streamId);
 
         if (savedTransform) {
-          /*
             this.setState({
                 transform: savedTransform
             });
-            */
         }
     }
 

@@ -52,7 +52,6 @@ class Dialog extends AbstractDialog<Props, State> {
     constructor(props: Props) {
         super(props);
 
-
         // Bind event handlers so they are only bound once per instance.
         this._onCancel = this._onCancel.bind(this);
         this._onSubmit = this._onSubmit.bind(this);
@@ -73,6 +72,7 @@ class Dialog extends AbstractDialog<Props, State> {
 
         // $FlowExpectedError
         delete props.dispatch;
+
         return <StatelessDialog { ...props } />;
     }
 

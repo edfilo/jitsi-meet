@@ -144,7 +144,6 @@ class Toolbox extends PureComponent<Props> {
 
                     <RoundButton
                      backgroundColor = "green"
-                     round = 'true'
                      width={200}
                      height={66}
                      fontSize={20}

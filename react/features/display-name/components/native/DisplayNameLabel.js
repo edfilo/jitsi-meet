@@ -69,10 +69,6 @@ function _mapStateToProps(state: Object, ownProps: Props) {
     const participant = getParticipantById(state, participantId);
     const isFakeParticipant = participant && participant.isFakeParticipant;
 
-
-
-
-
     // Currently we only render the display name if it's not the local
     // participant and there is no video rendered for
     // them.
@@ -80,7 +76,6 @@ function _mapStateToProps(state: Object, ownProps: Props) {
         && localParticipant?.id !== participantId
         && !shouldRenderParticipantVideo(state, participantId)
         && !isFakeParticipant;
-
 
     return {
         _participantName:

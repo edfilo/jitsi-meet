@@ -45,8 +45,8 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
-  <key>CodePushDeploymentKey</key>
-  <string>M_feAlkukvTabINUUij4GZcsoItkc_d16RXtn</string>
+	<key>CodePushDeploymentKey</key>
+	<string>M_feAlkukvTabINUUij4GZcsoItkc_d16RXtn</string>
 	<key>FirebaseCrashlyticsCollectionEnabled</key>
 	<string>false</string>
 	<key>FirebaseScreenReportingEnabled</key>
@@ -57,15 +57,20 @@
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
-    <key>NSAllowsArbitraryLoads</key>
-    <true/>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
-      <key>codepush.appcenter.ms</key>
+			<key>codepush.appcenter.ms</key>
       <dict>
         <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
         <true/>
       </dict>
+			<key>http://336ac3f758d0.ngrok.io/</key>
+			<dict>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
 			<key>localhost</key>
 			<dict>
 				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
@@ -76,11 +81,11 @@
 	<key>NSCalendarsUsageDescription</key>
 	<string>See your scheduled meetings in the app.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Allow friends to see you on video.</string>
+	<string>Participate in meetings with video.</string>
 	<key>NSLocalNetworkUsageDescription</key>
 	<string>Local network is used for establishing Peer-to-Peer connections.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Allow friends to hear your voice.</string>
+	<string>Participate in meetings with voice.</string>
 	<key>NSUserActivityTypes</key>
 	<array>
 		<string>org.jitsi.JitsiMeet.ios.conference</string>

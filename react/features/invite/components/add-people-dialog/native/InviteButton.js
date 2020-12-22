@@ -18,7 +18,7 @@ type Props = AbstractButtonProps & {
 };
 
 /**
- * Implements an {@link AbstractButton} to enter add/Invite friends to the
+ * Implements an {@link AbstractButton} to enter add/invite people to the
  * current call/conference/meeting.
  */
 class InviteButton extends AbstractButton<Props, *> {

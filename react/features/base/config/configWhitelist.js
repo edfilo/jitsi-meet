@@ -8,9 +8,6 @@ import extraConfigWhitelist from './extraConfigWhitelist';
  *
  * @type Array
  */
-
-
- 
 export default [
     '_desktopSharingSourceDevice',
     '_peerConnStatusOutOfLastNTimeout',

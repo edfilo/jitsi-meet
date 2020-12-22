@@ -7,7 +7,7 @@
  * }
  */
 
-//export const MODAL_STYLE = {TIP:'tip', YOUTUBE:'youtube', BAR:'bar'};
+export const MODAL_STYLE = {TIP:'tip', YOUTUBE:'youtube', BAR:'bar'};
 
 
 export const SET_AUDIO_MUTED = 'SET_AUDIO_MUTED';

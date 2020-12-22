@@ -19,7 +19,6 @@ import { SoundCollection } from '../../sounds';
 import { appWillMount, appWillUnmount } from '../actions';
 import logger from '../logger';
 
-
 declare var APP: Object;
 
 /**
@@ -59,8 +58,6 @@ export default class BaseApp extends Component<*, State> {
             route: {},
             store: undefined
         };
-
-
     }
 
     /**
@@ -100,9 +97,7 @@ export default class BaseApp extends Component<*, State> {
      * @inheritdoc
      */
     componentWillUnmount() {
-
         this.state.store.dispatch(appWillUnmount(this));
-
     }
 
     /**
@@ -127,15 +122,9 @@ export default class BaseApp extends Component<*, State> {
      * @returns {ReactElement}
      */
     render() {
-
-
-
         const { route: { component, props }, store } = this.state;
 
-
         if (store) {
-
-
             return (
                 <I18nextProvider i18n = { i18next }>
                     <Provider store = { store }>

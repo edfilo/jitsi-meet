@@ -28,8 +28,6 @@ export type Props = AbstractProps & {
     t: Function
 }
 
-
-
 /**
  * Component to render a custom dialog.
  */

@@ -100,7 +100,6 @@ class JitsiModal extends PureComponent<Props> {
     render() {
         const { _headerStyles, _show, _styles, children, footerComponent, headerProps, position, style } = this.props;
 
-        
         return (
             <SlidingView
                 onHide = { this._onRequestClose }

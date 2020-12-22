@@ -44,8 +44,6 @@ export class AbstractApp extends BaseApp<Props, *> {
         this._init.then(() => {
             // If a URL was explicitly specified to this React Component, then
             // open it; otherwise, use a default.
-
-    
             this._openURL(toURLString(this.props.url) || this._getDefaultURL());
         });
     }
@@ -91,7 +89,6 @@ export class AbstractApp extends BaseApp<Props, *> {
     }
 
     _createMainElement: (React$Element<*>, Object) => ?React$Element<*>;
-
 
     /**
      * Gets the default URL to be opened when this {@code App} mounts.

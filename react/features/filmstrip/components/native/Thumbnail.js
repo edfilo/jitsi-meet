@@ -31,9 +31,7 @@ import ScreenShareIndicator from './ScreenShareIndicator';
 import VideoMutedIndicator from './VideoMutedIndicator';
 import styles, { AVATAR_SIZE } from './styles';
 
-import { Emitter } from 'react-native-particles';
 
-//import SmokeElement from "smoke-effect-react";
 
 
 /**

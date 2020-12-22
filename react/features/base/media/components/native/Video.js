@@ -1,14 +1,12 @@
 // @flow
 
-import React, { Component} from 'react';
+import React, { Component } from 'react';
 import { RTCView } from 'react-native-webrtc';
 
 import { Pressable } from '../../../react';
 
 import VideoTransform from './VideoTransform';
 import styles from './styles';
-
-import { View } from 'react-native';
 
 /**
  * The type of the React {@code Component} props of {@link Video}.
@@ -83,47 +81,37 @@ export default class Video extends Component<Props> {
      */
     render() {
         const { onPress, stream, zoomEnabled } = this.props;
+
         if (stream) {
             // RTCView
             const style = styles.video;
             const objectFit
                 = zoomEnabled
-                    ? 'cover'
+                    ? 'contain'
                     : (style && style.objectFit) || 'cover';
-                    const rtcView
-                        = (
-                            <RTCView
-                                mirror = { this.props.mirror }
-                                objectFit = { objectFit }
-                                streamURL = { stream.toURL() }
-                                style = { style } />
-                        );
+            const rtcView
+                = (
+                    <RTCView
+                        mirror = { this.props.mirror }
+                        objectFit = { objectFit }
+                        streamURL = { stream.toURL() }
+                        style = { style }
+                        zOrder = { this.props.zOrder } />
+                );
+
             // VideoTransform implements "pinch to zoom". As part of "pinch to
             // zoom", it implements onPress, of course.
-
-            /* <VideoTransform
-                  enabled = { zoomEnabled }
-                  onPress = { onPress }
-                  streamId = { stream.id }
-                  style = { style }>
-                  { rtcView }
-              </VideoTransform>
-
-    <View style={{backgroundColor:'purple', flex:1}} >{rtcView}</View>
-
-              */
-            if (true) {
-
+            if (zoomEnabled) {
                 return (
-                  <View pointerEvents = 'box-only' style = {{flex:1}}>
+                    <VideoTransform
+                        enabled = { zoomEnabled }
+                        onPress = { onPress }
+                        streamId = { stream.id }
+                        style = { style }>
                         { rtcView }
-                  </View>
-
-
-                //  rtcView
+                    </VideoTransform>
                 );
             }
-
 
             // XXX Unfortunately, VideoTransform implements a custom press
             // detection which has been observed to be very picky about the
@@ -137,9 +125,6 @@ export default class Video extends Component<Props> {
                 </Pressable>
             );
         }
-
-console.log('shouldnt be here');
-
 
         // RTCView has peculiarities which may or may not be platform specific.
         // For example, it doesn't accept an empty streamURL. If the execution

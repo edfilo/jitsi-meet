@@ -78,6 +78,9 @@ class NavigationBar extends Component<Props> {
                             { this.props._meetingName }
                         </Text>
                     }
+                    {
+                        this.props._conferenceTimerEnabled && <ConferenceTimer />
+                    }
                 </View>
             </View>
         ];
@@ -92,7 +95,6 @@ class NavigationBar extends Component<Props> {
  * @returns {Props}
  */
 function _mapStateToProps(state) {
-
     return {
         _conferenceTimerEnabled:
             getFeatureFlag(state, CONFERENCE_TIMER_ENABLED, true) && !state['features/base/config'].hideConferenceTimer,

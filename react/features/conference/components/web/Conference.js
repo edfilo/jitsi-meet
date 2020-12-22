@@ -237,7 +237,6 @@ class Conference extends AbstractConference<Props, *> {
      * @inheritdoc
      */
     _start() {
-
         APP.UI.start();
 
         APP.UI.registerListeners();

@@ -86,7 +86,7 @@ type State = AbstractState & {
 };
 
 /**
- * Implements a special dialog to Invite friends from a directory service.
+ * Implements a special dialog to invite people from a directory service.
  */
 class AddPeopleDialog extends AbstractAddPeopleDialog<Props, State> {
     /**
@@ -369,7 +369,7 @@ class AddPeopleDialog extends AbstractAddPeopleDialog<Props, State> {
      */
     _onShareMeeting() {
         if (this.state.inviteItems.length > 0) {
-            // The use probably intended to Invite friends.
+            // The use probably intended to invite people.
             this._onInvite();
         } else {
             this.props.dispatch(beginShareRoom());

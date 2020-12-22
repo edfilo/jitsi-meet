@@ -38,7 +38,7 @@ export default class RoundButton extends Component {
         textAlignHorizontal: PropTypes.oneOf(['flex-start', 'center', 'flex-end']),
         imageAlignVertical: PropTypes.oneOf(['flex-start', 'center', 'flex-end']),
         textHeight: PropTypes.number,
-        round: PropTypes.boolean,
+        makeRound: PropTypes.boolean,
         imagePadding: PropTypes.number,
         imageBackgroundColor: PropTypes.string
     };
@@ -57,7 +57,7 @@ export default class RoundButton extends Component {
         textAlignVertical: 'flex-end',
         imageAlignVertical: 'flex-start',
         textHeight: 20,
-        round: true,
+        makeRound: true,
         imagePadding: 30,
         imageBackgroundColor: 'black',
         imageBorderColor: 'white',

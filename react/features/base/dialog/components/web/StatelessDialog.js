@@ -123,10 +123,7 @@ class StatelessDialog extends Component<Props> {
             width
         } = this.props;
 
-
-
         return (
-
             <Modal
                 autoFocus = { true }
                 components = {{
@@ -142,12 +139,12 @@ class StatelessDialog extends Component<Props> {
                 <div
                     onKeyDown = { this._onKeyDown }
                     ref = { this._setDialogElement }>
-                    <div
+                    <form
                         className = 'modal-dialog-form'
                         id = 'modal-dialog-form'
                         onSubmit = { this._onSubmit }>
                         { children }
-                    </div>
+                    </form>
                 </div>
             </Modal>
         );

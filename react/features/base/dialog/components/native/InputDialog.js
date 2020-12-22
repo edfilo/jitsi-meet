@@ -144,9 +144,6 @@ class InputDialog extends BaseDialog<Props, State> {
             return;
         }
 
-
-
-
         this.setState({
             fieldValue
         });

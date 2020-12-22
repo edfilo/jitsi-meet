@@ -232,7 +232,7 @@ class CalendarListContent extends Component<Props> {
                 newSection.data.push(displayableEvent);
             }
         }
-        //debugger;
+
         return Array.from(sectionMap.values());
     }
 

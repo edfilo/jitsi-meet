@@ -20,10 +20,8 @@
 #import "Types.h"
 #import "ViewController.h"
 
-#import <Firebase.h>
-
 @import Firebase;
-@import JitsiMeet;
+@import JitsiMeetSDK;
 
 @implementation AppDelegate
 
@@ -33,42 +31,37 @@
 
     jitsiMeet.conferenceActivityType = JitsiMeetConferenceActivityType;
     jitsiMeet.customUrlScheme = @"org.jitsi.meet";
-    jitsiMeet.customUrlScheme = @"https";
-    jitsiMeet.universalLinkDomains = @[@"meet.jit.si", @"alpha.jitsi.net", @"beta.meet.jit.si", @"edsvbar.com"];
-
-
+  jitsiMeet.universalLinkDomains = @[@"meet.jit.si", @"alpha.jitsi.net", @"beta.meet.jit.si", @"edsvbar.com"];
 
     jitsiMeet.defaultConferenceOptions = [JitsiMeetConferenceOptions fromBuilder:^(JitsiMeetConferenceOptionsBuilder *builder) {
-
-
-      builder.audioMuted = NO;
-      builder.videoMuted = NO;
-
-        builder.welcomePageEnabled = NO;
+        [builder setFeatureFlag:@"resolution" withValue:@(360)];
         builder.serverURL = [NSURL URLWithString:@"https://edsvbar.com"];
+        builder.welcomePageEnabled = NO;
+      builder.room = @"eds";
 
-        builder.room = @"eds";
-        // Apple rejected our app because they claim requiring a
-        // Dropbox account for recording is not acceptable.
-#if DEBUG
-      //  [builder setFeatureFlag:@"ios.recording.enabled" withBoolean:YES];
-#endif
-   //   [builder setFeatureFlag:@"resolution" withValue:@(360)];
+
       [builder setFeatureFlag:@"calendar.enabled" withBoolean:NO];
       [builder setFeatureFlag:@"chat.enabled" withBoolean:NO];
 
+        // Apple rejected our app because they claim requiring a
+        // Dropbox account for recording is not acceptable.
+#if DEBUG
+        [builder setFeatureFlag:@"ios.recording.enabled" withBoolean:YES];
+#endif
     }];
 
   [jitsiMeet application:application didFinishLaunchingWithOptions:launchOptions];
 
-  
     // Initialize Crashlytics and Firebase if a valid GoogleService-Info.plist file was provided.
+
+
   if ([FIRUtilities appContainsRealServiceInfoPlist]) {
         NSLog(@"Enabling Firebase");
         [FIRApp configure];
         // Crashlytics defaults to disabled wirth the FirebaseCrashlyticsCollectionEnabled Info.plist key.
-       // [[FIRCrashlytics crashlytics] setCrashlyticsCollectionEnabled:![jitsiMeet isCrashReportingDisabled]];
+        // [[FIRCrashlytics crashlytics] setCrashlyticsCollectionEnabled:![jitsiMeet isCrashReportingDisabled]];
     }
+
 
     ViewController *rootController = (ViewController *)self.window.rootViewController;
     [jitsiMeet showSplashScreen:rootController.view];
@@ -88,6 +81,7 @@
 -    (BOOL)application:(UIApplication *)application
   continueUserActivity:(NSUserActivity *)userActivity
     restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> *restorableObjects))restorationHandler {
+
 
     if ([FIRUtilities appContainsRealServiceInfoPlist]) {
         // 1. Attempt to handle Universal Links through Firebase in order to support
@@ -111,6 +105,7 @@
         }
     }
 
+
     // 2. Default to plain old, non-Firebase-assisted Universal Links.
     return [[JitsiMeet sharedInstance] application:application
                               continueUserActivity:userActivity
@@ -128,6 +123,7 @@
     }
 
     NSURL *openUrl = url;
+
 
     if ([FIRUtilities appContainsRealServiceInfoPlist]) {
         // Process Firebase Dynamic Links

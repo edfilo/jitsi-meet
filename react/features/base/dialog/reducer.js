@@ -28,10 +28,7 @@ ReducerRegistry.register('features/base/dialog', (state = {}, action) => {
         break;
     }
 
-
-
     case OPEN_DIALOG:
-
         return assign(state, {
             component: action.component,
             componentProps: action.componentProps,

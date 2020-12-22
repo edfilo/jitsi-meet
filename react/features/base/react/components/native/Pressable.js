@@ -33,7 +33,6 @@ export default class Pressable extends Component<Props> {
         const { children, onPress } = this.props;
 
         if (onPress) {
-          console.log('pressable');
             return (
                 <TouchableWithoutFeedback onPress = { onPress }>
                     { children }

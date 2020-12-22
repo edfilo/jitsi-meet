@@ -59,7 +59,6 @@ export default class Container<P: Props> extends AbstractContainer<P> {
 
         // onClick & touchFeedback
         if (element && onClickOrTouchFeedback) {
-
             const touchableProps = {
                 accessibilityLabel,
                 accessible,

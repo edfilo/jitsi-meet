@@ -19,14 +19,6 @@ export const MEDIA_TYPE = {
     VIDEO: 'video'
 };
 
-export const MODAL_STYLE = {
-  TIP: 'tip',
-  YOUTUBE: 'youtube',
-  BAR:'bar'
-};
-
-
-
 /* eslint-disable no-bitwise */
 
 /**

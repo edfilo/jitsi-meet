@@ -12,9 +12,6 @@ import { AbstractApp } from './AbstractApp';
 import '../middlewares';
 import '../reducers';
 
-//import { hot } from 'react-hot-loader/root';
-
-
 /**
  * Root app {@code Component} on Web/React.
  *
@@ -27,12 +24,9 @@ export class App extends AbstractApp {
      *
      * @override
      */
-
-
     _createMainElement(component, props) {
-
         return (
-            <AtlasKitThemeProvider mode = 'light'>
+            <AtlasKitThemeProvider mode = 'dark'>
                 <ChromeExtensionBanner />
                 { super._createMainElement(component, props) }
             </AtlasKitThemeProvider>
@@ -45,12 +39,10 @@ export class App extends AbstractApp {
      * @returns {React$Element}
      */
     _renderDialogContainer() {
-
         return (
-            <AtlasKitThemeProvider mode = 'light'>
+            <AtlasKitThemeProvider mode = 'dark'>
                 <DialogContainer />
             </AtlasKitThemeProvider>
         );
     }
 }
-//export default (App)

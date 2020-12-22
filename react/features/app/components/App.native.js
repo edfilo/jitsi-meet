@@ -1,10 +1,8 @@
 // @flow
 
-
-
-
-import React, { Component } from 'react';
+import React from 'react';
 import SplashScreen from 'react-native-splash-screen';
+
 import { setColorScheme } from '../../base/color-scheme';
 import { DialogContainer } from '../../base/dialog';
 import { updateFlags } from '../../base/flags/actions';
@@ -15,21 +13,12 @@ import { DimensionsDetector, clientResized } from '../../base/responsive-ui';
 import { updateSettings } from '../../base/settings';
 import logger from '../logger';
 
-
 import { AbstractApp } from './AbstractApp';
 import type { Props as AbstractAppProps } from './AbstractApp';
-
-
-//import * as firebase from '@react-native-firebase/app';
-
-import firestore from '@react-native-firebase/firestore';
-
-
 
 // Register middlewares and reducers.
 import '../middlewares';
 import '../reducers';
-
 
 declare var __DEV__;
 
@@ -58,13 +47,6 @@ type Props = AbstractAppProps & {
      */
     userInfo: ?Object
 };
-
-
-export class MyApp extends Component {
-
-}
-
-
 
 /**
  * Root app {@code Component} on mobile/React Native.
@@ -101,10 +83,6 @@ export class App extends AbstractApp {
      * @returns {void}
      */
     componentDidMount() {
-
-
-
-
         super.componentDidMount();
 
         SplashScreen.hide();

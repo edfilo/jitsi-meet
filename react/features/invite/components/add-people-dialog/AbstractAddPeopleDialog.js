@@ -79,7 +79,7 @@ export type State = {
 };
 
 /**
- * Implements an abstract dialog to Invite friends to the conference.
+ * Implements an abstract dialog to invite people to the conference.
  */
 export default class AbstractAddPeopleDialog<P: Props, S: State>
     extends Component<P, S> {
@@ -95,7 +95,7 @@ export default class AbstractAddPeopleDialog<P: Props, S: State>
     }
 
     /**
-     * Invite friends and numbers to the conference. The logic works by inviting
+     * Invite people and numbers to the conference. The logic works by inviting
      * numbers, people/rooms, and videosipgw in parallel. All invitees are
      * stored in an array. As each invite succeeds, the invitee is removed
      * from the array. After all invites finish, close the modal if there are
