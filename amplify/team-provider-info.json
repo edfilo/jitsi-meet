@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-backpackchat-staging-13405-authRole",
+      "UnauthRoleArn": "arn:aws:iam::933529701820:role/amplify-backpackchat-staging-13405-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::933529701820:role/amplify-backpackchat-staging-13405-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-backpackchat-staging-13405-deployment",
+      "UnauthRoleName": "amplify-backpackchat-staging-13405-unauthRole",
+      "StackName": "amplify-backpackchat-staging-13405",
+      "StackId": "arn:aws:cloudformation:us-east-1:933529701820:stack/amplify-backpackchat-staging-13405/45997ac0-4b08-11eb-a597-0a9eb36083cf",
+      "AmplifyAppId": "d320b306znrfg3"
+    },
+    "categories": {
+      "auth": {
+        "BackpackChat": {}
+      }
+    }
+  }
+}

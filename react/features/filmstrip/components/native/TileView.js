@@ -5,7 +5,8 @@ import React, { Component } from 'react';
 import {
     ScrollView,
     TouchableWithoutFeedback,
-    View
+    View,
+    Text
 } from 'react-native';
 import type { Dispatch } from 'redux';
 
@@ -27,6 +28,7 @@ import PinchZoomView from 'react-native-pinch-zoom-view';
  * The type of the React {@link Component} props of {@link TileView}.
  */
 type Props = {
+
 
     /**
      * Application's aspect ratio.
@@ -66,7 +68,7 @@ type Props = {
  * @private
  * @type {number}
  */
-const MARGIN = 10;
+const MARGIN = 0;
 
 /**
  * The aspect ratio the tiles should display in.
@@ -130,15 +132,11 @@ class TileView extends Component<Props, State> {
 
       let { updateParentState } = this.props.data;
 
-
-
-
         const thumbs = this._renderThumbnails();
-        const tilestyle = {backgroundColor:'transparent',width:'100%',height:'100%'};
+        const tilestyle =  this.props.style;
+
         return (
           <View style= {tilestyle}>{thumbs}</View>
-
-
           );
 
     }
@@ -152,7 +150,9 @@ class TileView extends Component<Props, State> {
     _getColumnCount() {
         const participantCount = this.props._participants.length;
 
-        return 100;
+
+
+
         // For narrow view, tiles should stack on top of each other for a lonely
         // call and a 1:1 call. Otherwise tiles should be grouped into rows of
         // two.
@@ -175,6 +175,7 @@ class TileView extends Component<Props, State> {
      * @returns {Participant[]}
      */
     _getSortedParticipants() {
+
         const participants = [];
         let localParticipant;
 
@@ -197,33 +198,57 @@ class TileView extends Component<Props, State> {
      * @private
      * @returns {Object}
      */
-    _getTileDimensions(isYouTube) {
+    _getTileDimensions(isYouTube, idx) {
+
+        const headcount = this.props._participants.length;
+
         const { _height, _participants, _width } = this.props;
         const columns = this._getColumnCount();
-        const participantCount = _participants.length;
-        const heightToUse = _height - (MARGIN * 2);
-        const widthToUse = _width - (MARGIN * 2);
+
+        const heightToUse = this.props.style.height;
+        // _height;// - (MARGIN * 2);
+        const widthToUse = this.props.style.width;
+        // _width;// - (MARGIN * 2);
         let tileWidth;
 
-        // If there is going to be at least two rows, ensure that at least two
-        // rows display fully on screen.
-        if (participantCount / columns > 1) {
-            tileWidth = Math.min(widthToUse / columns, heightToUse / 2);
-        } else {
-            tileWidth = Math.min(widthToUse / columns, heightToUse);
-        }
 
-        //const boost = isYouTube ? 1.5 : 1.0;
+        this.padding = 20;
 
-        const width = isYouTube ? 320 : 100;
-        const height = isYouTube ? 180 : width * (4.0/5.0);
+        const cols = (headcount <= 2) ? 1 : 2;
+        const rows = Math.ceil(headcount / cols);
+
+        const col = idx % cols;
+        const row =  Math.floor(idx / cols);
+
+        const shrink = (cols == 1) ? .75 : 1.0;
+
+
+        const width = isYouTube ? 320 : (shrink * ((widthToUse / cols) - (cols - 1) * this.padding));
+        const height = isYouTube ? 180 : (width * (4.0/5.0));
+
+        const left = (widthToUse * ((1.0 - shrink) * .5)) + col * (widthToUse / cols) + Math.max((col - .5) * this.padding, 0.0);
+        const top = row * height + Math.max((row - .5) * this.padding, 0.0);
+
+
+        const topMargin = (heightToUse - rows * height + (this.padding * (rows - 1.0))) * .5;
+
+/*
+        console.log('layout engine'
+        + ' headcount:' + headcount
+        + ' top:' + top
+        + ' left:' + left
+        + ' topmargin:' + topMargin
+        + ' width:' + width
+        + ' height:' + height);
+*/
+
 
         return {
             height:height,
-            // (_width * .22) * (9.0/16.0) * boost,//tileWidth / TILE_ASPECT_RATIO,
-            width:width
-            // _width * .22 * boost
-          }
+            width:width,
+            top:top + topMargin,
+            left:left
+        }
     }
 
 
@@ -238,37 +263,50 @@ class TileView extends Component<Props, State> {
 
     _onPress() {
 
+
+
     }
+
+
+    _isChat() {
+
+        return true;
+    }
+
+
     _renderThumbnails() {
 
 
-
-
-
-
-
-
-
         return this._getSortedParticipants()
-            .map(participant => (
-                <PinchZoomView
-                style = {{
-                  width:this._getTileDimensions(participant.isFakeParticipant).width,
-                  height:this._getTileDimensions(participant.isFakeParticipant).height,
-                  position:'absolute'
-                //  backgroundColor:'purple'
-                  }}
-                >
+            .map((participant, idx) => (
+              <View key = { 'view' + participant.id }>
                 <Thumbnail
                     disableTint = { true }
                     key = { participant.id }
                     participant = { participant }
                     renderDisplayName = { false }
-                    styleOverrides = {{width:this._getTileDimensions(participant.isFakeParticipant).width
-                      ,height:this._getTileDimensions(participant.isFakeParticipant).height}}
-                    tileView = { true } />
+                    styleOverrides = {{
+                      position:'absolute'
+                      ,width:this._getTileDimensions(participant.isFakeParticipant, idx).width
+                      ,height:this._getTileDimensions(participant.isFakeParticipant, idx).height
+                      ,left:this._getTileDimensions(participant.isFakeParticipant, idx).left
+                      ,top:this._getTileDimensions(participant.isFakeParticipant, idx).top
+                      }}
+                    tileView = { true }>
 
-                </PinchZoomView>
+                </Thumbnail>
+                {/*<Text key = { 'key' + participant.id }
+                style = {{position:'absolute'
+                ,color:'white'
+                ,width:this._getTileDimensions(participant.isFakeParticipant, idx).width
+                ,height:this._getTileDimensions(participant.isFakeParticipant, idx).height
+                ,left:this._getTileDimensions(participant.isFakeParticipant, idx).left
+                ,top:this._getTileDimensions(participant.isFakeParticipant, idx).top
+                }}>
+                name:
+                {participant.name}
+              </Text>*/}
+              </View>
             ));
 
     }

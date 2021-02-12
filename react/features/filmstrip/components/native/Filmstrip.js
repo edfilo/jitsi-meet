@@ -97,7 +97,7 @@ class Filmstrip extends Component<Props> {
 
         return (
             <Container
-                style = { filmstripStyle }
+                style = {{...filmstripStyle}}
                 visible = { _visible }>
                 {
                     this._separateLocalThumbnail

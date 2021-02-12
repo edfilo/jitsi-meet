@@ -206,8 +206,24 @@ export class AbstractWelcomePage extends Component<Props, *> {
             const onAppNavigateSettled
                 = () => this._mounted && this.setState({ joining: false });
 
-            this.props.dispatch(appNavigate(room))
-                .then(onAppNavigateSettled, onAppNavigateSettled);
+
+            const doc = this.db.collection('interviews')
+                      .doc(room).get().then(function(d){
+
+                        if(d.exists){
+
+                          this.props.dispatch(appNavigate(room))
+                              .then(onAppNavigateSettled, onAppNavigateSettled);
+
+                        } else {
+
+                          alert(room + 'not found.');
+                          
+                        }
+
+              });
+
+
         }
     }
 

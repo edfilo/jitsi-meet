@@ -24,9 +24,9 @@
 		0BCA49601EC4B6C600B793EE /* POSIX.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BCA495D1EC4B6C600B793EE /* POSIX.m */; };
 		0BCA49611EC4B6C600B793EE /* Proximity.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BCA495E1EC4B6C600B793EE /* Proximity.m */; };
 		0BD906EA1EC0C00300C8C18E /* JitsiMeet.h in Headers */ = {isa = PBXBuildFile; fileRef = 0BD906E81EC0C00300C8C18E /* JitsiMeet.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		15899A6222B1BF6FA0257F11 /* Pods_JitsiMeetSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 724EDB1921237B632661EEE8 /* Pods_JitsiMeetSDK.framework */; };
 		6C31EDC820C06D490089C899 /* recordingOn.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6C31EDC720C06D490089C899 /* recordingOn.mp3 */; };
 		6C31EDCA20C06D530089C899 /* recordingOff.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 6C31EDC920C06D530089C899 /* recordingOff.mp3 */; };
-		6F08DF7D4458EE3CF3F36F6D /* libPods-JitsiMeetSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4376CA6886DE68FD7A4294B /* libPods-JitsiMeetSDK.a */; };
 		75635B0A20751D6D00F29C9F /* joined.wav in Resources */ = {isa = PBXBuildFile; fileRef = 75635B0820751D6D00F29C9F /* joined.wav */; };
 		75635B0B20751D6D00F29C9F /* left.wav in Resources */ = {isa = PBXBuildFile; fileRef = 75635B0920751D6D00F29C9F /* left.wav */; };
 		87FE6F3321E52437004A5DC7 /* incomingMessage.wav in Resources */ = {isa = PBXBuildFile; fileRef = 87FE6F3221E52437004A5DC7 /* incomingMessage.wav */; };
@@ -86,6 +86,7 @@
 		0BD906E91EC0C00300C8C18E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6C31EDC720C06D490089C899 /* recordingOn.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = recordingOn.mp3; path = ../../sounds/recordingOn.mp3; sourceTree = "<group>"; };
 		6C31EDC920C06D530089C899 /* recordingOff.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = recordingOff.mp3; path = ../../sounds/recordingOff.mp3; sourceTree = "<group>"; };
+		724EDB1921237B632661EEE8 /* Pods_JitsiMeetSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JitsiMeetSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		75635B0820751D6D00F29C9F /* joined.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = joined.wav; path = ../../sounds/joined.wav; sourceTree = "<group>"; };
 		75635B0920751D6D00F29C9F /* left.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = left.wav; path = ../../sounds/left.wav; sourceTree = "<group>"; };
 		87FE6F3221E52437004A5DC7 /* incomingMessage.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = incomingMessage.wav; path = ../../sounds/incomingMessage.wav; sourceTree = "<group>"; };
@@ -93,6 +94,190 @@
 		A480429B21EE335600289B73 /* AmplitudeModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AmplitudeModule.m; path = src/analytics/AmplitudeModule.m; sourceTree = SOURCE_ROOT; };
 		A4A934E8212F3ADB001E9388 /* Dropbox.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Dropbox.m; sourceTree = "<group>"; };
 		A4A934EB21349A06001E9388 /* Dropbox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Dropbox.h; sourceTree = "<group>"; };
+		B3478CC425B2EBC400F36A1E /* libabseil.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libabseil.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478CC625B2EBC400F36A1E /* libAmplitude-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libAmplitude-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478CC825B2EBC400F36A1E /* libAppAuth.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAppAuth.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478CCA25B2EBC400F36A1E /* libBase64.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libBase64.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478CCC25B2EBC400F36A1E /* libBoringSSL-GRPC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libBoringSSL-GRPC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478CCE25B2EBC400F36A1E /* libBVLinearGradient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libBVLinearGradient.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478CD025B2EBC400F36A1E /* libCocoaLumberjack.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libCocoaLumberjack.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478CD225B2EBC400F36A1E /* libCodePush.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libCodePush.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478CD425B2EBC400F36A1E /* libDoubleConversion.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libDoubleConversion.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478CD625B2EBC400F36A1E /* libFBReactNativeSpec.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFBReactNativeSpec.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478CE425B2EBC400F36A1E /* libFolly.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFolly.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478CE625B2EBC400F36A1E /* libglog.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libglog.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478CE825B2EBC400F36A1E /* libGoogleDataTransport.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGoogleDataTransport.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478CEA25B2EBC400F36A1E /* libGoogleUtilities.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGoogleUtilities.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478CEC25B2EBC400F36A1E /* libgRPC-C++.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libgRPC-C++.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478CEE25B2EBC400F36A1E /* libgRPC-Core.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libgRPC-Core.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478CF025B2EBC400F36A1E /* libGTMAppAuth.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGTMAppAuth.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478CF225B2EBC400F36A1E /* libGTMSessionFetcher.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGTMSessionFetcher.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478CF425B2EBC400F36A1E /* libJWT.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libJWT.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478CF625B2EBC400F36A1E /* libleveldb-library.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libleveldb-library.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478CF825B2EBC400F36A1E /* libnanopb.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libnanopb.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478CFA25B2EBC400F36A1E /* libObjectiveDropboxOfficial.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libObjectiveDropboxOfficial.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478D0025B2EBC400F36A1E /* libPromisesObjC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libPromisesObjC.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478D0225B2EBC400F36A1E /* libRCTTypeSafety.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRCTTypeSafety.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478D0425B2EBC400F36A1E /* libReact-Core.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-Core.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478D0625B2EBC400F36A1E /* libReact-CoreModules.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-CoreModules.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478D0825B2EBC400F36A1E /* libReact-cxxreact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-cxxreact.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478D0A25B2EBC400F36A1E /* libReact-jsi.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-jsi.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478D0C25B2EBC400F36A1E /* libReact-jsiexecutor.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-jsiexecutor.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478D0E25B2EBC400F36A1E /* libReact-jsinspector.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-jsinspector.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478D1025B2EBC400F36A1E /* libreact-native-background-timer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-background-timer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478D1225B2EBC400F36A1E /* libreact-native-calendar-events.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-calendar-events.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478D1425B2EBC400F36A1E /* libreact-native-keep-awake.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-keep-awake.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478D1625B2EBC400F36A1E /* libreact-native-netinfo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-netinfo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478D1825B2EBC400F36A1E /* libreact-native-splash-screen.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-splash-screen.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478D1C25B2EBC400F36A1E /* libreact-native-webview.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-webview.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478D1E25B2EBC400F36A1E /* libReact-RCTActionSheet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTActionSheet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478D2025B2EBC400F36A1E /* libReact-RCTAnimation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTAnimation.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478D2225B2EBC400F36A1E /* libReact-RCTBlob.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTBlob.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478D2425B2EBC400F36A1E /* libReact-RCTImage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTImage.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478D2625B2EBC400F36A1E /* libReact-RCTLinking.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTLinking.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478D2825B2EBC400F36A1E /* libReact-RCTNetwork.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTNetwork.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478D2A25B2EBC400F36A1E /* libReact-RCTSettings.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTSettings.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478D2C25B2EBC400F36A1E /* libReact-RCTText.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTText.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478D2E25B2EBC400F36A1E /* libReact-RCTVibration.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTVibration.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478D3025B2EBC400F36A1E /* libReactCommon.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReactCommon.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478D3225B2EBC400F36A1E /* libRNCAsyncStorage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNCAsyncStorage.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478D3425B2EBC400F36A1E /* libRNDefaultPreference.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNDefaultPreference.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478D3625B2EBC400F36A1E /* libRNFBApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNFBApp.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478D3825B2EBC500F36A1E /* libRNFBAuth.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNFBAuth.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478D3A25B2EBC500F36A1E /* libRNFBDynamicLinks.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNFBDynamicLinks.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478D3C25B2EBC500F36A1E /* libRNFBFirestore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNFBFirestore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478D3E25B2EBC500F36A1E /* libRNFBStorage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNFBStorage.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478D4025B2EBC500F36A1E /* libRNGoogleSignin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNGoogleSignin.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478D4225B2EBC500F36A1E /* libRNLiveAudioStream.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNLiveAudioStream.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478D4425B2EBC500F36A1E /* libRNSound.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNSound.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478D4625B2EBC500F36A1E /* libRNSVG.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNSVG.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478D4825B2EBC500F36A1E /* libRNWatch.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNWatch.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478D4A25B2EBC500F36A1E /* libSSZipArchive.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libSSZipArchive.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478D4C25B2EBC500F36A1E /* libYoga.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libYoga.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478DEF25B2F77200F36A1E /* libabseil.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libabseil.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478DF125B2F77200F36A1E /* libAmplitude-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libAmplitude-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478DF325B2F77200F36A1E /* libAppAuth.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAppAuth.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478DF525B2F77200F36A1E /* libBase64.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libBase64.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478DF725B2F77200F36A1E /* libBoringSSL-GRPC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libBoringSSL-GRPC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478DF925B2F77200F36A1E /* libBVLinearGradient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libBVLinearGradient.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478DFB25B2F77200F36A1E /* libCocoaLumberjack.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libCocoaLumberjack.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478DFD25B2F77200F36A1E /* libCodePush.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libCodePush.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478DFF25B2F77200F36A1E /* libDoubleConversion.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libDoubleConversion.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E0125B2F77200F36A1E /* libFBReactNativeSpec.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFBReactNativeSpec.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E0F25B2F77200F36A1E /* libFolly.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFolly.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E1125B2F77200F36A1E /* libglog.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libglog.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E1325B2F77200F36A1E /* libGoogleDataTransport.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGoogleDataTransport.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E1525B2F77200F36A1E /* libGoogleUtilities.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGoogleUtilities.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E1725B2F77200F36A1E /* libgRPC-C++.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libgRPC-C++.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E1925B2F77200F36A1E /* libgRPC-Core.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libgRPC-Core.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E1B25B2F77200F36A1E /* libGTMAppAuth.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGTMAppAuth.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E1D25B2F77200F36A1E /* libGTMSessionFetcher.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGTMSessionFetcher.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E1F25B2F77300F36A1E /* libJWT.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libJWT.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E2125B2F77300F36A1E /* libleveldb-library.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libleveldb-library.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E2325B2F77300F36A1E /* libnanopb.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libnanopb.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E2525B2F77300F36A1E /* libObjectiveDropboxOfficial.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libObjectiveDropboxOfficial.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E2B25B2F77300F36A1E /* libPromisesObjC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libPromisesObjC.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E2D25B2F77300F36A1E /* libRCTTypeSafety.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRCTTypeSafety.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E2F25B2F77300F36A1E /* libReact-Core.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-Core.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E3125B2F77300F36A1E /* libReact-CoreModules.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-CoreModules.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E3325B2F77300F36A1E /* libReact-cxxreact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-cxxreact.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E3525B2F77300F36A1E /* libReact-jsi.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-jsi.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E3725B2F77300F36A1E /* libReact-jsiexecutor.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-jsiexecutor.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E3925B2F77300F36A1E /* libReact-jsinspector.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-jsinspector.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E3B25B2F77300F36A1E /* libreact-native-background-timer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-background-timer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E3D25B2F77300F36A1E /* libreact-native-calendar-events.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-calendar-events.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E3F25B2F77300F36A1E /* libreact-native-keep-awake.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-keep-awake.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E4125B2F77300F36A1E /* libreact-native-netinfo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-netinfo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E4325B2F77300F36A1E /* libreact-native-splash-screen.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-splash-screen.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E4725B2F77300F36A1E /* libreact-native-webview.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-webview.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E4925B2F77300F36A1E /* libReact-RCTActionSheet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTActionSheet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E4B25B2F77300F36A1E /* libReact-RCTAnimation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTAnimation.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E4D25B2F77300F36A1E /* libReact-RCTBlob.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTBlob.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E4F25B2F77300F36A1E /* libReact-RCTImage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTImage.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E5125B2F77300F36A1E /* libReact-RCTLinking.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTLinking.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E5325B2F77300F36A1E /* libReact-RCTNetwork.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTNetwork.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E5525B2F77300F36A1E /* libReact-RCTSettings.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTSettings.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E5725B2F77300F36A1E /* libReact-RCTText.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTText.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E5925B2F77300F36A1E /* libReact-RCTVibration.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTVibration.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E5B25B2F77300F36A1E /* libReactCommon.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReactCommon.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E5D25B2F77300F36A1E /* libRNCAsyncStorage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNCAsyncStorage.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E5F25B2F77300F36A1E /* libRNDefaultPreference.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNDefaultPreference.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E6125B2F77300F36A1E /* libRNFBApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNFBApp.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E6325B2F77300F36A1E /* libRNFBAuth.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNFBAuth.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E6525B2F77300F36A1E /* libRNFBDynamicLinks.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNFBDynamicLinks.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E6725B2F77300F36A1E /* libRNFBFirestore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNFBFirestore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E6925B2F77300F36A1E /* libRNFBStorage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNFBStorage.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E6B25B2F77300F36A1E /* libRNGoogleSignin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNGoogleSignin.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E6D25B2F77300F36A1E /* libRNLiveAudioStream.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNLiveAudioStream.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E6F25B2F77300F36A1E /* libRNSound.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNSound.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E7125B2F77300F36A1E /* libRNSVG.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNSVG.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E7325B2F77300F36A1E /* libRNWatch.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNWatch.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E7525B2F77300F36A1E /* libSSZipArchive.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libSSZipArchive.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E7725B2F77300F36A1E /* libYoga.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libYoga.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E7C25B2F88C00F36A1E /* libRNFBStorage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNFBStorage.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E7E25B2F8B100F36A1E /* libabseil.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libabseil.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E8025B2F8B600F36A1E /* libAmplitude-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libAmplitude-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E8225B2F8E800F36A1E /* libabseil.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libabseil.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E8325B2F8E800F36A1E /* libAmplitude-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libAmplitude-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E8425B2F8E800F36A1E /* libAppAuth.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAppAuth.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E8525B2F8E800F36A1E /* libBase64.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libBase64.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E8625B2F8E800F36A1E /* libBoringSSL-GRPC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libBoringSSL-GRPC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E8725B2F8E800F36A1E /* libBVLinearGradient.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libBVLinearGradient.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E8825B2F8E800F36A1E /* libCocoaLumberjack.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libCocoaLumberjack.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E8925B2F8E800F36A1E /* libCodePush.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libCodePush.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E8A25B2F8E800F36A1E /* libDoubleConversion.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libDoubleConversion.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E8B25B2F8E800F36A1E /* libFBReactNativeSpec.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFBReactNativeSpec.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E9225B2F8E800F36A1E /* libFolly.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libFolly.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E9325B2F8E800F36A1E /* libglog.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libglog.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E9425B2F8E800F36A1E /* libGoogleDataTransport.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGoogleDataTransport.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E9525B2F8E800F36A1E /* libGoogleUtilities.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGoogleUtilities.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E9625B2F8E800F36A1E /* libgRPC-C++.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libgRPC-C++.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E9725B2F8E800F36A1E /* libgRPC-Core.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libgRPC-Core.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E9825B2F8E800F36A1E /* libGTMAppAuth.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGTMAppAuth.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E9925B2F8E800F36A1E /* libGTMSessionFetcher.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGTMSessionFetcher.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E9A25B2F8E800F36A1E /* libJWT.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libJWT.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E9B25B2F8E800F36A1E /* libleveldb-library.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libleveldb-library.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E9C25B2F8E800F36A1E /* libnanopb.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libnanopb.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E9D25B2F8E800F36A1E /* libObjectiveDropboxOfficial.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libObjectiveDropboxOfficial.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E9E25B2F8E800F36A1E /* libPromisesObjC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libPromisesObjC.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478E9F25B2F8E800F36A1E /* libRCTTypeSafety.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRCTTypeSafety.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478EA025B2F8E800F36A1E /* libReact-Core.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-Core.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478EA125B2F8E800F36A1E /* libReact-CoreModules.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-CoreModules.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478EA225B2F8E800F36A1E /* libReact-cxxreact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-cxxreact.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478EA325B2F8E800F36A1E /* libReact-jsi.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-jsi.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478EA425B2F8E800F36A1E /* libReact-jsiexecutor.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-jsiexecutor.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478EA525B2F8E800F36A1E /* libReact-jsinspector.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-jsinspector.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478EA625B2F8E800F36A1E /* libreact-native-background-timer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-background-timer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478EA725B2F8E800F36A1E /* libreact-native-calendar-events.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-calendar-events.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478EA825B2F8E800F36A1E /* libreact-native-keep-awake.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-keep-awake.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478EA925B2F8E800F36A1E /* libreact-native-netinfo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-netinfo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478EAA25B2F8E800F36A1E /* libreact-native-splash-screen.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-splash-screen.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478EAC25B2F8E800F36A1E /* libreact-native-webview.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libreact-native-webview.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478EAD25B2F8E800F36A1E /* libReact-RCTActionSheet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTActionSheet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478EAE25B2F8E800F36A1E /* libReact-RCTAnimation.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTAnimation.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478EAF25B2F8E800F36A1E /* libReact-RCTBlob.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTBlob.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478EB025B2F8E800F36A1E /* libReact-RCTImage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTImage.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478EB125B2F8E800F36A1E /* libReact-RCTLinking.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTLinking.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478EB225B2F8E800F36A1E /* libReact-RCTNetwork.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTNetwork.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478EB325B2F8E800F36A1E /* libReact-RCTSettings.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTSettings.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478EB425B2F8E800F36A1E /* libReact-RCTText.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTText.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478EB525B2F8E800F36A1E /* libReact-RCTVibration.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libReact-RCTVibration.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478EB625B2F8E800F36A1E /* libReactCommon.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReactCommon.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478EB725B2F8E800F36A1E /* libRNCAsyncStorage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNCAsyncStorage.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478EB825B2F8E800F36A1E /* libRNDefaultPreference.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNDefaultPreference.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478EB925B2F8E800F36A1E /* libRNFBApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNFBApp.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478EBA25B2F8E800F36A1E /* libRNFBAuth.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNFBAuth.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478EBB25B2F8E800F36A1E /* libRNFBDynamicLinks.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNFBDynamicLinks.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478EBC25B2F8E800F36A1E /* libRNFBFirestore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNFBFirestore.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478EBD25B2F8E800F36A1E /* libRNFBStorage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNFBStorage.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478EBE25B2F8E800F36A1E /* libRNGoogleSignin.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNGoogleSignin.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478EBF25B2F8E800F36A1E /* libRNLiveAudioStream.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNLiveAudioStream.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478EC025B2F8E800F36A1E /* libRNSound.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNSound.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478EC125B2F8E800F36A1E /* libRNSVG.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNSVG.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478EC225B2F8E800F36A1E /* libRNWatch.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNWatch.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478EC325B2F8E800F36A1E /* libSSZipArchive.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libSSZipArchive.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3478EC425B2F8E800F36A1E /* libYoga.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libYoga.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B39F2D2525C372C90095272E /* main.jsbundle */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		C30F88D1CB0F4F5593216D24 /* liveStreamingOff.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = liveStreamingOff.mp3; path = ../../sounds/liveStreamingOff.mp3; sourceTree = "<group>"; };
 		C30F88D3CB0F4F5593216D24 /* liveStreamingOn.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = liveStreamingOn.mp3; path = ../../sounds/liveStreamingOn.mp3; sourceTree = "<group>"; };
 		C6245F5B2053091D0040BE68 /* image-resize@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "image-resize@2x.png"; path = "src/picture-in-picture/image-resize@2x.png"; sourceTree = "<group>"; };
@@ -129,7 +314,6 @@
 		DEFE535721FB2E9E00011A3A /* ReactUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReactUtils.h; sourceTree = "<group>"; };
 		DEFE535821FB311F00011A3A /* JitsiMeet+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JitsiMeet+Private.h"; sourceTree = "<group>"; };
 		E0AEE4939B53C646EA7E4858 /* Pods-JitsiMeetSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JitsiMeetSDK.release.xcconfig"; path = "Target Support Files/Pods-JitsiMeetSDK/Pods-JitsiMeetSDK.release.xcconfig"; sourceTree = "<group>"; };
-		E4376CA6886DE68FD7A4294B /* libPods-JitsiMeetSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JitsiMeetSDK.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,7 +323,7 @@
 			files = (
 				0BB9AD791F5EC6D7001C08DB /* Intents.framework in Frameworks */,
 				0BB9AD771F5EC6CE001C08DB /* CallKit.framework in Frameworks */,
-				6F08DF7D4458EE3CF3F36F6D /* libPods-JitsiMeetSDK.a in Frameworks */,
+				15899A6222B1BF6FA0257F11 /* Pods_JitsiMeetSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,6 +353,7 @@
 		0BD906DB1EC0C00300C8C18E = {
 			isa = PBXGroup;
 			children = (
+				B39F2D2525C372C90095272E /* main.jsbundle */,
 				9C3C6FA2341729836589B856 /* Frameworks */,
 				0BD906E61EC0C00300C8C18E /* Products */,
 				0BCA49681EC4BBE500B793EE /* Resources */,
@@ -236,10 +421,193 @@
 		9C3C6FA2341729836589B856 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B3478E8225B2F8E800F36A1E /* libabseil.a */,
+				B3478E8325B2F8E800F36A1E /* libAmplitude-iOS.a */,
+				B3478E8425B2F8E800F36A1E /* libAppAuth.a */,
+				B3478E8525B2F8E800F36A1E /* libBase64.a */,
+				B3478E8625B2F8E800F36A1E /* libBoringSSL-GRPC.a */,
+				B3478E8725B2F8E800F36A1E /* libBVLinearGradient.a */,
+				B3478E8825B2F8E800F36A1E /* libCocoaLumberjack.a */,
+				B3478E8925B2F8E800F36A1E /* libCodePush.a */,
+				B3478E8A25B2F8E800F36A1E /* libDoubleConversion.a */,
+				B3478E8B25B2F8E800F36A1E /* libFBReactNativeSpec.a */,
+				B3478E9225B2F8E800F36A1E /* libFolly.a */,
+				B3478E9325B2F8E800F36A1E /* libglog.a */,
+				B3478E9425B2F8E800F36A1E /* libGoogleDataTransport.a */,
+				B3478E9525B2F8E800F36A1E /* libGoogleUtilities.a */,
+				B3478E9625B2F8E800F36A1E /* libgRPC-C++.a */,
+				B3478E9725B2F8E800F36A1E /* libgRPC-Core.a */,
+				B3478E9825B2F8E800F36A1E /* libGTMAppAuth.a */,
+				B3478E9925B2F8E800F36A1E /* libGTMSessionFetcher.a */,
+				B3478E9A25B2F8E800F36A1E /* libJWT.a */,
+				B3478E9B25B2F8E800F36A1E /* libleveldb-library.a */,
+				B3478E9C25B2F8E800F36A1E /* libnanopb.a */,
+				B3478E9D25B2F8E800F36A1E /* libObjectiveDropboxOfficial.a */,
+				B3478E9E25B2F8E800F36A1E /* libPromisesObjC.a */,
+				B3478E9F25B2F8E800F36A1E /* libRCTTypeSafety.a */,
+				B3478EA025B2F8E800F36A1E /* libReact-Core.a */,
+				B3478EA125B2F8E800F36A1E /* libReact-CoreModules.a */,
+				B3478EA225B2F8E800F36A1E /* libReact-cxxreact.a */,
+				B3478EA325B2F8E800F36A1E /* libReact-jsi.a */,
+				B3478EA425B2F8E800F36A1E /* libReact-jsiexecutor.a */,
+				B3478EA525B2F8E800F36A1E /* libReact-jsinspector.a */,
+				B3478EA625B2F8E800F36A1E /* libreact-native-background-timer.a */,
+				B3478EA725B2F8E800F36A1E /* libreact-native-calendar-events.a */,
+				B3478EA825B2F8E800F36A1E /* libreact-native-keep-awake.a */,
+				B3478EA925B2F8E800F36A1E /* libreact-native-netinfo.a */,
+				B3478EAA25B2F8E800F36A1E /* libreact-native-splash-screen.a */,
+				B3478EAC25B2F8E800F36A1E /* libreact-native-webview.a */,
+				B3478EAD25B2F8E800F36A1E /* libReact-RCTActionSheet.a */,
+				B3478EAE25B2F8E800F36A1E /* libReact-RCTAnimation.a */,
+				B3478EAF25B2F8E800F36A1E /* libReact-RCTBlob.a */,
+				B3478EB025B2F8E800F36A1E /* libReact-RCTImage.a */,
+				B3478EB125B2F8E800F36A1E /* libReact-RCTLinking.a */,
+				B3478EB225B2F8E800F36A1E /* libReact-RCTNetwork.a */,
+				B3478EB325B2F8E800F36A1E /* libReact-RCTSettings.a */,
+				B3478EB425B2F8E800F36A1E /* libReact-RCTText.a */,
+				B3478EB525B2F8E800F36A1E /* libReact-RCTVibration.a */,
+				B3478EB625B2F8E800F36A1E /* libReactCommon.a */,
+				B3478EB725B2F8E800F36A1E /* libRNCAsyncStorage.a */,
+				B3478EB825B2F8E800F36A1E /* libRNDefaultPreference.a */,
+				B3478EB925B2F8E800F36A1E /* libRNFBApp.a */,
+				B3478EBA25B2F8E800F36A1E /* libRNFBAuth.a */,
+				B3478EBB25B2F8E800F36A1E /* libRNFBDynamicLinks.a */,
+				B3478EBC25B2F8E800F36A1E /* libRNFBFirestore.a */,
+				B3478EBD25B2F8E800F36A1E /* libRNFBStorage.a */,
+				B3478EBE25B2F8E800F36A1E /* libRNGoogleSignin.a */,
+				B3478EBF25B2F8E800F36A1E /* libRNLiveAudioStream.a */,
+				B3478EC025B2F8E800F36A1E /* libRNSound.a */,
+				B3478EC125B2F8E800F36A1E /* libRNSVG.a */,
+				B3478EC225B2F8E800F36A1E /* libRNWatch.a */,
+				B3478EC325B2F8E800F36A1E /* libSSZipArchive.a */,
+				B3478EC425B2F8E800F36A1E /* libYoga.a */,
+				B3478E7E25B2F8B100F36A1E /* libabseil.a */,
+				B3478E8025B2F8B600F36A1E /* libAmplitude-iOS.a */,
+				B3478E7C25B2F88C00F36A1E /* libRNFBStorage.a */,
+				B3478DEF25B2F77200F36A1E /* libabseil.a */,
+				B3478DF125B2F77200F36A1E /* libAmplitude-iOS.a */,
+				B3478DF325B2F77200F36A1E /* libAppAuth.a */,
+				B3478DF525B2F77200F36A1E /* libBase64.a */,
+				B3478DF725B2F77200F36A1E /* libBoringSSL-GRPC.a */,
+				B3478DF925B2F77200F36A1E /* libBVLinearGradient.a */,
+				B3478DFB25B2F77200F36A1E /* libCocoaLumberjack.a */,
+				B3478DFD25B2F77200F36A1E /* libCodePush.a */,
+				B3478DFF25B2F77200F36A1E /* libDoubleConversion.a */,
+				B3478E0125B2F77200F36A1E /* libFBReactNativeSpec.a */,
+				B3478E0F25B2F77200F36A1E /* libFolly.a */,
+				B3478E1125B2F77200F36A1E /* libglog.a */,
+				B3478E1325B2F77200F36A1E /* libGoogleDataTransport.a */,
+				B3478E1525B2F77200F36A1E /* libGoogleUtilities.a */,
+				B3478E1725B2F77200F36A1E /* libgRPC-C++.a */,
+				B3478E1925B2F77200F36A1E /* libgRPC-Core.a */,
+				B3478E1B25B2F77200F36A1E /* libGTMAppAuth.a */,
+				B3478E1D25B2F77200F36A1E /* libGTMSessionFetcher.a */,
+				B3478E1F25B2F77300F36A1E /* libJWT.a */,
+				B3478E2125B2F77300F36A1E /* libleveldb-library.a */,
+				B3478E2325B2F77300F36A1E /* libnanopb.a */,
+				B3478E2525B2F77300F36A1E /* libObjectiveDropboxOfficial.a */,
+				B3478E2B25B2F77300F36A1E /* libPromisesObjC.a */,
+				B3478E2D25B2F77300F36A1E /* libRCTTypeSafety.a */,
+				B3478E2F25B2F77300F36A1E /* libReact-Core.a */,
+				B3478E3125B2F77300F36A1E /* libReact-CoreModules.a */,
+				B3478E3325B2F77300F36A1E /* libReact-cxxreact.a */,
+				B3478E3525B2F77300F36A1E /* libReact-jsi.a */,
+				B3478E3725B2F77300F36A1E /* libReact-jsiexecutor.a */,
+				B3478E3925B2F77300F36A1E /* libReact-jsinspector.a */,
+				B3478E3B25B2F77300F36A1E /* libreact-native-background-timer.a */,
+				B3478E3D25B2F77300F36A1E /* libreact-native-calendar-events.a */,
+				B3478E3F25B2F77300F36A1E /* libreact-native-keep-awake.a */,
+				B3478E4125B2F77300F36A1E /* libreact-native-netinfo.a */,
+				B3478E4325B2F77300F36A1E /* libreact-native-splash-screen.a */,
+				B3478E4725B2F77300F36A1E /* libreact-native-webview.a */,
+				B3478E4925B2F77300F36A1E /* libReact-RCTActionSheet.a */,
+				B3478E4B25B2F77300F36A1E /* libReact-RCTAnimation.a */,
+				B3478E4D25B2F77300F36A1E /* libReact-RCTBlob.a */,
+				B3478E4F25B2F77300F36A1E /* libReact-RCTImage.a */,
+				B3478E5125B2F77300F36A1E /* libReact-RCTLinking.a */,
+				B3478E5325B2F77300F36A1E /* libReact-RCTNetwork.a */,
+				B3478E5525B2F77300F36A1E /* libReact-RCTSettings.a */,
+				B3478E5725B2F77300F36A1E /* libReact-RCTText.a */,
+				B3478E5925B2F77300F36A1E /* libReact-RCTVibration.a */,
+				B3478E5B25B2F77300F36A1E /* libReactCommon.a */,
+				B3478E5D25B2F77300F36A1E /* libRNCAsyncStorage.a */,
+				B3478E5F25B2F77300F36A1E /* libRNDefaultPreference.a */,
+				B3478E6125B2F77300F36A1E /* libRNFBApp.a */,
+				B3478E6325B2F77300F36A1E /* libRNFBAuth.a */,
+				B3478E6525B2F77300F36A1E /* libRNFBDynamicLinks.a */,
+				B3478E6725B2F77300F36A1E /* libRNFBFirestore.a */,
+				B3478E6925B2F77300F36A1E /* libRNFBStorage.a */,
+				B3478E6B25B2F77300F36A1E /* libRNGoogleSignin.a */,
+				B3478E6D25B2F77300F36A1E /* libRNLiveAudioStream.a */,
+				B3478E6F25B2F77300F36A1E /* libRNSound.a */,
+				B3478E7125B2F77300F36A1E /* libRNSVG.a */,
+				B3478E7325B2F77300F36A1E /* libRNWatch.a */,
+				B3478E7525B2F77300F36A1E /* libSSZipArchive.a */,
+				B3478E7725B2F77300F36A1E /* libYoga.a */,
+				B3478CC425B2EBC400F36A1E /* libabseil.a */,
+				B3478CC625B2EBC400F36A1E /* libAmplitude-iOS.a */,
+				B3478CC825B2EBC400F36A1E /* libAppAuth.a */,
+				B3478CCA25B2EBC400F36A1E /* libBase64.a */,
+				B3478CCC25B2EBC400F36A1E /* libBoringSSL-GRPC.a */,
+				B3478CCE25B2EBC400F36A1E /* libBVLinearGradient.a */,
+				B3478CD025B2EBC400F36A1E /* libCocoaLumberjack.a */,
+				B3478CD225B2EBC400F36A1E /* libCodePush.a */,
+				B3478CD425B2EBC400F36A1E /* libDoubleConversion.a */,
+				B3478CD625B2EBC400F36A1E /* libFBReactNativeSpec.a */,
+				B3478CE425B2EBC400F36A1E /* libFolly.a */,
+				B3478CE625B2EBC400F36A1E /* libglog.a */,
+				B3478CE825B2EBC400F36A1E /* libGoogleDataTransport.a */,
+				B3478CEA25B2EBC400F36A1E /* libGoogleUtilities.a */,
+				B3478CEC25B2EBC400F36A1E /* libgRPC-C++.a */,
+				B3478CEE25B2EBC400F36A1E /* libgRPC-Core.a */,
+				B3478CF025B2EBC400F36A1E /* libGTMAppAuth.a */,
+				B3478CF225B2EBC400F36A1E /* libGTMSessionFetcher.a */,
+				B3478CF425B2EBC400F36A1E /* libJWT.a */,
+				B3478CF625B2EBC400F36A1E /* libleveldb-library.a */,
+				B3478CF825B2EBC400F36A1E /* libnanopb.a */,
+				B3478CFA25B2EBC400F36A1E /* libObjectiveDropboxOfficial.a */,
+				B3478D0025B2EBC400F36A1E /* libPromisesObjC.a */,
+				B3478D0225B2EBC400F36A1E /* libRCTTypeSafety.a */,
+				B3478D0425B2EBC400F36A1E /* libReact-Core.a */,
+				B3478D0625B2EBC400F36A1E /* libReact-CoreModules.a */,
+				B3478D0825B2EBC400F36A1E /* libReact-cxxreact.a */,
+				B3478D0A25B2EBC400F36A1E /* libReact-jsi.a */,
+				B3478D0C25B2EBC400F36A1E /* libReact-jsiexecutor.a */,
+				B3478D0E25B2EBC400F36A1E /* libReact-jsinspector.a */,
+				B3478D1025B2EBC400F36A1E /* libreact-native-background-timer.a */,
+				B3478D1225B2EBC400F36A1E /* libreact-native-calendar-events.a */,
+				B3478D1425B2EBC400F36A1E /* libreact-native-keep-awake.a */,
+				B3478D1625B2EBC400F36A1E /* libreact-native-netinfo.a */,
+				B3478D1825B2EBC400F36A1E /* libreact-native-splash-screen.a */,
+				B3478D1C25B2EBC400F36A1E /* libreact-native-webview.a */,
+				B3478D1E25B2EBC400F36A1E /* libReact-RCTActionSheet.a */,
+				B3478D2025B2EBC400F36A1E /* libReact-RCTAnimation.a */,
+				B3478D2225B2EBC400F36A1E /* libReact-RCTBlob.a */,
+				B3478D2425B2EBC400F36A1E /* libReact-RCTImage.a */,
+				B3478D2625B2EBC400F36A1E /* libReact-RCTLinking.a */,
+				B3478D2825B2EBC400F36A1E /* libReact-RCTNetwork.a */,
+				B3478D2A25B2EBC400F36A1E /* libReact-RCTSettings.a */,
+				B3478D2C25B2EBC400F36A1E /* libReact-RCTText.a */,
+				B3478D2E25B2EBC400F36A1E /* libReact-RCTVibration.a */,
+				B3478D3025B2EBC400F36A1E /* libReactCommon.a */,
+				B3478D3225B2EBC400F36A1E /* libRNCAsyncStorage.a */,
+				B3478D3425B2EBC400F36A1E /* libRNDefaultPreference.a */,
+				B3478D3625B2EBC400F36A1E /* libRNFBApp.a */,
+				B3478D3825B2EBC500F36A1E /* libRNFBAuth.a */,
+				B3478D3A25B2EBC500F36A1E /* libRNFBDynamicLinks.a */,
+				B3478D3C25B2EBC500F36A1E /* libRNFBFirestore.a */,
+				B3478D3E25B2EBC500F36A1E /* libRNFBStorage.a */,
+				B3478D4025B2EBC500F36A1E /* libRNGoogleSignin.a */,
+				B3478D4225B2EBC500F36A1E /* libRNLiveAudioStream.a */,
+				B3478D4425B2EBC500F36A1E /* libRNSound.a */,
+				B3478D4625B2EBC500F36A1E /* libRNSVG.a */,
+				B3478D4825B2EBC500F36A1E /* libRNWatch.a */,
+				B3478D4A25B2EBC500F36A1E /* libSSZipArchive.a */,
+				B3478D4C25B2EBC500F36A1E /* libYoga.a */,
 				0BB9AD761F5EC6CE001C08DB /* CallKit.framework */,
 				0B93EF7A1EC608550030D24D /* CoreText.framework */,
 				0BB9AD781F5EC6D7001C08DB /* Intents.framework */,
-				E4376CA6886DE68FD7A4294B /* libPods-JitsiMeetSDK.a */,
+				724EDB1921237B632661EEE8 /* Pods_JitsiMeetSDK.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -439,6 +807,14 @@
 				"${PODS_ROOT}/Amplitude-iOS/Amplitude/ComodoCaLimitedRsaCertificationAuthority.der",
 				"${PODS_ROOT}/Amplitude-iOS/Amplitude/ComodoRsaCA.der",
 				"${PODS_ROOT}/Amplitude-iOS/Amplitude/ComodoRsaDomainValidationCA.der",
+				"${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseAnonymousAuthUI.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseAuthUI.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseEmailAuthUI.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseFacebookAuthUI.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseGoogleAuthUI.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseOAuthUI.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebasePhoneAuthUI.bundle",
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-C++/gRPCCertificates-Cpp.bundle",
 			);
@@ -448,6 +824,14 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ComodoCaLimitedRsaCertificationAuthority.der",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ComodoRsaCA.der",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ComodoRsaDomainValidationCA.der",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FacebookSDKStrings.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseAnonymousAuthUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseAuthUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseEmailAuthUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseFacebookAuthUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseGoogleAuthUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseOAuthUI.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebasePhoneAuthUI.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/gRPCCertificates-Cpp.bundle",
 			);
@@ -548,6 +932,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MACH_O_TYPE = staticlib;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -604,6 +989,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MACH_O_TYPE = staticlib;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -618,10 +1004,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = CDF93D491F83B1CD37D701B1 /* Pods-JitsiMeetSDK.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -629,6 +1016,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = src/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = org.jitsi.JitsiMeetSDK.ios;
@@ -646,17 +1034,19 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E0AEE4939B53C646EA7E4858 /* Pods-JitsiMeetSDK.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				DEAD_CODE_STRIPPING = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = src/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				PRODUCT_BUNDLE_IDENTIFIER = org.jitsi.JitsiMeetSDK.ios;

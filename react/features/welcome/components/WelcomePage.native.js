@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+    ImageBackground,
     Animated,
     Keyboard,
     SafeAreaView,
@@ -37,6 +38,9 @@ import WelcomePageLists from './WelcomePageLists';
 import WelcomePageSideBar from './WelcomePageSideBar';
 import styles, { PLACEHOLDER_TEXT_COLOR } from './styles';
 
+import firestore from '@react-native-firebase/firestore';
+
+
 /**
  * The native container rendering the welcome page.
  *
@@ -51,6 +55,7 @@ class WelcomePage extends AbstractWelcomePage {
     constructor(props) {
         super(props);
 
+
         this.state._fieldFocused = false;
         this.state.hintBoxAnimation = new Animated.Value(0);
 
@@ -62,6 +67,7 @@ class WelcomePage extends AbstractWelcomePage {
         // Specially bind functions to avoid function definition on render.
         this._onFieldBlur = this._onFieldFocusChange.bind(this, false);
         this._onFieldFocus = this._onFieldFocusChange.bind(this, true);
+        this.db = firestore();
     }
 
     /**
@@ -75,7 +81,7 @@ class WelcomePage extends AbstractWelcomePage {
     componentDidMount() {
         super.componentDidMount();
 
-        this._updateRoomname();
+        //this._updateRoomname();
 
         const { dispatch } = this.props;
 
@@ -117,7 +123,7 @@ class WelcomePage extends AbstractWelcomePage {
         }
         */
 
-        return this._renderFullUI();
+        return this._renderChatUI();
     }
 
     /**
@@ -167,6 +173,7 @@ class WelcomePage extends AbstractWelcomePage {
      * @returns {void}
      */
     _onFieldFocusChange(focused) {
+
         focused
             && this.setState({
                 _fieldFocused: true
@@ -271,6 +278,62 @@ class WelcomePage extends AbstractWelcomePage {
      *
      * @returns {ReactElement}
      */
+
+     go() {
+
+     }
+
+
+    _renderChatUI() {
+
+      const roomnameAccLabel = 'welcomepage.accessibilityLabel.roomname';
+
+      const { _headerStyles, t } = this.props;
+
+
+      const image = {uri:'backgrounds/nyc.jpg'};
+      //{uri:'https://firebasestorage.googleapis.com/v0/b/backpack-chat-73855.appspot.com/o/stock%2Fpink.jpg?alt=media'};
+
+
+      const welcome = 'Welcome to Backpack Live!\n\nEnter code to join interview.';
+
+      return (<ImageBackground
+        source={image}
+        style={{backgroundColor:'#111',width: '100%', height: '100%', resizeMode:'cover'}}>
+                <SafeAreaView style = {{...styles.roomContainer, flexDirection:'row', justifyContent:'center', marginTop:166}} >
+                      <View style = {{...styles.joinControls, flexDirection:'column', alignItems:'center', width:300, backgroundColor:'#000', padding:10, borderRadius:20, borderWidth:1, borderColor:'rgba(255.0,255.0,255.0,.222)'}} >
+                          <Text style = {{...styles.enterRoomText, textAlign:'center', fontFamily:'Avenir'}}>
+
+                              {welcome}
+
+
+                          </Text>
+                          <TextInput
+                              accessibilityLabel = { t(roomnameAccLabel) }
+                              autoCapitalize = 'none'
+                              autoComplete = 'off'
+                              autoCorrect = { false }
+                              autoFocus = { false }
+                              onBlur = { this._onFieldBlur }
+                              onChangeText = { this._onRoomChange }
+                              onFocus = { this._onFieldFocus }
+                              onSubmitEditing = { this._onJoin }
+                              placeholder = { this.state.roomPlaceholder }
+                              placeholderTextColor = { PLACEHOLDER_TEXT_COLOR }
+                              returnKeyType = { 'go' }
+                              style = {{...styles.textInput, width:150, borderRadius:9, backgroundColor:'#011', borderColor:'#ccc'}}
+                              underlineColorAndroid = 'transparent'
+                              value = { this.state.room } />
+                            <TouchableOpacity onPress = {this._onJoin}>
+                                  <Text style = {{width:150, backgroundColor:'transparent', fontSize:20, paddingTop:10, textAlign:'center',color:'#71ef5e', height:40}}>{'Join'}</Text>
+                            </TouchableOpacity>
+
+                      </View>
+                  </SafeAreaView>
+                </ImageBackground>);
+
+
+    }
     _renderFullUI() {
         const roomnameAccLabel = 'welcomepage.accessibilityLabel.roomname';
         const { _headerStyles, t } = this.props;

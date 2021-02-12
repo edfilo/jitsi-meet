@@ -1,0 +1,16 @@
+{
+  "auth": {
+    "BackpackChat": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  },
+  "storage": {
+    "audio": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation"
+    }
+  }
+}

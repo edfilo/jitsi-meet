@@ -16,6 +16,8 @@ import { HIDE_DIALOG, OPEN_DIALOG } from './actionTypes';
 ReducerRegistry.register('features/base/dialog', (state = {}, action) => {
     switch (action.type) {
     case HIDE_DIALOG: {
+
+        //debugger;
         const { component } = action;
 
         if (typeof component === 'undefined' || state.component === component) {

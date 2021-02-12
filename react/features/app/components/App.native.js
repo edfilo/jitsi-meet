@@ -12,7 +12,7 @@ import { Platform } from '../../base/react';
 import { DimensionsDetector, clientResized } from '../../base/responsive-ui';
 import { updateSettings } from '../../base/settings';
 import logger from '../logger';
-
+import { StatusBar } from 'react-native';
 import { AbstractApp } from './AbstractApp';
 import type { Props as AbstractAppProps } from './AbstractApp';
 
@@ -65,6 +65,7 @@ export class App extends AbstractApp {
     constructor(props: Props) {
         super(props);
 
+
         // In the Release configuration, React Native will (intentionally) throw
         // an unhandled JavascriptException for an unhandled JavaScript error.
         // This will effectively kill the app. In accord with the Web, do not
@@ -93,6 +94,8 @@ export class App extends AbstractApp {
             // We set these early enough so then we avoid any unnecessary re-renders.
             dispatch(setColorScheme(this.props.colorScheme));
             dispatch(updateFlags(this.props.flags));
+
+            StatusBar.setBarStyle('light-content', true);
 
             // Check if serverURL is configured externally and not allowed to change.
             const serverURLChangeEnabled = getFeatureFlag(getState(), SERVER_URL_CHANGE_ENABLED, true);

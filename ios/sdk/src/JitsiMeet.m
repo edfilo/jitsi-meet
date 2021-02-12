@@ -106,7 +106,8 @@
     }
 
     JitsiMeetConferenceOptions *conferenceOptions = [JitsiMeetConferenceOptions fromBuilder:^(JitsiMeetConferenceOptionsBuilder *builder) {
-        builder.room = [url absoluteString];
+        builder.room = url.lastPathComponent;
+        //[url absoluteString];
     }];
 
     return [JitsiMeetView setPropsInViews:[conferenceOptions asProps]];
@@ -146,7 +147,10 @@
         NSURL *url = userActivity.webpageURL;
         if ([_universalLinkDomains containsObject:url.host]) {
             return [JitsiMeetConferenceOptions fromBuilder:^(JitsiMeetConferenceOptionsBuilder *builder) {
-                builder.room = [url absoluteString];
+                builder.room = url.lastPathComponent;
+                builder.serverURL = [url URLByDeletingLastPathComponent];
+
+                //[url absoluteString];
             }];
         }
     } else if ([activityType isEqualToString:@"INStartAudioCallIntent"]

@@ -31,23 +31,47 @@
 
     jitsiMeet.conferenceActivityType = JitsiMeetConferenceActivityType;
     jitsiMeet.customUrlScheme = @"org.jitsi.meet";
-  jitsiMeet.universalLinkDomains = @[@"meet.jit.si", @"alpha.jitsi.net", @"beta.meet.jit.si", @"edsvbar.com"];
+    jitsiMeet.universalLinkDomains = @[@"meet.jit.si", @"alpha.jitsi.net", @"beta.meet.jit.si", @"edsvbar.com"];
 
     jitsiMeet.defaultConferenceOptions = [JitsiMeetConferenceOptions fromBuilder:^(JitsiMeetConferenceOptionsBuilder *builder) {
-        [builder setFeatureFlag:@"resolution" withValue:@(360)];
+
         builder.serverURL = [NSURL URLWithString:@"https://edsvbar.com"];
-        builder.welcomePageEnabled = NO;
-      builder.room = @"eds";
+        builder.welcomePageEnabled = YES;
+        builder.room = @"";
 
-
+      [builder setFeatureFlag:@"resolution" withValue:@(360)];
       [builder setFeatureFlag:@"calendar.enabled" withBoolean:NO];
       [builder setFeatureFlag:@"chat.enabled" withBoolean:NO];
+      [builder setFeatureFlag:@"ios.recording.enabled" withBoolean:NO];
 
-        // Apple rejected our app because they claim requiring a
-        // Dropbox account for recording is not acceptable.
-#if DEBUG
-        [builder setFeatureFlag:@"ios.recording.enabled" withBoolean:YES];
-#endif
+      [builder setFeatureFlag:@"add-people.enabled" withBoolean:NO];
+      [builder setFeatureFlag:@"call-integration.enabled" withBoolean:NO];
+      [builder setFeatureFlag:@"close-captions.enabled" withBoolean:NO];
+      [builder setFeatureFlag:@"conference-timer.enabled" withBoolean:NO];
+      [builder setFeatureFlag:@"chat.enabled" withBoolean:NO];
+      [builder setFeatureFlag:@"filmstrip.enabled" withBoolean:NO];
+      [builder setFeatureFlag:@"invite.enabled" withBoolean:YES];
+
+      [builder setFeatureFlag:@"ios.recording.enabled" withBoolean:NO];
+      [builder setFeatureFlag:@"kick-out.enabled" withBoolean:NO];
+      [builder setFeatureFlag:@"live-streaming.enabled" withBoolean:NO];
+
+      [builder setFeatureFlag:@"meeting-name.enabled" withBoolean:NO];
+      [builder setFeatureFlag:@"meeting-password.enabled" withBoolean:NO];
+
+      [builder setFeatureFlag:@"notifications.enabled" withBoolean:NO];
+
+      [builder setFeatureFlag:@"pic.enabled" withBoolean:YES];
+
+      [builder setFeatureFlag:@"raise-hand.enabled" withBoolean:NO];
+
+      [builder setFeatureFlag:@"recording.enabled" withBoolean:NO];
+
+      [builder setFeatureFlag:@"server-url-change.enabled" withBoolean:NO];
+
+      [builder setFeatureFlag:@"video-share.enabled" withBoolean:NO];
+
+
     }];
 
   [jitsiMeet application:application didFinishLaunchingWithOptions:launchOptions];
@@ -58,9 +82,14 @@
   if ([FIRUtilities appContainsRealServiceInfoPlist]) {
         NSLog(@"Enabling Firebase");
         [FIRApp configure];
+    
         // Crashlytics defaults to disabled wirth the FirebaseCrashlyticsCollectionEnabled Info.plist key.
         // [[FIRCrashlytics crashlytics] setCrashlyticsCollectionEnabled:![jitsiMeet isCrashReportingDisabled]];
     }
+
+  NSLog(@"WAKEFIELD:");
+  
+  [FIRDynamicLinks performDiagnosticsWithCompletion:nil];
 
 
     ViewController *rootController = (ViewController *)self.window.rootViewController;

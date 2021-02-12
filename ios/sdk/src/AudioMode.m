@@ -270,6 +270,7 @@ RCT_EXPORT_METHOD(updateDeviceList) {
                 [session lockForConfiguration];
                 [session overrideOutputAudioPort:AVAudioSessionPortOverrideSpeaker error:nil];
                 [session unlockForConfiguration];
+
             }
         }
     });

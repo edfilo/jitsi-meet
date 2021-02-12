@@ -157,10 +157,10 @@ export function getBackendSafeRoomName(room: ?string): ?string {
     // doesn't change the string value.
 
     const r = room.toLowerCase().replace("-dev", "");
-    console.log('miami safe ' + r);
+    console.log('miami safe roomname ' + r);
     return r;
 
-    return r;
+
 }
 
 /**

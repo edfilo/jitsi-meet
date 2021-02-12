@@ -130,6 +130,7 @@ import { createPresenterEffect } from './react/features/stream-effects/presenter
 import { endpointMessageReceived } from './react/features/subtitles';
 import UIEvents from './service/UI/UIEvents';
 
+
 const logger = Logger.getLogger(__filename);
 
 const eventEmitter = new EventEmitter();
@@ -705,7 +706,7 @@ export default {
         }
 
         APP.UI.startVideo();
-        
+
 
         // XXX The API will take care of disconnecting from the XMPP
         // server (and, thus, leaving the room) on unload.

@@ -37,9 +37,9 @@
 
 #if DEBUG
 static NSURL *serverRootWithHost(NSString *host) {
-    return
-        [NSURL URLWithString:
-                [NSString stringWithFormat:@"http://%@:8081/", host]];
+    //:8081/
+    return [NSURL URLWithString:
+                [NSString stringWithFormat:@"http://%@", host]];
 }
 
 - (BOOL)isPackagerRunning:(NSString *)host {
@@ -65,6 +65,8 @@ static NSURL *serverRootWithHost(NSString *host) {
     return [status isEqualToString:@"packager-status:running"];
 }
 
+
+
 - (NSString *)guessPackagerHost {
     /*
     static NSString *ipGuess;
@@ -85,11 +87,14 @@ static NSURL *serverRootWithHost(NSString *host) {
      */
 
     //NSString *host = ipGuess ?: @"localhost";
+    NSString *host = @"e1f068e21ebd.ngrok.io";
+   // NSString *host = @"backpackstudio.page.link/bundle";
+    //@"localhost";// @"10.0.0.133";
+    //NSString *host =  @"10.0.0.133";
 
-    NSString *host = @"10.0.0.133";
-    //@"336ac3f758d0.ngrok.io";
+    // NSString *host =  @"localhost";//@"5a2f6a95fb40.ngrok.io";
 
-    NSLog(@"YOU ARE HERE MIAMI");
+    NSLog(@"bridge connecting to %@", host);
 
     if ([self isPackagerRunning:host]) {
         return host;
@@ -102,6 +107,10 @@ static NSURL *serverRootWithHost(NSString *host) {
 #pragma mark RCTBridgeDelegate methods
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge {
+
+//    return [[NSBundle mainBundle] URLForResource:@"main"withExtension:@"jsbundle"];
+
+
 #if DEBUG
     // In debug mode, try to fetch the bundle from the packager, or fallback to
     // the one inside the framework. The IP address for the packager host is
@@ -110,6 +119,7 @@ static NSURL *serverRootWithHost(NSString *host) {
     // This duplicates some functionality present in RCTBundleURLProvider, but
     // that mode is not designed to work inside a framework, because all
     // resources are loaded from the main bundle.
+
 
 
     NSString *host = [self guessPackagerHost];
@@ -126,6 +136,8 @@ static NSURL *serverRootWithHost(NSString *host) {
 
         return components.URL;
     }
+
+    
 #endif
 
     return [[NSBundle bundleForClass:self.class] URLForResource:@"main"
