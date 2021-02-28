@@ -32,7 +32,6 @@
 		87FE6F3321E52437004A5DC7 /* incomingMessage.wav in Resources */ = {isa = PBXBuildFile; fileRef = 87FE6F3221E52437004A5DC7 /* incomingMessage.wav */; };
 		A4414AE020B37F1A003546E6 /* rejected.wav in Resources */ = {isa = PBXBuildFile; fileRef = A4414ADF20B37F1A003546E6 /* rejected.wav */; };
 		A480429C21EE335600289B73 /* AmplitudeModule.m in Sources */ = {isa = PBXBuildFile; fileRef = A480429B21EE335600289B73 /* AmplitudeModule.m */; };
-		A4A934E9212F3ADB001E9388 /* Dropbox.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A934E8212F3ADB001E9388 /* Dropbox.m */; };
 		C30F88D0CB0F4F5593216D24 /* liveStreamingOff.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C30F88D1CB0F4F5593216D24 /* liveStreamingOff.mp3 */; };
 		C30F88D2CB0F4F5593216D24 /* liveStreamingOn.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C30F88D3CB0F4F5593216D24 /* liveStreamingOn.mp3 */; };
 		C6245F5D2053091D0040BE68 /* image-resize@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C6245F5B2053091D0040BE68 /* image-resize@2x.png */; };
@@ -277,7 +276,6 @@
 		B3478EC225B2F8E800F36A1E /* libRNWatch.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNWatch.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3478EC325B2F8E800F36A1E /* libSSZipArchive.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libSSZipArchive.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3478EC425B2F8E800F36A1E /* libYoga.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libYoga.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		B39F2D2525C372C90095272E /* main.jsbundle */ = {isa = PBXFileReference; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		C30F88D1CB0F4F5593216D24 /* liveStreamingOff.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = liveStreamingOff.mp3; path = ../../sounds/liveStreamingOff.mp3; sourceTree = "<group>"; };
 		C30F88D3CB0F4F5593216D24 /* liveStreamingOn.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = liveStreamingOn.mp3; path = ../../sounds/liveStreamingOn.mp3; sourceTree = "<group>"; };
 		C6245F5B2053091D0040BE68 /* image-resize@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "image-resize@2x.png"; path = "src/picture-in-picture/image-resize@2x.png"; sourceTree = "<group>"; };
@@ -353,7 +351,6 @@
 		0BD906DB1EC0C00300C8C18E = {
 			isa = PBXGroup;
 			children = (
-				B39F2D2525C372C90095272E /* main.jsbundle */,
 				9C3C6FA2341729836589B856 /* Frameworks */,
 				0BD906E61EC0C00300C8C18E /* Products */,
 				0BCA49681EC4BBE500B793EE /* Resources */,
@@ -866,7 +863,6 @@
 				C69EFA0C209A0F660027712B /* JMCallKitEmitter.swift in Sources */,
 				DEFE535621FB2E8300011A3A /* ReactUtils.m in Sources */,
 				C6A34261204EF76800E062DD /* DragGestureController.swift in Sources */,
-				A4A934E9212F3ADB001E9388 /* Dropbox.m in Sources */,
 				C69EFA0D209A0F660027712B /* JMCallKitProxy.swift in Sources */,
 				DE81A2D52316AC4D00AE1940 /* JitsiMeetLogger.m in Sources */,
 				C69EFA0E209A0F660027712B /* JMCallKitListener.swift in Sources */,

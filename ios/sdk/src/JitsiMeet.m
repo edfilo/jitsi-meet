@@ -16,7 +16,7 @@
 
 #import <Intents/Intents.h>
 
-#import "Dropbox.h"
+//#import "Dropbox.h"
 #import "JitsiMeet+Private.h"
 #import "JitsiMeetConferenceOptions+Private.h"
 #import "JitsiMeetView+Private.h"
@@ -73,7 +73,7 @@
 
     _launchOptions = [launchOptions copy];
 
-    [Dropbox setAppKey];
+  //  [Dropbox setAppKey];
 
     return YES;
 }
@@ -91,9 +91,11 @@
             openURL:(NSURL *)url
             options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
 
+    /*
     if ([Dropbox application:app openURL:url options:options]) {
         return YES;
     }
+*/
 
     if ([RNGoogleSignin application:app
                             openURL:url

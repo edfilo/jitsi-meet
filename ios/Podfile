@@ -6,6 +6,7 @@ install! 'cocoapods', :deterministic_uuids => false
 
 use_frameworks! :linkage => :static
 
+#pod 'iCimulator'
 
 pod 'RNFBApp', :path => '../node_modules/@react-native-firebase/app'
 pod 'RNFBAuth', :path => '../node_modules/@react-native-firebase/auth'

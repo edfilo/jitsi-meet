@@ -12,6 +12,7 @@ import { UnsupportedDesktopBrowser } from '../unsupported-browser';
 import {
     BlankPage,
     WelcomePage,
+    SettingsPage,
     isWelcomePageAppEnabled,
     isWelcomePageUserEnabled
 } from '../welcome';
@@ -54,17 +55,30 @@ export function _getRouteToRender(stateful: Function | Object): Promise<Route> {
  * @returns {Promise<Route>}
  */
 function _getMobileRoute(state): Promise<Route> {
+
     const route = _getEmptyRoute();
 
-    if (isRoomValid(state['features/base/conference'].room)) {
+    const hasname = state['features/base/settings'].displayName;
+    const hasroom = isRoomValid(state['features/base/conference'].room);
+
+    route.component = Conference;
+
+    if (hasname && hasroom) {
         route.component = Conference;
-    } else if (isWelcomePageAppEnabled(state)) {
+    } else  {
         route.component = WelcomePage;
-    } else {
-        route.component = BlankPage;
     }
 
     return Promise.resolve(route);
+
+/*
+    if (isWelcomePageAppEnabled(state))
+     else {
+        route.component = BlankPage;
+    }
+*/
+    
+
 }
 
 /**
@@ -75,8 +89,11 @@ function _getMobileRoute(state): Promise<Route> {
  * @returns {Promise<Route>|undefined}
  */
 function _getWebConferenceRoute(state): ?Promise<Route> {
+
     if (!isRoomValid(state['features/base/conference'].room)) {
+
         return;
+
     }
 
     const route = _getEmptyRoute();
@@ -95,6 +112,7 @@ function _getWebConferenceRoute(state): ?Promise<Route> {
 
     return getDeepLinkingPage(state)
         .then(deepLinkComponent => {
+
             if (deepLinkComponent) {
                 route.component = deepLinkComponent;
             } else if (isSupportedBrowser()) {

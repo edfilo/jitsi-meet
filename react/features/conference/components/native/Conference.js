@@ -64,6 +64,10 @@ import { Dimensions } from 'react-native';
 
 import { doInvitePeople } from '../../../invite/actions.native';
 
+// Import the react-native-sound module
+import Sound from 'react-native-sound';
+
+
 
 
 
@@ -134,6 +138,7 @@ class Conference extends AbstractConference<Props, *> {
      * instance is to be initialized.
      */
     constructor(props) {
+
         super(props);
 
         // Bind event handlers so they are only bound once per instance.
@@ -145,23 +150,27 @@ class Conference extends AbstractConference<Props, *> {
 
         this.state = {
           streaming:false
-        //  bgimage: "https://edsvbar.com/backgrounds/dive.jpg",
-        //  updateParentState: (newState) => this.setState(newState)
+          //  bgimage: "https://edsvbar.com/backgrounds/dive.jpg",
+          //  updateParentState: (newState) => this.setState(newState)
         }
 
         this.db = firestore();
         this.firestore = firestore;
 
+        this.deviceInfo = DeviceInfo;
 
+        this.isStudio = this.deviceInfo.getBundleId() == 'com.filowatt.backpackstudio';
 
-    const options = {
-      sampleRate: 441000,  // default is 44100 but 32000 is adequate for accurate voice recognition
-      channels: 1,        // 1 or 2, default 1
-      bitsPerSample: 16,  // 8 or 16, default 16
-      audioSource: 6,     // android only (see below)
-    };
-    LiveAudioStream.init(options);
+        const options = {
+          sampleRate: 44100,  // default is 44100 but 32000 is adequate for accurate voice recognition
+          channels: 1,        // 1 or 2, default 1
+          bitsPerSample: 16,  // 8 or 16, default 16
+          audioSource: 6,     // android only (see below)
+        };
 
+        LiveAudioStream.init(options);
+
+        Sound.setCategory('PlayAndRecord');
 
     }
 
@@ -185,45 +194,61 @@ class Conference extends AbstractConference<Props, *> {
 
      updateStuff(slug) {
 
-        return;
+       if(!slug){
 
-                 //this.setBG();
-                 //this.showDisplayName();
-                 //debugger;
+         alert('studio id missing');
+         return;
 
-                 const firestore = this.db
+       }
+
+       const firestore = this.db
                        .collection('interviews')
                        .doc(slug)
                        .onSnapshot(documentSnapshot => {
 
+                         console.log('dunkin callback');
                            if(!documentSnapshot.data()){
-                             //this.setBG();
-                             alert('could not find room '+ slug);
+                             alert('could not find '+ slug);
                              return;
                            }
 
-                           //alert('snap ' + (documentSnapshot.data().title ? documentSnapshot.data().title : 'no title'));
 
                            if(documentSnapshot.data().title){
                              this.setState({title:documentSnapshot.data().title});
                           }
 
                            if(documentSnapshot.data().date){
-                             const date = documentSnapshot.data().date.toDate();
-                             this.setState({dateString: date.toLocaleString()});
+
+                             const millis = documentSnapshot.data().date.toMillis();
+                             const date = new Date(millis);
+                             const options = {day: "numeric",hour: "numeric",minute: "2-digit",month: "short",weekday: "short", timeZoneName:'short'};
+                             this.setState({dateString:  date.toLocaleString("en-US", options)});
+
                            }
 
-                           //this.setMeta(documentSnapshot.data());
-                           //this.setTitle();
+                           if(documentSnapshot.data().backgroundImage){
+                             this.setState({backgroundImageFilename:documentSnapshot.data().backgroundImage});
+                           }
+
+                           const isRecording = documentSnapshot.data().state == 'recording';
+                           const isPaused = documentSnapshot.data().state == 'paused';
+                           const parentID = documentSnapshot.data().parentID;
+                           if(!this.state.isRecording && isRecording)this.startRecording(parentID, documentSnapshot.data().timestamp);
+                           if(this.state.isRecording && !isRecording)this.stopRecording();
+
+                           this.setState({isRecording:isRecording});
+                           this.setState({isPaused:isPaused});
+
                            this.setBG();
-                           //debugger;
-                             //alert(documentSnapshot.data().title);
-                            //this.props.dispatch(setBarMetaData(documentSnapshot.data()));
+
+                        },  error => {
+
+                              alert(error);
                         });
 
      }
 
-
+     /*
     componentDidUpdate(prev) {
 
       //console.log('component did update');
@@ -235,6 +260,7 @@ class Conference extends AbstractConference<Props, *> {
         }
 
     }
+    */
 
 
   showDisplayName(onPostSubmit) {
@@ -266,16 +292,12 @@ class Conference extends AbstractConference<Props, *> {
   }
 
 
-
     saveChunk(idx, data) {
 
-
+      if(!data){
+        console.log('nil data');
+      }
       base64.decode(data);
-
-      //console.log(data);
-
-      //var dec = window.atob(enc);
-
 
       const blobdata = {
         blob: this.firestore.Blob.fromBase64String(data),
@@ -283,9 +305,12 @@ class Conference extends AbstractConference<Props, *> {
         time: this.firestore.Timestamp.fromDate(new Date())
       };
 
-      const droop = this.db.collection('episodes').doc('episodea')
-      .collection('recordings').doc('recordinga').collection('chunks')
-      .add(blobdata);
+      //debugger;
+      this.recordingRef.collection('chunks').add(blobdata);
+
+      //const droop = this.db.collection('interviews').doc(this.props._slug)
+      //.collection('recordings').doc(this.recordingID).collection('chunks')
+      //.add(blobdata);
 
     }
 
@@ -295,33 +320,92 @@ class Conference extends AbstractConference<Props, *> {
       this.props.dispatch(doInvitePeople());
     }
 
-    startRecording() {
+
+    uuid () {
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+          var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+          return v.toString(16);
+      });
+    }
 
 
-      const droopa = firestore()
-            .collection('episodes')
-            .doc('episodea')
+
+    stopRecording() {
+
+
+
+      console.log('stopping!');
+      LiveAudioStream.stop();
+
+      const recordingID = this.recordingRef.id;
+
+      //const  url = 'http://localhost:5001/backpack-chat-73855/us-central1/app/recording/' + this.recordingRef.id + '/stitch';
+      const url = 'https://us-central1-backpack-chat-73855.cloudfunctions.net/app/recording/' + recordingID + '/stitch';
+
+      fetch(url).then(function(r){
+
+          debugger;
+      });
+/*
+      const getArticlesFromApi = async () => {
+          try {
+
+
+
+            console.log('calling ' + url);
+            let response = await fetch(url, {
+                method: 'GET',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                }});
+
+            let json = await response.json();
+            console.log('tropicana');
+            console.log(json);
+          } catch (error) {
+             console.error(error);
+          }
+      };
+
+      getArticlesFromApi();
+*/
+
+
+      //alert('made a file maybe');
+
+    }
+
+    startRecording(parentID, offset) {
+
+      //this.recordingID = this.uuid();
+      //debugger;
+
+      this.recordingRef = firestore()
+            .collection('interviews')
+            .doc(this.props._slug)
             .collection('recordings')
-            .doc('recordinga').delete();
+            .doc();
+
+
+            //    console.log('tropicana docref id ' + this.recordingRef.id);
+            this.recordingRef.set({
+                      recordingID: this.recordingRef.id,
+                      offset: offset,
+                      parentID: parentID,
+                      username: 'Fred',
+                      timestamp: this.firestore.FieldValue.serverTimestamp()
+                });
+
+            //});
 
       this.chunkCount = 0;
-      const streaming = !this.state.streaming;
-
-      this.setState({streaming:streaming});
-
-
-
-      if(streaming){
-
-        //  this.startMultiUpload('asldkfjalsdkfjalsdkfjlasdk jlasdkj flasdk jfalsdk jlasdk jfalsdkjflsdkfjlsadk jflaskdj flasdkjf alsdkjf lsdkafj asldk jflasdkafjalskdjfaslkd', 'test.m4a');
-
 
         const parent = this;
 
         LiveAudioStream.on('data', data => {
 
-
-          //console.log('writing data');
+          console.log('writing data');
 
           parent.saveChunk(parent.chunkCount, data);
 
@@ -335,27 +419,13 @@ class Conference extends AbstractConference<Props, *> {
         //LiveAudioStream.stop();
         LiveAudioStream.start();
 
-
-      } else {
-
-        this.booleanStop = false;
-
-        console.log('stopping!');
-        LiveAudioStream.stop();
-        alert('made a file maybe');
-
-      }
-
-
     }
+
+
 
     getChunks() {
 
-      const droopa = firestore()
-            .collection('episodes')
-            .doc('episodea')
-            .collection('recordings')
-            .doc('recordinga')
+      const droopa = this.recordingRef
             .collection('chunks').get()
             .then(data => {
 
@@ -367,21 +437,24 @@ class Conference extends AbstractConference<Props, *> {
 
     }
 
+    setBG() {
 
-    async setBG() {
+        this.setState({bgurl:'backgrounds/' + this.state.backgroundImageFilename});
+
+    }
 
 
+    async setBGServer() {
 
       const bgimageurl = await storage()
-          .ref(this.props._slug + '/image.jpg')
+          .ref(this.props._slug + '/' + this.state.backgroundImageFilename)
           .getDownloadURL();
 
-     this.setState({bgurl:bgimageurl});
+      this.setState({bgurl:bgimageurl});
 
 
     }
 
-    //setMeta(data)
 
     componentDidMount() {
         BackButtonRegistry.addListener(this._onHardwareBackPress);
@@ -389,12 +462,15 @@ class Conference extends AbstractConference<Props, *> {
 
         const slug =  this.props._slug;
         if(slug){
+            //alert('slug on mount');
           this.updateStuff(slug);
           console.log('FL component did mount slug ' + slug);
         }else {
+          alert('missing slug on mount');
           console.log('FL component did mount no slug');
         }
 
+        //this.showDisplayName();
 
 
     }
@@ -421,7 +497,6 @@ class Conference extends AbstractConference<Props, *> {
     render() {
         return (
             <Container style = { styles.conference }>
-
                 { this._renderContent() }
             </Container>
         );
@@ -535,19 +610,20 @@ class Conference extends AbstractConference<Props, *> {
 
         const image = {uri: (this.state.bgurl || defimage)}
 
-        const buttonText = this.state.streaming ? 'RECORDING' : 'NOT RECORDING';
 
           const windowWidth = this.state.viewWidth || Dimensions.get('window').width;
           const windowHeight = this.state.viewHeight || Dimensions.get('window').height;
 
         const padding = {top:30, left:10, right:10, bottom:30};
 
+        const topMargin = this.isStudio ? 5 : 60;
+        const bottomMargin = this.isStudio ? 5 : 30;
 
         return (
           <View onLayout={(event) => { this.find_dimensions(event.nativeEvent.layout) }} style={styles.container}>
             <ImageBackground
             source={image}
-            style={{backgroundColor:'#222',width: '100%', height: '100%', resizeMode:'cover'}}>
+            style={{backgroundColor:'#111',width: '100%', height: '100%', resizeMode:'cover'}}>
 
                 {/*
                   * The LargeVideo is the lowermost stacking layer.
@@ -577,16 +653,28 @@ class Conference extends AbstractConference<Props, *> {
                         </TintedView>
                 }
 
-              {/*  <TouchableOpacity onPress={ () => this.exit() }
-                  style = {{ position:'absolute', height:40, width:40, left:0, top:0}}
-                >
-                  <View style = {{backgroundColor:'red', height:25, width:25, top:7, left:7, borderRadius:15}} />
-                </TouchableOpacity>
-              */}
-
-                <Text style = {{textAlign:'center', fontFamily:'Avenir', color:'rgba(255, 255, 255, .71)', fontSize:20, position:'absolute', width:250, height:30, top:10, left:(windowWidth - 250.0) * .5 }}>{this.state.title}</Text>
 
 
+                <Text style = {{textAlign:'center', fontFamily:'Avenir',  color:'rgba(255, 255, 255, 1.0)', fontSize:22, position:'absolute', width:250, height:30, top:0 + topMargin, left:(windowWidth - 250.0) * .5 }}>
+                {this.state.title}
+                </Text>
+                <Text style = {{textAlign:'center', fontFamily:'Avenir',   color:'rgba(255, 255, 255, 1.0)', fontSize:13, position:'absolute', width:250, height:30, top:40 + topMargin, left:(windowWidth - 250.0) * .5 }}>
+                {this.state.dateString}
+                </Text>
+
+
+              {<Text style = {{backgroundColor:'black', fontWeight:'bold', overflow:'hidden', borderRadius:15, textAlignVertical:'center', paddingTop:0, textAlign:'center', fontFamily:'Avenir',   color:(this.state.isRecording ? 'rgba(255, 5, 5, 1.0)':'rgba(255, 255, 255, .25)'), fontSize:20, lineHeight:40, position:'absolute', width:177, height:40, bottom:bottomMargin, left:(windowWidth - 177.0) * .5 }}>
+            {'RECORDING'}
+                </Text>}
+
+{/*
+                <Image style = {{position:'absolute',
+                 width:233,
+                 height:233 / 4.58,
+                 bottom:bottomMargin,
+                 left:(windowWidth - 233.0) * .5}}
+                 source={{uri: this.state.isRecording ? 'liveicons/recordingon.png' : 'liveicons/recordingoff.png' }}/>
+*/}
 
                 <View
                     pointerEvents = 'box-none'
@@ -612,14 +700,13 @@ class Conference extends AbstractConference<Props, *> {
                         _shouldDisplayTileView ? undefined : <Filmstrip />
                     }
 
-                    <TouchableOpacity onPress={ () => this.invite() }
-                      style = {{position:'absolute', height:40, width:133, borderRadius:20, left:(windowWidth - 133.0) * .5, bottom:5, backgroundColor:'green'}}
-                    >
-
-
-                    <Text style = {{fontWeight:'500', paddingTop:10, fontFamily:'Avenir', width:'100%', height:'100%',color:'white', textAlign:'center'}}>Invite Guests</Text>
-
+                    {/*
+                      <TouchableOpacity onPress={ () => this.invite() }
+                      style = {{position:'absolute', height:40, width:133, borderRadius:20, left:(windowWidth - 133.0) * .5, bottom:5, backgroundColor:'green'}}>
+                        <Text style = {{fontWeight:'500', paddingTop:10, fontFamily:'Avenir', width:'100%', height:'100%',color:'white', textAlign:'center'}}>Invite Guests</Text>
                     </TouchableOpacity>
+                */}
+
 
 
                     {/*

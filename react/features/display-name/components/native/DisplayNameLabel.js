@@ -40,10 +40,11 @@ class DisplayNameLabel extends Component<Props> {
      *
      * @inheritdoc
      */
+
     render() {
-        if (!this.props._render) {
-            return null;
-        }
+      //  if (!this.props._render) {
+        //    return null;
+      //  }
 
         return (
             <View style = { styles.displayNameBackdrop }>
@@ -73,7 +74,7 @@ function _mapStateToProps(state: Object, ownProps: Props) {
     // participant and there is no video rendered for
     // them.
     const _render = Boolean(participantId)
-        && localParticipant?.id !== participantId
+      //  && localParticipant?.id !== participantId
         && !shouldRenderParticipantVideo(state, participantId)
         && !isFakeParticipant;
 

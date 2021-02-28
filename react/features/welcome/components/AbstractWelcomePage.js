@@ -190,7 +190,11 @@ export class AbstractWelcomePage extends Component<Props, *> {
      * @returns {void}
      */
     _onJoin() {
+
+
         const room = this.state.room || this.state.generatedRoomname;
+
+
 
         sendAnalytics(
             createWelcomePageEvent('clicked', 'joinButton', {
@@ -201,27 +205,14 @@ export class AbstractWelcomePage extends Component<Props, *> {
         if (room) {
             this.setState({ joining: true });
 
+            this.props.dispatch(appNavigate(room))
+                .then(onAppNavigateSettled, onAppNavigateSettled);
+
+
             // By the time the Promise of appNavigate settles, this component
             // may have already been unmounted.
             const onAppNavigateSettled
                 = () => this._mounted && this.setState({ joining: false });
-
-
-            const doc = this.db.collection('interviews')
-                      .doc(room).get().then(function(d){
-
-                        if(d.exists){
-
-                          this.props.dispatch(appNavigate(room))
-                              .then(onAppNavigateSettled, onAppNavigateSettled);
-
-                        } else {
-
-                          alert(room + 'not found.');
-                          
-                        }
-
-              });
 
 
         }

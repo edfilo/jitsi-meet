@@ -143,6 +143,7 @@ function Thumbnail(props: Props) {
     const videoMuted = !videoTrack || videoTrack.muted;
     const isScreenShare = videoTrack && videoTrack.videoType === VIDEO_TYPE.DESKTOP;
 
+
     return (
         <Container
           //  onClick = { _onClick }
@@ -168,11 +169,9 @@ function Thumbnail(props: Props) {
               zOrder = { 1 } />
 
 
-
-
-            {/* renderDisplayName && <Container style = { styles.displayNameContainer }>
+            { renderDisplayName && <Container style = {{...styles.displayNameContainer, bottom:0}}>
                 <DisplayNameLabel participantId = { participantId } />
-            </Container> */}
+            </Container> }
 
             { renderModeratorIndicator
                 && <View style = { styles.moderatorIndicatorContainer }>

@@ -206,9 +206,7 @@ class TileView extends Component<Props, State> {
         const columns = this._getColumnCount();
 
         const heightToUse = this.props.style.height;
-        // _height;// - (MARGIN * 2);
         const widthToUse = this.props.style.width;
-        // _width;// - (MARGIN * 2);
         let tileWidth;
 
 
@@ -227,11 +225,13 @@ class TileView extends Component<Props, State> {
         const height = isYouTube ? 180 : (width * (4.0/5.0));
 
         const left = (widthToUse * ((1.0 - shrink) * .5)) + col * (widthToUse / cols) + Math.max((col - .5) * this.padding, 0.0);
-        const top = row * height + Math.max((row - .5) * this.padding, 0.0);
+        var top = row * height + Math.max((row - .5) * this.padding, 0.0);
 
+        //if(rows == 1)top = -200;
 
-        const topMargin = (heightToUse - rows * height + (this.padding * (rows - 1.0))) * .5;
+        var topMargin = (heightToUse - rows * height + (this.padding * (rows - 1.0))) * .5;
 
+        if(rows == 1)topMargin = 133;
 /*
         console.log('layout engine'
         + ' headcount:' + headcount
@@ -284,7 +284,7 @@ class TileView extends Component<Props, State> {
                     disableTint = { true }
                     key = { participant.id }
                     participant = { participant }
-                    renderDisplayName = { false }
+                    renderDisplayName = { true }
                     styleOverrides = {{
                       position:'absolute'
                       ,width:this._getTileDimensions(participant.isFakeParticipant, idx).width
@@ -295,17 +295,6 @@ class TileView extends Component<Props, State> {
                     tileView = { true }>
 
                 </Thumbnail>
-                {/*<Text key = { 'key' + participant.id }
-                style = {{position:'absolute'
-                ,color:'white'
-                ,width:this._getTileDimensions(participant.isFakeParticipant, idx).width
-                ,height:this._getTileDimensions(participant.isFakeParticipant, idx).height
-                ,left:this._getTileDimensions(participant.isFakeParticipant, idx).left
-                ,top:this._getTileDimensions(participant.isFakeParticipant, idx).top
-                }}>
-                name:
-                {participant.name}
-              </Text>*/}
               </View>
             ));
 

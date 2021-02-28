@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {
     ImageBackground,
     Animated,
@@ -40,6 +41,8 @@ import styles, { PLACEHOLDER_TEXT_COLOR } from './styles';
 
 import firestore from '@react-native-firebase/firestore';
 
+import { updateSettings } from '../../base/settings';
+
 
 /**
  * The native container rendering the welcome page.
@@ -53,8 +56,8 @@ class WelcomePage extends AbstractWelcomePage {
      * @inheritdoc
      */
     constructor(props) {
-        super(props);
 
+        super(props);
 
         this.state._fieldFocused = false;
         this.state.hintBoxAnimation = new Animated.Value(0);
@@ -67,7 +70,31 @@ class WelcomePage extends AbstractWelcomePage {
         // Specially bind functions to avoid function definition on render.
         this._onFieldBlur = this._onFieldFocusChange.bind(this, false);
         this._onFieldFocus = this._onFieldFocusChange.bind(this, true);
+
+        this._onPressRoom = this._onPressRoom.bind(this);
+        this._onPressStudioBeta = this._onPressStudioBeta.bind(this);
+        this._onPressDisplayName = this._onPressDisplayName.bind(this);
+        this._onDisplayNameChange = this._onDisplayNameChange.bind(this);
+
         this.db = firestore();
+
+        this.validRoom = false;
+
+        this.state.room = 'test';//'kxgv8';
+
+    }
+
+    componentDidUpdate() {
+
+      if(this.props._hasRoom && this.props._hasDisplayName){
+
+        if(!this.isJoining){
+          this._onJoin();
+          this.isJoining = true;
+        }
+
+      }
+
     }
 
     /**
@@ -81,13 +108,14 @@ class WelcomePage extends AbstractWelcomePage {
     componentDidMount() {
         super.componentDidMount();
 
-        //this._updateRoomname();
-
         const { dispatch } = this.props;
 
         if (this.props._settings.startAudioOnly) {
+
             dispatch(destroyLocalTracks());
+
         } else {
+
             dispatch(destroyLocalDesktopTrackIfExists());
 
             // Make sure we don't request the permission for the camera from
@@ -241,37 +269,39 @@ class WelcomePage extends AbstractWelcomePage {
         const { t } = this.props;
         let children;
 
-
         if (this.state.joining) {
             // TouchableHighlight is picky about what its children can be, so
             // wrap it in a native component, i.e. View to avoid having to
             // modify non-native children.
-            children = (
-                <View>
+
+            children = (<View>
                     <LoadingIndicator
                         color = { styles.buttonText.color }
                         size = 'small' />
-                </View>
-            );
+                </View>) ;
+
         } else {
+
             children = (
                 <Text style = { styles.buttonText }>
                     { this.props.t('welcomepage.join') }
                 </Text>
             );
+
         }
 
         return (
             <TouchableHighlight
                 accessibilityLabel =
                     { t('welcomepage.accessibilityLabel.join') }
-                onPress = { this._onJoin }
+                onPress = { this._onPress }
                 style = { styles.button }
                 underlayColor = { ColorPalette.white }>
                 { children }
-            </TouchableHighlight>
-        );
+            </TouchableHighlight>);
     }
+
+
 
     /**
      * Renders the full welcome page.
@@ -283,6 +313,48 @@ class WelcomePage extends AbstractWelcomePage {
 
      }
 
+    _verifyRoom(room) {
+
+      var self = this;
+      this.db.collection('interviews')
+      .doc(room).get().then(function(d){
+
+              if(d.exists) {
+                 self.setState({validRoom:true});
+                 self.validRoom = true;
+                 self.props.dispatch(updateSettings({validRoom:true}));
+
+              } else {
+                alert('Invalid room code');
+                self.props.dispatch(updateSettings({validRoom:false}));
+
+              }
+      });
+
+    }
+
+
+    _onPressDisplayName() {
+
+
+      //debugger;
+      this.props.dispatch(updateSettings({displayName:this.state.displayName}));
+
+
+    }
+
+    _onPressRoom() {
+      const room =  this._verifyRoom(this.state.room);
+    }
+
+    _onDisplayNameChange(value: string) {
+
+      this.setState({displayName:value});
+    }
+
+    _onPressStudioBeta() {
+      alert('hi');
+    }
 
     _renderChatUI() {
 
@@ -292,10 +364,14 @@ class WelcomePage extends AbstractWelcomePage {
 
 
       const image = {uri:'backgrounds/nyc.jpg'};
-      //{uri:'https://firebasestorage.googleapis.com/v0/b/backpack-chat-73855.appspot.com/o/stock%2Fpink.jpg?alt=media'};
-
 
       const welcome = 'Welcome to Backpack Live!\n\nEnter code to join interview.';
+      const enterdisplayname = 'Please enter your display name.';
+
+      this.validRoom = this.state.validRoom;
+
+      console.log(this.validRoom ? "room is valid" : "room is invalid");
+
 
       return (<ImageBackground
         source={image}
@@ -304,7 +380,7 @@ class WelcomePage extends AbstractWelcomePage {
                       <View style = {{...styles.joinControls, flexDirection:'column', alignItems:'center', width:300, backgroundColor:'#000', padding:10, borderRadius:20, borderWidth:1, borderColor:'rgba(255.0,255.0,255.0,.222)'}} >
                           <Text style = {{...styles.enterRoomText, textAlign:'center', fontFamily:'Avenir'}}>
 
-                              {welcome}
+                              {this.validRoom ? enterdisplayname : welcome}
 
 
                           </Text>
@@ -315,93 +391,37 @@ class WelcomePage extends AbstractWelcomePage {
                               autoCorrect = { false }
                               autoFocus = { false }
                               onBlur = { this._onFieldBlur }
-                              onChangeText = { this._onRoomChange }
+                              onChangeText =  {this.validRoom ?  this._onDisplayNameChange : this._onRoomChange }
                               onFocus = { this._onFieldFocus }
-                              onSubmitEditing = { this._onJoin }
-                              placeholder = { this.state.roomPlaceholder }
+                              onSubmitEditing = { this.validRoom ? this._onPressDisplayName : this._onPressRoom  }
+                              placeholder = { this.validRoom ? 'name' : this.state.roomPlaceholder }
                               placeholderTextColor = { PLACEHOLDER_TEXT_COLOR }
                               returnKeyType = { 'go' }
                               style = {{...styles.textInput, width:150, borderRadius:9, backgroundColor:'#011', borderColor:'#ccc'}}
                               underlineColorAndroid = 'transparent'
-                              value = { this.state.room } />
-                            <TouchableOpacity onPress = {this._onJoin}>
+                              value = { this.validRoom ? this.state.displayName : this.state.room } />
+                            <TouchableOpacity onPress = { this.validRoom ? this._onPressDisplayName : this._onPressRoom  }>
                                   <Text style = {{width:150, backgroundColor:'transparent', fontSize:20, paddingTop:10, textAlign:'center',color:'#71ef5e', height:40}}>{'Join'}</Text>
                             </TouchableOpacity>
 
                       </View>
+
+  <TouchableOpacity onPress = {this._onPressStudioBeta}>
+                      <Text style={{color:'white', fontFamily:'Avenir'}}>
+                          {'Want to host your own podcast with live guests?\nGet the Backpack Studio 1.5 beta'}
+                      </Text>
+                      <Text style={{color:'green', fontFamily:'Avenir'}}>
+                          {'here'}
+                      </Text>
+  </TouchableOpacity>
+
+
                   </SafeAreaView>
                 </ImageBackground>);
 
-
-    }
-    _renderFullUI() {
-        const roomnameAccLabel = 'welcomepage.accessibilityLabel.roomname';
-        const { _headerStyles, t } = this.props;
-
-        return (
-            <LocalVideoTrackUnderlay style = { styles.welcomePage }>
-                <View style = { _headerStyles.page }>
-                    <Header style = { styles.header }>
-                        <TouchableOpacity onPress = { this._onShowSideBar } >
-                            <Icon
-                                src = { IconMenu }
-                                style = { _headerStyles.headerButtonIcon } />
-                        </TouchableOpacity>
-                        <VideoSwitch />
-                    </Header>
-                    <SafeAreaView style = { styles.roomContainer } >
-                        <View style = { styles.joinControls } >
-                            <Text style = { styles.enterRoomText }>
-                                { t('welcomepage.roomname') }
-                            </Text>
-                            <TextInput
-                                accessibilityLabel = { t(roomnameAccLabel) }
-                                autoCapitalize = 'none'
-                                autoComplete = 'off'
-                                autoCorrect = { false }
-                                autoFocus = { false }
-                                onBlur = { this._onFieldBlur }
-                                onChangeText = { this._onRoomChange }
-                                onFocus = { this._onFieldFocus }
-                                onSubmitEditing = { this._onJoin }
-                                placeholder = { this.state.roomPlaceholder }
-                                placeholderTextColor = { PLACEHOLDER_TEXT_COLOR }
-                                returnKeyType = { 'go' }
-                                style = { styles.textInput }
-                                underlineColorAndroid = 'transparent'
-                                value = { this.state.room } />
-                            {
-                                this._renderInsecureRoomNameWarning()
-                            }
-                            {
-                                this._renderHintBox()
-                            }
-                        </View>
-                    </SafeAreaView>
-                    <WelcomePageLists disabled = { this.state._fieldFocused } />
-                </View>
-                <WelcomePageSideBar />
-                { this._renderWelcomePageModals() }
-            </LocalVideoTrackUnderlay>
-        );
     }
 
-    /**
-     * Renders a "reduced" version of the welcome page.
-     *
-     * @returns {ReactElement}
-     */
-    _renderReducedUI() {
-        const { t } = this.props;
 
-        return (
-            <View style = { styles.reducedUIContainer }>
-                <Text style = { styles.reducedUIText }>
-                    { t('welcomepage.reducedUIText', { app: getName() }) }
-                </Text>
-            </View>
-        );
-    }
 
     /**
      * Renders JitsiModals that are supposed to be on the welcome page.
@@ -424,12 +444,22 @@ class WelcomePage extends AbstractWelcomePage {
  * @returns {Object}
  */
 function _mapStateToProps(state) {
+
+    console.log('indian beach mapping state room ' + state['features/base/conference'].room + ' display name ' + state['features/base/settings'].displayName + 'valid room' + state['features/base/settings'].validRoom);
+
+    const hasroom = state['features/base/settings'].validRoom || state['features/base/conference'].room;
+    const hasname = state['features/base/settings'].displayName;
+
+
     return {
         ..._abstractMapStateToProps(state),
-        _headerStyles: ColorSchemeRegistry.get(state, 'Header')
+        _headerStyles: ColorSchemeRegistry.get(state, 'Header'),
+        _hasDisplayName: hasname,
+        _hasRoom: hasroom,
 
-        // _reducedUI: state['features/base/responsive-ui'].reducedUI
+
     };
+
 }
 
 export default translate(connect(_mapStateToProps)(WelcomePage));

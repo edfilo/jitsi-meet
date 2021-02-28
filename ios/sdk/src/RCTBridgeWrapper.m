@@ -37,9 +37,9 @@
 
 #if DEBUG
 static NSURL *serverRootWithHost(NSString *host) {
-    //:8081/
-    return [NSURL URLWithString:
-                [NSString stringWithFormat:@"http://%@", host]];
+
+    return [NSURL URLWithString:[NSString stringWithFormat:@"http://%@", host]];
+
 }
 
 - (BOOL)isPackagerRunning:(NSString *)host {
@@ -87,12 +87,11 @@ static NSURL *serverRootWithHost(NSString *host) {
      */
 
     //NSString *host = ipGuess ?: @"localhost";
-    NSString *host = @"e1f068e21ebd.ngrok.io";
-   // NSString *host = @"backpackstudio.page.link/bundle";
-    //@"localhost";// @"10.0.0.133";
-    //NSString *host =  @"10.0.0.133";
 
-    // NSString *host =  @"localhost";//@"5a2f6a95fb40.ngrok.io";
+
+    NSString *host = @"db0907f2620b.ngrok.io";
+    
+    //@"567bcabe5c21.ngrok.io";
 
     NSLog(@"bridge connecting to %@", host);
 
@@ -108,7 +107,7 @@ static NSURL *serverRootWithHost(NSString *host) {
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge {
 
-//    return [[NSBundle mainBundle] URLForResource:@"main"withExtension:@"jsbundle"];
+    //return [[NSBundle mainBundle] URLForResource:@"main"withExtension:@"jsbundle"];
 
 
 #if DEBUG
