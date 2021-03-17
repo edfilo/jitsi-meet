@@ -74,6 +74,7 @@ RCT_EXPORT_METHOD(endCall:(NSString *)callUUID
                    reject:(RCTPromiseRejectBlock)reject) {
     DDLogInfo(@"[RNCallKit][endCall] callUUID = %@", callUUID);
 
+    return;
     NSUUID *callUUID_ = [[NSUUID alloc] initWithUUIDString:callUUID];
 
     if (!callUUID_) {
@@ -95,6 +96,7 @@ RCT_EXPORT_METHOD(setMuted:(NSString *)callUUID
                     reject:(RCTPromiseRejectBlock)reject) {
     DDLogInfo(@"[RNCallKit][setMuted] callUUID = %@", callUUID);
 
+    return;
     NSUUID *callUUID_ = [[NSUUID alloc] initWithUUIDString:callUUID];
 
     if (!callUUID_) {
@@ -112,6 +114,7 @@ RCT_EXPORT_METHOD(setMuted:(NSString *)callUUID
 RCT_EXPORT_METHOD(setProviderConfiguration:(NSDictionary *)dictionary) {
     DDLogInfo(@"[RNCallKit][setProviderConfiguration:] dictionary = %@", dictionary);
 
+    return;
     if (![JMCallKitProxy isProviderConfigured]) {
         [self configureProviderFromDictionary:dictionary];
     }
@@ -127,7 +130,7 @@ RCT_EXPORT_METHOD(startCall:(NSString *)callUUID
                     resolve:(RCTPromiseResolveBlock)resolve
                      reject:(RCTPromiseRejectBlock)reject) {
     DDLogInfo(@"[RNCallKit][startCall] callUUID = %@", callUUID);
-
+    return;
     NSUUID *callUUID_ = [[NSUUID alloc] initWithUUIDString:callUUID];
 
     if (!callUUID_) {
@@ -158,6 +161,7 @@ RCT_EXPORT_METHOD(reportCallFailed:(NSString *)callUUID
                             reject:(RCTPromiseRejectBlock)reject) {
     NSUUID *callUUID_ = [[NSUUID alloc] initWithUUIDString:callUUID];
 
+    return;
     if (!callUUID_) {
         reject(nil, [NSString stringWithFormat:@"Invalid UUID: %@", callUUID], nil);
         return;
@@ -175,6 +179,7 @@ RCT_EXPORT_METHOD(reportConnectedOutgoingCall:(NSString *)callUUID
                                        reject:(RCTPromiseRejectBlock)reject) {
     NSUUID *callUUID_ = [[NSUUID alloc] initWithUUIDString:callUUID];
 
+    return;
     if (!callUUID_) {
         reject(nil, [NSString stringWithFormat:@"Invalid UUID: %@", callUUID], nil);
         return;
@@ -192,6 +197,7 @@ RCT_EXPORT_METHOD(updateCall:(NSString *)callUUID
                       reject:(RCTPromiseRejectBlock)reject) {
     DDLogInfo(@"[RNCallKit][updateCall] callUUID = %@ options = %@", callUUID, options);
 
+    return;
     NSUUID *callUUID_ = [[NSUUID alloc] initWithUUIDString:callUUID];
 
     if (!callUUID_) {

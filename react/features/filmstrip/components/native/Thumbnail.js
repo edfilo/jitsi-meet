@@ -160,7 +160,7 @@ function Thumbnail(props: Props) {
             touchFeedback = { true }>
 
             <ParticipantView
-                avatarSize = { tileView ? AVATAR_SIZE * 1.5 : AVATAR_SIZE }
+                avatarSize = { 100 }
                 disableVideo = { isScreenShare || participant.isFakeParticipant }
                 participantId = { participantId }
                 style = {{..._styles.participantViewStyle, flex:1 }}
@@ -169,22 +169,22 @@ function Thumbnail(props: Props) {
               zOrder = { 1 } />
 
 
-            { renderDisplayName && <Container style = {{...styles.displayNameContainer, bottom:0}}>
+            { renderDisplayName && <Container style = {{...styles.displayNameContainer, bottom:0, left:0}}>
                 <DisplayNameLabel participantId = { participantId } />
             </Container> }
 
-            { renderModeratorIndicator
+            { /*renderModeratorIndicator
                 && <View style = { styles.moderatorIndicatorContainer }>
                     <ModeratorIndicator />
-                </View>}
+                </View>*/}
 
             { !participant.isFakeParticipant && <View
                 style = { [
                     styles.thumbnailTopIndicatorContainer,
                     styles.thumbnailTopLeftIndicatorContainer
                 ] }>
-                <RaisedHandIndicator participantId = { participant.id } />
-                { renderDominantSpeakerIndicator && <DominantSpeakerIndicator /> }
+              {/*<RaisedHandIndicator participantId = { participant.id } />*/}
+            { /*renderDominantSpeakerIndicator && <DominantSpeakerIndicator /> */}
             </View> }
 
 

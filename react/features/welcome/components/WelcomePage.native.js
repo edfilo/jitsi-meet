@@ -8,7 +8,9 @@ import {
     TextInput,
     TouchableHighlight,
     TouchableOpacity,
-    View
+    View,
+    Linking,
+    Image
 } from 'react-native';
 
 import { getName } from '../../app/functions';
@@ -79,14 +81,18 @@ class WelcomePage extends AbstractWelcomePage {
         this.db = firestore();
 
         this.validRoom = false;
+        //this.props._room = 'test';
 
-        this.state.room = 'test';//'kxgv8';
+        //debugger;
+        //alert(this.props._room);
+
+        //this.state.room = 'test';//'funcle';//'kxgv8';
 
     }
 
     componentDidUpdate() {
 
-      if(this.props._hasRoom && this.props._hasDisplayName){
+      if(this.state.validRoom && this.state.room && this.props._hasDisplayName){
 
         if(!this.isJoining){
           this._onJoin();
@@ -121,10 +127,13 @@ class WelcomePage extends AbstractWelcomePage {
             // Make sure we don't request the permission for the camera from
             // the start. We will, however, create a video track iff the user
             // already granted the permission.
+/*
             navigator.permissions.query({ name: 'camera' }).then(response => {
                 response === 'granted'
                     && dispatch(createDesiredLocalTracks(MEDIA_TYPE.VIDEO));
             });
+            */
+
         }
     }
 
@@ -315,29 +324,38 @@ class WelcomePage extends AbstractWelcomePage {
 
     _verifyRoom(room) {
 
+
       var self = this;
       this.db.collection('interviews')
-      .doc(room).get().then(function(d){
+      .where("code", "==", room).get().then((querySnapshot) => {
+
+        if(querySnapshot.docs == 0){
+          alert('Invalid code');
+          self.props.dispatch(updateSettings({validRoom:false}));
+          return;
+        }
+
+          querySnapshot.docs.forEach((d) => {
 
               if(d.exists) {
+
                  self.setState({validRoom:true});
                  self.validRoom = true;
                  self.props.dispatch(updateSettings({validRoom:true}));
 
               } else {
-                alert('Invalid room code');
-                self.props.dispatch(updateSettings({validRoom:false}));
 
               }
-      });
+            });
 
+          });
     }
+
 
 
     _onPressDisplayName() {
 
 
-      //debugger;
       this.props.dispatch(updateSettings({displayName:this.state.displayName}));
 
 
@@ -352,8 +370,30 @@ class WelcomePage extends AbstractWelcomePage {
       this.setState({displayName:value});
     }
 
+
+
     _onPressStudioBeta() {
-      alert('hi');
+
+      const url = 'https://testflight.apple.com/join/3lHe1WZS';
+
+      Linking.canOpenURL(url).then(supported => {
+      if (supported) {
+        Linking.openURL(url);
+      } else {
+        alert("Could not open " + url);
+      }});
+
+    }
+
+
+    _renderSplash () {
+
+      //const splash = {uri:'liveicons/greenicon.png'};
+
+      const splash = {uri:'liveicons/splashscreen.png'};
+
+      return(<Image style = {{width:100,height:100}} source= {splash}/>);
+
     }
 
     _renderChatUI() {
@@ -363,22 +403,31 @@ class WelcomePage extends AbstractWelcomePage {
       const { _headerStyles, t } = this.props;
 
 
-      const image = {uri:'backgrounds/nyc.jpg'};
+      const image = {uri:'backgrounds/cali.jpg'};
 
-      const welcome = 'Welcome to Backpack Live!\n\nEnter code to join interview.';
-      const enterdisplayname = 'Please enter your display name.';
+      const welcome = 'Enter code,  or click on link from host to join interview.';
+      const enterdisplayname = 'Enter your first name.';
+
+
+
+
 
       this.validRoom = this.state.validRoom;
 
+
       console.log(this.validRoom ? "room is valid" : "room is invalid");
 
+    //  console.log('props' + this.props._room);
 
       return (<ImageBackground
         source={image}
         style={{backgroundColor:'#111',width: '100%', height: '100%', resizeMode:'cover'}}>
                 <SafeAreaView style = {{...styles.roomContainer, flexDirection:'row', justifyContent:'center', marginTop:166}} >
-                      <View style = {{...styles.joinControls, flexDirection:'column', alignItems:'center', width:300, backgroundColor:'#000', padding:10, borderRadius:20, borderWidth:1, borderColor:'rgba(255.0,255.0,255.0,.222)'}} >
+                    <View style = {{flexDirection:'column', alignItems:'center', height:500, width:300, borderColor:'red', borderWidth:0}}>
+                      <View style = {{...styles.joinControls, width:'100%', alignItems:'center', backgroundColor:'#000', height:244, padding:0, borderRadius:20, borderWidth:1, borderColor:'rgba(255.0,255.0,255.0,.222)'}} >
+  {this._renderSplash()}
                           <Text style = {{...styles.enterRoomText, textAlign:'center', fontFamily:'Avenir'}}>
+
 
                               {this.validRoom ? enterdisplayname : welcome}
 
@@ -406,14 +455,17 @@ class WelcomePage extends AbstractWelcomePage {
 
                       </View>
 
-  <TouchableOpacity onPress = {this._onPressStudioBeta}>
-                      <Text style={{color:'white', fontFamily:'Avenir'}}>
-                          {'Want to host your own podcast with live guests?\nGet the Backpack Studio 1.5 beta'}
-                      </Text>
-                      <Text style={{color:'green', fontFamily:'Avenir'}}>
-                          {'here'}
-                      </Text>
-  </TouchableOpacity>
+                      <TouchableOpacity style = {{marginTop:150}} onPress = {this._onPressStudioBeta}>
+                                          <Text style={{textAlign:'center',color:'white', fontFamily:'Avenir'}}>
+                                              {'Host your own podcast with live guests.'}
+                                          </Text>
+                                          <Text style={{textAlign:'center',color:'green', fontFamily:'Avenir'}}>
+                                              {'Get the Backpack Studio 1.5 beta'}
+                                          </Text>
+                      </TouchableOpacity>
+
+
+                    </View>
 
 
                   </SafeAreaView>
@@ -445,7 +497,9 @@ class WelcomePage extends AbstractWelcomePage {
  */
 function _mapStateToProps(state) {
 
-    console.log('indian beach mapping state room ' + state['features/base/conference'].room + ' display name ' + state['features/base/settings'].displayName + 'valid room' + state['features/base/settings'].validRoom);
+    console.log('indian beach mapping state room: ' + state['features/base/conference'].room);
+    console.log('indian beach mapping  display name: ' + state['features/base/settings'].displayName);
+    console.log('indian beach valid room:' + state['features/base/settings'].validRoom);
 
     const hasroom = state['features/base/settings'].validRoom || state['features/base/conference'].room;
     const hasname = state['features/base/settings'].displayName;
@@ -455,7 +509,8 @@ function _mapStateToProps(state) {
         ..._abstractMapStateToProps(state),
         _headerStyles: ColorSchemeRegistry.get(state, 'Header'),
         _hasDisplayName: hasname,
-        _hasRoom: hasroom,
+        _hasRoom: hasroom
+      //  _room: state['features/base/conference'].room
 
 
     };

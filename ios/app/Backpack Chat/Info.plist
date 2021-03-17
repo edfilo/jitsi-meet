@@ -37,11 +37,10 @@
 	<string>M_feAlkukvTabINUUij4GZcsoItkc_d16RXtn</string>
 	<key>FirebaseDynamicLinksCustomDomains</key>
 	<array>
-		<string>backpackchat.page.link</string>
-		<string>backpackchat.page.link</string>
-		<string>backpackchat.com</string>
-		<string>backpackchat.page.link/test</string>
+		<string>backpacklive.page.link</string>
 	</array>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>

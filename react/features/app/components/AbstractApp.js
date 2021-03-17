@@ -44,7 +44,18 @@ export class AbstractApp extends BaseApp<Props, *> {
         this._init.then(() => {
             // If a URL was explicitly specified to this React Component, then
             // open it; otherwise, use a default.
+
+
+
+          //  const str = toURLString(this.props.url) || this._getDefaultURL();
+          //  alert('app mounted with' + str);
+        //  debugger;
+          console.log('confusion: abstract app component did mount with' + toURLString(this.props.url));
+
             this._openURL(toURLString(this.props.url) || this._getDefaultURL());
+
+          //  this._openURL(str);
+
         });
     }
 
@@ -61,12 +72,18 @@ export class AbstractApp extends BaseApp<Props, *> {
 
         this._init.then(() => {
             // Deal with URL changes.
+            const str = toURLString(this.props.url) || this._getDefaultURL();
+
+          //  alert('app updated with' + str);
+
 
             if (previousUrl !== currentUrl
+
 
                     // XXX Refer to the implementation of loadURLObject: in
                     // ios/sdk/src/JitsiMeetView.m for further information.
                     || previousTimestamp !== currentTimestamp) {
+                                  //console.log('sex url changed' + currentUrl);
                 this._openURL(currentUrl || this._getDefaultURL());
             }
         });
@@ -110,6 +127,7 @@ export class AbstractApp extends BaseApp<Props, *> {
      * @returns {void}
      */
     _openURL(url) {
+      //debugger;
         this.state.store.dispatch(appNavigate(toURLString(url)));
     }
 }

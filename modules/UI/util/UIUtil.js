@@ -41,7 +41,7 @@ const UIUtil = {
      */
     redirect(url) {
       debugger;
-      
+
         window.location.href = url;
     },
 

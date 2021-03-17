@@ -66,6 +66,7 @@ ReducerRegistry.register(STORE_NAME, (state = DEFAULT_STATE, action) => {
         return _initSettings(state);
 
     case SETTINGS_UPDATED:
+    //debugger;
         return {
             ...state,
             ...action.settings

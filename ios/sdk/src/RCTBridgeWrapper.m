@@ -89,9 +89,8 @@ static NSURL *serverRootWithHost(NSString *host) {
     //NSString *host = ipGuess ?: @"localhost";
 
 
-    NSString *host = @"db0907f2620b.ngrok.io";
+    NSString *host = @"212c1f3453b9.ngrok.io";
     
-    //@"567bcabe5c21.ngrok.io";
 
     NSLog(@"bridge connecting to %@", host);
 

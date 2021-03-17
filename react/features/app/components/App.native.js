@@ -84,8 +84,8 @@ export class App extends AbstractApp {
      * @returns {void}
      */
     componentDidMount() {
-        super.componentDidMount();
 
+        super.componentDidMount();
         SplashScreen.hide();
 
         this._init.then(() => {

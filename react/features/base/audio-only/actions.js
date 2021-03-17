@@ -25,18 +25,32 @@ declare var APP: Object;
  * }}
  */
 export function setAudioOnly(audioOnly: boolean, ensureVideoTrack: boolean = false) {
+
+
+
+
     return (dispatch: Dispatch<any>, getState: Function) => {
         const { enabled: oldValue } = getState()['features/base/audio-only'];
+
+
+
+
 
         if (oldValue !== audioOnly) {
             sendAnalytics(createAudioOnlyChangedEvent(audioOnly));
             logger.log(`Audio-only ${audioOnly ? 'enabled' : 'disabled'}`);
+
+
+    
+
 
             dispatch({
                 type: SET_AUDIO_ONLY,
                 audioOnly,
                 ensureVideoTrack
             });
+
+
 
             if (typeof APP !== 'undefined') {
                 // TODO This should be a temporary solution that lasts only until video

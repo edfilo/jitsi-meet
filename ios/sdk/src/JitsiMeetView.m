@@ -22,6 +22,7 @@
 #import "JitsiMeetView+Private.h"
 #import "ReactUtils.h"
 #import "RNRootView.h"
+#import "BPLogger.h"
 
 
 /**
@@ -29,6 +30,11 @@
  */
 static NSString *const PiPEnabledFeatureFlag = @"pip.enabled";
 
+@interface JitsiMeetView()
+
+@property (nonatomic) NSDictionary *waitProps;
+
+@end
 
 @implementation JitsiMeetView {
     /**
@@ -103,7 +109,12 @@ static void initializeViewsMap() {
     // the default background color.
     self.backgroundColor
         = [UIColor colorWithRed:.07f green:.07f blue:.07f alpha:1];
+
+
 }
+
+
+
 
 #pragma mark API
 
@@ -126,7 +137,15 @@ static void initializeViewsMap() {
  * - Some extras which are added by this function
  */
 - (void)setProps:(NSDictionary *_Nonnull)newProps {
+
+    // [BPLogger writeShitToFile:[NSString stringWithFormat:@"new props %@", newProps]];
+
+   // [BPLogger writeShitToFile:[NSString stringWithFormat:@"def props %@", [[JitsiMeet sharedInstance] getDefaultProps]]];
+
     NSMutableDictionary *props = mergeProps([[JitsiMeet sharedInstance] getDefaultProps], newProps);
+
+
+   // [BPLogger writeShitToFile:[NSString stringWithFormat:@"merged props %@", props]];
 
     // Set the PiP flag if it wasn't manually set.
     NSMutableDictionary *featureFlags = props[@"flags"];
@@ -148,9 +167,16 @@ static void initializeViewsMap() {
     // in React Component props by defining a unique value per invocation.
     props[@"timestamp"] = @(mach_absolute_time());
 
+
+
+
     if (rootView) {
         // Update props with the new URL.
         rootView.appProperties = props;
+
+        [BPLogger writeShitToFile:[NSString stringWithFormat:@"update bridge %@", props]];
+
+
     } else {
         RCTBridge *bridge = [[JitsiMeet sharedInstance] getReactBridge];
         rootView
@@ -158,6 +184,8 @@ static void initializeViewsMap() {
                                       moduleName:@"App"
                                initialProperties:props];
         rootView.backgroundColor = self.backgroundColor;
+
+       // [BPLogger writeShitToFile:[NSString stringWithFormat:@"new bridge %@", props]];
 
         // Add rootView as a subview which completely covers this one.
         [rootView setFrame:[self bounds]];
@@ -168,17 +196,36 @@ static void initializeViewsMap() {
     }
 }
 
+
 + (BOOL)setPropsInViews:(NSDictionary *_Nonnull)newProps {
     BOOL handled = NO;
+
+    RCTBridge *bridge = [[JitsiMeet sharedInstance] getReactBridge];
+    if(bridge.isLoading){
+
+        [[NSNotificationCenter defaultCenter] addObserverForName:RCTJavaScriptDidLoadNotification object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+
+            [JitsiMeetView setPropsInViews:newProps];
+        }];
+
+        return NO;
+    }
+
+
 
     if (views) {
         for (NSString *externalAPIScope in views) {
             JitsiMeetView *view
                 = [self viewForExternalAPIScope:externalAPIScope];
 
+
+
             if (view) {
                 [view setProps:newProps];
+                [BPLogger writeShitToFile:[NSString stringWithFormat:@"setpropsinviews %@", newProps]];
+
                 handled = YES;
+
             }
         }
     }

@@ -10,6 +10,7 @@
 #import "FIRUtilities.h"
 #import "Types.h"
 #import "ViewController.h"
+//#import "BPLogger.h"
 
 @import Firebase;
 @import JitsiMeetSDK;
@@ -19,43 +20,73 @@
 
 
 
--             (BOOL)application:(UIApplication *)application
+- (BOOL)application:(UIApplication *)application
   didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+
+  //[BPLogger writeShitToFile:[NSString stringWithFormat:@"didfinishlaunching %@", launchOptions]];
+
+
     JitsiMeet *jitsiMeet = [JitsiMeet sharedInstance];
+
+
+
+  if ([FIRUtilities appContainsRealServiceInfoPlist]) {
+        NSLog(@"Enabling Firebase");
+        [FIRApp configure];
+
+    }
+
+
+ // NSDictionary *d= [launchOptions objectForKey:UIApplicationLaunchOptionsUserActivityDictionaryKey];
+  //if(d objectForKey:UIApplicationLaunchOPtionsUserActi)
+  //NSString *room = url.lastPathComponent;
+
+
+
+
+
+  NSLog(@"FOXX LAUNCH OPTIONS %@", launchOptions);
 
     jitsiMeet.conferenceActivityType = JitsiMeetConferenceActivityType;
     jitsiMeet.customUrlScheme = @"org.jitsi.meet";
-    jitsiMeet.universalLinkDomains = @[@"meet.jit.si", @"alpha.jitsi.net", @"beta.meet.jit.si", @"edsvbar.com"];
+    jitsiMeet.universalLinkDomains = @[@"meet.jit.si", @"alpha.jitsi.net", @"beta.meet.jit.si", @"edsvbar.com", @"backpackstudioapp.com"];
+
+
+  //if([launchOptions objectForKey:UIApplicationLaunchOptionsUserActivityTypeKey]){
+
+    NSDictionary *d = [launchOptions objectForKey:UIApplicationLaunchOptionsUserActivityTypeKey];
+   // [self writeShitToFile:[NSString stringWithFormat:@"launchoptiopnsuseractivitytype %@", d]];
+
+
+  //}
+
 
     jitsiMeet.defaultConferenceOptions = [JitsiMeetConferenceOptions fromBuilder:^(JitsiMeetConferenceOptionsBuilder *builder) {
     [builder setFeatureFlag:@"resolution" withValue:@(360)];
     builder.serverURL = [NSURL URLWithString:@"https://edsvbar.com"];
     builder.welcomePageEnabled = YES;
-    builder.room = @"";
-
-
+    [builder setFeatureFlag:@"call-integration.enabled" withBoolean:NO];
     [builder setFeatureFlag:@"calendar.enabled" withBoolean:NO];
     [builder setFeatureFlag:@"chat.enabled" withBoolean:NO];
     [builder setFeatureFlag:@"ios.recording.enabled" withBoolean:NO];
 
     }];
 
-  [jitsiMeet application:application didFinishLaunchingWithOptions:launchOptions];
 
-    // Initialize Crashlytics and Firebase if a valid GoogleService-Info.plist file was provided.
+    [jitsiMeet application:application didFinishLaunchingWithOptions:launchOptions];
 
- // [FIRDynamicLink t]
-
-  if ([FIRUtilities appContainsRealServiceInfoPlist]) {
-        NSLog(@"Enabling Firebase");
-        [FIRApp configure];
-        // Crashlytics defaults to disabled wirth the FirebaseCrashlyticsCollectionEnabled Info.plist key.
-        // [[FIRCrashlytics crashlytics] setCrashlyticsCollectionEnabled:![jitsiMeet isCrashReportingDisabled]];
-    }
 
 
     ViewController *rootController = (ViewController *)self.window.rootViewController;
+
+
+
     [jitsiMeet showSplashScreen:rootController.view];
+
+
+
+
 
     return YES;
 }
@@ -77,6 +108,9 @@
     restorationHandler:(void (^)(NSArray<id<UIUserActivityRestoring>> *restorableObjects))restorationHandler {
 
 
+
+
+
     if ([FIRUtilities appContainsRealServiceInfoPlist]) {
         // 1. Attempt to handle Universal Links through Firebase in order to support
         //    its Dynamic Links (which we utilize for the purposes of deferred deep
@@ -90,6 +124,13 @@
            NSURL *firebaseUrl = [FIRUtilities extractURL:dynamicLink];
            if (firebaseUrl != nil) {
              userActivity.webpageURL = firebaseUrl;
+
+             NSLog(@"FOXX USERACTIVITY %@", firebaseUrl.absoluteString);
+
+
+            // [BPLogger writeShitToFile:[NSString stringWithFormat:@"...continue user activity %@", userActivity.webpageURL]];
+
+
              [[JitsiMeet sharedInstance] application:application
                                 continueUserActivity:userActivity
                                   restorationHandler:restorationHandler];
@@ -109,9 +150,20 @@
                                 restorationHandler:restorationHandler];
 }
 
+
+
 - (BOOL)application:(UIApplication *)app
             openURL:(NSURL *)url
             options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+
+
+
+  //[BPLogger writeShitToFile:[NSString stringWithFormat:@"openurl %@", options]];
+
+
+
+
+
 
     // This shows up during a reload in development, skip it.
     // https://github.com/firebase/firebase-ios-sdk/issues/233
@@ -130,6 +182,8 @@
             openUrl = firebaseUrl;
         }
     }
+
+  NSLog(@"FOXX OPENURL %@", openUrl.absoluteString);
 
     return [[JitsiMeet sharedInstance] application:app
                                            openURL:openUrl

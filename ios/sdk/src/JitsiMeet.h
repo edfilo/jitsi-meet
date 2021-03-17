@@ -39,6 +39,7 @@
  * with those passed to JitsiMeetView.join when joining a conference.
  */
 @property (nonatomic, nullable) JitsiMeetConferenceOptions *defaultConferenceOptions;
+@property (nonatomic, nullable) NSDictionary *mylaunchOptions;
 
 #pragma mark - This class is a singleton
 
@@ -62,6 +63,7 @@
 - (JitsiMeetConferenceOptions *_Nonnull)getInitialConferenceOptions;
 
 - (BOOL)isCrashReportingDisabled;
+
 
 - (void)showSplashScreen:(UIView * _Nonnull) rootView;
 

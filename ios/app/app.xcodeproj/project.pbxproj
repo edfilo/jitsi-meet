@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0B412F1F1EDEE6E800B1A0A6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B412F1E1EDEE6E800B1A0A6 /* ViewController.m */; };
 		0B412F211EDEE95300B1A0A6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B412F201EDEE95300B1A0A6 /* Main.storyboard */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
@@ -18,15 +17,12 @@
 		B30AC1BF258DE716003D5E3F /* SwiftFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30AC1BE258DE716003D5E3F /* SwiftFile.swift */; };
 		B325C8FA259A0EC4009CF5F0 /* SwiftChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = B325C8F9259A0EC4009CF5F0 /* SwiftChat.swift */; };
 		B325C8FB259A0F20009CF5F0 /* FIRUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = DE4C455F21DE1E4E00EA0709 /* FIRUtilities.m */; };
-		B325C8FC259A1429009CF5F0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B335E1AB2599CFC60008F79F /* LaunchScreen.storyboard */; };
 		B325C8FD259A1491009CF5F0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		B325C8FE259A1616009CF5F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B412F201EDEE95300B1A0A6 /* Main.storyboard */; };
 		B335E19F2599CFC30008F79F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B335E19E2599CFC30008F79F /* AppDelegate.m */; };
-		B335E1A22599CFC30008F79F /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B335E1A12599CFC30008F79F /* SceneDelegate.m */; };
 		B335E1A52599CFC30008F79F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B335E1A42599CFC30008F79F /* ViewController.m */; };
 		B335E1AA2599CFC60008F79F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B335E1A92599CFC60008F79F /* Assets.xcassets */; };
 		B335E1B02599CFC60008F79F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B335E1AF2599CFC60008F79F /* main.m */; };
-		B34AA72125E82DE200215828 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = B34AA72025E82DE200215828 /* main.jsbundle */; };
 		B34AA72325E8303F00215828 /* splashscreen.png in Resources */ = {isa = PBXBuildFile; fileRef = B34AA72225E8303E00215828 /* splashscreen.png */; };
 		B351EAB225E29D4500E9A771 /* Threeguys.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B351EAB125E29D4300E9A771 /* Threeguys.xcassets */; };
 		B351EB4C25E4939E00E9A771 /* liveicons in Resources */ = {isa = PBXBuildFile; fileRef = B351EB4B25E4939400E9A771 /* liveicons */; };
@@ -34,6 +30,7 @@
 		B36DD56E25CB5BAC00B7AA05 /* backgrounds in Resources */ = {isa = PBXBuildFile; fileRef = B36DD56D25CB5BAB00B7AA05 /* backgrounds */; };
 		B375557125C3A1AD00ED09A9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B375557025C3A1AD00ED09A9 /* GoogleService-Info.plist */; };
 		B39890F9258C7F3700C17AF4 /* oldGoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B39890F8258C7F3700C17AF4 /* oldGoogleService-Info.plist */; };
+		B3A131E625F42EB200D413B7 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = B3A131E525F42EB200D413B7 /* main.jsbundle */; };
 		B3D1BF1E25E8393100B79117 /* JitsiMeetSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B335DA33258EB5DA003E74BB /* JitsiMeetSDK.framework */; };
 		B3F27C202591EEE300E6EE70 /* JitsiMeetSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B335DA33258EB5DA003E74BB /* JitsiMeetSDK.framework */; };
 		B3F27C212591EEE300E6EE70 /* JitsiMeetSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B335DA33258EB5DA003E74BB /* JitsiMeetSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -55,8 +52,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0B412F1D1EDEE6E800B1A0A6 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		0B412F1E1EDEE6E800B1A0A6 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		0B412F201EDEE95300B1A0A6 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0B5418461F7C5D8C00A2DD86 /* MeetingRowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingRowController.swift; sourceTree = "<group>"; };
 		0B70016F1F7C51CC005944F4 /* InCallController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InCallController.swift; sourceTree = "<group>"; };
@@ -90,15 +85,11 @@
 		B335E19B2599CFC30008F79F /* Backpack Live.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Backpack Live.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B335E19D2599CFC30008F79F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B335E19E2599CFC30008F79F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		B335E1A02599CFC30008F79F /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
-		B335E1A12599CFC30008F79F /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
 		B335E1A32599CFC30008F79F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		B335E1A42599CFC30008F79F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		B335E1A92599CFC60008F79F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		B335E1AC2599CFC60008F79F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B335E1AE2599CFC60008F79F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B335E1AF2599CFC60008F79F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		B34AA72025E82DE200215828 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		B34AA72225E8303E00215828 /* splashscreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = splashscreen.png; path = ../../splashscreen.png; sourceTree = "<group>"; };
 		B34EBCF525B6E37E005837B5 /* Pods_JitsiMeetSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_JitsiMeetSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B351EAB125E29D4300E9A771 /* Threeguys.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Threeguys.xcassets; sourceTree = "<group>"; };
@@ -108,6 +99,7 @@
 		B375557025C3A1AD00ED09A9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B39890F8258C7F3700C17AF4 /* oldGoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "oldGoogleService-Info.plist"; sourceTree = "<group>"; };
 		B39F2CC225C22B620095272E /* Backpack Chat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Backpack Chat.entitlements"; sourceTree = "<group>"; };
+		B3A131E525F42EB200D413B7 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		B3B083EB1D4955FF0069CEE7 /* app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = app.entitlements; sourceTree = "<group>"; };
 		B3D1BF2225E8394800B79117 /* WebRTC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = WebRTC.xcframework; path = "../../node_modules/react-native-webrtc/apple/WebRTC.xcframework"; sourceTree = "<group>"; };
 		B644D2149930F3E4FEBECBAA /* Pods-Backpack Chat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Backpack Chat.debug.xcconfig"; path = "Target Support Files/Pods-Backpack Chat/Pods-Backpack Chat.debug.xcconfig"; sourceTree = "<group>"; };
@@ -198,8 +190,6 @@
 				13B07FB71A68108700A75B9A /* main.m */,
 				0B412F201EDEE95300B1A0A6 /* Main.storyboard */,
 				0BBD021F212EB69D00CCB19F /* Types.h */,
-				0B412F1D1EDEE6E800B1A0A6 /* ViewController.h */,
-				0B412F1E1EDEE6E800B1A0A6 /* ViewController.m */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -208,8 +198,8 @@
 			isa = PBXGroup;
 			children = (
 				B30AC1BE258DE716003D5E3F /* SwiftFile.swift */,
+				B3A131E525F42EB200D413B7 /* main.jsbundle */,
 				B34AA72225E8303E00215828 /* splashscreen.png */,
-				B34AA72025E82DE200215828 /* main.jsbundle */,
 				B351EB4B25E4939400E9A771 /* liveicons */,
 				B36DD56925CB461F00B7AA05 /* clouds.jpg */,
 				B351EAB125E29D4300E9A771 /* Threeguys.xcassets */,
@@ -244,13 +234,10 @@
 				B39F2CC225C22B620095272E /* Backpack Chat.entitlements */,
 				B335E19D2599CFC30008F79F /* AppDelegate.h */,
 				B335E19E2599CFC30008F79F /* AppDelegate.m */,
-				B335E1A02599CFC30008F79F /* SceneDelegate.h */,
-				B335E1A12599CFC30008F79F /* SceneDelegate.m */,
 				B335E1A32599CFC30008F79F /* ViewController.h */,
 				B325C8F6259A0D38009CF5F0 /* GoogleService-Info.plist */,
 				B335E1A42599CFC30008F79F /* ViewController.m */,
 				B335E1A92599CFC60008F79F /* Assets.xcassets */,
-				B335E1AB2599CFC60008F79F /* LaunchScreen.storyboard */,
 				B335E1AE2599CFC60008F79F /* Info.plist */,
 				B335E1AF2599CFC60008F79F /* main.m */,
 				B325C8F9259A0EC4009CF5F0 /* SwiftChat.swift */,
@@ -292,6 +279,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B335E1CD2599CFC70008F79F /* Build configuration list for PBXNativeTarget "Backpack Live" */;
 			buildPhases = (
+				B3A131E325F41EDF00D413B7 /* Copy bundle */,
 				F4A462915FF1B9C2B2D08F67 /* [CP] Check Pods Manifest.lock */,
 				B335E1972599CFC30008F79F /* Sources */,
 				B335E1982599CFC30008F79F /* Frameworks */,
@@ -373,7 +361,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B325C8FC259A1429009CF5F0 /* LaunchScreen.storyboard in Resources */,
 				B325C8FE259A1616009CF5F0 /* Main.storyboard in Resources */,
 				B325C8FD259A1491009CF5F0 /* LaunchScreen.xib in Resources */,
 				B351EB4C25E4939E00E9A771 /* liveicons in Resources */,
@@ -381,7 +368,7 @@
 				B375557125C3A1AD00ED09A9 /* GoogleService-Info.plist in Resources */,
 				B351EAB225E29D4500E9A771 /* Threeguys.xcassets in Resources */,
 				B34AA72325E8303F00215828 /* splashscreen.png in Resources */,
-				B34AA72125E82DE200215828 /* main.jsbundle in Resources */,
+				B3A131E625F42EB200D413B7 /* main.jsbundle in Resources */,
 				B36DD56E25CB5BAC00B7AA05 /* backgrounds in Resources */,
 				B36DD56A25CB462300B7AA05 /* clouds.jpg in Resources */,
 			);
@@ -524,6 +511,24 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VBAR/Pods-VBAR-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		B3A131E325F41EDF00D413B7 /* Copy bundle */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy bundle";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n    cp -r \"/Users/kilojam/jitsidev/debug/main.jsbundle\" \n                \"/Users/kilojam/jitsidev/jitsi-meet/ios/app/main.jsbundle\"\n    #\"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app\"\nfi\nif [ \"${CONFIGURATION}\" == \"Release\" ]; then\n    cp -r \"/Users/kilojam/jitsidev/release/main.jsbundle\" \"/Users/kilojam/jitsidev/jitsi-meet/ios/app/main.jsbundle\"\n    \n    #\"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app\"\nfi\n\n";
+		};
 		B6607F42A5CF0C76E98929E2 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -648,7 +653,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B30AC1BF258DE716003D5E3F /* SwiftFile.swift in Sources */,
-				0B412F1F1EDEE6E800B1A0A6 /* ViewController.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				DE4C456121DE1E4E00EA0709 /* FIRUtilities.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
@@ -664,7 +668,6 @@
 				B335E19F2599CFC30008F79F /* AppDelegate.m in Sources */,
 				B325C8FA259A0EC4009CF5F0 /* SwiftChat.swift in Sources */,
 				B335E1B02599CFC60008F79F /* main.m in Sources */,
-				B335E1A22599CFC30008F79F /* SceneDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -677,14 +680,6 @@
 				13B07FB21A68108700A75B9A /* Base */,
 			);
 			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-		B335E1AB2599CFC60008F79F /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B335E1AC2599CFC60008F79F /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -881,7 +876,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Backpack Chat/Backpack Chat.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 14;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 7R2746UPX7;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -927,7 +922,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 14;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 7R2746UPX7;
 				FRAMEWORK_SEARCH_PATHS = (

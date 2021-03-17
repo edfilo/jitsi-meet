@@ -27,6 +27,10 @@
 #import <RNGoogleSignin/RNGoogleSignin.h>
 #import <WebRTC/RTCLogging.h>
 
+#import "BPLogger.h"
+
+
+
 
 @implementation JitsiMeet {
     RCTBridgeWrapper *_bridgeWrapper;
@@ -72,10 +76,14 @@
   didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
     _launchOptions = [launchOptions copy];
+    
+
+    [BPLogger writeShitToFile:[NSString stringWithFormat:@"peter dfl %@", _launchOptions]];
 
   //  [Dropbox setAppKey];
 
     return YES;
+
 }
 
 -    (BOOL)application:(UIApplication *)application
@@ -84,6 +92,8 @@
 
     JitsiMeetConferenceOptions *options = [self optionsFromUserActivity:userActivity];
 
+    [BPLogger writeShitToFile:[NSString stringWithFormat:@"peter cont  %@", userActivity.webpageURL]];
+
     return options && [JitsiMeetView setPropsInViews:[options asProps]];
 }
 
@@ -91,11 +101,13 @@
             openURL:(NSURL *)url
             options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
 
+    [BPLogger writeShitToFile:[NSString stringWithFormat:@"peter openurl %@", url.absoluteString]];
+
     /*
     if ([Dropbox application:app openURL:url options:options]) {
         return YES;
     }
-*/
+*
 
     if ([RNGoogleSignin application:app
                             openURL:url
@@ -106,19 +118,34 @@
     if (_customUrlScheme == nil || ![_customUrlScheme isEqualToString:url.scheme]) {
         return NO;
     }
+*/
 
-    JitsiMeetConferenceOptions *conferenceOptions = [JitsiMeetConferenceOptions fromBuilder:^(JitsiMeetConferenceOptionsBuilder *builder) {
-        builder.room = url.lastPathComponent;
-        //[url absoluteString];
+
+
+     JitsiMeetConferenceOptions *conferenceOptions = [JitsiMeetConferenceOptions fromBuilder:^(JitsiMeetConferenceOptionsBuilder *builder) {
+
+
+         builder.room = url.absoluteString;
+         //builder.serverURL = [url URLByDeletingLastPathComponent];
+
+
+
     }];
 
-    return [JitsiMeetView setPropsInViews:[conferenceOptions asProps]];
+
+    [JitsiMeetView setPropsInViews:[conferenceOptions asProps]];
+
+    return YES;
+
+
 }
 
 #pragma mark - Utility methods
 
 - (JitsiMeetConferenceOptions *)getInitialConferenceOptions {
     if (_launchOptions[UIApplicationLaunchOptionsURLKey]) {
+
+        
         NSURL *url = _launchOptions[UIApplicationLaunchOptionsURLKey];
         return [JitsiMeetConferenceOptions fromBuilder:^(JitsiMeetConferenceOptionsBuilder *builder) {
             builder.room = [url absoluteString];
@@ -149,8 +176,8 @@
         NSURL *url = userActivity.webpageURL;
         if ([_universalLinkDomains containsObject:url.host]) {
             return [JitsiMeetConferenceOptions fromBuilder:^(JitsiMeetConferenceOptionsBuilder *builder) {
-                builder.room = url.lastPathComponent;
-                builder.serverURL = [url URLByDeletingLastPathComponent];
+                builder.room = url.absoluteString;// url.lastPathComponent;
+                //builder.serverURL = [url URLByDeletingLastPathComponent];
 
                 //[url absoluteString];
             }];

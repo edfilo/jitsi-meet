@@ -48,7 +48,7 @@ class DisplayNameLabel extends Component<Props> {
 
         return (
             <View style = { styles.displayNameBackdrop }>
-                <Text style = { styles.displayNameText }>
+                <Text style = {{...styles.displayNameText, textAlign:'left' }}>
                     { this.props._participantName }
                 </Text>
             </View>

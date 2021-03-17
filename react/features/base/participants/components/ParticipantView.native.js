@@ -203,7 +203,7 @@ class ParticipantView extends Component<Props> {
         const connectionProblem
             = connectionStatus !== JitsiParticipantConnectionStatus.ACTIVE;
         const useTint
-            = connectionProblem || this.props.tintEnabled;
+            = false;// connectionProblem || this.props.tintEnabled;
 
         const testHintId
             = this.props.testHintId

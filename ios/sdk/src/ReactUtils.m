@@ -34,6 +34,8 @@ NSMutableDictionary* mergeProps(NSDictionary *a, NSDictionary *b) {
         return [NSMutableDictionary dictionaryWithDictionary:a];
     }
 
+    
+
     // Both have values, let's merge them, the strategy is to take the value from a first,
     // then override it with the one from b. If the value is a dictionary, merge them
     // recursively. Same goes for arrays.

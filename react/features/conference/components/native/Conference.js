@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import {ImageBackground, StyleSheet, TouchableOpacity, NativeModules, Image, View, Text, SafeAreaView, StatusBar } from 'react-native';
+import {Alert, ImageBackground, StyleSheet, TouchableOpacity, NativeModules, Image, View, Text, SafeAreaView, StatusBar, Modal } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 import { appNavigate } from '../../../app/actions';
@@ -37,6 +37,10 @@ import type { AbstractProps } from '../AbstractConference';
 import Labels from './Labels';
 import LonelyMeetingExperience from './LonelyMeetingExperience';
 import NavigationBar from './NavigationBar';
+import MyInfoScreen from './InfoScreen';
+import TextBox from './TextBox';
+
+
 import styles, { NAVBAR_GRADIENT_COLORS } from './styles';
 
 import firestore from '@react-native-firebase/firestore';
@@ -64,10 +68,17 @@ import { Dimensions } from 'react-native';
 
 import { doInvitePeople } from '../../../invite/actions.native';
 
+import { SettingsView } from '../../../welcome/components/SettingsView';
+
+
 // Import the react-native-sound module
 import Sound from 'react-native-sound';
 
+import { updateSettings } from '../../../base/settings';
 
+import { setAudioMuted, setVideoMuted } from '../../../base/media';
+
+const { AudioMode } = NativeModules;
 
 
 
@@ -145,7 +156,9 @@ class Conference extends AbstractConference<Props, *> {
         this._onClick = this._onClick.bind(this);
         this._onHardwareBackPress = this._onHardwareBackPress.bind(this);
         this._setToolboxVisible = this._setToolboxVisible.bind(this);
-
+        this._onExit = this._onExit.bind(this);
+        this._onInfo = this._onInfo.bind(this);
+        this._updateDisplayName = this._updateDisplayName.bind(this);
         this.chunkCount = 0;
 
         this.state = {
@@ -156,6 +169,9 @@ class Conference extends AbstractConference<Props, *> {
 
         this.db = firestore();
         this.firestore = firestore;
+
+      //  this.firestore.SnapshotOptions.serverTimestamps = 'estimate';
+
 
         this.deviceInfo = DeviceInfo;
 
@@ -195,56 +211,50 @@ class Conference extends AbstractConference<Props, *> {
      updateStuff(slug) {
 
        if(!slug){
-
-         alert('studio id missing');
          return;
-
        }
 
        const firestore = this.db
-                       .collection('interviews')
-                       .doc(slug)
-                       .onSnapshot(documentSnapshot => {
+                       .collection('interviews').where('code','==', slug)
+                       .onSnapshot((querySnapshot) => {
 
-                         console.log('dunkin callback');
-                           if(!documentSnapshot.data()){
-                             alert('could not find '+ slug);
-                             return;
-                           }
+                          querySnapshot.docs.forEach((doc) => {
 
 
-                           if(documentSnapshot.data().title){
-                             this.setState({title:documentSnapshot.data().title});
-                          }
+                            var data = doc.data({serverTimestamps: 'estimate'});
+                               this.setState({title:data.title});
 
-                           if(documentSnapshot.data().date){
 
-                             const millis = documentSnapshot.data().date.toMillis();
-                             const date = new Date(millis);
-                             const options = {day: "numeric",hour: "numeric",minute: "2-digit",month: "short",weekday: "short", timeZoneName:'short'};
-                             this.setState({dateString:  date.toLocaleString("en-US", options)});
+                               const millis = data.date.toMillis();
+                               const date = new Date(millis);
+                               const options = {day: "numeric",hour: "numeric",minute: "2-digit",month: "short",weekday: "short", timeZoneName:'short'};
+                               this.setState({dateString:  date.toLocaleString("en-US", options)});
+                               this.setState({backgroundImageFilename:data.backgroundImage});
 
-                           }
+                             const isRecording = data.state == 'recording';
+                             const isPaused = data.state == 'paused';
+                             const parentID = data.parentID;
 
-                           if(documentSnapshot.data().backgroundImage){
-                             this.setState({backgroundImageFilename:documentSnapshot.data().backgroundImage});
-                           }
+                             if(!this.isStudio){
+                             if(!this.state.isRecording && isRecording)this.startRecording(parentID, data);
+                             if(this.state.isRecording && !isRecording)this.stopRecording();
+                              }
 
-                           const isRecording = documentSnapshot.data().state == 'recording';
-                           const isPaused = documentSnapshot.data().state == 'paused';
-                           const parentID = documentSnapshot.data().parentID;
-                           if(!this.state.isRecording && isRecording)this.startRecording(parentID, documentSnapshot.data().timestamp);
-                           if(this.state.isRecording && !isRecording)this.stopRecording();
+                             this.setState({isRecording:isRecording});
+                             this.setState({isPaused:isPaused});
 
-                           this.setState({isRecording:isRecording});
-                           this.setState({isPaused:isPaused});
+                             this.setBG();
 
-                           this.setBG();
+                          },  error => {
 
-                        },  error => {
+                                alert(error);
+                          });
+                       });
 
-                              alert(error);
-                        });
+
+
+
+
 
      }
 
@@ -299,6 +309,9 @@ class Conference extends AbstractConference<Props, *> {
       }
       base64.decode(data);
 
+      //this.firestore.DocumentSnapshot.ServerTimestampBehavior =
+
+
       const blobdata = {
         blob: this.firestore.Blob.fromBase64String(data),
         seq: idx,
@@ -339,12 +352,14 @@ class Conference extends AbstractConference<Props, *> {
 
       const recordingID = this.recordingRef.id;
 
+
       //const  url = 'http://localhost:5001/backpack-chat-73855/us-central1/app/recording/' + this.recordingRef.id + '/stitch';
       const url = 'https://us-central1-backpack-chat-73855.cloudfunctions.net/app/recording/' + recordingID + '/stitch';
 
       fetch(url).then(function(r){
 
-          debugger;
+          //alert(r.message);
+          //debugger;
       });
 /*
       const getArticlesFromApi = async () => {
@@ -376,14 +391,17 @@ class Conference extends AbstractConference<Props, *> {
 
     }
 
-    startRecording(parentID, offset) {
+
+
+    startRecording(parentID, interview) {
 
       //this.recordingID = this.uuid();
       //debugger;
 
+
       this.recordingRef = firestore()
-            .collection('interviews')
-            .doc(this.props._slug)
+          //  .collection('interviews')
+          //  .doc(this.props._slug)
             .collection('recordings')
             .doc();
 
@@ -391,11 +409,13 @@ class Conference extends AbstractConference<Props, *> {
             //    console.log('tropicana docref id ' + this.recordingRef.id);
             this.recordingRef.set({
                       recordingID: this.recordingRef.id,
-                      offset: offset,
                       parentID: parentID,
-                      username: 'Fred',
+                      interviewID: inerview.interviewID || '',
+                      username: this.props._displayName || '',
+                      prevTimeSeconds: interview.prevTimeSeconds,
+                      lastStartTimestamp: interview.lastStartTimestamp || this.firestore.FieldValue.serverTimestamp(),
                       timestamp: this.firestore.FieldValue.serverTimestamp()
-                });
+            });
 
             //});
 
@@ -470,8 +490,13 @@ class Conference extends AbstractConference<Props, *> {
           console.log('FL component did mount no slug');
         }
 
-        //this.showDisplayName();
 
+        Alert.alert("Welcome", "When the host starts the recording session, only your audio will be recorded.");
+
+        //alert('When the host starts the recording session, only your audio will be recorded.');
+
+        //By giving your  video camera permission you will be able to see the host and other guests. "')
+        //this.showDisplayName();
 
     }
 
@@ -495,10 +520,14 @@ class Conference extends AbstractConference<Props, *> {
      * @returns {ReactElement}
      */
     render() {
-        return (
+        return (<>
+
             <Container style = { styles.conference }>
+
                 { this._renderContent() }
             </Container>
+
+              </>
         );
     }
 
@@ -582,8 +611,93 @@ class Conference extends AbstractConference<Props, *> {
 
        };
 
-    exit() {
-      alert('exit');
+    _onInfo() {
+      this.setState({info:!this.state.info});
+
+      //this.props.dispatch(setAudioMuted(true));
+      this.props.dispatch(setAudioMuted(false));
+
+
+      var mode =  AudioMode.VIDEO_CALL;
+
+
+
+
+        var deviceInfo = DeviceInfo;
+      //if(deviceInfo.getBundleId() != 'com.filowatt.backpackstudio'){
+
+
+          AudioMode.setMode(mode).catch(err => logger.error(`Failed to set audio mode ${String(mode)}: ${err}`));
+
+      //  }
+
+
+    }
+
+    _onExit() {
+
+      this.props.dispatch(appNavigate(undefined));
+    }
+
+
+
+    _updateDisplayName(text) {
+
+      this.props.dispatch(updateSettings({displayName:text}));
+
+      this.setState({info:false});
+    //  alert('name is ' + text);
+    }
+
+    _renderSettingsView() {
+
+      const windowWidth = this.state.viewWidth || Dimensions.get('window').width;
+      const windowHeight = this.state.viewHeight || Dimensions.get('window').height;
+
+        return(<TextBox
+          onSubmit = {this._updateDisplayName}
+          heading = {'Display Name'}
+          styles = {{top:200, left:(windowWidth-300) * .5}}
+          join = {'Update'}
+          />);
+
+
+    }
+    _renderInfoButton(bottomMargin) {
+
+      return(<TouchableOpacity
+            accessibilityLabel = { 'Back' }
+            onPress = { this._onInfo }
+            style = {{position:'absolute',
+            height:40, width:60, right:5, bottom:bottomMargin,
+            backgroundColor:'transparent',
+            fontWeight:'bolder',
+            borderRadius:10}}
+            >
+            <Text  style = {{lineHeight:40, textAlign:'center', opacity:.66, color:'#c00'
+          }}>
+            {'i'}</Text>
+        </TouchableOpacity>);
+
+    }
+
+    _renderExitButton(bottomMargin) {
+
+      return(<TouchableOpacity
+            accessibilityLabel = { 'Back' }
+            onPress = { this._onExit }
+            style = {{position:'absolute',
+            height:40, width:60, left:5, bottom:bottomMargin,
+            backgroundColor:'transparent',
+            borderRadius:10}}>
+            <Text style = {{
+              lineHeight:40,
+              borderRadius:12,
+              backgroundColor:'#000',textAlign:'center', opacity:.88,
+              color:'#c00'}}>
+            {'EXIT'}</Text>
+        </TouchableOpacity>);
+
     }
 
     _renderContent() {
@@ -614,10 +728,11 @@ class Conference extends AbstractConference<Props, *> {
           const windowWidth = this.state.viewWidth || Dimensions.get('window').width;
           const windowHeight = this.state.viewHeight || Dimensions.get('window').height;
 
-        const padding = {top:30, left:10, right:10, bottom:30};
+        const padding = {top:55, left:10, right:10, bottom:60};
 
-        const topMargin = this.isStudio ? 5 : 60;
-        const bottomMargin = this.isStudio ? 5 : 30;
+        const topMargin = this.isStudio ? 10 : 40;
+        const bottomMargin = this.isStudio ? 10 : 40;
+
 
         return (
           <View onLayout={(event) => { this.find_dimensions(event.nativeEvent.layout) }} style={styles.container}>
@@ -633,10 +748,11 @@ class Conference extends AbstractConference<Props, *> {
                         style = {{
                           borderWidth:0,
                           borderColor:'white',
-                          top:padding.top,
+                          padding:0,
+                          top:padding.top + topMargin,
                           left:padding.left,
                           width:windowWidth - padding.left - padding.right ,
-                          height:windowHeight - padding.top - padding.bottom
+                          height:windowHeight - padding.top - padding.bottom - topMargin - bottomMargin
                           }}
                         onClick = { this._onClick } />
                         : <LargeVideo onClick = { this._onClick } />
@@ -654,17 +770,27 @@ class Conference extends AbstractConference<Props, *> {
                 }
 
 
+              {!this.isStudio && this._renderExitButton(bottomMargin)}
+              {this._renderInfoButton(bottomMargin)}
 
-                <Text style = {{textAlign:'center', fontFamily:'Avenir',  color:'rgba(255, 255, 255, 1.0)', fontSize:22, position:'absolute', width:250, height:30, top:0 + topMargin, left:(windowWidth - 250.0) * .5 }}>
+
+                <Text style = {{textAlign:'center', fontFamily:'Avenir',  color:'rgba(255, 255, 255, 1.0)', fontSize:24, position:'absolute', width:250, height:30, top:0 + topMargin, left:(windowWidth - 250.0) * .5 }}>
                 {this.state.title}
                 </Text>
-                <Text style = {{textAlign:'center', fontFamily:'Avenir',   color:'rgba(255, 255, 255, 1.0)', fontSize:13, position:'absolute', width:250, height:30, top:40 + topMargin, left:(windowWidth - 250.0) * .5 }}>
+                <Text style = {{textAlign:'center', fontFamily:'Avenir',   color:'rgba(255, 255, 255, .555)', fontSize:12, position:'absolute', width:250, height:30, top:30 + topMargin, left:(windowWidth - 250.0) * .5 }}>
                 {this.state.dateString}
                 </Text>
 
 
-              {<Text style = {{backgroundColor:'black', fontWeight:'bold', overflow:'hidden', borderRadius:15, textAlignVertical:'center', paddingTop:0, textAlign:'center', fontFamily:'Avenir',   color:(this.state.isRecording ? 'rgba(255, 5, 5, 1.0)':'rgba(255, 255, 255, .25)'), fontSize:20, lineHeight:40, position:'absolute', width:177, height:40, bottom:bottomMargin, left:(windowWidth - 177.0) * .5 }}>
-            {'RECORDING'}
+              {<Text style = {{ position:'absolute', overflow:'hidden', borderRadius:15,  paddingTop:0, textAlign:'center', fontFamily:'Avenir'
+              ,color:(this.state.isRecording ? 'rgba(255, 5, 5, 1.0)':'rgba(255, 255, 255, .5)')
+              , backgroundColor: this.state.isRecording ? 'black' : 'transparent'
+              , borderColor: this.state.isRecording ? 'transparent' : 'rgba(255, 255, 255, .1)'
+              , fontWeight: this.state.isRecording ? 'bold' : 'normal'
+              , fontSize: this.state.isPaused ? 15 : 20
+              , borderWidth: 1
+              , lineHeight:40, width:211, height:40, bottom:bottomMargin, left:(windowWidth - 211.0) * .5 }}>
+            {this.state.isPaused ? 'PAUSED' :  this.state.isRecording ? 'RECORDING' : 'OFF AIR'}
                 </Text>}
 
 {/*
@@ -700,25 +826,8 @@ class Conference extends AbstractConference<Props, *> {
                         _shouldDisplayTileView ? undefined : <Filmstrip />
                     }
 
-                    {/*
-                      <TouchableOpacity onPress={ () => this.invite() }
-                      style = {{position:'absolute', height:40, width:133, borderRadius:20, left:(windowWidth - 133.0) * .5, bottom:5, backgroundColor:'green'}}>
-                        <Text style = {{fontWeight:'500', paddingTop:10, fontFamily:'Avenir', width:'100%', height:'100%',color:'white', textAlign:'center'}}>Invite Guests</Text>
-                    </TouchableOpacity>
-                */}
 
 
-
-                    {/*
-                    <TouchableOpacity onPress={ () => this.startRecording() }
-                      style = {{position:'absolute', height:50, bottom:10, width:windowWidth, backgroundColor:'red'}}
-                    >
-
-                    <View>
-                        <Text style = {{color:'white', textAlign:'center'}}>{buttonText}</Text>
-                    </View>
-                    </TouchableOpacity>
-                  */}
 
                   {/*<Toolbox />*/}
 
@@ -732,6 +841,7 @@ class Conference extends AbstractConference<Props, *> {
 
                 { this._renderConferenceModals() }
 
+              { this.state.info && this._renderSettingsView() }
 
                 </ImageBackground>
             </View>
@@ -867,7 +977,8 @@ function _mapStateToProps(state) {
         _largeVideoParticipantId: state['features/large-video'].participantId,
         _pictureInPictureEnabled: getFeatureFlag(state, PIP_ENABLED),
         _reducedUI: reducedUI,
-        _toolboxVisible: isToolboxVisible(state)
+        _toolboxVisible: isToolboxVisible(state),
+        _displayName: state['features/base/settings'].displayName || ''
     };
 }
 

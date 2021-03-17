@@ -210,7 +210,7 @@ class TileView extends Component<Props, State> {
         let tileWidth;
 
 
-        this.padding = 20;
+        this.padding = 10;
 
         const cols = (headcount <= 2) ? 1 : 2;
         const rows = Math.ceil(headcount / cols);
@@ -221,27 +221,35 @@ class TileView extends Component<Props, State> {
         const shrink = (cols == 1) ? .75 : 1.0;
 
 
-        const width = isYouTube ? 320 : (shrink * ((widthToUse / cols) - (cols - 1) * this.padding));
-        const height = isYouTube ? 180 : (width * (4.0/5.0));
 
-        const left = (widthToUse * ((1.0 - shrink) * .5)) + col * (widthToUse / cols) + Math.max((col - .5) * this.padding, 0.0);
-        var top = row * height + Math.max((row - .5) * this.padding, 0.0);
 
-        //if(rows == 1)top = -200;
 
-        var topMargin = (heightToUse - rows * height + (this.padding * (rows - 1.0))) * .5;
+        //if(rows > 1){
+        var  height = isYouTube ? 180 : (heightToUse - ((rows - 1) * this.padding)) / rows;
+        var  width = isYouTube ? 320 : (height * (5.0/4.0));
+        //}
 
-        if(rows == 1)topMargin = 133;
-/*
-        console.log('layout engine'
-        + ' headcount:' + headcount
-        + ' top:' + top
-        + ' left:' + left
-        + ' topmargin:' + topMargin
-        + ' width:' + width
-        + ' height:' + height);
-*/
+        if((width * cols + ((cols - 1) * this.padding)) > widthToUse){
+          var width = isYouTube ? 320 : (shrink * ((widthToUse / cols) - (cols - 1) * this.padding));
+          var height = isYouTube ? 180 : (width * (4.0/5.0));
+        }
 
+
+        const isLast = (idx + 1) == headcount;
+
+        var left = (widthToUse * ((1.0 - shrink) * .5)) + col * (widthToUse / cols) + Math.max((col - .5) * this.padding, 0.0);
+
+        if(isLast && (cols == 2) && (col == 0)){
+          left = (widthToUse * .5) - (width * .5);
+        }
+
+
+        var top = row * height + row * this.padding;
+        // Math.max((row - .5) * this.padding, 0.0);
+
+        var topMargin =  (heightToUse - rows * height + (this.padding * (rows - 1.0))) * .5;
+
+        if(rows == 1)topMargin = (heightToUse - height) * .3333;
 
         return {
             height:height,

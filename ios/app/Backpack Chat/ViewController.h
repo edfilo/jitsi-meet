@@ -19,6 +19,7 @@
 
 @interface ViewController : UIViewController<JitsiMeetViewDelegate>
 
+@property (nonatomic) NSString *room;
 - (void)terminate;
 
 @end

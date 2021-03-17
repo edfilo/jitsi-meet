@@ -229,6 +229,7 @@ export class AbstractWelcomePage extends Component<Props, *> {
      * @returns {void}
      */
     _onRoomChange(value: string) {
+      console.log('on room change ' + value);
         this.setState({
             room: value,
             insecureRoomName: this.props._enableInsecureRoomNameWarning && value && isInsecureRoomName(value)

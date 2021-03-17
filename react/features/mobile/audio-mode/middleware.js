@@ -15,6 +15,9 @@ import { MiddlewareRegistry } from '../../base/redux';
 import { _SET_AUDIOMODE_DEVICES, _SET_AUDIOMODE_SUBSCRIPTIONS } from './actionTypes';
 import logger from './logger';
 
+import DeviceInfo from 'react-native-device-info';
+
+
 const { AudioMode } = NativeModules;
 const AudioModeEmitter = new NativeEventEmitter(AudioMode);
 
@@ -146,7 +149,15 @@ function _updateAudioMode({ getState }, next, action) {
         mode = AudioMode.DEFAULT;
     }
 
-    AudioMode.setMode(mode).catch(err => logger.error(`Failed to set audio mode ${String(mode)}: ${err}`));
+
+
+      var deviceInfo = DeviceInfo;
+    //if(deviceInfo.getBundleId() != 'com.filowatt.backpackstudio'){
+
+
+          AudioMode.setMode(mode).catch(err => logger.error(`Failed to set audio mode ${String(mode)}: ${err}`));
+
+    //  }
 
     return result;
 }

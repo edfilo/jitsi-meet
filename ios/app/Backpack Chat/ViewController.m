@@ -29,13 +29,42 @@
 
 @implementation ViewController
 
+- (void) viewDidAppear:(BOOL)animated {
+
+  [super viewDidAppear:animated];
+
+  /*
+  JitsiMeetConferenceOptions *co = [[JitsiMeet sharedInstance] getInitialConferenceOptions];
+
+
+  NSDictionary *d = [JitsiMeet sharedInstance].mylaunchOptions;
+
+  NSURL *url = [d objectForKey:UIApplicationLaunchOptionsURLKey];
+
+  UIAlertController *ac =  [UIAlertController alertControllerWithTitle:@"hi" message:url.absoluteString preferredStyle:UIAlertControllerStyleAlert];
+  [ac addAction:[UIAlertAction actionWithTitle:@"ok" style:UIAlertActionStyleDefault handler:nil]];
+
+  [self presentViewController:ac animated:YES completion:nil];
+*/
+  
+
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+
+  JitsiMeetConferenceOptions *co = [[JitsiMeet sharedInstance] getInitialConferenceOptions];
+
+
+  self.room = co.room;
+
 
     JitsiMeetView *view = (JitsiMeetView *) self.view;
     view.delegate = self;
 
-    [view join:[[JitsiMeet sharedInstance] getInitialConferenceOptions]];
+    [view join:co];
 }
 
 // JitsiMeetViewDelegate

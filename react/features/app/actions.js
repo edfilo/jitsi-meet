@@ -51,6 +51,8 @@ export function appNavigate(uri: ?string) {
     return async (dispatch: Dispatch<any>, getState: Function) => {
         let location = parseURIString(uri);
 
+        console.log('confusion: uri string parsed in appnavigate to' + location);
+
         // If the specified location (URI) does not identify a host, use the app's
         // default.
         if (!location || !location.host) {

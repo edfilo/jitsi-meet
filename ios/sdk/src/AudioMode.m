@@ -21,6 +21,9 @@
 #import <WebRTC/WebRTC.h>
 
 #import "LogUtils.h"
+#import "JitsiMeet+Private.h"
+#import "JitsiMeetConferenceOptions+Private.h"
+#import "JitsiMeetView+Private.h"
 
 
 // Audio mode
@@ -99,8 +102,8 @@ RCT_EXPORT_MODULE();
 
         videoCallConfig = [[RTCAudioSessionConfiguration alloc] init];
         videoCallConfig.category = AVAudioSessionCategoryPlayAndRecord;
-        videoCallConfig.categoryOptions = AVAudioSessionCategoryOptionAllowBluetooth;
-        videoCallConfig.mode = AVAudioSessionModeVideoChat;
+        videoCallConfig.categoryOptions = AVAudioSessionCategoryOptionAllowBluetooth | AVAudioSessionCategoryOptionDefaultToSpeaker;
+        videoCallConfig.mode = AVAudioSessionModeDefault;//AVAudioSessionModeVideoChat;
 
         // Manually routing audio to the earpiece doesn't quite work unless one disables BT (weird, I know).
         earpieceConfig = [[RTCAudioSessionConfiguration alloc] init];
@@ -115,6 +118,9 @@ RCT_EXPORT_MODULE();
 
         RTCAudioSession *session = [RTCAudioSession sharedInstance];
         [session addDelegate:self];
+
+     //   [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayAndRecord mode:AVAudioSessionModeDefault options:AVAudioSessionCategoryOptionDefaultToSpeaker error:nil];
+
     }
 
     return self;
@@ -128,10 +134,14 @@ RCT_EXPORT_MODULE();
 - (BOOL)setConfig:(RTCAudioSessionConfiguration *)config
             error:(NSError * _Nullable *)outError {
 
+   // return YES;
     RTCAudioSession *session = [RTCAudioSession sharedInstance];
     [session lockForConfiguration];
     BOOL success = [session setConfiguration:config error:outError];
     [session unlockForConfiguration];
+
+    //[JitsiMeetView setPropsInViews:@{@"audioCategory":config.category, @"audioCategoryOptions":config.categoryOptions, @"audioCategoryMode":config.mode}];
+
 
     return success;
 }
@@ -141,6 +151,23 @@ RCT_EXPORT_MODULE();
 RCT_EXPORT_METHOD(setMode:(int)mode
                   resolve:(RCTPromiseResolveBlock)resolve
                    reject:(RCTPromiseRejectBlock)reject) {
+
+
+#ifdef BACKPACK_STUDIO
+
+
+    NSLog(@"xxx skipping mode cause studio! xxx");
+    return;
+
+#endif
+
+
+    NSLog(@"xxxxxxx MODE IS BEING SET TO %i xxxxxxx", mode);
+
+    if(mode == kAudioModeDefault){
+        NSLog(@"!!!!Disallowing Default!!!!!");
+        mode = kAudioModeVideoCall;
+    }
     RTCAudioSessionConfiguration *config = [self configForMode:mode];
     NSError *error;
 
@@ -170,7 +197,8 @@ RCT_EXPORT_METHOD(setAudioDevice:(NSString *)device
                   resolve:(RCTPromiseResolveBlock)resolve
                   reject:(RCTPromiseRejectBlock)reject) {
     DDLogInfo(@"[AudioMode] Selected device: %@", device);
-    
+
+   // return;
     RTCAudioSession *session = [RTCAudioSession sharedInstance];
     [session lockForConfiguration];
     BOOL success;
@@ -222,7 +250,11 @@ RCT_EXPORT_METHOD(setAudioDevice:(NSString *)device
     }
     
     [session unlockForConfiguration];
-    
+
+    session.useManualAudio = YES;
+
+
+
     if (success) {
         resolve(nil);
     } else {
@@ -319,6 +351,8 @@ RCT_EXPORT_METHOD(updateDeviceList) {
 }
 
 - (void)notifyDevicesChanged {
+ //   return;
+
     dispatch_async(_workerQueue, ^{
         NSMutableArray *data = [[NSMutableArray alloc] init];
         // Here we use AVAudioSession because RTCAudioSession doesn't expose availableInputs.

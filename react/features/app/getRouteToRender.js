@@ -61,7 +61,14 @@ function _getMobileRoute(state): Promise<Route> {
     const hasname = state['features/base/settings'].displayName;
     const hasroom = isRoomValid(state['features/base/conference'].room);
 
+    console.log('foxx mobile room' + state['features/base/conference'].room);
+
+    if(state['features/base/conference'].room){
+    //  alert('get a room' + state['features/base/conference'].room);
+
+    }
     route.component = Conference;
+
 
     if (hasname && hasroom) {
         route.component = Conference;
@@ -77,7 +84,7 @@ function _getMobileRoute(state): Promise<Route> {
         route.component = BlankPage;
     }
 */
-    
+
 
 }
 

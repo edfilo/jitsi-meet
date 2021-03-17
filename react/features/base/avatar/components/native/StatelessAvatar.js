@@ -39,15 +39,17 @@ export default class StatelessAvatar extends AbstractStatelessAvatar<Props> {
 
         let avatar;
 
-        if (this._isIcon(url)) {
+        /*if (this._isIcon(url)) {
             avatar = this._renderIconAvatar(url);
+
         } else if (url) {
             avatar = this._renderURLAvatar();
         } else if (initials) {
             avatar = this._renderInitialsAvatar();
         } else {
+        */
             avatar = this._renderDefaultAvatar();
-        }
+        //}
 
         return (
             <View>
@@ -94,11 +96,13 @@ export default class StatelessAvatar extends AbstractStatelessAvatar<Props> {
 
         return (
             <Image
-                source = { DEFAULT_AVATAR }
-                style = { [
-                    styles.avatarContent(size),
-                    styles.staticAvatar
-                ] } />
+                source = {{uri: 'liveicons/greened.png'}}
+                style = {{...styles.avatarContent(size),
+                    ...styles.staticAvatar
+                    ,backgroundColor:'black'
+                    
+
+                }} />
         );
     }
 

@@ -28,6 +28,7 @@
             const isElectron = navigator.userAgent.includes('Electron');
             const shouldRegisterWorker = !isElectron && 'serviceWorker' in navigator;
 
+debugger;
             if (shouldRegisterWorker) {
                 navigator.serviceWorker
                     .register(window.location.origin + '/pwa-worker.js')
@@ -218,11 +219,11 @@
     </script>
     <script><!--#include virtual="/config.js" --></script><!-- adapt to your needs, i.e. set hosts and bosh path -->
     <!--#include virtual="connection_optimization/connection_optimization.html" -->
-    <script src="libs/do_external_connect.min.js?v=2"></script>
+    <script src="libs/do_external_connect.min.js?v=3"></script>
     <script><!--#include virtual="/interface_config.js" --></script>
     <script><!--#include virtual="/logging_config.js" --></script>
-    <script src="libs/lib-jitsi-meet.min.js?v=953733991"></script>
-    <script src="/libs/app.<!--#echo var="dev"-->bundle.min.js?v=726235"></script>
+    <script src="libs/lib-jitsi-meet.min.js?v=95373991"></script>
+    <script src="/libs/app.<!--#echo var="dev"-->bundle.min.js?v=729625"></script>
 
 
 
@@ -265,6 +266,8 @@
 
     window.livetwitches = <!--#include virtual="/twitch?json=true" -->
     window.livetwitchesfull = <!--#include virtual="/twitch?jsonfull=true" -->
+
+
 
     </script>
 
@@ -327,6 +330,8 @@
 
         FB.AppEvents.logPageView();
 
+
+
       };
 
       (function(d, s, id){
@@ -335,6 +340,11 @@
          js = d.createElement(s); js.id = id;
          js.src = "https://connect.facebook.net/en_US/sdk.js";
          fjs.parentNode.insertBefore(js, fjs);
+
+
+
+                      
+
        }(document, 'script', 'facebook-jssdk'));
 
 
